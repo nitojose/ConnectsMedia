@@ -1,0 +1,445 @@
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+    --bgPrimary: #1c1d1e ;
+  }
+
+
+
+
+ /* header section - start  */
+.headerBanner 
+  {
+    background-color: var(--bgPrimary);
+    width: -webkit-fill-available;
+    position: relative;
+  }
+.headerSection
+{
+    position: relative;
+}
+
+.header-title
+{
+    position: absolute;
+    /* top: 20px; */
+    color: var(--white);
+    /* float: right; */
+    display: flex;
+    /* align-content: flex-end; */
+    top: 300px;
+    font-size: 5rem;
+    font-family: system-ui;
+    right: 2px;;
+    bottom:0;
+    text-align-last: end;
+    z-index: 1;
+}
+
+.header-logo-menu
+{
+    display: flex;
+    /* flex-grow: 1; */
+    justify-content: space-between;
+    position: relative;
+}
+
+#header-logo-img
+{
+    position: absolute;
+    z-index: 1;
+}
+
+.header-aboutus
+{
+    /* position: absolute; */
+    /* top: 20px; */
+    color: var(--white);
+    /* left: 2rem;
+    bottom: 0; */
+    font-size: 4rem;
+    margin-top: -10rem;
+}
+
+.aboutIcon
+{
+    margin-top: -7rem;
+    position: absolute;
+    color: var(--white);
+    font-size: 4rem;
+    margin-right: 0rem;
+}
+
+/* header section - end  */
+
+
+
+
+/* about- section - start */
+
+
+.about-div1
+{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+#whoweare
+{
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 2rem;
+    top: 7rem;
+    left: 37rem;
+    color: var(--white);
+    font-weight: 500;
+   
+}
+
+#descri_1
+{
+    color: var(--white);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 43rem;
+    text-align: left;
+    right:5rem;
+}
+
+
+
+
+.about-div2
+{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    top: 3rem;
+}
+
+#whatwedo
+{
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 2rem;
+    top: 7rem;
+    left: 41.5rem;
+    color: var(--white);
+    font-weight: 500;
+   
+}
+
+#descri_2
+{
+    color: var(--white);
+    font-size: 1.5rem;
+    position: absolute;
+    left: 5rem;
+    text-align: right;
+    right: 43rem;
+}
+
+/* about- section - end */
+
+
+
+/* pillar section - start */
+
+
+.pillarSection
+{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#about-pillar
+{
+    font-family: system-ui;
+    font-size: 5rem;
+    color: var(--white);
+    
+    margin-top: -10rem;
+}
+
+#pillarIcon
+{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: var(--white);
+    font-size: 4rem;
+    margin-right: 12rem;    
+    margin-top: -5rem;
+    
+}
+
+/* pillar section - end  */
+
+
+/* featurelist - start  */
+
+.feature-list
+{
+    margin-top: 10rem;
+    padding-bottom: 10rem;
+    background-color: var(--bgPrimary);
+}
+
+#vision
+{
+    color: var(--white);
+    font-size: 4rem;
+    font-weight: 500;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform:  matrix(-1, 0, 0, -1, 0, 0);
+    margin-top: -29rem;
+    position: absolute;
+    /* direction: rtl;
+    unicode-bidi: bidi-override; */
+}
+
+#mission
+{
+    color: var(--white);
+    font-size: 4rem;
+    font-weight: 500;
+    margin-top: -21rem;
+    position: absolute;
+    margin-left: 14rem;
+}
+
+
+#statement
+{
+    color: var(--white);
+    font-size: 4rem;
+    font-weight: 500;
+    margin-top: -8rem;
+    position: absolute;
+    margin-left: -19rem;
+}
+
+
+#values
+{
+    color: var(--white);
+    font-size: 4rem;
+    font-weight: 500;
+    writing-mode: vertical-lr;
+    /* text-orientation: mixed; */
+    margin-top: -15rem;
+    position: absolute;
+    margin-left: 13rem;
+}
+
+
+#plusIcon1
+{
+    position: absolute;
+    margin-top: -3rem;
+    margin-left: -11rem;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+#rightIcon1
+{
+    position: absolute;
+    margin-top: -2.8rem;
+    margin-left: -10rem;
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+#descri_icon
+{
+    font-size: 1rem;
+    color: var(--white);
+    position: absolute;
+    margin-top: -26rem;
+    margin-left: 14rem;
+   
+}
+
+
+#plusIcon2
+{
+    position: absolute;
+    margin-top: 6rem;
+    margin-left: 0rem;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+#rightIcon2
+{
+    position: absolute;
+    margin-top: 6.2rem;
+    margin-left: 1rem;
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+#descri_icon2
+{
+    font-size: 1rem;
+    color: var(--white);
+    position: absolute;
+    margin-top: -16rem;
+    margin-left: 25rem;
+}
+
+
+#plusIcon3
+{
+    position: absolute;
+    margin-top: 19rem;
+    margin-left: -20rem;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+#rightIcon3
+{
+    position: absolute;
+    margin-top: 19.2rem;
+    margin-left: -21rem;
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+#descri_icon3
+{
+    font-size: 1rem;
+    color: var(--white);
+    position: absolute;
+    margin-top: -3rem;
+    margin-left: -18rem;
+   
+}
+
+#plusIcon4
+{
+    position: absolute;
+    margin-top: 22rem;
+    margin-left: -11rem;
+    color: var(--white);
+    font-size: 1.5rem;
+}
+
+#rightIcon4
+{
+    position: absolute;
+    margin-top: 22.2rem;
+    margin-left: -12rem;
+    color: var(--white);
+    font-size: 1.1rem;
+}
+
+#descri_icon4
+{
+    font-size: 1rem;
+    color: var(--white);
+    position: absolute;
+    margin-top: 0rem;
+    margin-left: -8rem;
+}
+
+.div2{
+
+    margin-left: 10rem;
+    margin-top: -10rem;
+
+}
+
+.div3{
+
+    margin-left: 20rem;
+    margin-top: -10rem;
+
+}
+
+.div4{
+
+    margin-left: 30rem;
+    margin-top: -10rem;
+    
+}
+/* featurelist - start  */
+
+
+
+/* why connect - start  */
+
+.bar {
+    list-style: none;
+    width: 800px;
+    margin-top: -9rem;
+  }
+  .bar >li {
+    position: relative;
+    color: var(--white);
+  }
+  .bar>li:before {
+    content: '\25CF';
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  .bar>li:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: '';
+    border-left: 2px solid var(--white);
+    margin-left: 5px;
+    height: 100%;
+  }
+  .bar >li:first-of-type:after {
+    top: 50%;
+  }
+  .bar >li:last-of-type:after {
+    top: -50%;
+  }
+
+
+  .why-connect
+  {
+      margin-top: 30rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  }
+
+  #questionIcon
+  {
+    color: var(--white);
+    font-size: 4 rem;
+    font-size: 3rem;
+    margin-left: -47rem;
+    margin-top: -33rem;
+    position: absolute;
+  }
+
+  #whyconnect-text
+  {
+    color: var(--white);
+    font-size: 3rem;
+    font-weight: 500;
+    /* padding-top: 5rem; */
+    margin-top: -31rem;
+    margin-left: -23rem;
+    font-family: system-ui;
+    position: absolute;
+}
+
+
+  
+
+/* why connect - end  */
