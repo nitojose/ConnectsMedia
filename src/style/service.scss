@@ -1,0 +1,110 @@
+@import './main.scss';
+
+/* service - start  */
+
+
+.service_list
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10rem;
+    
+}
+
+#service_text
+{
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+    font-size: 3rem;
+    margin-top: 52rem;
+}
+
+#vertical_line
+{
+    border-left: 3px solid $primary_color;
+    height: 550px;
+    position: relative;
+    margin-left: 5rem;
+    top: -1;
+}
+
+
+#serviceIcon
+{
+    color: $primary_color;
+    font-size: 2rem;
+    margin-left: 4rem;
+    margin-top:-1rem;
+}
+
+#service_1
+{
+    background-color: $ashcolor;
+    width: 300px;
+    height: 500px;
+    margin-left: 10rem;
+    border-radius: 10px;
+    margin-top: 10rem;
+}
+
+#youtube_icon
+{
+    position: absolute;
+    margin-top: -3rem;
+    margin-left: -3rem;
+}
+
+ul.dashed {
+    list-style-type: none;
+    line-height: 2;
+    
+    font-size: 20px;
+  }
+  ul.dashed > li {
+    text-indent: -5px;
+    color: $primary_color;
+   
+  }
+  ul.dashed > li:before {
+    content: "- ";
+    text-indent: -5px;
+    color: $primary_color;
+    
+  }
+
+
+  .items_list
+  {
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex-start;
+    padding-top: 7rem;
+  }
+
+
+  #second_col
+  {
+    position: absolute;
+    margin-top: -58rem;
+    margin-left: 31rem;
+      
+  }
+
+  #vertical_text
+  {
+    color: $primary_color;
+    font-size: 2rem;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+    margin-top: -26rem;
+    margin-left: 19rem;
+    font-family: monospace;
+    text-align: center;
+    height: 500px;
+  }
+
+/* service - end  */

@@ -9,7 +9,7 @@ export default function index() {
 
             <Container>
                 <Row>
-                    <Col> <h4 className='header-title'>Connecting your <br></br> church <br></br>to the world</h4></Col>
+                   <h4 className='header-title'>Connecting your <br></br> church <br></br>to the world</h4>
                 </Row>
 
                 

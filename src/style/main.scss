@@ -1,9 +1,13 @@
 $primary_color : #fff;
 $bgPrimary: #1c1d1e ;
+$ashcolor:#424949;
+$violetColor:#bf8ace;
+
 body
 {
     background-color: $bgPrimary;
     color: $primary_color;
-
+    margin: 0;
+    padding: 0;
 }
 

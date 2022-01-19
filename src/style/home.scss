@@ -26,18 +26,18 @@
 .header-title
 {
     position: absolute;
-    margin-top: 20px; 
-    /* float: right; */
+    margin-top: 20px;
     display: flex;
-    /* align-content: flex-end; */
     font-size: 4rem;
     font-family: system-ui;
-     right: 2px; 
-    /* bottom: 0; */
-    /* text-align-last: end; */
+    /* right: 2px; */
     z-index: 1;
     text-align: right;
     z-index: 1;
+    right: 3%;
+    align-items: flex-end;
+    justify-content: end;
+
 }
 
 

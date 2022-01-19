@@ -2,69 +2,86 @@
 
 @import './main.scss';
 
-.about-div1
-{
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-}
 
 #whoweare
 {
     position: absolute;
     writing-mode: vertical-rl;
     text-orientation: mixed;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
     font-size: 3rem;
-    top: 7rem;
-    left: 21rem;
+    left: 26rem;
     color: $primary_color;
     font-weight: 500;
-   
+    top: 87rem;
+    height: 400px;
+    text-align: inherit;
 }
 
 #descri_1
 {
     color: $primary_color;
-    font-size: 2rem;
-    position: absolute;
-    left: 48rem;
-    text-align: left;
-   
-}
-
-
-
-
-.about-div2
-{
-    position: relative;
+    font-size: 25px;
+    // width: 550px;
+    height: 400px;
     display: flex;
-    justify-content: space-around;
-    top: 3rem;
+    align-items: center;
+    justify-content: center;
 }
+
+
+
 
 #whatwedo
 {
     position: absolute;
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    font-size: 2rem;
-    top: 7rem;
-    left: 48.5rem;
+    transform: matrix(1, 0, 0, 1, 0, 0);
     color: $primary_color;
-    font-weight: 500;
-   
+    margin-top: -18rem;
+    margin-left: -2rem;
+    height: 400px;
+    font-size: 3rem;
+    font-weight: 500;  
 }
 
-#descri_2
-{
-    color: $primary_color;
-    font-size: 1.5rem;
-    position: absolute;
-    left: 10rem;
-    text-align: right;
-    right: 48rem;
-   
-}
+
 
 /* about- section - end */
+
+
+
+/* pillar section - start */
+
+
+.pillarSection
+{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    // margin-top: 10rem;
+}
+
+#about-pillar
+{
+    font-family: inherit;
+    font-size: 5rem;
+    color: $primary_color;
+    // margin-top: -5rem;
+}
+
+#pillarIcon
+{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    color: $primary_color;
+    font-size: 3rem;
+    margin-top: -2rem;
+    margin-left: -92px;
+    position: relative;
+}
+
+/* pillar section - end  */
