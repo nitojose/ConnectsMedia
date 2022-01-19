@@ -1,0 +1,70 @@
+/* about- section - start */
+
+@import './main.scss';
+
+.about-div1
+{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+#whoweare
+{
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 3rem;
+    top: 7rem;
+    left: 21rem;
+    color: $primary_color;
+    font-weight: 500;
+   
+}
+
+#descri_1
+{
+    color: $primary_color;
+    font-size: 2rem;
+    position: absolute;
+    left: 48rem;
+    text-align: left;
+   
+}
+
+
+
+
+.about-div2
+{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    top: 3rem;
+}
+
+#whatwedo
+{
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 2rem;
+    top: 7rem;
+    left: 48.5rem;
+    color: $primary_color;
+    font-weight: 500;
+   
+}
+
+#descri_2
+{
+    color: $primary_color;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 10rem;
+    text-align: right;
+    right: 48rem;
+   
+}
+
+/* about- section - end */

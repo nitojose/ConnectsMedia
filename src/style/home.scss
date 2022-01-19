@@ -1,0 +1,109 @@
+@import './main.scss';
+
+
+.navbar
+{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menu-nav
+{
+    color: $primary_color;
+    font-size: 3rem;
+    
+}
+
+
+// home - content 
+
+.headerSection
+{
+    
+}
+
+.header-title
+{
+    position: absolute;
+    margin-top: 20px; 
+    /* float: right; */
+    display: flex;
+    /* align-content: flex-end; */
+    font-size: 4rem;
+    font-family: system-ui;
+     right: 2px; 
+    /* bottom: 0; */
+    /* text-align-last: end; */
+    z-index: 1;
+    text-align: right;
+    z-index: 1;
+}
+
+
+
+.header-aboutus
+{
+    color: $primary_color;
+    font-size: 2rem;
+    margin-top: -5rem;
+}
+
+.aboutIcon
+{
+    margin-top: -2rem;
+    position: absolute;
+    color: $primary_color;
+    font-size: 3rem;
+    margin-left: -9rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .aboutIcon
+    {
+        
+        // margin-right: 0rem;
+        right: 13rem;
+        margin-top: -1rem;
+        position: absolute;
+        color: $primary_color;
+        font-size: 3rem;
+        // visibility: hidden;
+    }
+
+    .header-aboutus
+    {
+        
+        color: $primary_color;
+        font-size: 2.5rem;
+        margin-top: -5rem;
+    }
+
+  }
+
+
+  /* Media Query for Mobile Devices */
+  @media (max-width: 480px) {
+    
+}
+  
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+   
+}
+  
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px){
+    
+}
+  
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px){
+ 
+}
+  
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+   
+}

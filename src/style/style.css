@@ -1,7 +1,10 @@
+
+
 :root {
     --blue: #1e90ff;
     --white: #ffffff;
     --bgPrimary: #1c1d1e ;
+    --ashcolor : #424949 ;
   }
 
 
@@ -92,7 +95,7 @@
     text-orientation: mixed;
     font-size: 2rem;
     top: 7rem;
-    left: 37rem;
+    left: 39.2rem;
     color: var(--white);
     font-weight: 500;
    
@@ -103,9 +106,10 @@
     color: var(--white);
     font-size: 1.5rem;
     position: absolute;
-    left: 43rem;
+    left: 48rem;
     text-align: left;
-    right:5rem;
+    right:10rem;
+   
 }
 
 
@@ -126,7 +130,7 @@
     text-orientation: mixed;
     font-size: 2rem;
     top: 7rem;
-    left: 41.5rem;
+    left: 48.5rem;
     color: var(--white);
     font-weight: 500;
    
@@ -137,9 +141,10 @@
     color: var(--white);
     font-size: 1.5rem;
     position: absolute;
-    left: 5rem;
+    left: 10rem;
     text-align: right;
-    right: 43rem;
+    right: 48rem;
+   
 }
 
 /* about- section - end */
@@ -155,6 +160,7 @@
     justify-content: center;
     display: flex;
     flex-direction: column;
+    margin-top: 10rem;
 }
 
 #about-pillar
@@ -389,7 +395,7 @@
   .bar>li:before {
     content: '\25CF';
     margin-right: 10px;
-    font-size: 20px;
+    font-size: 2rem;
   }
   .bar>li:after {
     position: absolute;
@@ -422,8 +428,8 @@
     color: var(--white);
     font-size: 4 rem;
     font-size: 3rem;
-    margin-left: -47rem;
-    margin-top: -33rem;
+    margin-left: -46rem;
+    margin-top: -39rem;
     position: absolute;
   }
 
@@ -433,7 +439,7 @@
     font-size: 3rem;
     font-weight: 500;
     /* padding-top: 5rem; */
-    margin-top: -31rem;
+    margin-top: -36rem;
     margin-left: -23rem;
     font-family: system-ui;
     position: absolute;
@@ -443,3 +449,75 @@
   
 
 /* why connect - end  */
+
+
+/* service - start  */
+
+#service_1
+{
+    background-color: var(--ashcolor);
+    width: 300px;
+    height: 500px;
+    margin-left: 10rem;
+    border-radius: 10px;
+    margin-top: 10rem;
+}
+
+#youtube_icon
+{
+    position: absolute;
+    margin-top: -3rem;
+    margin-left: -3rem;
+}
+
+ul.dashed {
+    list-style-type: none;
+    line-height: 2;
+    
+    font-size: 20px;
+  }
+  ul.dashed > li {
+    text-indent: -5px;
+    color: var(--white);
+   
+  }
+  ul.dashed > li:before {
+    content: "- ";
+    text-indent: -5px;
+    color: var(--white);
+    
+  }
+
+
+  .items_list
+  {
+    display: flex;
+    /* justify-content: center; */
+    align-items: flex-start;
+    padding-top: 7rem;
+  }
+
+
+  #second_col
+  {
+    position: absolute;
+    margin-top: -58rem;
+    margin-left: 31rem;
+      
+  }
+
+  #vertical_text
+  {
+    color: var(--white);
+    font-size: 40px;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+    margin-top: -26rem;
+    margin-left: 19rem;
+    font-family: monospace;
+    text-align: center;
+    height: 500px;
+  }
+
+/* service - end  */
