@@ -9,17 +9,20 @@
 {
     background-image: linear-gradient(to top, $violetColor 0%, $ashcolor 100%);
     height: 400px;
-    width: 200px;
+    width: 230px;
     border-radius: 8px;
     position: relative;
+    
 }
 
 .cam_img
 {
     position: absolute;
-    width: 150px;
-    height: 150px;
-    left: 10%;
+    // width: 150px;
+    // height: 150px;
+    margin-top: -2rem;
+    left: 15%;
+    z-index: 1;
 }
 
 .vertical_text
@@ -28,14 +31,30 @@
     text-orientation: mixed;
     transform: matrix(-1, 0, 0, -1, 0, 0);
     position: absolute;
-    font-size: 25px;
-    left: 0;
-    bottom: 0;
+    font-size: 28px;
+    font-weight: 500;
+    left: -1rem;
+    bottom: 1rem;
     margin-left: -1rem;
 }
 
 .go-button
 {
-    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-bottom: 8rem; */
+    position: relative;
+    /* position: absolute; */
+    /* bottom: 0; */
     bottom: 0;
+    top: 22rem;
+}
+
+.content
+{
+    position: absolute;
+    margin-top: 9rem;
+    margin-left: 3rem;
+    // padding-right: 1rem;
 }
