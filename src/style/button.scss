@@ -1,0 +1,24 @@
+
+@import './main.scss';
+
+.go-button
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin-bottom: 8rem; */
+    position: relative;
+    /* position: absolute; */
+    /* bottom: 0; */
+    bottom: 0;
+    top: 22rem;
+}
+
+.button-text
+{
+    border-radius: 45%;
+    border: 3px solid #F1C40F;
+    background-color: transparent;
+    color: $primary_color;
+    font-weight: 500;
+}

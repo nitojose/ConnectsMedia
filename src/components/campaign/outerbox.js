@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from 'react-bootstrap'
 import '../../style/campaign.scss'
-import Button from 'react-bootstrap/Button';
+import Button from '../Button'
 
 export default function outerbox(props) {
 
@@ -23,9 +23,13 @@ export default function outerbox(props) {
                 <p>{props.content}</p>
             </div>
 
-            <div className='go-button'>
-                <Button variant="outline-warning" className='px-4' >Go</Button>
-            </div>
+            {/* <div className='go-button'>
+                <button className='button-text px-3'>Go</button>
+            </div> */}
+
+            <Button/>
+
+           
 
         </Card> 
 
