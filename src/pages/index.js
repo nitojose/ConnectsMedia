@@ -6,6 +6,9 @@ import Pillars from '../pages/About/pillars'
 import Features from '../pages/About/features'
 import Service from '../pages/services/index'
 import Campaign from '../pages/campaign/index'
+import Package from '../pages/Packages/index'
+import Contact from '../pages/contact/contact'
+import Footer from '../components/Footer/index'
 import '../style/main.scss'
 
 
@@ -19,6 +22,10 @@ export default function index() {
             <Features />
             <Service />
             <Campaign />
+            <Package />
+            <Contact />
+            <Footer />
+            
         </div>
     )
 }

@@ -1,0 +1,55 @@
+@import './main.scss';
+@import './campaign.scss';
+
+.card-box
+{
+    background-color:  $ashcolor ;
+    height: 550px;
+    width: 65%;
+    border-radius: 8px;
+    position: relative;
+}
+
+
+.header
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.rating
+{
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 0rem;
+}
+
+
+.inner-box
+{
+    display: flex;
+    align-items: flex-start; 
+    // justify-content: flex-start;
+    background-color: $ashcolor;
+    border: none;
+    width: 90%;
+    height: 350px;
+    margin-top: 2rem;
+}
+
+.checkIcon
+{
+    background-color: $ashcolor;
+}
+
+
+.pkg-content
+{
+    margin-left: 2rem;
+    margin-top: -1rem;
+}

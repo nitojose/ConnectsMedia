@@ -3,6 +3,9 @@ $bgPrimary: #1c1d1e ;
 $ashcolor:#424949;
 $violetColor:#bf8ace;
 $btn-yellow : #F1C40F;
+$btn-pink : #fc0298;
+$font : monospace;
+$secondary_color: #fcfcfc;
 
 body
 {
@@ -10,5 +13,52 @@ body
     color: $primary_color;
     margin: 0;
     padding: 0;
+    // font-family:  $font
 }
 
+.heading
+{
+    font-size: 40px;
+    font-weight: 400;
+    
+}
+
+.paragrah
+{
+    font-size: 22px;
+    color: $ashcolor;
+    font-weight: 500;
+}
+
+.para-content
+{
+    font-size: 18px;
+    color: $primary_color;
+    font-weight: 400;
+}
+
+.icon
+{
+    font-size: 30px;
+}
+
+.media-icon
+{
+    margin-top: 10px;
+    color: $secondary_color;
+}
+
+.textbox
+{
+    border-radius: 6px;
+}
+
+.footer-div
+{
+    
+    background-color: #424949;
+    
+    display: flex;
+    justify-content: space-around;
+
+}

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container,Row, Col} from 'react-bootstrap'
 import '../../style/campaign.scss'
-import Button from 'react-bootstrap/Button';
 import Outerbox from '../../components/campaign/outerbox';
 import pic1 from '../../assets/images/OBJECTS.png';
 
