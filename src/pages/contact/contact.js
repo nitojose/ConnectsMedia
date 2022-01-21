@@ -16,7 +16,7 @@ export default function contact() {
         <Container>
             <Row>
             <p className='paragrah' >Let's Get In Touch</p>
-                <Col xl={4} sm={12} md={12} xxl={5}>
+                <Col xl={4} sm={12} md={12} xxl={5} className='py-5'>
 
                     
                     <h6 className='heading'>Connect Media</h6>
@@ -52,24 +52,24 @@ export default function contact() {
 
                 <Col></Col>
 
-                <Col xl={8} sm={12} md={12} xxl={5}>
+                <Col xl={8} sm={12} md={12} xxl={5} className='py-5'>
                   
                     <h6 className='heading'>Leave Message</h6>
                     <p para-content>Curabitur Mollis Bibendum Luctus Duis Suscipit<br></br> Vitas Dui Sed Suscipit</p>
                     
                     <Form>
                         <Row>
-                            <Col>  <Textbox placeholder="Name" type="text" /> </Col>
-                            <Col> <Textbox placeholder="Email" type="text" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <Textbox placeholder="Name" type="text" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}> <Textbox placeholder="Email" type="text" /> </Col>
                         </Row>
 
                         <Row>
-                            <Col>  <Textbox placeholder="Contact No" type="text" /> </Col>
-                            <Col>  <Textbox placeholder="Subject" type="text" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <Textbox placeholder="Contact No" type="text" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <Textbox placeholder="Subject" type="text" /> </Col>
                         </Row>
 
                         <Row>
-                            <Col> <TextArea placeholder="Message"/> </Col>
+                            <Col sm={12} md={12} xl={12} xxl={12}> <TextArea placeholder="Message"/> </Col>
                         </Row>
 
                         <Buttons text="SUBMIT REQUEST" />

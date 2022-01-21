@@ -10,12 +10,12 @@
     text-orientation: mixed;
     transform: matrix(-1, 0, 0, -1, 0, 0);
     font-size: 3rem;
-    left: 26rem;
-    color: $primary_color;
+    margin-left: 22rem;
+    color: #fff;
     font-weight: 500;
-    top: 87rem;
     height: 400px;
     text-align: inherit;
+    margin-top: -30rem;
 }
 
 #descri_1
@@ -69,7 +69,7 @@
     font-family: inherit;
     font-size: 5rem;
     color: $primary_color;
-    // margin-top: -5rem;
+    margin-top: -10rem;
 }
 
 #pillarIcon
@@ -79,7 +79,7 @@
     display: flex;
     color: $primary_color;
     font-size: 3rem;
-    margin-top: -2rem;
+    margin-top: -4rem;
     margin-left: -92px;
     position: relative;
 }

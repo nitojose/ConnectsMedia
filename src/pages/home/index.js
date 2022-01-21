@@ -7,13 +7,13 @@ export default function index() {
     return (
         <>
 
-            <Container>
-                <Row>
-                   <h4 className='header-title'>Connecting your <br></br> church <br></br>to the world</h4>
-                </Row>
-
-                
+<           Container className='page margin-25vh'>
+               
+               <h4 className='header-title'>Connecting your </h4> <br></br> <h4 className='header-title font-mono'> church </h4> <br></br>
+               <h4 className='header-title'>to the world</h4>
+         
             </Container>
+
 
 
             <Container className='headerSection'>

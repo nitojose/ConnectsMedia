@@ -17,21 +17,25 @@ export default function Cards(props) {
 
         <Card className='card-box'>
             <div className='header py-3'>
-                <h4 className=''>{props.heading }</h4>
-                <div className='rating'>
-                    <StarRating
-                        rating={rating}
-                        starRatedColor={props.ratingColor}
-                        numberOfStars={5}
-                        name='stars'
+            <div className='header'>
+                    <img src={props.img} alt="img1" width={200} className='bg-img'/>
+                    <h4 className='zindex'>{props.heading }</h4>
+                    <div className='rating'>
+                        <StarRating
+                            rating={rating}
+                            starRatedColor={props.ratingColor}
+                            numberOfStars={5}
+                            name='stars'
 
-                        starDimension={15}
-                        // starSpacing={2}
-                        ignoreInlineStyles={false}
-                    />
+                            starDimension={15}
+                            // starSpacing={2}
+                            ignoreInlineStyles={false}
+                        />
+                    </div>
+
+                    <p className='py-1 zindex'>{props.month}</p>
+
                 </div>
-
-                <p className='py-1'>{props.month}</p>
 
                 <Card className='inner-box'>
                     {package_details.map(name => (  

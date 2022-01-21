@@ -9,20 +9,21 @@ import '../../style/main.scss'
 export default function index() {
     return (
       
-           <div className='footer-div'>
-               <Row>
-                   <Col sm={12} md={12} xl={2} xxl={2}></Col>
-                   <Col sm={12} md={12} xl={8} xxl={8} className='footer-div py-5'>
-                        <AiOutlineMail />
-                        <FaFacebookF />
-                        <AiOutlineInstagram />
-                        <FaYoutube />
-                   </Col>
-                   <Col sm={12} md={12} xl={2} xxl={2}></Col>
-               </Row>
+        <Row className=' footer-div ' >
+        <Col sm={12} md={12} xl={2} xxl={2}></Col>
+        <Col sm={12} md={12} xl={2} xxl={8} className=' footer-div py-5'>
 
-               
-           </div>
-       
+            <div className=' footer-icons'>
+                 <AiOutlineMail />
+                 <FaFacebookF />
+                 <AiOutlineInstagram />
+                 <FaYoutube />
+            </div>
+            <p style={{fontWeight:'200',marginTop:'1rem'}}>@Connectmedianetworks | All Rights Reserved</p>
+             
+        </Col>
+        <Col sm={12} md={12} xl={2} xxl={2}></Col>
+    </Row>
+
     )
 }

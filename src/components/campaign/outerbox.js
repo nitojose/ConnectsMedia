@@ -5,15 +5,19 @@ import Button from '../Button'
 
 export default function outerbox(props) {
 
-    // const imagepath = '../../assets/images/';
+    
+    const height = Number(props.height);
+    const width = Number(props.width);
+    const marginTop = (props.marginTop);
+    
+    
     return (
 
     
         <Card className='box'>
 
-            {console.log(props.image)}
 
-            <img src={(props.image)} alt={props.alt} className='cam_img' width={150} height={150}/>
+            <img src={(props.image)} alt={props.alt} className='cam_img' width={width} height={height} style={{marginTop:marginTop}}/>
 
             <div className='vertical_text'>
                 <p>{props.text}</p>
