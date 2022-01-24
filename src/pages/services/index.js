@@ -36,13 +36,13 @@ export default function index() {
     return (
         <div style={{paddingBottom:'15rem',backgroundColor:'#1c1d1e'}} >
             <Row>
-                <Col xl={3} md={3} sm={12} xxl={3} >
+                <Col xl={3} md={12} sm={12} xxl={3} >
                     <p id='service_text'>Services</p>
                     <div id='vertical_line'></div>
                     <FaArrowDown id='serviceIcon'/>
                 </Col>
 
-                <Col xl={9} md={9} sm={12} xxl={9}>
+                <Col xl={9} md={12} sm={12} xxl={9}>
 
                     <Row>
                         <Col sm={12} md={12} xl={6} xxl={6}>
@@ -88,73 +88,3 @@ export default function index() {
 }
 
 
-{/* <div id='service_1'>
-                    <img src={require('../../assets/images/Group 186.png')} width={150} height={140}  alt='youtube icon' id='youtube_icon'/>
-
-                    <div className='items_list'>
-                        <ul class="dashed">
-                            <li>Live-Stream Services: Increase viewership & followers</li>
-                            <li>Customized Videos</li>
-                            <li>Create Short Videos from Sermons</li>
-                            <li>Personalized Shorts</li>
-                        </ul>
-                    </div>
-
-                    <p id='vertical_text'>Youtube Management</p>
-                    
-
-                </div>
-
-
-                <div id='service_1'>
-                    <img src={require('../../assets/images/Group 192.png')} width={150} height={140}  alt='youtube icon' id='youtube_icon'/>
-
-                    <div className='items_list'>
-                        <ul class="dashed">
-                            <li>Live-Stream Services: Increase viewership & followers</li>
-                            <li>Customized Videos</li>
-                            <li>Create Short Videos from Sermons</li>
-                            <li>Personalized Shorts</li>
-                        </ul>
-                    </div>
-                    <p id='vertical_text'>Facebook Management</p>
-
-                </div>
-
-
-                <div id='second_col'>
-
-                    <div id='service_1'>
-                        <img src={require('../../assets/images/Group 191.png')} width={150} height={140}  alt='youtube icon' id='youtube_icon'/>
-
-                        <div className='items_list'>
-                            <ul class="dashed">
-                                <li>Live-Stream Services: Increase viewership & followers</li>
-                                <li>Customized Videos</li>
-                                <li>Create Short Videos from Sermons</li>
-                                <li>Personalized Shorts</li>
-                            </ul>
-                        </div>
-                        <p id='vertical_text'>Instagram Management</p>
-
-                    </div>
-
-
-
-                    <div id='service_1'>
-                        <img src={require('../../assets/images/Group 193.png')} width={150} height={140}  alt='youtube icon' id='youtube_icon'/>
-
-                        <div className='items_list'>
-                            <ul class="dashed">
-                                <li>Live-Stream Services: Increase viewership & followers</li>
-                                <li>Customized Videos</li>
-                                <li>Create Short Videos from Sermons</li>
-                                <li>Personalized Shorts</li>
-                            </ul>
-                        </div>
-                    
-                            <p id='vertical_text'>Advertisement Management</p>
-
-                        
-                    </div>
-                </div> */}

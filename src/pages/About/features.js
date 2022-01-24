@@ -4,12 +4,13 @@ import { FiArrowRight } from "react-icons/fi"
 import { FiArrowLeft } from "react-icons/fi"
 import { FaQuestion } from "react-icons/fa"
 import '../../style/features.scss'
+import { Col } from 'react-bootstrap'
 
 export default function features() {
     return (
         <div className='feature-list'> 
 
-
+{/* <Col sm={12} md={12} xl={3} xxl={3}> */}
             <div className='div1'>
                 <img src={require('../../assets/images/Rectangle 37.png')} alt='header section' width={350} height={350}/>
                 <p id='vision'>Our Vision</p>
@@ -18,6 +19,9 @@ export default function features() {
                 <FiArrowRight id='rightIcon1' />
                 <p id='descri_icon'>to be a tool for churches and ministries ,<br></br>to be a tool for churches and ministries</p>
             </div>
+
+{/* </Col> */}
+            
 
 
 

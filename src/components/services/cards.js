@@ -7,7 +7,7 @@ export default function cards(props) {
     const height = parseFloat(props.height)+'px';
     const items =  props.list;
 
-    console.log("items",props.list);
+    // console.log("items",props.list);
 
   return (
     <Card id='service_1'>

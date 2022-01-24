@@ -7,13 +7,12 @@ export default function Navbar() {
     return (
         <>
       
-            <Container>
-                <Row className='navbar'>
-                    <Col><img src={require('../../assets/images/logo.png')}  alt='header-logo-img'/></Col>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col><BsList className='menu-nav'/></Col>
-                </Row>
+            <Container className='navbar'>
+               
+                    <img src={require('../../assets/images/logo.png')}  alt='header-logo-img'/>
+
+                    <BsList className='menu-nav'/>
+                
             </Container>
         </>
       
