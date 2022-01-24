@@ -9,7 +9,7 @@ import pink from '../../assets/pkg-bg/Group 478.png'
 export default function index() {
     return (
         <Container style={{paddingBottom:'10rem'}} className='my-5'>
-             <p className='campaign_text'>Packages</p>
+             <p className='campaign_text center-align'>Packages</p>
 
              <Row className='py-5'>
 

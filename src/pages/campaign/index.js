@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect ,useRef} from 'react'
 import { Container,Row, Col} from 'react-bootstrap'
 import '../../style/campaign.scss'
 import Outerbox from '../../components/campaign/outerbox';
@@ -8,17 +8,34 @@ import pic3 from '../../assets/images/hands.png';
 import pic4 from '../../assets/images/Group 364.png';
 import pic5 from '../../assets/images/Group 376.png';
 import pic6 from '../../assets/images/cross.png';
+import Rellax from "rellax";
 
 
+export default function Campaigns() {
 
-export default function index() {
+
+    const rellaxRef = useRef();
+
+  useEffect(() => {
+    // new Rellax(".rellax", {
+    //   speed: -0.5,
+    // //   center: false,
+    // //   wrapper: null,
+    // //   round: true,
+    // //   vertical: true,
+    // //   horizontal: false
+    // });
+
+    
+  }, []);
+
     return (
         <Container style={{marginTop:'5rem'}}>
             
             <p className='campaign_text'>Campaigns</p>
 
-            <Row className='my-5 mx-5 my-0'>
-                <Col sm={12} md={12} xl={4} xxl={4} className='py-5'>
+            <Row className='my-5 mx-5 my-0 ' >
+                <Col sm={12} md={12} xl={4} xxl={4} className='py-5 rellax' data-rellax-speed="-4" data-rellax-percentage="0.5">
 
                     <Outerbox image={pic1} alt="cam-img1" text="Upcoming Events" content="Share your calender here.we will pick all your future events from here." width="150" height="150" marginTop="0rem">
                         

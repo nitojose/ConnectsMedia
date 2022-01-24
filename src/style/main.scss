@@ -11,8 +11,8 @@ body
 {
     background-color: $bgPrimary;
     color: $primary_color;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 0px;
     // font-family:  $font
 }
 
@@ -93,4 +93,11 @@ body
 .margin-top-15rm
 {
     margin-top: 15rem;
+}
+
+.center-align
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

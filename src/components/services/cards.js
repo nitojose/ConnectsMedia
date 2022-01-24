@@ -10,7 +10,7 @@ export default function cards(props) {
     // console.log("items",props.list);
 
   return (
-    <Card id='service_1'>
+    <Card className='service_1'>
         <img src={props.image} alt={props.alt} id={props.imgId} width={width} height={height} />
 
             <div className='items_list'>

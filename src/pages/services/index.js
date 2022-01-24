@@ -37,9 +37,9 @@ export default function index() {
         <div style={{paddingBottom:'15rem',backgroundColor:'#1c1d1e'}} >
             <Row>
                 <Col xl={3} md={12} sm={12} xxl={3} >
-                    <p id='service_text'>Services</p>
-                    <div id='vertical_line'></div>
-                    <FaArrowDown id='serviceIcon'/>
+                    <p className='service_text '>Services</p>
+                    <div className='vertical_line '></div>
+                    <FaArrowDown className='serviceIcon '/>
                 </Col>
 
                 <Col xl={9} md={12} sm={12} xxl={9}>

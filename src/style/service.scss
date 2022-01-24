@@ -13,13 +13,14 @@
     
 }
 
-#service_text
+.service_text
 {
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-    transform: matrix(-1, 0, 0, -1, 0, 0);
+    // writing-mode: vertical-lr;
+    // text-orientation: mixed;
+    // transform: matrix(-1, 0, 0, -1, 0, 0);
     font-size: 3rem;
-    margin-top: 52rem;
+    margin-left: 5rem;
+    // margin-top: 52rem;
 }
 
 #vertical_line
@@ -32,20 +33,20 @@
 }
 
 
-#serviceIcon
+.serviceIcon
 {
     color: $primary_color;
-    font-size: 2rem;
+    font-size: 3rem;
     margin-left: 4rem;
     margin-top:-1rem;
 }
 
-#service_1
+.service_1
 {
     background-color: $ashcolor;
     width: 300px;
     height: 500px;
-    margin-left: 10rem;
+    margin-left: 6rem;
     border-radius: 10px;
     margin-top: 10rem;
 }
@@ -109,3 +110,46 @@ ul.dashed {
   }
 
 /* service - end  */
+
+
+@media only screen and (min-width: 768px) {
+
+  // large screen 
+
+
+  .service_text
+{
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: matrix(-1, 0, 0, -1, 0, 0);
+    font-size: 3rem;
+    margin-top: 52rem;
+    margin-left: 2rem;
+   
+}
+
+.vertical_line
+{
+    border-left: 3px solid $primary_color;
+    height: 550px;
+    position: relative;
+    margin-left: 5rem;
+    top: -1;
+}
+
+
+.serviceIcon
+{
+    color: $primary_color;
+    font-size: 2rem;
+    margin-left: 4rem;
+    margin-top:-1rem;
+}
+
+
+.service_1
+{
+  margin-left: 0rem;
+}
+
+}

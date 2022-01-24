@@ -7,6 +7,9 @@
     margin-top: 10rem;
     padding-bottom: 10rem;
     background-color: $bgPrimary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #vision
@@ -22,29 +25,39 @@
     height: 400px;
 }
 
-#mission
+.mission
+{
+    // color: $primary_color;
+    // font-size: 4rem;
+    // font-weight: 500;
+    // margin-top: -21rem;
+    // position: absolute;
+    // margin-left: 14rem;
+
+
+
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 500;
+    position: absolute;
+    margin-right: -1rem;
+    margin-top: -10rem;
+    margin-left: -9rem;
+}
+
+
+.statement
 {
     color: $primary_color;
     font-size: 4rem;
     font-weight: 500;
-    margin-top: -21rem;
+    margin-top: -20rem;
     position: absolute;
-    margin-left: 14rem;
+    margin-left: 2rem;
 }
 
 
-#statement
-{
-    color: $primary_color;
-    font-size: 4rem;
-    font-weight: 500;
-    margin-top: -8rem;
-    position: absolute;
-    margin-left: -19rem;
-}
-
-
-#values
+.values
 {
     color: $primary_color;
     font-size: 4rem;
@@ -53,7 +66,7 @@
     /* text-orientation: mixed; */
     margin-top: -15rem;
     position: absolute;
-    margin-left: 13rem;
+    margin-left: 15rem;
     height: 500px;
 }
 
@@ -87,121 +100,203 @@
 }
 
 
-#plusIcon2
+.plusIcon2
+{
+    // position: absolute;
+    // margin-top: 6rem;
+    // margin-left: 0rem;
+    // color: $primary_color;
+    // font-size: 1.5rem;
+
+
+    position: absolute;
+    margin-top: -4rem;
+    margin-left: 4rem;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.rightIcon2
+{
+    // position: absolute;
+    // margin-top: 6.2rem;
+    // margin-left: 1rem;
+    // color: $primary_color;
+    // font-size: 1.1rem;
+
+    position: absolute;
+    margin-top: -3.8rem;
+    margin-left: 3.4rem;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.descri_icon2
+{
+    // font-size: 1rem;
+    // color: $primary_color;
+    // position: absolute;
+    // margin-top: -16rem;
+    // margin-left: 25rem;
+
+
+    font-size: 1rem;
+    color: #fff;
+    position: absolute;
+    margin-top: -4rem;
+    margin-left: -9.5rem;
+}
+
+
+.plusIcon3
 {
     position: absolute;
-    margin-top: 6rem;
-    margin-left: 0rem;
+    margin-top: 8rem;
+    margin-left: -9rem;
     color: $primary_color;
     font-size: 1.5rem;
 }
 
-#rightIcon2
+.rightIcon3
 {
     position: absolute;
-    margin-top: 6.2rem;
-    margin-left: 1rem;
+    margin-top: 8.2rem;
+    margin-left: -8rem;
     color: $primary_color;
     font-size: 1.1rem;
 }
 
-#descri_icon2
+.descri_icon3
 {
     font-size: 1rem;
     color: $primary_color;
     position: absolute;
-    margin-top: -16rem;
-    margin-left: 25rem;
-}
-
-
-#plusIcon3
-{
-    position: absolute;
-    margin-top: 19rem;
-    margin-left: -20rem;
-    color: $primary_color;
-    font-size: 1.5rem;
-}
-
-#rightIcon3
-{
-    position: absolute;
-    margin-top: 19.2rem;
-    margin-left: -21rem;
-    color: $primary_color;
-    font-size: 1.1rem;
-}
-
-#descri_icon3
-{
-    font-size: 1rem;
-    color: $primary_color;
-    position: absolute;
-    margin-top: -3rem;
-    margin-left: -18rem;
+    margin-top: -14rem;
+    margin-left: 16rem;
    
 }
 
-#plusIcon4
+.plusIcon4
 {
     position: absolute;
-    margin-top: 22rem;
-    margin-left: -11rem;
+    margin-top: -5rem;
+    margin-left: 13rem;
     color: $primary_color;
     font-size: 1.5rem;
 }
 
-#rightIcon4
+.rightIcon4
 {
     position: absolute;
-    margin-top: 22.2rem;
-    margin-left: -12rem;
+    margin-top: -4.8rem;
+    margin-left: 12rem;
     color: $primary_color;
     font-size: 1.1rem;
 }
 
-#descri_icon4
+.descri_icon4
 {
     font-size: 1rem;
     color: $primary_color;
     position: absolute;
-    margin-top: 0rem;
-    margin-left: -8rem;
+    margin-top: -5rem;
+    margin-left: -4rem;
+}
+
+.div1{
+
+    margin-left: 0rem;
+    // margin-top: -10rem;
+
 }
 
 .div2{
 
-    margin-left: 10rem;
-    margin-top: -10rem;
-
+  margin-left: 9rem;
+  margin-top: -10rem;
 }
+
 
 .div3{
 
-    margin-left: 20rem;
-    margin-top: -10rem;
+  margin-left: 0rem;
+  margin-top: 2rem;
+
 
 }
 
 .div4{
 
-    margin-left: 30rem;
-    margin-top: -10rem;
+  margin-left: 9rem;
+  margin-top: -6rem;
+
     
 }
 /* featurelist - start  */
 
+
+
+  .why-connect
+  {
+    //   margin-top: 30rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  }
+
+  .questionIcon
+  {
+    color: #fff;
+    font-size: 4 rem;
+    font-size: 3rem;
+    margin-top: -65rem;
+    position: absolute;
+    margin-left: -12rem;
+  }
+
+  .whyconnect-text
+  {
+    color: $primary_color;
+    font-size: 3rem;
+    font-weight: 500;
+    /* padding-top: 5rem; */
+    margin-top: -130rem;
+    // margin-left: -23rem;
+    font-family: system-ui;
+    position: absolute;
+}
+
+
+.bar {
+    list-style: none;
+    // width: 800px;
+    margin-top: 5rem;
+  }
+
+
+  .bar li{
+      font-size: 2rem;
+    //   position: absolute;
+  }
+/* why connect - end  */
+
+
+
+@media only screen and (min-width: 768px) {
+
+    // large screen 
 
 /* why connect - start  */
 
 .bar {
     list-style: none;
     width: 800px;
-    margin-top: -9rem;
+    margin-top: -11rem;
   }
   .bar >li {
     position: relative;
+    font-size: 1rem;
     color: $primary_color;
   }
   .bar>li:before {
@@ -226,36 +321,85 @@
   }
 
 
+
   .why-connect
   {
-      margin-top: 30rem;
+      margin-top: 50rem;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
   }
 
-  #questionIcon
-  {
-    color: $primary_color;
-    font-size: 4 rem;
-    font-size: 3rem;
-    margin-left: -22.5rem;
-    margin-top: -21rem;
-    position: absolute;
-  }
 
-  #whyconnect-text
+  .whyconnect-text
   {
     color: $primary_color;
     font-size: 3rem;
     font-weight: 500;
-    /* padding-top: 5rem; */
-    margin-top: -36rem;
+    padding-top: 5rem; 
+    margin-top: -57rem;
     margin-left: -23rem;
     font-family: system-ui;
     position: absolute;
 }
 
 
-/* why connect - end  */
+.questionIcon
+  {
+    color: $primary_color;
+    font-size: 4rem;
+    font-size: 3rem;
+    margin-left: -22.5rem;
+    margin-top: -26rem;
+    position: absolute;
+  }
+
+
+  .plusIcon2
+  {
+    margin-top: 18rem;
+    margin-left: -17rem;
+  }
+
+  .rightIcon2
+  {
+    margin-top: 18.2rem;
+    margin-left: -17.6rem;
+  }
+
+  .plusIcon4
+  {
+    margin-top: 16.5rem;
+    margin-left: -8rem;
+  }
+
+  .rightIcon4{
+    margin-top: 16.8rem;
+    margin-left: -8.8rem;
+  }
+
+  .div3{
+    margin-left: 7rem;
+    margin-top: -8rem;
+  }
+
+  .div4 {
+    margin-left: 22rem;
+    margin-top: -17rem;
+  }
+
+  .section_1
+  {
+    margin-top: 37rem;
+    position: absolute;
+    margin-left: 11rem;
+  }
+
+  .section_2
+  {
+    position: absolute;
+    margin-top: 37rem;
+    margin-left: 11rem;
+  }
+}

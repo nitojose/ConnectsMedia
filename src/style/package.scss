@@ -8,6 +8,7 @@
     width: 65%;
     border-radius: 8px;
     position: relative;
+    margin-left: 6.5rem;
 }
 
 
@@ -63,4 +64,14 @@
 {
     margin-left: 2rem;
     margin-top: -1rem;
+}
+
+
+@media only screen and (min-width: 768px) {
+
+    .card-box
+    {
+        margin-left: 4rem;
+    }
+
 }

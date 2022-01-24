@@ -25,23 +25,23 @@ export default function contact() {
                     <div style={{marginTop:'2rem'}}>
 
                         <Row className='media-icon'>
-                            <Col xl={3} sm={6} md={6} xxl={1} > <AiOutlineMail className='icon' /> </Col>
-                            <Col xl={9} sm={6} md={6} xxl={11} > Connect@Connectmedianetworks.Us</Col>
+                            <Col xl={3} sm={2} md={3} xxl={1} > <AiOutlineMail className='icon' /> </Col>
+                            <Col xl={9} sm={10} md={9} xxl={11} > Connect@Connectmedianetworks.Us</Col>
                         </Row>
 
                         <Row className='media-icon'>
-                            <Col xl={1} sm={6} md={6} xxl={1} > <FaFacebookF className='icon' /> </Col>
-                            <Col xl={11} sm={6} md={6} xxl={11} > @Connectmedianetworks</Col>
+                            <Col xl={1} sm={2} md={3} xxl={1} > <FaFacebookF className='icon' /> </Col>
+                            <Col xl={11} sm={10} md={3} xxl={11} > @Connectmedianetworks</Col>
                         </Row>
 
                         <Row className='media-icon'>
-                            <Col xl={3} sm={6} md={6} xxl={1} > <AiOutlineInstagram className='icon' /> </Col>
-                            <Col xl={9} sm={6} md={6} xxl={11} > Connect_Media_Networks</Col>
+                            <Col xl={3} sm={2} md={3} xxl={1} > <AiOutlineInstagram className='icon' /> </Col>
+                            <Col xl={9} sm={10} md={9} xxl={11} > Connect_Media_Networks</Col>
                         </Row>
 
                         <Row className='media-icon'>
-                            <Col xl={3} sm={6} md={6} xxl={1} > <FaYoutube className='icon' /> </Col>
-                            <Col xl={9} sm={6} md={6} xxl={11} > Connect Media Networks</Col>
+                            <Col xl={3} sm={2} md={3} xxl={1} > <FaYoutube className='icon' /> </Col>
+                            <Col xl={9} sm={10} md={3} xxl={11} > Connect Media Networks</Col>
                         </Row>
                         
                         
