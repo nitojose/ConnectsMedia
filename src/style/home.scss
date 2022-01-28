@@ -6,6 +6,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    
 }
 
 .menu-nav
@@ -60,7 +61,7 @@
     position: absolute;
     color: $primary_color;
     font-size: 3rem;
-    margin-left: -9rem;
+    // margin-left: -9rem;
 }
 
 
@@ -69,7 +70,7 @@
     {
         
         // margin-right: 0rem;
-        right: 13rem;
+        // right: 13rem;
         margin-top: -1rem;
         position: absolute;
         color: $primary_color;

@@ -8,14 +8,18 @@ import Textbox from '../../components/TextBox'
 import Form from 'react-bootstrap/Form'
 import TextArea from '../../components/TextArea';
 import Buttons from '../../components/Packages/Buttons';
+import Parallax from 'react-rellax'
 
 export default function contact() {
 
     
     return (
-        <Container>
+        <Container className='padding-top-20 margin-top-40'>
+            <Parallax speed={-4}>
             <Row>
-            <p className='paragrah' >Let's Get In Touch</p>
+
+            
+                <p className='paragrah' >Let's Get In Touch</p>
                 <Col xl={4} sm={12} md={12} xxl={5} className='py-5'>
 
                     
@@ -77,7 +81,9 @@ export default function contact() {
                     </Form>
 
                 </Col>
+                
             </Row>
+            </Parallax>
         </Container>
     )
 }

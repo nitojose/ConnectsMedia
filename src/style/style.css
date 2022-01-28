@@ -32,7 +32,7 @@
     /* align-content: flex-end; */
     top: 300px;
     font-size: 5rem;
-    font-family: system-ui;
+    /* font-family: system-ui; */
     right: 2px;;
     bottom:0;
     text-align-last: end;
@@ -165,7 +165,7 @@
 
 #about-pillar
 {
-    font-family: system-ui;
+    /* font-family: system-ui; */
     font-size: 5rem;
     color: var(--white);
     
@@ -441,7 +441,7 @@
     /* padding-top: 5rem; */
     margin-top: -36rem;
     margin-left: -23rem;
-    font-family: system-ui;
+    /* font-family: system-ui; */
     position: absolute;
 }
 
@@ -515,7 +515,7 @@ ul.dashed {
     transform: matrix(-1, 0, 0, -1, 0, 0);
     margin-top: -26rem;
     margin-left: 19rem;
-    font-family: monospace;
+    /* font-family: monospace; */
     text-align: center;
     height: 500px;
   }

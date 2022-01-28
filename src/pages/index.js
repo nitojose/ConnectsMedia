@@ -1,29 +1,43 @@
 import React from 'react'
 import Navbar from '../components/header/navbar'
-import Home from '../pages/home/index'
-import About from '../pages/About/index'
-import Pillars from '../pages/About/pillars'
-import Features from '../pages/About/features'
-import Service from '../pages/services/index'
-import Campaign from '../pages/campaign/index'
-import Package from '../pages/Packages/index'
-import Contact from '../pages/contact/contact'
+import MainScreen from '../pages/MainScreen/index'
 import Footer from '../components/Footer/index'
-import '../style/main.scss'
+import Registration from '../pages/Registration/index'
+import PackageDetails from './Packages/package_details'
 
+import '../style/main.scss'
+import {
+    BrowserRouter as Router,
+  
+    Route,
+
+    Switch
+  } from 'react-router-dom';
 
 export default function index() {
     return (
         <div>
             <Navbar />
-            <Home />
-            <About />
-            <Pillars />
-            <Features />
-            <Service />
-            <Campaign />
-            <Package />
-            <Contact />
+            <Switch>
+                <Route exact path="/">
+                    
+                    <MainScreen />
+                </Route>
+
+                <Route exact path='/registration'>
+
+                    <Registration />
+
+                </Route>
+
+                <Route exact path='/pkg-details'>
+
+                <PackageDetails />
+
+                </Route>
+
+
+            </Switch>
             <Footer />
             
         </div>

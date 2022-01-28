@@ -7,6 +7,8 @@ import img1 from '../../assets/images/Group 186.png'
 import img3 from '../../assets/images/Group 192.png'
 import img2 from '../../assets/images/Group 191.png'
 import img4 from '../../assets/images/Group 193.png'
+import  Parallax from 'react-rellax';
+
 
 export default function index() {
     const itemList1 = ["Live-Stream Services: Increase viewership & followers",
@@ -34,12 +36,15 @@ export default function index() {
         "Youtube advertising"]
 
     return (
-        <div style={{paddingBottom:'15rem',backgroundColor:'#1c1d1e'}} >
+        <div >
             <Row>
-                <Col xl={3} md={12} sm={12} xxl={3} >
-                    <p className='service_text '>Services</p>
-                    <div className='vertical_line '></div>
-                    <FaArrowDown className='serviceIcon '/>
+                <Col xl={3} md={12} sm={12} xxl={3} className='text_service'>
+                    <Parallax speed={-2.5}>
+                        <p className='service_text '>Services</p>
+                        <div className='vertical_line '></div>
+                        <FaArrowDown className='serviceIcon '/>
+                    </Parallax>
+
                 </Col>
 
                 <Col xl={9} md={12} sm={12} xxl={9}>

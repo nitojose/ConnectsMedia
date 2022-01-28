@@ -9,7 +9,7 @@ import Parallax from 'react-rellax'
 import { Link } from "react-router-dom";
 
 
-export default function Cards(props) {
+export default function Details_card(props) {
 
     const rating = parseFloat(props.rating);
     const color = props.ratingColor;
@@ -17,14 +17,16 @@ export default function Cards(props) {
 
     const package_details =[
         'For up To 2 Social Media Platforms','3 Posts Per Week','All Images Graphics And Copywriting included.Featured Videos Avilable','Messaging And Comment Moderation Included','Boosted Post Add-On Avilable']
+
+
     return (
         <>
         <Parallax speed={speed}>
-            <Card className='card-box'>
-            <div className='header py-3'>
-            <div className='header'>
-                    <img src={props.img} alt="img1" width={200} className='bg-img'/>
-                    <h4 className='zindex'>{props.heading }</h4>
+            <Card className='card-details '>
+            <div className='header_details py-3'>
+            <div className='header_details'>
+                    
+                    <h4 className='zindex heading' >{props.heading }</h4>
                     <div className='rating'>
                         <StarRating
                             rating={rating}
@@ -38,7 +40,6 @@ export default function Cards(props) {
                         />
                     </div>
 
-                    <p className='py-1 zindex'>{props.month}</p>
 
                 </div>
 
@@ -53,10 +54,6 @@ export default function Cards(props) {
                     
                 </Card>
 
-                {/* <Button text="GO" color={color} >  */}
-                <Link to="registration"> GO </Link>
-                
-                {/* </Button> */}
                 
                
                 

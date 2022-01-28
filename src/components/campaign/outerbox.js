@@ -2,7 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import '../../style/campaign.scss'
 import Button from '../Button'
-
+import  Parallax from 'react-rellax';
 
 
 export default function outerbox(props) {
@@ -10,10 +10,12 @@ export default function outerbox(props) {
     const height = Number(props.height);
     const width = Number(props.width);
     const marginTop = (props.marginTop);
+    const speed = parseFloat(props.speed);
     
     
     return (
-
+<>
+<Parallax speed={speed}>
     
         <Card className='box '>
 
@@ -37,7 +39,8 @@ export default function outerbox(props) {
            
 
         </Card> 
-
+        </Parallax>
+        </>
         
     )
 }

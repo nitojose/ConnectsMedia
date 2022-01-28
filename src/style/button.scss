@@ -20,6 +20,7 @@
     border: 3px solid #F1C40F;
     background-color: transparent;
     color: $primary_color;
+    padding:5px 0;
     font-weight: 500;
 }
 
@@ -34,5 +35,6 @@
     /* bottom: 0; */
     bottom: 0;
     // top: 22rem;
+    float: left;
 }
 

@@ -4,10 +4,8 @@ import '../style/main.scss'
 
 export default function TextBox(props) {
     return (
-        <Form.Control
+        <input
             type={props.type}
-            id="inputPassword5"
-            aria-describedby="passwordHelpBlock"
             placeholder={props.placeholder}
             className='textbox my-3'
         />

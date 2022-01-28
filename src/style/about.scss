@@ -66,9 +66,9 @@
     // margin-top: 10rem;
 }
 
-#about-pillar
+.about-pillar
 {
-    font-family: inherit;
+    // font-family: inherit;
     font-size: 5rem;
     color: $primary_color;
     margin-top: -10rem;
@@ -81,11 +81,15 @@
     display: flex;
     color: $primary_color;
     font-size: 3rem;
-    margin-top: -4rem;
-    margin-left: -92px;
+    margin-top: -2rem;
+    margin-left: -14px;
     position: relative;
 }
 
+.about-pillar
+        {
+            margin-top: 16rem;
+        }
 /* pillar section - end  */
 
 @media only screen and (min-width: 601px) {
@@ -103,6 +107,13 @@
         text-align: inherit;
         margin-top: -30rem;
         }
+
+
+        .about-pillar
+        {
+            margin-top: 16rem;
+        }
+
   }
 
 
@@ -137,5 +148,11 @@
         margin-left: -2rem;
         margin-top: -21rem;
     }
+
+
+    .about-pillar
+        {
+            margin-top: 5rem;
+        }
 
   } 

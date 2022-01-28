@@ -11,6 +11,11 @@
     margin-left: 6.5rem;
 }
 
+.card-details
+{
+    background-color:  $ashcolor ;
+    width: 75%;
+}
 
 .header
 {
@@ -19,6 +24,15 @@
     justify-content: center;
     flex-direction: column;
     
+}
+
+.header_details
+{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 3rem;
 }
 
 .bg-img
@@ -74,4 +88,32 @@
         margin-left: 4rem;
     }
 
+    
+
+}
+
+
+@media only screen   
+and (min-device-width : 360px)   
+and (max-device-width : 640px)  
+{
+    .padding-top-60
+    {
+        padding-top: 40rem;
+    }
+
+    .card-box
+    {
+        margin-top: 8rem;
+    }
+
+    .margin-top-53
+    {
+        margin-top: -53rem;
+    }
+
+    .pkg_text
+    {
+        margin-top: 45rem;
+    }
 }

@@ -13,7 +13,13 @@ body
     color: $primary_color;
     margin: 0px;
     padding: 0px;
-    // font-family:  $font
+    font-family: 'Roboto', sans-serif;
+}
+
+a
+{
+    color:$btn-yellow;
+    text-decoration: none;
 }
 
 .heading
@@ -51,6 +57,20 @@ body
 .textbox
 {
     border-radius: 6px;
+    padding:5px;
+    margin: 10px 0;
+    width:100%;
+}
+
+.textArea
+{
+    // width: 90%;
+    vertical-align: bottom;
+}
+
+.extraRowSpace
+{
+    padding: 20px 0;
 }
 
 .footer-div
@@ -61,7 +81,7 @@ body
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
-    
+    margin-right: 0;
 }
 
 .footer-icons
@@ -82,6 +102,7 @@ body
 {
     width:100%;
     height: 100vh;
+   
 }
 
 .margin-25vh
@@ -100,4 +121,33 @@ body
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 45rem;
+}
+
+
+
+@media only screen and (min-width: 1400px) {
+
+    .padding-top
+    {
+        padding-top:50vh
+    }
+
+    .padding-top-20
+    {
+        padding-top:20vh
+    }
+}
+
+
+
+@media only screen   
+and (min-device-width : 360px)   
+and (max-device-width : 640px)  
+{
+
+    .margin-top-40
+    {
+        margin-top: 40rem;
+    }
 }
