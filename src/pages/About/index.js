@@ -33,7 +33,7 @@ export default function index() {
 
 
 
-            <Container style={{marginTop:'10rem'}}>
+            <Container >
 
                 <Row>
 

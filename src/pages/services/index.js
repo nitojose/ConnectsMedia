@@ -56,7 +56,7 @@ export default function index() {
                         </Col>
 
 
-                        <Col sm={12} md={12} xl={6} xxl={6} className='margin-top-15rm'>
+                        <Col sm={12} md={12} xl={6} xxl={6} className=''>
 
                         <Card width="150" height="140"  alt="youtube icon" image={img2} imgId="youtube_icon" list={itemList2} text="Instagram Management"></Card>
                         </Col>

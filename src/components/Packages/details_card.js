@@ -43,7 +43,7 @@ export default function Details_card(props) {
 
                 </div>
 
-                <Card className='inner-box'>
+                <Card className='inner-box' style={{marginLeft:'3rem'}}>
                     {package_details.map(name => (  
                         <>
                              <BsCheckCircle className='checkIcon' color={props.ratingColor}/> 

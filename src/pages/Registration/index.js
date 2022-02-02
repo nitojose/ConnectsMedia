@@ -1,4 +1,5 @@
-import React from 'react';
+'use strict';
+import React,{useState} from 'react';
 import { Row,Col, Container } from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import Textbox from '../../components/TextBox'
@@ -8,29 +9,85 @@ import { useHistory,Link} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { Button } from 'bootstrap';
 import Parallax from 'react-rellax'
+import axios from 'axios'
+import { Url } from '../../GLOBAL/global';
+import {Alert}  from 'react-bootstrap';
 
-export default function Index() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+var sessionstorage = require('sessionstorage');
+
+
+export default function Index(props) {
 
   let history = useHistory();
-
-
-  //  const [register, handleSubmit] = useForm();
-
-  //  const onSubmit = data => console.log(data);
+  console.log("props",props.name);
+  
   const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
 
   function onSubmit(data)
   {
-    console.log(data);
-    history.push('/pkg-details');
+    
+
+     let formdata = new FormData();
+     formdata.append('name',data.name);
+     formdata.append('email',data.email);
+     formdata.append('password',data.pass2);
+     formdata.append('phone',data.phone);
+     formdata.append('ministry',data.ministry);
+     formdata.append('address',data.address);
+
+     
+    
+     
+          const headers ={
+            'Content-Type': 'multipart/form-data'
+          }
+
+        axios({
+        method: 'post',
+        url: Url+'register',
+        data: formdata,
+        headers: headers
+        })
+        .then(function (response) {
+            //handle success
+           console.log(response.data);
+            if(response.data.message === "Registered Successfully...")
+            {
+              sessionstorage.setItem("token",response.data.token);
+              sessionstorage.setItem("customerId",response.data.id);
+              toast.success("Registration Success !");
+              toast.warning("Verify Email Id !");
+              history.push( { pathname: '/login', serviceType: props.name})
+            }
+            
+
+            if(response.data === "email already exists")
+            {
+              toast("Email Already Exists !")
+            }
+            
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
+
+
+
+          // history.push('/pkg-details');
   }
+
 
 
   return (
   
     <div style={{marginTop:'10rem'}} >
       <Container >
-      
+
+    
       <Row >
 
            
@@ -38,7 +95,7 @@ export default function Index() {
                 <Col xl={4} sm={12} md={12} xxl={5} className='py-5 my-5'>
 
                 <Parallax speed={-3} >  
-                  <img src={require('../../assets/images/hands.png')} height={500} width={500} alt="hands" />
+                  <img src={require('../../assets/images/register.png')} height={500} width={500} alt="hands" />
                 </Parallax>
                 </Col>
 
@@ -78,8 +135,10 @@ export default function Index() {
 
                         <Row align="center" >
                           <Col>Already Have An Account? &nbsp;
-                          <Link to='/sign-in'>Sign in</Link></Col>
+                          <Link to='/login'>Sign in</Link></Col>
                         </Row>
+
+                        
                       
                     
                     </Form>
@@ -89,6 +148,8 @@ export default function Index() {
                 </Col>
              
             </Row>
+
+            <ToastContainer />
             
             </Container>
     </div>

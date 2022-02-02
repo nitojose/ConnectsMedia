@@ -14,7 +14,7 @@ export default function contact() {
 
     
     return (
-        <Container className='padding-top-20 margin-top-40'>
+        <Container className='padding-top-20 margin-top-165'>
             <Parallax speed={-4}>
             <Row>
 

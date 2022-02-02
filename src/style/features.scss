@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 #vision
@@ -53,7 +54,8 @@
   font-weight: 500;
   margin-top: -20rem;
   position: absolute;
-  margin-left: -7rem;
+  margin-left: -8rem;
+  
 }
 
 
@@ -74,17 +76,24 @@
 #plusIcon1
 {
     position: absolute;
-    margin-top: -3rem;
-    margin-left: -11rem;
+    // margin-top: -25rem;
+    // margin-left: 11rem;
     color: $primary_color;
     font-size: 1.5rem;
+
+ 
+    margin-top: -4rem;
+    margin-left: -11rem;
+  
 }
 
 #rightIcon1
 {
     position: absolute;
-    margin-top: -2.8rem;
-    margin-left: -10rem;
+    // margin-top: -24.8rem;
+    // margin-left: 12rem;
+    margin-top: -3.8rem;
+    margin-left: -9.8rem;
     color: $primary_color;
     font-size: 1.1rem;
 }
@@ -151,8 +160,8 @@
 .plusIcon3
 {
     position: absolute;
-    margin-top: 8rem;
-    margin-left: -9rem;
+    margin-top: -12rem;
+    margin-left: 12rem;
     color: $primary_color;
     font-size: 1.5rem;
 }
@@ -160,8 +169,8 @@
 .rightIcon3
 {
     position: absolute;
-    margin-top: 8.2rem;
-    margin-left: -8rem;
+    margin-top: -11.8rem;
+    margin-left: 13rem;
     color: $primary_color;
     font-size: 1.1rem;
 }
@@ -254,9 +263,9 @@
     color: #fff;
     font-size: 4 rem;
     font-size: 3rem;
-    margin-top: -65rem;
+    margin-top: -131rem;
     position: absolute;
-    margin-left: -12rem;
+    margin-left: -22rem;
   }
 
   .whyconnect-text
@@ -294,12 +303,23 @@
   
 }
 
+.img
+{
+  background-image: url('../assets/images/Group 148.png');
+  object-fit: cover;
+}
 
 @media only screen and (min-width: 768px) {
 
     // large screen 
 
 /* why connect - start  */
+
+.plusIcon1
+  {
+    margin-top: -4rem;
+    margin-left: -11rem;
+  }
 
 .bar {
     list-style: none;
@@ -441,6 +461,12 @@
   {
     margin-top: -7rem;
   }
+
+  .plusIcon1
+  {
+    margin-top: -4rem;
+    margin-left: -11rem;
+  }
 }
 
 
@@ -455,6 +481,24 @@
   .rightIcon4{
     margin-top: 16.8rem;
     margin-left: -8.8rem;
+  }
+
+  .plusIcon3
+  {
+    margin-top: 8rem;
+    margin-left: -9rem
+  }
+  
+  .rightIcon3
+  {
+    margin-top: 8.2rem;
+    margin-left: -8rem;
+  }
+
+  .plusIcon1
+  {
+    margin-top: -25rem;
+    margin-left: -11rem;
   }
 }
 
@@ -472,6 +516,12 @@ and (max-width : 480px)
   .rightIcon4{
     // margin-top: 16.8rem;
     // margin-left: -8.8rem;
+  }
+
+  .plusIcon1
+  {
+    margin-top: -25rem;
+    margin-left: -11rem;
   }
 }
 
@@ -511,5 +561,11 @@ and (max-device-width : 640px)
   {
     margin-top: 16.8rem;
     margin-left: -9rem;
+  }
+
+  .plusIcon1
+  {
+    margin-top: -4rem;
+    margin-left: -11rem;
   }
 }

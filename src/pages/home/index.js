@@ -4,13 +4,17 @@ import '../../style/home.scss'
 import { Container,Row,Col } from 'react-bootstrap'
 import  Parallax from 'react-rellax';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function index() {
     return (
         <>
    
+           
             <Container className='page margin-25vh' >
                 {/* margin-25vh */}
-                    <Parallax speed={8}>
+                    <Parallax speed={0}>
               
                         <h4 className='header-title'>Connecting your </h4> <br></br> <h4 className='header-title font-mono'> church </h4> <br></br>
                         <h4 className='header-title'>to the world</h4>

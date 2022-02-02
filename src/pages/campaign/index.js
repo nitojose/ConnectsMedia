@@ -18,11 +18,11 @@ export default function Campaigns() {
         <Container  > 
         {/* style={{marginTop:'5rem'}} */}
             <Parallax speed={-2} >
-                <p className='campaign_text margin-top-15rm top-10'>Campaigns</p>
+                <p className='campaign_text top-10 padding-top-82'>Campaigns</p>
             
             </Parallax>
 
-            <Row className=' mx-5 my-0 m-top-10' >
+            <Row className=' mx-5 my-0 ' >
                 <Col sm={12} md={12} xl={4} xxl={4} className='my-0 py-0' >
 
               
@@ -62,7 +62,7 @@ export default function Campaigns() {
 
                 {/* second row */}
 
-            <Row className='mx-5 my-5 padding-top-20 padding-top-17 margin-top-10'>
+            <Row className='mx-5 my-5 padding-top-20 margin-top-10'>
                 <Col sm={12} md={12} xl={4} xxl={4} className=' ' >
 
                   

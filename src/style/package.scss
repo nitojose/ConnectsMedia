@@ -9,12 +9,26 @@
     border-radius: 8px;
     position: relative;
     margin-left: 6.5rem;
+    border-color: none;
+
 }
 
 .card-details
 {
-    background-color:  $ashcolor ;
-    width: 75%;
+    background-color:  inherit;
+    // width: 75%;
+    border-color: none;
+    border-style: none;
+}
+
+.payment_card
+{
+   
+    background-color: $ashcolor;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header
@@ -29,10 +43,10 @@
 .header_details
 {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
-    margin-left: 3rem;
+    justify-content: center;
+    // margin-left: 3rem;
 }
 
 .bg-img
@@ -61,7 +75,7 @@
     display: flex;
     align-items: flex-start; 
     // justify-content: flex-start;
-    background-color: $ashcolor;
+    background-color: inherit;
     border: none;
     width: 90%;
     height: 350px;
@@ -70,7 +84,7 @@
 
 .checkIcon
 {
-    background-color: $ashcolor;
+    background-color: inherit;
 }
 
 
@@ -80,15 +94,44 @@
     margin-top: -1rem;
 }
 
+.pkg-text
+{
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+    transform: matrix(1, 0, 0, 1, 0, 0);
+    top: 525%;
+    position: relative;
+    padding-top: 70%;
+}
+
+
+.space-align
+{
+    padding-top:5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
 @media only screen and (min-width: 768px) {
 
     .card-box
     {
         margin-left: 4rem;
+        margin-top: 50%;
     }
 
-    
+    .pkg-text
+    {
+        top: 420%;
+        padding-top: 0;
+    }
+
+    .pkg_div
+    {
+        position: relative;
+        padding-top:50%;
+    }
 
 }
 
@@ -104,7 +147,7 @@ and (max-device-width : 640px)
 
     .card-box
     {
-        margin-top: 8rem;
+        margin-top: 30rem;
     }
 
     .margin-top-53
@@ -112,8 +155,19 @@ and (max-device-width : 640px)
         margin-top: -53rem;
     }
 
-    .pkg_text
+    .pkg-text
     {
-        margin-top: 45rem;
+        top: 640%;
+        writing-mode: none;
+        text-orientation: none;
+        transform: none;
+        writing-mode: lr-tb;
     }
+
+   
+}
+
+@media only screen and (min-width: 1400px) {
+   
+
 }
