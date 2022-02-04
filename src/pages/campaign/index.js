@@ -27,7 +27,7 @@ export default function Campaigns() {
 
               
 
-                         <Outerbox image={pic1} alt="cam-img1" text="Upcoming Events" content="Share your calender here.we will pick all your future events from here." width="150" height="150" marginTop="0rem" speed="-3.2">
+                         <Outerbox image={pic1} alt="cam-img1" text="Upcoming Events" content="Share your calender here.we will pick all your future events from here." width="150" height="150" marginTop="0rem" speed="-3.2" slug="/events-creation">
                         
                         
                         </Outerbox>

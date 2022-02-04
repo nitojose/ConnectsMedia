@@ -4,13 +4,14 @@ import Service from '../../components/Packages/servicelist';
 import { Form } from 'react-bootstrap';
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
+import { Link,useHistory } from 'react-router-dom';
 
 var sessionstorage = require('sessionstorage');
 
 
 export default function StandardList() {
 
-   
+    let history = new useHistory();
     const [Items,setItems] =  React.useState(new Map());
   
     const lists = [
@@ -106,12 +107,13 @@ export default function StandardList() {
      function handleSubmit()
     {
         
+      
         console.log("Items,",Items);
         var months = document.getElementById("months").value;
         // console.log("months",months);
         const member_id =  sessionstorage.getItem("customerId");
         const token = sessionstorage.getItem("token");
-        console.log("mid",member_id);
+        
     
         var data = new FormData();
 
@@ -145,6 +147,15 @@ export default function StandardList() {
                 //handle error
                 console.log(response);
             });
+
+        // console.log("data",data); 
+
+        // history.push({
+        //   pathname : '/Questionnaire',
+        //     state :{
+        //       formdata : data}
+        // })
+       
     }
 
     

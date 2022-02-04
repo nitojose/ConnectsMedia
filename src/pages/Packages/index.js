@@ -29,7 +29,7 @@ export default function index() {
 
                 <Col xl={4} sm={12} md={12} xxl={4} className=''>
               
-                        <Card heading="Standard" month="month" rating="2.4" ratingColor="#E4115E" img={pink} speed="-4.2" servicelist="/customized-list"></Card>
+                        <Card heading="Standard" month="month" rating="2.4" ratingColor="#E4115E" img={pink} speed="-4.2" servicelist="/standard-list" ></Card>
                  
                  </Col>
 
@@ -44,7 +44,7 @@ export default function index() {
                  <Col xl={4} sm={12} md={12} xxl={4} className=''>
 
                  
-                    <Card heading="Customized" month="month" rating="3.5" ratingColor="#0EAE83" img={green} speed="-4.2" servicelist="/standard-list"></Card>
+                    <Card heading="Customized" month="month" rating="3.5" ratingColor="#0EAE83" img={green} speed="-4.2" servicelist="/customized-list" ></Card>
                    
                  </Col>
 

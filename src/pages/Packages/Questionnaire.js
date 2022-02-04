@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 import SelectButton from '../../components/Packages/SelectButton';
 import Service from '../../components/Packages/servicelist'
 
-export default function Questionnaire() {
+export default function Questionnaire(props) {
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+    console.log("questionnaire",props.formdata);
 
     function onSubmit(data)
   {

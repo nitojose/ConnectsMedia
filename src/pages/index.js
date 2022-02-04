@@ -11,6 +11,7 @@ import {useLocation} from "react-router-dom"
 import CustomizedList from './Packages/customizedList'
 import StandardList from './Packages/standardList'
 import Questionnaire from './Packages/Questionnaire'
+import EventsCreation from '../pages/campaign/Events/createForm'
 
 import '../style/main.scss'
 import {
@@ -85,8 +86,12 @@ export default function Index() {
 
                 <Route exact path='/Questionnaire'>
 
+                    {/* <Questionnaire formdata={data.formdata} /> */}
                     <Questionnaire />
+                </Route>
 
+                <Route exact path='/events-creation'>
+                    <EventsCreation />
                 </Route>
                 
 

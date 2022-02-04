@@ -34,7 +34,7 @@ export default function outerbox(props) {
                 <button className='button-text px-3'>Go</button>
             </div> */}
 
-            <Button/>
+            <Button slug={props.slug}/>
 
            
 
