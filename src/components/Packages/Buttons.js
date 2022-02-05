@@ -6,7 +6,7 @@ export default function Buttons(props) {
     return (
 
         <div className='pkg-button'>
-            <button style={{borderColor:props.color}} className='button-text px-5'>
+            <button style={{borderColor:props.color}} className='button-text px-5' >
                 {props.text}
             </button>
         </div>

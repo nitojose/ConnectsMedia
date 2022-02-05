@@ -40,7 +40,7 @@ export default function Campaigns() {
 
              
                         <Outerbox image={pic2} alt="cam-img1" text="Million Posts" content="Register and support for this special campaign and we will take care of the rest to share jesus content everywhere."
-                        width="250" height="250" marginTop="-5rem" speed="-3.4">
+                        width="250" height="250" marginTop="-5rem" speed="-3.4" slug="/million-posts">
                         
                         </Outerbox>
 

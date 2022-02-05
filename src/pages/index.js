@@ -12,6 +12,7 @@ import CustomizedList from './Packages/customizedList'
 import StandardList from './Packages/standardList'
 import Questionnaire from './Packages/Questionnaire'
 import EventsCreation from '../pages/campaign/Events/createForm'
+import MillionPosts from '../pages/campaign/millionPosts/index'
 
 import '../style/main.scss'
 import {
@@ -84,15 +85,21 @@ export default function Index() {
                 </Route>
 
 
-                <Route exact path='/Questionnaire'>
+                <Route exact path='/Questionnaire/:id'>
 
-                    {/* <Questionnaire formdata={data.formdata} /> */}
+                   
                     <Questionnaire />
                 </Route>
 
                 <Route exact path='/events-creation'>
                     <EventsCreation />
                 </Route>
+
+                <Route exact path='/million-posts'>
+                    <MillionPosts />
+                </Route>
+
+                
                 
 
 

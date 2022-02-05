@@ -6,16 +6,156 @@ import Buttons from '../../components/Packages/Buttons';
 import { Link } from 'react-router-dom';
 import SelectButton from '../../components/Packages/SelectButton';
 import Service from '../../components/Packages/servicelist'
+import { useParams } from 'react-router-dom';
+import axios from 'axios'
+import { Url } from '../../GLOBAL/global';
+var sessionstorage = require('sessionstorage');
 
-export default function Questionnaire(props) {
+export default function Questionnaire() {
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
-    console.log("questionnaire",props.formdata);
+    const [Items,setItems] =  React.useState([]);
+    const [QueAns] = React.useState([]);
+    const { id } = useParams();
+
+    const Questions =["Name and address of your ministry/church","How many branches do you have?","Total active members on premises?","Active online regular viewers?","How often do you live stream in a week?","What are the challenges you face right now?","What are your goals using our services?","How serious are you to take your online presence to the next level?"];
 
     function onSubmit(data)
   {
+      
+      
       console.log(data);
+      
+      Questions.map(q => {
+          
+            if(q === "Name and address of your ministry/church")
+            {
+                var temp1 = {
+                    "question" : q,
+                    "answer": data.ministry
+                }
+                QueAns.push(temp1)
+            }
+
+            if(q === "How many branches do you have?")
+            {
+                var temp2 = {
+                    "question" : q,
+                    "answer": data.branches
+                }
+                QueAns.push(temp2)
+            }
+
+            if(q === "Total active members on premises?")
+            {
+                var temp3 = {
+                    "question" : q,
+                    "answer": data.members
+                }
+                QueAns.push(temp3)
+            }
+        
+            if(q === "Active online regular viewers?")
+            {
+                var temp4 = {
+                    "question" : q,
+                    "answer": data.viewers
+                }
+                QueAns.push(temp4)
+            }
+
+            if(q === "How often do you live stream in a week?")
+            {
+                var temp5 = {
+                    "question" : q,
+                    "answer": data.liveStream
+                }
+                QueAns.push(temp5)
+            }
+
+            if(q === "What are the challenges you face right now?")
+            {
+                var temp6 = {
+                    "question" : q,
+                    "answer": data.challenges
+                }
+                QueAns.push(temp6)
+            }
+
+            if(q === "What are your goals using our services?")
+            {
+                var temp7 = {
+                    "question" : q,
+                    "answer": Items
+                }
+                QueAns.push(temp7)
+            }
+
+            if(q === "How serious are you to take your online presence to the next level?")
+            {
+                var temp8 = {
+                    "question" : q,
+                    "answer": data.online_presence
+                }
+                QueAns.push(temp8)
+            }
+
+      })
+
+    //   console.log("QuesAns", JSON.stringify(QueAns));
+
+        const token = sessionstorage.getItem("token");
+       
+        var formdata = new FormData();
+
+        formdata.append("package_id",id);
+        formdata.append("package_services",JSON.stringify(QueAns));
+        
+      
+      
+        
+        const headers ={
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          }
+    
+        
+        axios({
+            method: 'post',
+            url: Url+'packagespec',
+            data: formdata,
+            headers: headers
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response.data);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+
   }
+
+
+  const lists = [
+    {
+      id:1,
+      value:"In 1 year we want to expand our online reach"
+    },
+    {
+      id:2,
+      value:"We are a new church. We want to make our presence in the current location"
+    },
+    {
+        id:3,
+        value:"We are planting new churches in new locations. We want to attract new members in different areas"
+    },
+    {
+        id:4,
+        value:"All of the above"
+    }
+]
 
   return (
     <div>
@@ -23,7 +163,7 @@ export default function Questionnaire(props) {
         <Container>
         <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name and address of your ministry/church" type="text"  {...register("ministry" , { required: true })} className='textbox' /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name and address of your ministry/church" type="text" name="ministry" {...register("ministry" , { required: true })} className='textbox' /> </Col>
                             <Col sm={12} md={12} xl={6} xxl={6}> 
 
                             <label>How many branches do you have?</label>
@@ -91,19 +231,26 @@ export default function Questionnaire(props) {
                         </Row>
                        
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <textarea placeholder="What are the challenges you face right now?" {...register("challenges" , { required: true })} className='textbox textArea' rows={3}></textarea>  </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <textarea name="challeges" placeholder="What are the challenges you face right now?" {...register("challenges" , { required: true })} className='textbox textArea' rows={3}></textarea>  </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}>
-                                <label>What are your goals using our services? </label>
+                                <label>What are your goals using our services? </label><br></br>
 
-                                <Service id="In 1 year we want to expand our online reach" name="In 1 year we want to expand our online reach" value="In 1 year we want to expand our online reach"/>
+                                {
+                                    lists.map(item => (
+                                    <>
+                                        <label>
+                                        <input
+                                            type="checkbox"
+                                            key={item.id}
+                                            value={item.id}
+                                            onChange={(e)=> handleChange(e,item.value)}
+                                        /> {item.value}
+                                        </label> <br></br>
+                                        </>
+                                    ))
+                                }
 
-                                <Service id="We are a new church. We want to make our presence in the current location" name="We are a new church. We want to make our presence in the current location" value="We are a new church. We want to make our presence in the current location"/>
-
-                                <Service id="We are planting new churches in new locations. We want to attract new members in different areas" name="We are planting new churches in new locations. We want to attract new members in different areas" value="We are planting new churches in new locations. We want to attract new members in different areas"/>
-
-                                <Service id="All of the above" name="All of the above" value="All of the above"/>
-                                
                             </Col>
 
                         </Row>
@@ -113,7 +260,7 @@ export default function Questionnaire(props) {
                             
                                 <label>How serious are you to take your online presence to the next level?</label>
                                 
-                                <select name="online-presence" {...register("online-presence" , { required: true })} >
+                                <select name="online_presence" {...register("online_presence" , { required: true })} >
                                     <option value="SURE">HIGH. We see great potential in this approach</option>
                                     <option value="MEDIUM">MEDIUM. Exploring the options</option>
                                     <option value="LOW">LOW. Testing the waters</option>
@@ -125,16 +272,9 @@ export default function Questionnaire(props) {
                         </Row>
 
                         <Row className='extraRowSpace'>
-                          <Buttons text="Register" type="submit" />
+                          <Buttons text="Submit" type="submit" />
                             {/* <input type="submit" /> */}
                         </Row>
-                        
-
-                        <Row align="center" >
-                          <Col>Already Have An Account? &nbsp;
-                          <Link to='/login'>Sign in</Link></Col>
-                        </Row>
-
                         
                       
                     
@@ -144,4 +284,18 @@ export default function Questionnaire(props) {
 
     </div>
     );
+
+
+    function handleChange(event,item1) 
+    {
+      var id = event.target.value;
+      var value = item1;
+      
+      var temp = {
+        "name":value
+      }
+
+      Items.push(temp);
+
+    }
 }

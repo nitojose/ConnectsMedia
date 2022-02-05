@@ -5,6 +5,7 @@ import { Form } from 'react-bootstrap';
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
 import { Link,useHistory } from 'react-router-dom';
+import Questionnaire from './Questionnaire';
 
 var sessionstorage = require('sessionstorage');
 
@@ -12,7 +13,8 @@ var sessionstorage = require('sessionstorage');
 export default function StandardList() {
 
     let history = new useHistory();
-    const [Items,setItems] =  React.useState(new Map());
+    
+    const [Items,setItems] =  React.useState([]);
   
     const lists = [
         {
@@ -40,7 +42,8 @@ export default function StandardList() {
             <Service id="Youtube Ads" name="Youtube Ads" />
             <Service id="Twitter Ads" name="Twitter Ads" /> */}
 
-<Form  >
+          
+        <Form  >
 
           {
             lists.map(item => (
@@ -55,7 +58,7 @@ export default function StandardList() {
                 </label> <br></br>
                 </>
             ))
-          }
+            }
 
             <br></br>
 
@@ -87,7 +90,9 @@ export default function StandardList() {
             </div>
             <button type='button' onClick={handleSubmit} >Submit</button>
 
-        </Form>
+        </Form> 
+
+
            
         </Container> 
     </div>
@@ -98,8 +103,13 @@ export default function StandardList() {
     {
       var id = event.target.value;
       var value = item1;
-      Items.set(id,value);
-      // console.log(Items);
+
+      var temp = {
+        "name":value
+      }
+
+      Items.push(temp);
+      
 
     }
 
@@ -108,7 +118,8 @@ export default function StandardList() {
     {
         
       
-        console.log("Items,",Items);
+        console.log("Items,",JSON.stringify(Items));
+        JSON.stringify(Items);
         var months = document.getElementById("months").value;
         // console.log("months",months);
         const member_id =  sessionstorage.getItem("customerId");
@@ -121,7 +132,7 @@ export default function StandardList() {
         data.append("package_type",'STD');
         data.append("package_cost",0);
         data.append("months",months);
-        data.append('package_services',Items)
+        data.append('package_services',JSON.stringify(Items))
       
         // for (var value of data.values()) {
         //     console.log(value); 
@@ -141,7 +152,8 @@ export default function StandardList() {
             })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                console.log(response.data);
+                showQues(response.data.id);
             })
             .catch(function (response) {
                 //handle error
@@ -156,6 +168,13 @@ export default function StandardList() {
         //       formdata : data}
         // })
        
+    }
+
+
+
+    function showQues(id)
+    {
+      history.push(`/Questionnaire/${id}`);
     }
 
     

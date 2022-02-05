@@ -9,7 +9,8 @@ export default function CustomizedList() {
      const [months,setMonths] = React.useState();
      
    
-     const [Items,setItems] =  React.useState(new Map());
+     const [Items,setItems] =  React.useState([]);
+
      const lists = [
             {
               id:1,
@@ -162,15 +163,20 @@ export default function CustomizedList() {
     {
       var id = event.target.value;
       var value = item1;
-      Items.set(id,value);
-      // console.log(Items);
+      
+      var temp = {
+        "name":value
+      }
+
+      Items.push(temp);
 
     }
 
 
     function handleSubmit()
     {
-      console.log("Items,",Items);
+        console.log("Items,",JSON.stringify(Items));
+        JSON.stringify(Items);
         var months = document.getElementById("months").value;
         // console.log("months",months);
         const member_id =  sessionstorage.getItem("customerId");
@@ -183,7 +189,7 @@ export default function CustomizedList() {
         data.append("package_type",'CUST');
         data.append("package_cost",1);
         data.append("months",months);
-        data.append('package_services',Items)
+        data.append('package_services',JSON.stringify(Items));
       
       
         
