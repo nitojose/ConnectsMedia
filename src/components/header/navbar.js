@@ -7,6 +7,8 @@ import { FiUser } from "react-icons/fi";
 import { useHistory,Link} from "react-router-dom";
 import { fadeInUp } from 'react-animations'
 import { StyleSheet, css } from 'aphrodite';
+import { Dropdown } from 'react-bootstrap';
+var sessionstorage = require('sessionstorage');
 
 const styles = StyleSheet.create({
     bounce: {
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
 
 export default function Navbar() {
 
-    const [showMenu,setMenu] = useState(false); 
+    
 
     let history = useHistory();
 
@@ -28,10 +30,20 @@ export default function Navbar() {
                
                     <img src={require('../../assets/images/logo.png')}  alt='header-logo-img'/>
 
-                    <div>
+                    <div className='center-align'>
                         <FiUser className='menu-nav' onClick={profileInfo}  />     
-                        <BsList className='menu-nav' onClick={sidebar}/>
-                        
+                        {/* <BsList className='menu-nav' onClick={sidebar}/> */}
+                        <Dropdown>
+                            <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
+                               Menu
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item> */}
+                                <Dropdown.Item href="/messages">Messages</Dropdown.Item>
+                                <Dropdown.Item onClick={signout}>Signout</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
 
                     
@@ -45,15 +57,17 @@ export default function Navbar() {
       
     )
 
-    function sidebar()
-    {
-        
-        setMenu(!showMenu);
-        
-    }
+    
 
     function profileInfo()
     {
         history.push('/profile');
     }
+
+    function signout()
+    {
+        sessionstorage.clear();
+        history.push('/login');
+    }
+
 }

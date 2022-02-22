@@ -37,7 +37,7 @@ export default function index() {
 
     return (
         <div >
-            <Row>
+            <Row className='service-main-div'>
                 <Col xl={3} md={12} sm={12} xxl={3} className='text_service'>
                     <Parallax speed={-2.5}>
                         <p className='service_text '>Services</p>

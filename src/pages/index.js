@@ -13,7 +13,8 @@ import StandardList from './Packages/standardList'
 import Questionnaire from './Packages/Questionnaire'
 import EventsCreation from '../pages/campaign/Events/createForm'
 import MillionPosts from '../pages/campaign/millionPosts/index'
-
+import StaticPosts from '../pages/campaign/Static-Campaign/index'
+import Messages from '../pages/Messages/Index'
 import '../style/main.scss'
 import {
     BrowserRouter as Router,
@@ -99,8 +100,13 @@ export default function Index() {
                     <MillionPosts />
                 </Route>
 
+                <Route exact path='/staticPosts'>
+                    <StaticPosts />
+                </Route>
                 
-                
+                <Route exact path='/messages'>
+                    <Messages />
+                </Route>
 
 
             </Switch>

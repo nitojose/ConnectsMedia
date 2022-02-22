@@ -16,6 +16,18 @@
     
 }
 
+.menu-btn
+{
+    color: $primary_color;
+    font-size: 1.5rem;
+}
+.menu-btn:hover
+{
+    color: $primary_color;
+    font-size: 1.5rem;
+    border-color: $primary_color;
+}
+
 .profile_div
 {
     background-color: aqua;

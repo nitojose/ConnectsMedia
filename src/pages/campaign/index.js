@@ -52,7 +52,7 @@ export default function Campaigns() {
                 <Col sm={12} md={12} xl={4} xxl={4}  className='my-5 py-5'>
 
                   
-                        <Outerbox image={pic3} alt="cam-img1" text="Strengthening Marriage" content="Register and support for this special campaign and we will keep on posting bible scripttures,inspirational content about importance of marriage on social media." width="280" height="200" marginTop="1.6rem" speed="-3.6">
+                        <Outerbox image={pic3} alt="cam-img1" text="Strengthening Marriage" content="Register and support for this special campaign and we will keep on posting bible scripttures,inspirational content about importance of marriage on social media." width="280" height="200" marginTop="1.6rem" speed="-3.6" slug="/staticPosts">
                         
                         </Outerbox>
                     
