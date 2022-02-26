@@ -13,7 +13,7 @@ export default function features() {
         <>
         <div className='feature-list' style={{marginLeft:'15rem'}}> 
 
-        <Container className="feature_align my-5 img">
+        <Container className="feature_align my-5">
 
             <Row>
                 <Col sm={6} md={6} xl={6} xxl={6}>

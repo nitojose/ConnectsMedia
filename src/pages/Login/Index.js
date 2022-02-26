@@ -23,7 +23,7 @@ export default function Index() {
     function onSubmit(data)
     {
       
-      console.log(data);
+      // console.log(data);
      let formdata = new FormData();
      formdata.append('name',data.name);
      formdata.append('email',data.email);

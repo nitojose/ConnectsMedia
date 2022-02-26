@@ -7,6 +7,10 @@ import  Parallax  from 'react-rellax';
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
 import { useHistory,Link} from "react-router-dom";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 var sessionstorage = require('sessionstorage');
 
 
@@ -25,9 +29,9 @@ export default function Index() {
         const token = sessionstorage.getItem("token");
         
         let formdata = new FormData();
-        
+        const customer_id = sessionstorage.getItem("customerId");
 
-        formdata.append("customer_id",sessionstorage.getItem("customerId"));
+        formdata.append("customer_id",customer_id);
         
         const headers ={
             'Content-Type': 'multipart/form-data',
@@ -43,7 +47,7 @@ export default function Index() {
             .then(function (response) {
                 //handle success
                
-                console.log(response.data.data[0]);
+                // console.log("getprofile",response.data.data[0]);
                 setCustomerInfo(response.data.data[0]);
                
                 
@@ -57,26 +61,34 @@ export default function Index() {
     
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+
+
     function onSubmit(data)
     {
-        console.log(data);
+        
 
+        const customer_id = sessionstorage.getItem("customerId");
+        console.log("id",customer_id);
      let formdata = new FormData();
      formdata.append('name',data.name);
-     formdata.append('email',data.email);
+     formdata.append('email',customerInfo.cust_email);
      formdata.append('phone',data.phone);
      formdata.append('ministry',data.ministry);
-     formdata.append('address',data.address);
-     formdata.append('customer_id',sessionstorage.getItem("customerId"));   
+     formdata.append('address',data.add);
+     formdata.append('customer_id',customer_id);   
+
+     console.log(formdata);
     
-     
-          const headers ={
-            'Content-Type': 'multipart/form-data'
-          }
+     const token = sessionstorage.getItem("token");
+
+     const headers ={
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
 
         axios({
         method: 'post',
-        url: Url+'profileUpdate',
+        url: Url+'ProfileUpdate',
         data: formdata,
         headers: headers
         })
@@ -84,8 +96,11 @@ export default function Index() {
             //handle success
             // console.log("success");
             console.log(response.data);
-            sessionstorage.setItem("token",response.data.token)
-            
+            if(response.data === "profile Updated Successfully")
+            {
+              toast.success("Profile Updated Successfully");
+              history.push('/home')
+            }
             
         })
         .catch(function (response) {
@@ -104,17 +119,22 @@ export default function Index() {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" , { required: true })} className='textbox' defaultValue={customerInfo.cust_name} /> </Col>
+
                             <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Ministry" type="text" {...register('ministry' , { required: true })} className='textbox' defaultValue={customerInfo.cust_ministry} /> </Col>
+
                         </Row>
 
                         <Row>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Email" type="email"  className='textbox' defaultValue={customerInfo.cust_email} disabled={true} style={{color:'#000',backgroundColor:'#fff'}}/> </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Phone" type="tel-in" {...register("phone" , { required: true })} className='textbox' defaultValue={customerInfo.cust_phone}/> </Col>
+
                         </Row>
 
                         <Row>
+                            
                             <Col sm={12} md={12} xl={12} xxl={12}><textarea placeholder="Full Address" {...register("add" , { required: true })} className='textbox textArea' rows={3} defaultValue={customerInfo.cust_address}></textarea></Col>
+
                         </Row>
 
                         {/* <Row>
@@ -133,15 +153,16 @@ export default function Index() {
                     
                     </Form>    
 
-                    <button onClick={signout}>Signout</button>
+                    {/* <button onClick={signout}>Signout</button> */}
                 </Parallax>
         </Container>
+        <ToastContainer />
     </div>
   );
 
-    function signout()
-    {
-        sessionstorage.clear();
-        history.push('/login');
-    }
+    // function signout()
+    // {
+    //     sessionstorage.clear();
+    //     history.push('/login');
+    // }
 }

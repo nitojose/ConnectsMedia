@@ -1,34 +1,42 @@
 import React,{useEffect} from 'react';
-import { Container,Row,Col,Table,Button } from 'react-bootstrap';
+import { Container,Row,Col,Table,Button,Modal } from 'react-bootstrap';
 import { Url } from '../../GLOBAL/global';
 import axios from 'axios';
 import '../../style/messages.scss';
+import dateFormat from 'dateformat';
+import { useHistory,Link} from "react-router-dom";
+import { FcLeftDown,FcRightUp } from "react-icons/fc";
+
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
-
-    const[orders,setOrders] = React.useState([]);
-    const [viewmsg,setViewMsg] = React.useState(false);
+    let history = useHistory();
+    const [length,setLength] = React.useState(0);
+    
+    const [allmessages,setAlmessages]= React.useState([]);
+   
+   
 
     useEffect(() => {
 
-        getOrders();
+        getDatas();
 
-      },[orders!== null]);
+      },[allmessages!== null]);
 
 
-    async function getOrders()
+    async function getDatas()
     {
-        const token = sessionstorage.getItem("token");
-        const customer_id = sessionstorage.getItem("customerId");
+            const token = sessionstorage.getItem("token");
+            const customer_id = sessionstorage.getItem("customerId");
 
-        
+            // get all messages where msg_type = "I"
 
-          await axios.get(Url+'getorder', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
+            await axios.get(Url+'getmessages', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
             .then(response => {
                 // If request is good...
-                // console.log(response.data);
-                setOrders(response.data);
+                // console.log(response.data.data);
+                setAlmessages(response.data.data);
+                setLength(allmessages.length)
             })
             .catch((error) => {
                 console.log('error ' + error);
@@ -39,70 +47,89 @@ export default function Index() {
 
     
   return (
+      <>      
+      
     <div>
         <Container>
             <Row >
                 <Col sm={12} md={2} xl={2} xxl={2}>
-                    <div className='footer-div'>
-                        <p className='pointer' onClick={viewMessages}>View Orders</p>
-                        <p>1</p>
-                        <p>2</p>
-                        <p>3</p>
-                    </div>
+                   
                 </Col>
 
                 <Col sm={12} md={8} xl={8} xxl={8}>
-                    {viewmsg && 
+                 
+                 
                         <div className='view-msg'>
-                            <p>Purchased Items</p>
+                            {/* <p>Purchased Items</p> */}
+
+
+                        
                             
-                            <Table striped bordered hover style={{backgroundColor:'bisque'}}>
+                            <Table striped bordered hover style={{backgroundColor:'azure'}} className="text-center">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Item</th>
-                                        <th>Cost</th>
-                                        <th>Selected Months</th>
+                                        <th>Date</th>
+                                        <th>sent/recieve</th>
+                                        <th>Message</th>
+                                       
+                                        {/* <th>Selected Months</th> */}
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                  
-                               
-                                    
-                                    <tr>
-                                        <td>1</td>
-                                        <td>mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td><Button variant="light" onClick={selectButton}>Select</Button></td>
-                                    </tr> 
+
+                                  {length >0 ? 
+
+                                    allmessages.map((data, idx) => (
                                    
-                                   {orders.map((data, idx) => (
-                                        console.log( orders[idx].order[idx].order_id)
-                                    ))}
+                               
+                                    <tr key={idx}>
+
+                                        <td>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
+                                      
+                                        <td>{data.msg_type===("I"||"R")?<FcRightUp/>:<FcLeftDown/>}</td>
+
+                                        <td>{data.msg_user}</td>
+                                        
+                                        <td>
+                                        <Button variant="dark" type='button' onClick={() => viewall(data)}>view all</Button><br></br>
+                                    
+                                        </td>
+                                    </tr>  
+                                   
+                                  
+                                       
+                                    )) : <p className='text-center'>No Messages</p>}
         
                                     
                                 </tbody>
                                 
                             </Table>
                         </div>
-                    }
-                    
+                 
+
+
+                   
                 </Col>
             </Row>
 
         </Container>
     </div>
+    </>
+
     );
 
-    function viewMessages()
+    
+
+    function viewall(data)
     {
-        setViewMsg(!viewmsg);
+        // setPmsg(data);
+        // setmodelmsg(true);
+        
+        console.log("pmsg",data);
+        history.push({pathname:'/related-msgs',data:data});
     }
 
-    function selectButton()
-    {
-        console.log('hello');
-    }
+    
+    
 }

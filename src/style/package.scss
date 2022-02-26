@@ -102,6 +102,7 @@
     top: 525%;
     position: relative;
     padding-top: 70%;
+    margin-top: 32rem !important;
 }
 
 
@@ -169,5 +170,9 @@ and (max-device-width : 640px)
 
 @media only screen and (min-width: 1400px) {
    
+    .pkg-text
+    {
+        margin-top: 15rem !important;
+    }
 
 }

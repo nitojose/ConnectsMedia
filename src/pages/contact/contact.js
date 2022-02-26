@@ -9,10 +9,23 @@ import Form from 'react-bootstrap/Form'
 import TextArea from '../../components/TextArea';
 import Buttons from '../../components/Packages/Buttons';
 import Parallax from 'react-rellax'
+import { useForm } from 'react-hook-form';
+import { Url } from '../../GLOBAL/global';
+import { useHistory,Link} from "react-router-dom";
+import axios from 'axios';
 
-export default function contact() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-    
+var sessionstorage = require('sessionstorage');
+
+
+export default function Contact() {
+
+    const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+    let history = useHistory();
+  
+
     return (
         <Container className='padding-top-20 margin-top-165'>
             <Parallax speed={-4}>
@@ -61,22 +74,23 @@ export default function contact() {
                     <h6 className='heading'>Leave Message</h6>
                     <p para-content>Curabitur Mollis Bibendum Luctus Duis Suscipit<br></br> Vitas Dui Sed Suscipit</p>
                     
-                    <Form>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <Textbox placeholder="Name" type="text" /> </Col>
-                            <Col sm={12} md={12} xl={6} xxl={6}> <Textbox placeholder="Email" type="text" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text" {...register("name" , { required: true })} className="textbox"/> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Email" type="email" {...register("email" , { required: true })} className="textbox"/> </Col>
                         </Row>
 
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <Textbox placeholder="Contact No" type="text" /> </Col>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <Textbox placeholder="Subject" type="text" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Contact No" type="tel-in" {...register("phone" , { required: true })} className="textbox" /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Subject" type="text" className='textbox' {...register("subject" , { required: true })} /> </Col>
                         </Row>
 
                         <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}> <TextArea placeholder="Message"/> </Col>
+                            <Col sm={12} md={12} xl={12} xxl={12}> <textarea placeholder="Message" 
+                            {...register("message" , { required: true })} rows={3} className="textbox textarea"> </textarea></Col>
                         </Row>
 
-                        <Buttons text="SUBMIT REQUEST" />
+                        <Buttons text="Submit Request" type="submit" />
                     
                     </Form>
 
@@ -84,6 +98,50 @@ export default function contact() {
                 
             </Row>
             </Parallax>
+            <ToastContainer/>
         </Container>
-    )
+    );
+
+    function onSubmit(data)
+    {
+        
+        let formdata = new FormData();
+        formdata.append('name',data.name);
+        formdata.append('email',data.email);
+        formdata.append('phone',data.phone);
+        formdata.append('subject',data.subject);
+        formdata.append('message',data.message);
+        
+
+        // console.log(formdata);
+    
+
+        const headers ={
+            'Content-Type': 'multipart/form-data',
+           
+        }
+
+            axios({
+            method: 'post',
+            url: Url+'contactPost',
+            data: formdata,
+            headers: headers
+            })
+            .then(function (response) {
+                //handle success
+                // console.log("success");
+                console.log(response.data);
+                if(response.data === "ok")
+                {
+                    toast.success("message sent successfully !!");
+                    history.push('/home');
+                }
+               
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+    }
+    
 }

@@ -107,6 +107,7 @@ export default function Questionnaire() {
         const token = sessionstorage.getItem("token");
        
         var formdata = new FormData();
+        // console.log()
 
         formdata.append("package_id",id);
         formdata.append("package_services",JSON.stringify(QueAns));
@@ -128,7 +129,7 @@ export default function Questionnaire() {
             })
             .then(function (response) {
                 //handle success
-                console.log(response.data);
+                console.log(response);
             })
             .catch(function (response) {
                 //handle error

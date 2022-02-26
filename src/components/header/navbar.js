@@ -28,7 +28,7 @@ export default function Navbar() {
       
             <Container className='navbar'>
                
-                    <img src={require('../../assets/images/logo.png')}  alt='header-logo-img'/>
+                    <img src={require('../../assets/images/logo.png')}  alt='header-logo-img' onClick={()=>home()}/>
 
                     <div className='center-align'>
                         <FiUser className='menu-nav' onClick={profileInfo}  />     
@@ -39,8 +39,9 @@ export default function Navbar() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item> */}
+                                <Dropdown.Item href="/orders">My Orders</Dropdown.Item>
                                 <Dropdown.Item href="/messages">Messages</Dropdown.Item>
+                                <Dropdown.Item href="/gene-enquiry">General Enquiry</Dropdown.Item>
                                 <Dropdown.Item onClick={signout}>Signout</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
@@ -68,6 +69,11 @@ export default function Navbar() {
     {
         sessionstorage.clear();
         history.push('/login');
+    }
+
+    function home()
+    {
+        history.push('/home');
     }
 
 }

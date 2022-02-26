@@ -15,6 +15,10 @@ import EventsCreation from '../pages/campaign/Events/createForm'
 import MillionPosts from '../pages/campaign/millionPosts/index'
 import StaticPosts from '../pages/campaign/Static-Campaign/index'
 import Messages from '../pages/Messages/Index'
+import Orders from '../pages/Orders/index'
+import EachOrder from './Orders/eachOrder'
+import Relatedmsgs from './Messages/Relatedmsgs'
+import Enquiry from '../pages/Enquiry/Index'
 import '../style/main.scss'
 import {
     BrowserRouter as Router,
@@ -106,6 +110,22 @@ export default function Index() {
                 
                 <Route exact path='/messages'>
                     <Messages />
+                </Route>
+
+                <Route exact path='/orders'>
+                    <Orders  />
+                </Route>
+
+                <Route exact path='/order-view'>
+                    <EachOrder order={data.order} />
+                </Route>
+
+                <Route exact path='/related-msgs'>
+                    <Relatedmsgs data={data.data}/>
+                </Route>
+
+                <Route exact path='/gene-enquiry'>
+                    <Enquiry/>
                 </Route>
 
 
