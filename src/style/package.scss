@@ -105,6 +105,34 @@
     margin-top: 32rem !important;
 }
 
+.checkbox
+{
+    height: 25px;
+    width: 25px;
+    
+}
+
+.select-months
+{
+    min-width: 20%;
+    height: 40px;
+    border: 2px solid $ashcolor;
+}
+
+
+
+.checkbox-label
+{
+   display: flex;
+   align-items: flex-start;
+   justify-content: flex-start;
+   
+}
+
+.label-width
+{
+    width:100%
+}
 
 .space-align
 {

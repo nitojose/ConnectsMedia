@@ -6,7 +6,10 @@ import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
 import { Link,useHistory } from 'react-router-dom';
 import Questionnaire from './Questionnaire';
-
+import '../../style/package.scss'
+import '../../style/button.scss'
+import Button from '../../components/Packages/Buttons'
+import Parallax from 'react-rellax'
 var sessionstorage = require('sessionstorage');
 
 
@@ -32,8 +35,15 @@ export default function StandardList() {
     ]
 
   return (
-    <div>
-        <Container >
+    <div className=' page my-5'>
+       <Parallax speed={5}>
+        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+              objectFit:'cover'
+          }}/>
+
+       </Parallax>
+      
+        <Container className=' center-align py-5'>
 
 {/*     
             <Service id="Google Ads" name="Google Ads" />
@@ -43,52 +53,67 @@ export default function StandardList() {
             <Service id="Twitter Ads" name="Twitter Ads" /> */}
 
           
-        <Form  >
+        <Form >
 
-          {
-            lists.map(item => (
-             <>
-                <label>
-                  <input
-                    type="checkbox"
-                    key={item.id}
-                    value={item.id}
-                    onChange={(e)=> handleChange(e,item.value)}
-                  /> {item.value}
-                </label> <br></br>
-                </>
-            ))
-            }
+            <Row className='center-align'>
+              <Col >
 
-            <br></br>
+                    {
+                    lists.map((item,i) => (
+                    <>
+                      <label className='checkbox-label' key={i}>
+                        <input
+                          type="checkbox"
+                          key={item.id}
+                          value={item.id}
+                          className='checkbox'
+                          onChange={(e)=> handleChange(e,item.value)}
+                        />&nbsp; {item.value}
+
+                  
+                      </label> <br></br>
+                      </>
+                  ))
+                  }
+              
+              </Col>
 
 
 
-
-
-            <div >
-                <label>Number of Months : </label>&nbsp; &nbsp;
+              <Col >
+              
+              <label>Number of Months : </label>&nbsp; &nbsp;
 
                 
 
-                <select name="months" id="months" >
-                    <option value="1" >1 month</option>
-                    <option value="2" >2 month</option>
-                    <option value="3">3 month</option>
-                    <option value="4">4 month</option>
-                    <option value="5">5 month</option>
-                    <option value="6">6 month</option>
-                    <option value="7">7 month</option>
-                    <option value="8">8 month</option>
-                    <option value="9">9 month</option>
-                    <option value="10">10 month</option>
-                    <option value="11">11 month</option>
-                    <option value="12">12 month</option>
-                </select>
+                  <select name="months" id="months" className='select-months' >
+
+                      <option value="1">1 </option>
+                      <option value="2" >2 </option>
+                      <option value="3">3 </option>
+                      <option value="4">4 </option>
+                      <option value="5">5 </option>
+                      <option value="6">6 </option>
+                      <option value="7">7 </option>
+                      <option value="8">8 </option>
+                      <option value="9">9 </option>
+                      <option value="10">10 </option>
+                      <option value="11">11 </option>
+                      <option value="12">12 </option>
+
+                  </select>
+              
+              </Col>
 
 
+            </Row>
+         
+
+        
+            
+            <div className='my-5 text-center'>
+              <button type='button' onClick={handleSubmit} className='button-text px-5'>Submit</button>
             </div>
-            <button type='button' onClick={handleSubmit} >Submit</button>
 
         </Form> 
 
@@ -118,7 +143,7 @@ export default function StandardList() {
     {
         
       
-        console.log("Items,",JSON.stringify(Items));
+        // console.log("Items,",JSON.stringify(Items));
         JSON.stringify(Items);
         var months = document.getElementById("months").value;
         // console.log("months",months);
@@ -174,6 +199,7 @@ export default function StandardList() {
 
     function showQues(id)
     {
+      console.log("pkg id : ", id)
       history.push(`/Questionnaire/${id}`);
     }
 

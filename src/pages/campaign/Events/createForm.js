@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { Container,Row,Col } from 'react-bootstrap';
 import Parallax from 'react-rellax';
-import { Link} from "react-router-dom";
+import { Link,useHistory} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import Form from 'react-bootstrap/Form'
 import Buttons from '../../../components/Packages/Buttons';
@@ -17,6 +17,7 @@ var sessionstorage = require('sessionstorage');
 
 export default function CreateForm() {
 
+    let history = useHistory();
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     const [showForm,setShowForm] = useState(true);
     const [payButton,setPayButton] = useState(false);
@@ -52,13 +53,20 @@ export default function CreateForm() {
         })
         .then(function (response) {
             //handle success
-            console.log(response.data);
+            // console.log(response.data);
             if(response.data.message === "event Created Successfully")
             {
-                toast.success("Event Created Successfully !");
-                setShowForm(false);
-                setPayButton(true);
-                setEventId(response.data.id);
+                toast.success("Event Created Successfully !",{autoClose:3000});
+
+                
+                // setShowForm(false);
+                // setPayButton(true);
+                // setEventId(response.data.id);
+
+                setTimeout(() => history.push('/home'), 3000);
+
+                
+
             }
         })
         .catch(function (response) {

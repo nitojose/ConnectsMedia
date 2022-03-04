@@ -60,7 +60,7 @@ export default function Index(props) {
               sessionstorage.setItem("customerId",response.data.id);
               toast.success("Registration Success !");
               toast.warning("Verify Email Id !");
-              history.push( { pathname: '/login', serviceType: props.name})
+              history.push( { pathname: '/login'})
             }
             
 

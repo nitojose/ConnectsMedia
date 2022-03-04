@@ -3,9 +3,13 @@ import { Container,Row,Col, Form } from 'react-bootstrap';
 import Service from '../../components/Packages/servicelist';
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
 var sessionstorage = require('sessionstorage');
 
 export default function CustomizedList() {
+  let history = useHistory();
      const [months,setMonths] = React.useState();
      
    
@@ -80,7 +84,7 @@ export default function CustomizedList() {
 
   return (
     <div>
-        <Container >
+        <Container className='' >
 
    
   
@@ -112,13 +116,14 @@ export default function CustomizedList() {
           {
             lists.map(item => (
              <>
-                <label>
+                <label className='checkbox-label'>
                   <input
                     type="checkbox"
                     key={item.id}
                     value={item.id}
+                    className='checkbox'
                     onChange={(e)=> handleChange(e,item.value)}
-                  /> {item.value}
+                  /> &nbsp;{item.value}
                 </label> <br></br>
                 </>
             ))
@@ -129,7 +134,7 @@ export default function CustomizedList() {
             <div >
         <label>Number of Months : </label>&nbsp; &nbsp;
 
-        <select id="months" required={true} >
+        <select id="months" required={true} className="select-months" >
           <option value="1" >1 month</option>
           <option value="2" >2 month</option>
           <option value="3">3 month</option>
@@ -147,12 +152,13 @@ export default function CustomizedList() {
 
       </div>
 
-
-      <button type='button' onClick={handleSubmit} >Submit</button>
+      <div className='my-5 '>
+        <button type='button' onClick={handleSubmit} className='button-text px-5' >Submit</button>
+      </div>
               
     </Form>
 
-       
+       <ToastContainer/>
         </Container> 
     </div>
     );
@@ -207,7 +213,14 @@ export default function CustomizedList() {
             })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                console.log(response.data.message);
+                if(response.data.message === "package stored Successfully")
+                {
+                  toast.success('Order Request has been send !!',{
+                    autoClose:3000
+                  });
+                  setTimeout(() => history.push('/home'), 3000);
+                }
             })
             .catch(function (response) {
                 //handle error

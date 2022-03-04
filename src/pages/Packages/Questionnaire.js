@@ -6,12 +6,18 @@ import Buttons from '../../components/Packages/Buttons';
 import { Link } from 'react-router-dom';
 import SelectButton from '../../components/Packages/SelectButton';
 import Service from '../../components/Packages/servicelist'
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 var sessionstorage = require('sessionstorage');
 
 export default function Questionnaire() {
+
+    let history = useHistory();
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     const [Items,setItems] =  React.useState([]);
@@ -24,7 +30,7 @@ export default function Questionnaire() {
   {
       
       
-      console.log(data);
+    //   console.log(data);
       
       Questions.map(q => {
           
@@ -34,7 +40,7 @@ export default function Questionnaire() {
                     "question" : q,
                     "answer": data.ministry
                 }
-                QueAns.push(temp1)
+                 QueAns.push(temp1)
             }
 
             if(q === "How many branches do you have?")
@@ -70,7 +76,7 @@ export default function Questionnaire() {
                     "question" : q,
                     "answer": data.liveStream
                 }
-                QueAns.push(temp5)
+               QueAns.push(temp5)
             }
 
             if(q === "What are the challenges you face right now?")
@@ -97,7 +103,7 @@ export default function Questionnaire() {
                     "question" : q,
                     "answer": data.online_presence
                 }
-                QueAns.push(temp8)
+                 QueAns.push(temp8)
             }
 
       })
@@ -129,7 +135,19 @@ export default function Questionnaire() {
             })
             .then(function (response) {
                 //handle success
-                console.log(response);
+                console.log("response",response.status);
+                if(response.status === 201)
+                {
+                    
+                    // history.push('/home');
+                    toast.success("Order Request has been send !!",{
+                        position:'top-right',
+                        autoClose:3000,
+                        closeOnClick:true
+                    });
+
+                    setTimeout(() => history.push('/home'), 3000);
+                }
             })
             .catch(function (response) {
                 //handle error
@@ -164,34 +182,41 @@ export default function Questionnaire() {
         <Container>
         <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name and address of your ministry/church" type="text" name="ministry" {...register("ministry" , { required: true })} className='textbox' /> </Col>
+
                             <Col sm={12} md={12} xl={6} xxl={6}> 
+                                <div className='center-align'>
+                                    <label>1.</label> &nbsp;&nbsp;&nbsp;<input placeholder="Name and address of your ministry/church" type="text" name="ministry" {...register("ministry" , { required: true })} className='textbox' />
+                                </div>
+                            </Col>
 
-                            <label>How many branches do you have?</label>
+                            <Col sm={12} md={12} xl={6} xxl={6}> 
+                                {/* <div className='center-align'> */}
 
-                                <select name="branches" {...register("branches" , { required: true })} >
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                        
-                                </select>
+                                    <label>2.&nbsp; How many branches do you have?</label> &nbsp;
+
+                                    <select name="branches" {...register("branches" , { required: true })} className='select-months' >
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                            
+                                    </select>
                             
                             </Col>
                         </Row>
 
-                        <Row>
+                        <Row className='extraRowSpace'>
                             <Col sm={12} md={12} xl={6} xxl={6}>  
                             
-                                <label>Total active members on premises?</label>
+                                <label>3. &nbsp;&nbsp;Total active members on premises?</label>&nbsp;
                                 
-                                <select name="members" {...register("members" , { required: true })} >
+                                <select name="members" {...register("members" , { required: true })} className='select-months'>
                                     <option value="not sure">Not Sure</option>
                                     <option value="1-30">1-30</option>
                                     <option value="30-60">30-60</option>
@@ -203,9 +228,9 @@ export default function Questionnaire() {
                             </Col>
                             <Col sm={12} md={12} xl={6} xxl={6}>  
 
-                            <label>Active online regular viewers?</label>
+                            <label>4. &nbsp;&nbsp;Active online regular viewers?</label> &nbsp;
                                 
-                                <select name="viewers" {...register("viewers" , { required: true })} >
+                                <select name="viewers" {...register("viewers" , { required: true })} className='select-months'>
                                     <option value="not sure">Not Sure</option>
                                     <option value="1-30">1-30</option>
                                     <option value="30-60">30-60</option>
@@ -216,11 +241,11 @@ export default function Questionnaire() {
                             </Col>
                         </Row>
 
-                        <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}>
-                            <label>How often do you live stream in a week?</label>
+                        <Row className='extraRowSpace'>
+                            <Col sm={12} md={12} xl={6} xxl={6}>
+                            <label>5. &nbsp;&nbsp;How often do you live stream in a week?</label> &nbsp;
                                 
-                                <select name="liveStream" {...register("liveStream" , { required: true })} >
+                                <select name="liveStream" {...register("liveStream" , { required: true })}  className='select-months'>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -229,24 +254,33 @@ export default function Questionnaire() {
                         
                                 </select>
                             </Col>
+
+                            <Col sm={12} md={12} xl={6} xxl={6}> 
+                            <div className='center-align'>
+                                <label>6.</label> &nbsp;&nbsp; &nbsp;
+                             <textarea name="challeges" placeholder="What are the challenges you face right now?" {...register("challenges" , { required: true })} className='textbox textArea' rows={3}></textarea>  
+                             </div>
+                             </Col>
+
                         </Row>
                        
-                        <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <textarea name="challeges" placeholder="What are the challenges you face right now?" {...register("challenges" , { required: true })} className='textbox textArea' rows={3}></textarea>  </Col>
+                        <Row className='extraRowSpace'>
+                            
 
                             <Col sm={12} md={12} xl={6} xxl={6}>
-                                <label>What are your goals using our services? </label><br></br>
+                                <label>7.  &nbsp;&nbsp;What are your goals using our services? </label><br></br><br></br>
 
                                 {
                                     lists.map(item => (
                                     <>
-                                        <label>
+                                        <label className='checkbox-label label-width'>
                                         <input
                                             type="checkbox"
                                             key={item.id}
                                             value={item.id}
+                                            className='checkbox'
                                             onChange={(e)=> handleChange(e,item.value)}
-                                        /> {item.value}
+                                        />&nbsp; {item.value}
                                         </label> <br></br>
                                         </>
                                     ))
@@ -254,14 +288,13 @@ export default function Questionnaire() {
 
                             </Col>
 
-                        </Row>
 
-                        <Row>
                             <Col sm={12} md={12} xl={6} xxl={6}>  
                             
-                                <label>How serious are you to take your online presence to the next level?</label>
+                                <label>8. &nbsp;&nbsp;How serious are you to take your online presence to the next level?</label><br></br><br></br>
+                            
                                 
-                                <select name="online_presence" {...register("online_presence" , { required: true })} >
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="online_presence" {...register("online_presence" , { required: true })} className='select-months'>
                                     <option value="SURE">HIGH. We see great potential in this approach</option>
                                     <option value="MEDIUM">MEDIUM. Exploring the options</option>
                                     <option value="LOW">LOW. Testing the waters</option>
@@ -269,6 +302,8 @@ export default function Questionnaire() {
                                 </select>
 
                             </Col>
+
+                        
                             
                         </Row>
 
@@ -280,6 +315,7 @@ export default function Questionnaire() {
                       
                     
                     </Form>
+                    <ToastContainer/>
 
         </Container>
 

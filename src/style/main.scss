@@ -13,7 +13,7 @@ body
     color: $primary_color;
     margin: 0px;
     padding: 0px;
-    font-family: 'Roboto', sans-serif;
+    font-family: poppins;
 }
 
 a
@@ -29,11 +29,23 @@ a
     
 }
 
+.bold-text
+{
+    font-weight: 600;
+}
+
 .paragrah
 {
     font-size: 22px;
     color: $ashcolor;
     font-weight: 500;
+}
+
+.center-align
+{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
 }
 
 .para-content
@@ -82,8 +94,10 @@ a
     flex-direction: column;
     align-items: center;
     margin-right: 0;
-    
+    margin-top: 50px;
 }
+
+
 
 .pointer
 {
@@ -107,7 +121,7 @@ a
 .page
 {
     width:100%;
-    height: 100vh;
+    height: 50vh;
    
 }
 
@@ -125,6 +139,11 @@ a
 .margin-top-15rm
 {
     margin-top: 15rem;
+}
+
+.margin-top-10rm
+{
+    margin-top: 12.4rem;
 }
 
 .center-align
@@ -177,4 +196,11 @@ and (max-device-width : 640px)
 {
     height: 100px;
     background-color: #fc0298;
+}
+
+.space-between
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }

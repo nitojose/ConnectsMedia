@@ -19,6 +19,7 @@ import Orders from '../pages/Orders/index'
 import EachOrder from './Orders/eachOrder'
 import Relatedmsgs from './Messages/Relatedmsgs'
 import Enquiry from '../pages/Enquiry/Index'
+import Requets from '../pages/pendingRequest/Index'
 import '../style/main.scss'
 import {
     BrowserRouter as Router,
@@ -36,13 +37,13 @@ export default function Index() {
             <Switch>
                 <Route exact path="/">
                     
-                    <Registration />
+                    <MainScreen />
 
                 </Route>
 
                 <Route exact path='/registration' >
                     
-                    <Registration name={data.name}/>
+                    <Registration name={data.name} />
 
                 </Route>
 
@@ -53,8 +54,22 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/login'>
+                    <Login />
 
-                    <Login serviceType={data.serviceType} />
+                    {/* <Login data={data.state?data.state:''}/> */}
+
+                </Route>
+
+                <Route exact path='/login/:standard-list'>
+
+                    <Login  />
+
+                </Route>
+
+
+                <Route exact path='/login/:customized-list'>
+
+                    <Login  />
 
                 </Route>
 
@@ -64,7 +79,7 @@ export default function Index() {
 
                 </Route>
 
-                <Route exact path='/forgot_password'>
+                <Route exact path='/reset_password'>
 
                     <ResetPassword />
 
@@ -83,7 +98,7 @@ export default function Index() {
                 </Route>
 
 
-                <Route exact path='/standard-list'>
+                <Route exact path="/standard-list">
 
                     <StandardList />
 
@@ -117,15 +132,19 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/order-view'>
-                    <EachOrder order={data.order} />
+                    <EachOrder order={data.order} type={data.type} />
                 </Route>
 
                 <Route exact path='/related-msgs'>
-                    <Relatedmsgs data={data.data}/>
+                    <Relatedmsgs data={data.data} />
                 </Route>
 
                 <Route exact path='/gene-enquiry'>
                     <Enquiry/>
+                </Route>
+
+                <Route exact path='/request/:type/:id'>
+                    <Requets/>
                 </Route>
 
 

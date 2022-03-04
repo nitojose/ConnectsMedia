@@ -6,9 +6,9 @@ import Buttons from '../../components/Packages/Buttons';
 import { Form } from 'react-bootstrap';
 import { Link ,useHistory } from 'react-router-dom';
 import axios from 'axios'
-import { Url } from '../../GLOBAL/global';
+import { Url,siteUrl } from '../../GLOBAL/global';
 import '../../style/login.scss'
-
+import {useLocation} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,15 +17,22 @@ var sessionstorage = require('sessionstorage');
 
 export default function Index() {
 
-    const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+  // const [value ,setValue] = React.useState({});
+  const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     let history  =new useHistory();
+
+    let d = window.location.pathname.slice(7);
+    console.log("current url : ",d);
+    
+    // setValue(d);
+
+    
 
     function onSubmit(data)
     {
       
       // console.log(data);
      let formdata = new FormData();
-     formdata.append('name',data.name);
      formdata.append('email',data.email);
      formdata.append('password',data.pass);
      
@@ -43,7 +50,7 @@ export default function Index() {
         })
         .then(function (response) {
             //handle success
-            console.log(response.data);
+            console.log(response.data.token);
             
 
             if(response.data === "Email Not verified")
@@ -55,7 +62,15 @@ export default function Index() {
             {
               sessionstorage.setItem("token",response.data.token);
               sessionstorage.setItem("customerId",response.data.id);
-              history.push('/home')
+
+              if(sessionstorage.getItem('request') !== null)
+              {
+                window.location.href= siteUrl+sessionstorage.getItem('request');
+              }
+
+              history.push('/'+window.location.pathname.slice(7));
+             
+              
             }
             
         })
@@ -93,10 +108,7 @@ export default function Index() {
                     <p className='para-content'>Come To The Fold And More Jesus Viral</p>
                     
                     <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Name" type="text"  {...register("name" , { required: true })} className='textbox login-box' /> </Col>
-                           
-                        </Row>
+                       
 
                         <Row>
                             <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box'/> </Col>
@@ -124,7 +136,7 @@ export default function Index() {
 
                         <Row align="center" >
                          
-                          <Link to='/forgot_password'>forgot password</Link>
+                          <Link to='/reset_password'>forget password</Link>
                         </Row>
             
                       

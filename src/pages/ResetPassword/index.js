@@ -22,7 +22,7 @@ export default function Index() {
      let formdata = new FormData();
      
      formdata.append('email',data.email);
-     formdata.append('password',data.pass1);
+    //  formdata.append('password',data.pass1);
      
 
      
@@ -52,26 +52,31 @@ export default function Index() {
     
   return (
       <div>
-          <Container>
+          <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+              objectFit:'cover'
+          }}/>
+          <Container className='page my-5'>
+
+              
           <Parallax speed={-3}>
-                    <h6 className='heading'>Reset Password</h6>
+                    <h6 className='heading my-5'>Reset Password</h6>
                     
                     
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         
 
-                        <Row>
+                        <Row >
                             <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box'/> </Col>
                             
                         </Row>
 
             
 
-                        <Row>
+                        {/* <Row>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox login-box'/> </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox login-box'/> </Col>
-                        </Row>
+                        </Row> */}
 
                         <Row className='extraRowSpace'>
                           <Buttons text="Reset " type="submit" />
