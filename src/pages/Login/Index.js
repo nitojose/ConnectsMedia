@@ -105,7 +105,7 @@ export default function Index() {
 
           }
           else{
-            history.push('/home')
+            history.push('/')
             history.go(0)
             console.log(" home");
           }

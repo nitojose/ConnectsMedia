@@ -25,202 +25,197 @@ import PendingReq from '../../src/pages/pendingRequest/pendingRequest'
 import Forgotpwd from '../../src/pages/forgotPassword/Index'
 import Forgotpwd1 from '../../src/pages/forgotPassword/forgot1'
 import EachRequest from '../../src/pages/pendingRequest/EachRequest'
+// import Homepage from '../../src/pages/HomePage/index'
 
 import {
     BrowserRouter as Router,
     Route,
     Switch
   } from 'react-router-dom';
-import Navbar from '../components/header/navbar'
+
 import UserHeader from '../components/header/UserHeader'
 
 export default function Index() {
     let data = useLocation();
+  
 
     return (
             <>
             <div>
 
+           
             <Switch>
-                
                 <Route exact path="/">
+                    
+                <MainScreen />
 
-                    <Mainscreen />
+                </Route>
+
+                <Route exact path='/home'>
+
+                <MainScreen />
+
+                </Route>
+
+               <Router>
+                    <UserHeader/>
+
+                <Route exact path='/registration' >
+                    
+                    <Registration name={data.name}/>
+
+                </Route>
+
+                <Route exact path='/faq'>
+                    <Faq />
+                </Route>
+
+                    <Route exact path='/pkg-details'>
+
+                <PackageDetails />
+
+                </Route>
+
+                <Route exact path='/login'>
+
+                    <Login />
+
+                </Route>
+
+                <Route exact path='/login/:standard-list'>
+
+                <Login  />
+
+                </Route>
+
+
+                <Route exact path='/login/:customized-list'>
+
+                <Login  />
+
+                </Route>
+
+                <Route exact path='/profile'>
+
+                   <Profile />
+
+                </Route>
+
+                <Route exact path='/reset_password'>
+
+                    <ResetPassword />
+
+                    </Route>
+
+                    <Route exact path='/forgot_password'>
+
+                    <Forgotpwd />
+
+                    </Route>
+
+                    <Route exact path='/forgot_password1'>
+
+                    <Forgotpwd1 />
+
+                    </Route>
+
+               
+                <Route exact path='/order-view'>
+
+                    <EachOrder order={data.order} type={data.type} />
+                
+                </Route>
+
+                <Route exact path='/customized-list'>
+
+                    <CustomizedList />
+
+                </Route>
+
+
+                <Route exact path='/standard-list'>
+
+                    <StandardList />
+
+                </Route>
+
+
+                <Route exact path='/Questionnaire/:id'>
+
+                   
+                    <Questionnaire />
+                </Route>
+
+                <Route exact path='/events-creation'>
+
+                    <EventsCreation />
+
+                </Route>
+
+                <Route exact path='/million-posts'>
+
+                    <MillionPosts />
+
+                </Route>
+
+                <Route exact path='/staticPosts'>
+
+                    <StaticPosts />
+
+                </Route>
+                
+                <Route exact path='/messages'>
+
+                    <Messages />
+
+                </Route>
+
+                <Route exact path='/orders'>
+
+                    <Orders  />
+
+                </Route>
+
+                <Route exact path='/pending_req/:id'>
+
+                    <EachRequest/>
+
+                </Route>
+
+
+                <Route exact path='/pending_req'>
+
+                    <EachRequest data={data.data}/>
 
                 </Route>
 
                 
 
-                <Router>
-
-                 <UserHeader/>
                 
+                <Route exact path='/request/:type/:id'>
 
-                    <Route exact path='/registration' >
-                        
-                        <Registration name={data.name}/>
-
-                    </Route>
-
-                    <Route exact path='/home'>
-
-                        <MainScreen />
-
-                    </Route>
-
-                    <Route exact path='/faq'>
-                        <Faq />
-                    </Route>
-
-                        <Route exact path='/pkg-details'>
-
-                    <PackageDetails />
-
-                    </Route>
-
-                    <Route exact path='/login'>
-
-                        <Login />
-
-                    </Route>
-
-                    <Route exact path='/login/:standard-list'>
-
-                    <Login  />
-
-                    </Route>
-
-
-                    <Route exact path='/login/:customized-list'>
-
-                    <Login  />
-
-                    </Route>
-
-                    <Route exact path='/profile'>
-
-                    <Profile />
-
-                    </Route>
-
-                    <Route exact path='/reset_password'>
-
-                        <ResetPassword />
-
-                        </Route>
-
-                        <Route exact path='/forgot_password'>
-
-                        <Forgotpwd />
-
-                        </Route>
-
-                        <Route exact path='/forgot_password1'>
-
-                        <Forgotpwd1 />
-
-                        </Route>
-
-                   
-
-                    <Route exact path='/order-view'>
-
-                        <EachOrder order={data.order} type={data.type} />
+                    <Requets/>
                     
-                    </Route>
+                </Route>
 
-                    <Route exact path='/customized-list'>
+                <Route exact path='/my-requests'>
+                    <PendingReq />
+                </Route>
 
-                        <CustomizedList />
+                <Route exact path='/related-msgs'>
+                    <Relatedmsgs data={data.data}/>
+                </Route>
 
-                    </Route>
-
-
-                    <Route exact path='/standard-list'>
-
-                        <StandardList />
-
-                    </Route>
-
-
-                    <Route exact path='/Questionnaire/:id'>
-
-                    
-                        <Questionnaire />
-                    </Route>
-
-                    <Route exact path='/events-creation'>
-
-                        <EventsCreation />
-
-                    </Route>
-
-                    <Route exact path='/million-posts'>
-
-                        <MillionPosts />
-
-                    </Route>
-
-                    <Route exact path='/staticPosts'>
-
-                        <StaticPosts />
-
-                    </Route>
-                    
-                    <Route exact path='/messages'>
-
-                        <Messages />
-
-                    </Route>
-
-                    <Route exact path='/orders'>
-
-                        <Orders  />
-
-                    </Route>
-
-                    <Route exact path='/pending_req/:id'>
-
-                        <EachRequest/>
-
-                    </Route>
-
-
-                    <Route exact path='/pending_req'>
-
-                        <EachRequest data={data.data}/>
-
-                    </Route>
-
-                    
-
-                    
-                    <Route exact path='/request/:type/:id'>
-
-                        <Requets/>
-                        
-                    </Route>
-
-                    <Route exact path='/my-requests'>
-                        <PendingReq />
-                    </Route>
-
-                    <Route exact path='/related-msgs'>
-                        <Relatedmsgs data={data.data}/>
-                    </Route>
-
-                    <Route exact path='/gene-enquiry'>
-                        <Enquiry/>
-                    </Route>
+                <Route exact path='/gene-enquiry'>
+                    <Enquiry/>
+                </Route>
 
                 </Router>
-                
-                
 
                 {/* <Route exact path='/sidebar'>
                     <Sidebar />
-                </Route> */}
-                
+                </Route>
+                 */}
                 {/* <Route exact path="/Home1" component={Home}/>
                 <Route exact path="/About1" component={About}/>
                 <Route exact path="/whyconnect1" component={Whyconnect}/>
@@ -229,8 +224,8 @@ export default function Index() {
                 <Route exact path="/statistics1" component={Statistics}/>
                 <Route exact path="/contact1" component={Contact}/>
                 <Route exact path="/faq1" component={Faq}/>
-                <Route exact path="/campaigns1" component={Campaign}/>
- */}
+                <Route exact path="/campaigns1" component={Campaign}/> */}
+
 
             </Switch>
             {/* <Footer /> */}

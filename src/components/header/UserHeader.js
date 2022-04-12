@@ -32,7 +32,7 @@ export default function UserHeader() {
 
     useEffect(() => {
 
-        if(window.location.pathname === "/home")
+        if(window.location.pathname === ('/home' || '/' || '/forgot-password'))
         {
             setHomePath(true)
         }
@@ -77,6 +77,7 @@ export default function UserHeader() {
             <div id="user-menu">
 
             {sessionstorage.getItem('token')!== null  ? (<>
+                
                 <Dropdown>
                                 <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
                                 <FaUserTie size={35} className='menu-nav' color='white'/>
@@ -96,7 +97,7 @@ export default function UserHeader() {
                                     
                                 </Dropdown.Menu>
                         </Dropdown>
-            </>):(<><Dropdown>
+            </>):(homePath ? (<><Dropdown>
                                 <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
                                 <FaUserTie size={35} className='menu-nav' color='white'/>
                                 </Dropdown.Toggle>
@@ -107,7 +108,7 @@ export default function UserHeader() {
                                         <Dropdown.Item onClick={homePage()}>Home</Dropdown.Item>
                                     
                                 </Dropdown.Menu>
-                        </Dropdown></>)}
+                        </Dropdown></>):(<></>))}
 
                     
             </div>

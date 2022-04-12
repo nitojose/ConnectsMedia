@@ -22,12 +22,6 @@ console.log('token is',sessionstorage.getItem('token'));
 
 
 
-const styles = StyleSheet.create({
-    bounce: {
-      animationName: fadeInUp,
-      animationDuration: '10s'
-    }
-})
 
 export default function Navbar(props,id) {
 
@@ -40,7 +34,7 @@ export default function Navbar(props,id) {
 
     useEffect(() => {
 
-        if(window.location.pathname === "/home")
+        if(window.location.pathname === ('/home'|| '/'))
         {
             setHomePath(true)
         }
@@ -106,7 +100,7 @@ export default function Navbar(props,id) {
                                         
                                     </Dropdown.Menu>
                             </Dropdown>
-                </>): (<><Dropdown>
+                </>): (homePath ? (<><Dropdown>
                                 <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
                                 <FaUserTie size={35} className='menu-nav' color='white'/>
                                 </Dropdown.Toggle>
@@ -117,7 +111,7 @@ export default function Navbar(props,id) {
                                         <Dropdown.Item onClick={homePage()}>Home</Dropdown.Item>
                                     
                                 </Dropdown.Menu>
-                        </Dropdown></>)}
+                        </Dropdown></>):(<></>))}
 
                            
                 </div>

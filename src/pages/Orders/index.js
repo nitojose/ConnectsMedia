@@ -382,6 +382,7 @@ export default function Index() {
       
     
     //   setOrderId(orderId)
+    console.log("data",data)
     history.push( { pathname: '/order-view',order:data,type:value})
       
   }
