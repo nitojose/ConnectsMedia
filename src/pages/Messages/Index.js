@@ -1,19 +1,19 @@
 import React,{useEffect} from 'react';
-import { Container,Row,Col,Table,Button,Modal } from 'react-bootstrap';
+import { Container,Row,Col,Table,Button,Modal,Card } from 'react-bootstrap';
 import { Url } from '../../GLOBAL/global';
 import axios from 'axios';
 import '../../style/messages.scss';
 import dateFormat from 'dateformat';
 import { useHistory,Link} from "react-router-dom";
 import { FcLeftDown,FcRightUp } from "react-icons/fc";
-
+import Parallax from 'react-rellax'
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
     let history = useHistory();
     const [length,setLength] = React.useState(0);
     
-    const [allmessages,setAlmessages]= React.useState([]);
+    const [allmessages,setAlmessages]= React.useState([{}]);
    
    
 
@@ -31,7 +31,8 @@ export default function Index() {
 
             // get all messages where msg_type = "I"
 
-            await axios.get(Url+'getmessages', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
+            await axios.get(Url+'getmessages', { headers: { Authorization: `Bearer ${token}`,'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'get' } ,params:{customer_id: customer_id} })
             .then(response => {
                 // If request is good...
                 // console.log(response.data.data);
@@ -50,68 +51,87 @@ export default function Index() {
       <>      
       
     <div>
+
+    <Parallax speed={5}>
+        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+              objectFit:'cover'
+          }}/>
+
+       </Parallax>
         <Container>
-            <Row >
-                <Col sm={12} md={2} xl={2} xxl={2}>
-                   
-                </Col>
+            <h2 className='text-center my-5'>Messages</h2>
+            
+                        <div className='view-msg mb-5'>
+                           
 
-                <Col sm={12} md={8} xl={8} xxl={8}>
-                 
-                 
-                        <div className='view-msg'>
-                            {/* <p>Purchased Items</p> */}
-
-
-                        
+                            {length >0 ?(
                             
-                            <Table striped bordered hover style={{backgroundColor:'azure'}} className="text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>sent/recieve</th>
-                                        <th>Message</th>
-                                       
-                                        {/* <th>Selected Months</th> */}
-                                    </tr>
-                                </thead>
+                            
+                              
+                                    <Row >
+                          {allmessages.map((data, idx) => (
+                            
+                              <>
+                                <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                                  <Card className='card-event '>
+                                 
+                                    <div className='card-header-color align-start' >
+                                      <div className='space-between'>
+                                        <p className='px-5 pt-2 bold-text'></p>
 
-                                <tbody>
-
-                                  {length >0 ? 
-
-                                    allmessages.map((data, idx) => (
-                                   
-                               
-                                    <tr key={idx}>
-
-                                        <td>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
-                                      
-                                        <td>{data.msg_type===("I"||"R")?<FcRightUp/>:<FcLeftDown/>}</td>
-
-                                        <td>{data.msg_user}</td>
+                                        <p className='px-5  light-white pt-2'>Message Type</p>
+                                        <p className='px-5 arrow-color mt-2'>{data.msg_type===("I"||"R")?
+                                        (<FcRightUp /> ):(<FcLeftDown /> )}</p>
                                         
-                                        <td>
-                                        <Button variant="dark" type='button' onClick={() => viewall(data)}>view all</Button><br></br>
-                                    
-                                        </td>
-                                    </tr>  
-                                   
+                                        
+                                      </div>
+                                    </div>
+                                    <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card'/>
+
+                                    <Card.Body className='card-bg mt-5'>
+                                      
+                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
+
+                                          <div className='space-between text-color mt-5'>
+                                            <p className=''>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</p>
+                                            <p>Order date</p>
+                                        
+                                          </div>
+                                            <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                            <textarea className='msg_textarea' disabled={true} rows={3}>{data.msg_user}</textarea>
+                                              <p>message</p>
+                                              
+                                            </div>
+                                            <hr className='text-color'></hr>
+
+
+
+                                          <div className='space-between text-color '>
+                                            <p className=' bold-text'>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
+                                            <p>Status</p>
+                                            
+                                          </div>
+
+
+                                          <div className='text-center'>
+                                                <span><Button variant="dark" className='px-5 b-3'onClick={() => viewall(data)}>view</Button></span>
+                                            </div>
+                                        
+
+                                    </Card.Body>
                                   
-                                       
-                                    )) : <p className='text-center'>No Messages</p>}
-        
-                                    
-                                </tbody>
+                                  </Card>
                                 
-                            </Table>
+                                </Col>
+                                </>
+                          ))}
+                                </Row>
+                            ):(<><p className='bold-text error'>No message send yet !!</p></>)}
                         </div>
-                 
-
-
-                   
-                </Col>
-            </Row>
+                
 
         </Container>
     </div>
@@ -126,7 +146,7 @@ export default function Index() {
         // setPmsg(data);
         // setmodelmsg(true);
         
-        console.log("pmsg",data);
+        // console.log("pmsg",data);
         history.push({pathname:'/related-msgs',data:data});
     }
 

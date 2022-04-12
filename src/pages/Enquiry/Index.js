@@ -6,6 +6,11 @@ import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
 import { FcLeftDown,FcRightUp } from "react-icons/fc";
 import dateFormat from 'dateformat';
+import Parallax from 'react-rellax';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 var sessionstorage = require('sessionstorage');
 
 
@@ -58,10 +63,15 @@ export default function Index() {
   return (
   
   <div>
+<Parallax speed={5}>
+        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+              objectFit:'cover'
+          }}/>
 
+       </Parallax>
                         <Modal.Dialog className='modal-msg'>
-                            <Modal.Header >
-                                <Modal.Title style={{color:'black'}}>General Enquiry </Modal.Title>
+                            <Modal.Header style={{backgroundColor:'#000914',color:'rgb(81, 87, 89);'}} >
+                                <Modal.Title >General Enquiry </Modal.Title>
                                
                             </Modal.Header>
 
@@ -81,83 +91,143 @@ export default function Index() {
                         </Modal.Dialog>
 
                         <Container>
-            <Row >
-                <Col sm={12} md={2} xl={2} xxl={2}>
-                   
-                </Col>
-
-                <Col sm={12} md={8} xl={8} xxl={8}>
+           
                  
                  
                         <div className='view-msg'>
-                            {/* <p>Purchased Items</p> */}
-                            
-                            <Table striped bordered hover style={{backgroundColor:'azure'}} className="text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>sent/recieve</th>
-                                        <th>Message</th>
-                                       
-                                        {/* <th>Selected Months</th> */}
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-
-                                    
+                          
                                   
+                               
+                            <Row >
                                 {allmessages.length >0 ? allmessages.map((data, idx) => (
-                                    // console.log(data)
-                               
-                                    <tr key={idx}>
+                            
+                              <>
+                                <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                                  <Card className='card-event '>
+                                 
+                                    <div className='card-header-color align-start' >
+                                      <div className='space-between'>
+                                        <p className='px-5 pt-2 bold-text'></p>
+                                        
+                                        <p className='px-5 arrow-color mt-2'>{data.msg_type===("I"||"R")?<FcRightUp/>:<FcLeftDown />}</p>
+                                        <p className='px-5  light-white pt-2'>Message Type</p>
+                                        
+                                      </div>
+                                    </div>
+                                    <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card' />
 
-                                        <td>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
+                                    <Card.Body className='card-bg mt-5'>
                                       
-                                        <td>{data.msg_type===("I"||"R")?<FcRightUp/>:<FcLeftDown/>}</td>
+                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
 
-                                        <td>{data.msg_user}</td>
+                                          <div className='space-between text-color mt-5'>
+                                            <p className=''>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</p>
+                                            <p>Order date</p>
                                         
+                                          </div>
+                                            <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                            <textarea className='bold-text msg_textarea' disabled={true} rows={3}>{data.msg_user}</textarea>
+                                              <p>message</p>
+                                              
+                                            </div>
+                                            <hr className='text-color'></hr>
+
+
+
+                                          <div className='space-between text-color '>
+                                            <p className=' bold-text'>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
+                                            <p>Status</p>
+                                            
+                                          </div>
+
+
+                                          
                                         
-                                    </tr>  
-                                   
+
+                                    </Card.Body>
                                   
-                                       
-                                    )) : "" }
-
-
-                                {adminGene.length > 0 ? adminGene.map((data, idx) => (
-                                    // console.log(data)
-                               
-                                    <tr key={idx}>
-
-                                        <td>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
-                                      
-                                        <td>{data.msg_type===("I"||"R")?<FcRightUp/>:<FcLeftDown />}</td>
-
-                                        <td>{data.msg_user}</td>
-                                        
-                                        
-                                    </tr>  
-                                   
-                                  
-                                       
-                                    )) : ""}
-
-                                    {allmessages.length === 0 && adminGene.length === 0 ? <p>no messages</p>: ''}
-        
-                                    
-                                </tbody>
+                                  </Card>
                                 
-                            </Table>
+                                </Col>
+                                </>
+                          )):""}
+
+
+
+
+                        {adminGene.length > 0 ? adminGene.map((data, idx) => (
+                            
+                            <>
+                              <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                                <Card className='card-event '>
+                               
+                                  <div className='card-header-color align-start' >
+                                    <div className='space-between'>
+                                      <p className='px-5 pt-2 bold-text'></p>
+                                      
+                                      <p className='px-5 arrow-color mt-2'>{data.msg_type===("I"||"R")?(<><FcRightUp/></>):(<><FcLeftDown /> </>)}</p>
+                                      <p className='px-5  light-white pt-2'>Message Type</p>
+                                      
+                                    </div>
+                                  </div>
+                                  <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card' />
+
+                                  <Card.Body className='card-bg mt-5'>
+                                    
+                                    {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
+
+                                        <div className='space-between text-color mt-5'>
+                                          <p className=''>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</p>
+                                          <p>Order date</p>
+                                      
+                                        </div>
+                                          <hr className='text-color'></hr>
+
+
+                                        <div className='space-between text-color '>
+                                          <textarea className=' msg_textarea' disabled={true} rows={3}>{data.msg_user}</textarea>
+                                            <p>message</p>
+                                            
+                                          </div>
+                                          <hr className='text-color'></hr>
+
+
+
+                                        <div className='space-between text-color '>
+                                          <p className=' bold-text'>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
+                                          <p>Status</p>
+                                          
+                                        </div>
+
+
+                                        
+                                      
+
+                                  </Card.Body>
+                                
+                                </Card>
+                              
+                              </Col>
+                              </>
+                        )):""}
+
+                        {allmessages.length === 0 && adminGene.length === 0 ? <p className='bold-text error'>No Message Send Yet !!</p>: ''}
+
+
+
+                        </Row>
+                               
                         </div>
                  
 
 
                    
-                </Col>
-            </Row>
-
+               
+        
+            <ToastContainer/>
         </Container>
 
   </div>);
@@ -193,10 +263,11 @@ export default function Index() {
         url: Url+'Message',
         data:formdata,
         headers: headers
-        })
+        })                        
         .then(function (response) {
             //handle success
             console.log(response.data);
+            toast.success("message sent !!")
             getDatas();
             
         })

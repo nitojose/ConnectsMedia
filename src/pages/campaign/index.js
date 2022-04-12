@@ -1,104 +1,246 @@
 import React, { useEffect ,useRef} from 'react'
 import { Container,Row, Col} from 'react-bootstrap'
 import '../../style/campaign.scss'
-import Outerbox from '../../components/campaign/outerbox';
-import pic1 from '../../assets/images/Group 338.png';
-import pic2 from '../../assets/images/OBJECTS.png';
-import pic3 from '../../assets/images/hands.png';
-import pic4 from '../../assets/images/Group 364.png';
-import pic5 from '../../assets/images/Group 376.png';
-import pic6 from '../../assets/images/cross.png';
 import Parallax from 'react-rellax'
+import { useHistory} from "react-router-dom";
+import axios from 'axios';
+import { Url } from '../../GLOBAL/global';
+var sessionstorage = require('sessionstorage');
+
 
 export default function Campaigns() {
 
+    const[campaign,setCampaign] = React.useState([]);
+
+    React.useEffect(()=>
+    {
+        getCampaigns();
+    },[]);
+
+    async function getCampaigns()
+    {
+        const token = sessionstorage.getItem("token");
+        console.log("token",token)
+       
+
+          await axios.get(Url+'getCampaign', { headers: { Authorization: `Bearer ${token}` }})
+          .then(response => {
+              
+              console.log(response.data);
+            setCampaign(response.data);
+          })
+          .catch((error) => {
+              console.log('error ' + error);
+          });
+
+    }
+
+    let history = useHistory();
 
     return (
         <>
-        <Container  > 
-        {/* style={{marginTop:'5rem'}} */}
-            <Parallax speed={-2} >
-                <p className='campaign_text top-10 padding-top-82'>Campaigns</p>
-            
-            </Parallax>
-
-            <Row className=' mx-5 my-0 ' >
-                <Col sm={12} md={12} xl={4} xxl={4} className='my-0 py-0' >
-
-              
-
-                         <Outerbox image={pic1} alt="cam-img1" text="Upcoming Events" content="Share your calender here.we will pick all your future events from here." width="150" height="150" marginTop="0rem" speed="-3.2" slug="/events-creation">
-                        
-                        
-                        </Outerbox>
-                  
-
-                </Col>
-
-
-                <Col sm={12} md={12} xl={4} xxl={4}  className='my-3 py-3'>
-
-             
-                        <Outerbox image={pic2} alt="cam-img1" text="Million Posts" content="Register and support for this special campaign and we will take care of the rest to share jesus content everywhere."
-                        width="250" height="250" marginTop="-5rem" speed="-3.4" slug="/million-posts">
-                        
-                        </Outerbox>
-
-                
-                    
-                </Col>
-
-
-                <Col sm={12} md={12} xl={4} xxl={4}  className='my-5 py-5'>
-
-                  
-                        <Outerbox image={pic3} alt="cam-img1" text="Strengthening Marriage" content="Register and support for this special campaign and we will keep on posting bible scripttures,inspirational content about importance of marriage on social media." width="280" height="200" marginTop="1.6rem" speed="-3.6" slug="/staticPosts">
-                        
-                        </Outerbox>
-                    
-                    
-                </Col>
-            </Row>
-
-                {/* second row */}
-
-            <Row className='mx-5 my-5 padding-top-20 margin-top-10'>
-                <Col sm={12} md={12} xl={4} xxl={4} className=' ' >
-
-                  
-                        <Outerbox image={pic4} alt="cam-img1" text="Youth Section" content="Share your calender here.We will pick all your future events from here." width="250" height="230" marginTop="-5rem" speed="-3.4">
+        
+    {/* <section id='campaigns1'>
+        <div class="compain-main-div">
+            <h1 id="campain-heading-tag">Campaigns</h1>
+            <div class="main-div">
+                <div class="cube">
+                    <div class="top">
+                        <div class="cub-content-div">
+                            <img src={require('../../assets/images/mike.png')} alt="" id="cube-img" />
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard dummy text ever since the 1500s,</p>
                             
-                        </Outerbox>
+                            {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("event")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/events-creation')}>Start Here</button>
+                                </>
+                                )
+                            }
+                            <h1>Upcoming Event</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="cube">
+                    <div class="top">
+                        <div class="cub-content-div-second">
+                            <img src={require('../../assets/images/OBJECTS.png')} alt="" id="cube-img_second" />
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard dummy text ever since the 1500s,</p>
+                            
+                            {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("million")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/million-posts')}>Start Here</button>
+                                </>
+                                )
+                            }
+                            <h1>Million Post</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="cube">
+                    <div class="top">
+                        <div class="cub-content-div-third">
+                            <img src={require('../../assets/images/hands.png')} alt="" id="cube-img-third" />
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                has been the industry's standard dummy text ever since the 1500s,</p>
+                           
+                            {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("static")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                </>
+                                )
+                            }
+                            <h1>StrengtheningMarriage</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                  
-                </Col>
+            
+        </div>
+    </section> */}
 
+    {/* Campaigns */}
 
-                <Col sm={12} md={12} xl={4} xxl={4}  className=''>
+<div class="section scrollbar" id="campaigns">
+	<div>
+	<h1>Campaigns</h1>
+    <ul>
 
-                   
-                        <Outerbox image={pic5} alt="cam-img1" text="Pray For Israel" content="Sign up for this campaign to show love for israel and we will post videos and posters on your behalf.psalm 122:6 pray for the peace of jerusalem.May they prosper who love you." width="120" height="120" marginTop="3rem" speed="-3.6">
-                        
-                        </Outerbox>
-                    
-                </Col>
+      
+         
+                <li>
+                    <h2>Upcoming Event</h2>
+                    <img src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                    <span>Share your calendar here. We will pick all your future events from here</span>
+                    {/* <div><button>Start Here</button></div> */}
+                            {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("event")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/events-creation')}>Start Here</button>
+                                </>
+                                )
+                            }
+	            </li>
 
+         
+      
+    <li>
+    	<h2>Missions</h2>
+		<img src={require('../../../src/assets/imgs/stand-mic.png')} alt="Million Post - Mic"/>
+        <span>Click below to support missionaries from across the globe</span>
+		<div><button>Start Here</button></div>
+	</li>
+    <li>
+    	<h2>Strengthening Marriage</h2>
+		<img src={require('../../../src/assets/imgs/strengthen-marriage.png')} alt="Strengthening Marriage"/>
+        <span>Register and support for this special campaign and we will keep on posting inspirational content and bible scriptures, about togetherness and marriage on social media</span>
+		
 
-                <Col sm={12} md={12} xl={4} xxl={4}  className=''>
-
-                    
-                        <Outerbox image={pic6} alt="cam-img1" text="Evangelism" content="Register and do your part to spread gospel.We will spread savings knowledge of jesus to the unsaved world on social media."
-                        width="230" height="230" marginTop="0rem" speed="-3.8">
-                        
-                        </Outerbox>
-
-                   
-                    
-                </Col>
-            </Row>
-          
-        </Container>
+                            {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("million")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/million-posts')}>Start Here</button>
+                                </>
+                                )
+                            }
+	</li>
+    <li>
+    	<h2>Youth Section</h2>
+		<img src={require('../../../src/assets/imgs/youth.png')} alt="Praying Youth"/>
+        <span>Register for this special campaign to engage our future generation with youthful Christian content on social media</span>
+		                    {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("static")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                </>
+                                )
+                            }
+	</li>
+    <li>
+    	<h2>Pray For Israel</h2>
+		<img src={require('../../../src/assets/imgs/israel.png')} alt="Pray for Israel"/>
+        <span>God loves Israel. So do we. Bible clearly mentions – “Pray for the peace of Jerusalem. May they prosper who love you”. We are creating an opportunity for you to bless Israel & Jerusalem. We will optimize videos and posters and publish on your behalf. Prosper!
+		</span>
+		                    {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("static")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                </>
+                                )
+                            }
+	</li>
+    <li>
+    	<h2>Evangelism</h2>
+		<img src={require('../../../src/assets/imgs/evangelism.png')} alt="Evangelism"/>
+        <span>Great opportunity to share the gospel while you are busy.
+ 	Register, and we will keep on posting word of God on social media ON YOUR NAME.
+		</span>
+		                    {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("static")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                </>
+                                )
+                            }
+	</li>
+    </ul>
+    </div>
+</div>
         </>
 
     )
+
+
+    function redirectto(type)
+    {
+        if(type === "event")
+        {
+            sessionstorage.setItem("camp","/events-creation");
+            history.push('/login');
+            history.go(0);
+        }
+
+        if(type === "million")
+        {
+            sessionstorage.setItem("camp","/million-posts");
+            history.push('/login');
+            history.go(0);
+        }
+
+        if(type === "static")
+        {
+            sessionstorage.setItem("camp","/staticPosts");
+            history.push('/login');
+            history.go(0);
+        }
+    }
 }

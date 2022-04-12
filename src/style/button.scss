@@ -14,15 +14,19 @@
     top: 22rem;
 }
 
-.button-text
-{
-    border-radius: 20px;
-    border: 3px solid #F1C40F;
-    background-color: transparent;
-    color: $primary_color;
-    padding:5px 0;
-    font-weight: 500;
-}
+// .buttontext
+// {
+//     border-radius: 20px;
+//     border: 3px solid #F1C40F;
+//     background-color: transparent;
+//     color: $primary_color;
+//     padding: 10px;
+//     font-weight: 500;
+//     margin: 20px;
+// }
+// .buttontext:hover{
+//     color: #F1C40F;
+// }
 
 .pkg-button
 {
@@ -36,5 +40,6 @@
     bottom: 0;
     // top: 22rem;
     float: left;
+    margin: 10px;
 }
 

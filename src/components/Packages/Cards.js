@@ -101,8 +101,8 @@ export default function Cards(props) {
 
             if(token === null)
             {
-               return <Link to={ { pathname: '/login'+props.servicelist } }  > GO </Link>
+               return <Link to={ { pathname: '/registration', name: props.servicelist} }> GO </Link>
             }
-        }
+         }
     
 }

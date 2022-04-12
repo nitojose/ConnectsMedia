@@ -1,8 +1,11 @@
 import React,{useEffect,useState} from 'react';
 import { Container,Row,Col } from 'react-bootstrap';
 import axios from 'axios'
-import { Url } from '../../../GLOBAL/global';
+import { Url ,notImage} from '../../../GLOBAL/global';
 import '../../../style/Mposts.scss'
+import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 var sessionstorage = require('sessionstorage');
 
 
@@ -10,6 +13,7 @@ var sessionstorage = require('sessionstorage');
 export default function Index() {
 
     const[Mpost,setMpost] = useState([]);
+    let history = useHistory();
 
     useEffect(() => {
 
@@ -34,7 +38,7 @@ export default function Index() {
         })
         .then(function (response) {
             //handle success
-            // console.log(response.data);
+            console.log("mpost",response.data);
             setMpost(response.data);
             // console.log("mpost",Mpost)
         })
@@ -47,54 +51,54 @@ export default function Index() {
   return (
       <>
     <div>
-        <Container>
+    <section className='card-list'>
+        
 
-        {Mpost.map((mpost,id) => (
-           
-            <Row>
-                <Col sm={2} md={2} xl={2} xxl={2}></Col>
-
-    
-                <Col sm={8} md={8} xl={8} xxl={8} key={id}>
-                    <div className='Mposts' style={{backgroundColor:'bisque'}}>
-                        <img src={require('../../../assets/images/bg.jpg')} alt='million' width={500} height={500}/>
-                        <p className='para-content'>{mpost.camp_title}</p>
-                        <p className='paragrah '>₹ {mpost.camp_cost}</p>
-                        
-                        <div className='footer-div ' style={{backgroundColor:'bisque'}}>
-                            <label>Number of Months : </label>
-
-                            <select id="months" required={true} >
-                                <option value="1">1 month</option>
-                                <option value="2">2 month</option>
-                                <option value="3">3 month</option>
-                                <option value="4">4 month</option>
-                                <option value="5">5 month</option>
-                                <option value="6">6 month</option>
-                                <option value="7">7 month</option>
-                                <option value="8">8 month</option>
-                                <option value="9">9 month</option>
-                                <option value="10">10 month</option>
-                                <option value="11">11 month</option>
-                                <option value="12">12 month</option>
-                            </select>
-
-                            <button onClick={(e) => purchaseCamp(e,mpost)}>Purchase</button>
-
-                        </div>
-                        
-
+{Mpost.map((mpost,id) => (
+   
+ 
+        <section className='sectionstyling'>
+            <div className='Mposts' style={{backgroundColor:'azure'}}>
+                <img src={mpost.photo === (undefined || null) ? notImage :('http://connectmedia.gitdr.com/public/'+mpost.photo)} alt='million' width={700} height={500} style={{objectFit:'contain'}}/>
+               
+                <div className='column-mpost'>
+                <div className='content-mpost'>
+                    <h2 style={{color: '#000',padding: 10}} className='para-content'>{mpost.camp_title}&nbsp; :</h2>
+                    <h2  className='paragrah '>&nbsp;₹ {mpost.camp_cost}</h2>
+                </div>
+                <div className='content-mpost-section'> 
+                    <div className='' style={{backgroundColor:'azure'}}>
+                        <label style={{color: '#000',padding:10}}>Number of Months : </label>
+                        <select className='btnstyle' id="months" required={true} >
+                            <option value="1">1 month</option>
+                            <option value="2">2 month</option>
+                            <option value="3">3 month</option>
+                            <option value="4">4 month</option>
+                            <option value="5">5 month</option>
+                            <option value="6">6 month</option>
+                            <option value="7">7 month</option>
+                            <option value="8">8 month</option>
+                            <option value="9">9 month</option>
+                            <option value="10">10 month</option>
+                            <option value="11">11 month</option>
+                            <option value="12">12 month</option>
+                        </select>
                     </div>
-                </Col>
+                </div>
+                <div className='btn-section'>
+                    <button className='btnstyle' onClick={(e) => purchaseCamp(e,mpost)}>Purchase</button>
+                </div>
 
+                </div>
+            </div> 
+        </section>
 
-                <Col sm={2} md={2} xl={2} xxl={2}></Col>
-            </Row>
-         
-           
-            ))}
+ 
+   
+    ))}
 
-        </Container>
+</section>
+<ToastContainer/>
     </div>
     </>
 
@@ -103,8 +107,9 @@ export default function Index() {
     function purchaseCamp(e,mpost)
     {
         
+        console.log("mpost",mpost)
         var months = document.getElementById("months").value;
-        // console.log("months",months);
+        console.log("months",months);
 
         const token = sessionstorage.getItem("token");
         const customer_id = sessionstorage.getItem("customerId");
@@ -117,11 +122,13 @@ export default function Index() {
         formdata.append("event_id",mpost.camp_id);
         formdata.append("order_item","CAMPAIGN");
         formdata.append("order_amt",mpost.camp_cost);
-
+        formdata.append("months",months);
 
         const headers ={
             'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'post'
         }
 
         axios({
@@ -132,8 +139,12 @@ export default function Index() {
         })
         .then(function (response) {
             //handle success
-            console.log(response.data.id)
-            
+            console.log("mpost-res",response.data.message);
+            if(response.data.message === "Created")
+            {
+                toast.success("Order Created !!",{autoClose:3000});
+                setTimeout(() => history.push('/my-requests'),3000)
+            }
         })
         .catch(function (response) {
             //handle error

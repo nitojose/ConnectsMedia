@@ -2,24 +2,29 @@ import React,{useEffect} from 'react';
 import { Url } from '../../GLOBAL/global';
 import axios from 'axios';
 import '../../style/messages.scss';
-import { Container,Row,Col,Table,Button,Modal } from 'react-bootstrap';
+import { Container,Row,Col,Table,Button,Modal,Card } from 'react-bootstrap';
 import dateFormat from 'dateformat';
 import { FcLeftDown,FcRightUp } from "react-icons/fc";
+import Parallax from 'react-rellax'
+import { useHistory} from "react-router-dom";
 var sessionstorage = require('sessionstorage');
 
 export default function Relatedmsgs(props) {
 
-    const[relatedMsg,setRelatedMsg] = React.useState([]);
+    const[relatedMsg,setRelatedMsg] = React.useState([{}]);
     const msg = props.data;
+    // console.log("related msg",msg);
     
     const [modelmsg,setmodelmsg] = React.useState(false);
     const [length,setLength] = React.useState(0);
+
+    let history = useHistory();
 
     useEffect(() => {
 
         getDatas();
 
-      },[relatedMsg!== null]);
+      },[]);
 
 
 
@@ -47,60 +52,87 @@ export default function Relatedmsgs(props) {
 
   return (
   <div>
-        <Container>
-            <Row >
-                <Col sm={12} md={2} xl={2} xxl={2}>
-                   
-                </Col>
 
-                <Col sm={12} md={8} xl={8} xxl={8}>
-                 
+        <Parallax speed={5}>
+            <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+              objectFit:'cover'
+          }}/>
+
+       </Parallax>
+        <Container>
+            <h2 className='text-center my-5'>Messages</h2>
+            
                  
                         <div className='view-msg'>
                             {/* <p>Purchased Items</p> */}
+                            {length !== 0 ? ( 
                             
-                            <Table striped bordered hover style={{backgroundColor:'aqua'}} className="text-center">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>sent/recieve</th>
-                                        <th>Message</th>
-                                       
-                                        {/* <th>Selected Months</th> */}
-                                    </tr>
-                                </thead>
-
-                                <tbody>
+                              
+                               <>
+                                <Row >
+                               {relatedMsg.map((data, idx) => (
                                   
-
-                                  {length > 0 ? 
-                                    relatedMsg.map((data, idx) => (
-                                    // console.log(data)
-                               
-                                    <tr key={idx}>
-
-                                        <td>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
-                                      
-                                      {/* msg_type =="S" from admin side */}
-                                      
-                                        <td>{data.msg_type===("R"||"I")?<FcRightUp/>:<FcLeftDown/>}</td>
-
-                                        <td>{data.msg_user}</td>
+                                    <>
+                                      <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                                        <Card className='card-event '>
+                                       
+                                          <div className='card-header-color align-start' >
+                                            <div className='space-between'>
+                                              <p className='px-5 pt-2 bold-text'></p>
+      
+                                              <p className='px-5 arrow-color mt-2'>{data.msg_type===("I"||"R")?<FcRightUp />:<FcLeftDown />}</p>
+                                              <p className='px-5  light-white pt-2'>Message Type</p>
+                                              
+                                            </div>
+                                          </div>
+                                          <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card' />
+      
+                                          <Card.Body className='card-bg mt-5'>
+                                            
+                                           
+      
+                                                <div className='space-between text-color mt-5'>
+                                                  <p className=''>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</p>
+                                                  <p>Order date</p>
+                                              
+                                                </div>
+                                                  <hr className='text-color'></hr>
+      
+      
+                                                <div className='space-between text-color '>
+                                                  <textarea className=' msg_textarea' disabled={true} rows={3}>{data.msg_user}</textarea>
+                                                    <p>message</p>
+                                                    
+                                                  </div>
+                                                  <hr className='text-color'></hr>
+      
+      
+      
+                                                <div className='space-between text-color '>
+                                                  <p className=' bold-text'>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
+                                                  <p>Status</p>
+                                                  
+                                                </div>
+      
+      
+                                               
+                                              
+      
+                                          </Card.Body>
                                         
-                                        <td>
-                                        <Button variant="dark" type='button' onClick={() => viewall(data)}>view all</Button><br></br>
-                                    
-                                        </td>
-                                    </tr>  
+                                        </Card>
+                                      
+                                      </Col>
+                                      </>
+                                ))}
+                                      </Row>
+                                      </>
+                            ):(<><p className='bold-text error'>No Related Messages Send Yet !!</p></>)}
                                    
-                                  
-                                       
-                                    )) : <p className='text-center'>No messages</p>}
-        
                                     
-                                </tbody>
                                 
-                            </Table>
+                           
+
                         </div>
                  
 
@@ -131,8 +163,7 @@ export default function Relatedmsgs(props) {
                         </Modal.Dialog>
                     }
                     
-                </Col>
-            </Row>
+                
 
         </Container>
     </div>
@@ -146,14 +177,7 @@ export default function Relatedmsgs(props) {
 
     
 
-    function viewall(data)
-    {
-        // setPmsg(data);
-        // setmodelmsg(true);
-        
-        console.log("pmsg",data);
-        
-    }
+    
 
     function ReplayToMsg()
     {
@@ -164,6 +188,7 @@ export default function Relatedmsgs(props) {
 
         var formdata = new FormData();
 
+        
 
 
         // formdata.append("customer_id",customer_id);

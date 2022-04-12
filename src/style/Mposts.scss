@@ -6,3 +6,59 @@
     flex-direction: row;
     
 }
+.content-mpost{
+    display: flex;
+    // flex-direction: cen;
+    justify-content: center;
+    align-items: center;
+    // width: 100vw;
+
+}
+.spacing{
+    display: flex;
+    flex-direction: row;
+}
+.btnstyle{
+    color: #fff;
+    background-color: black;
+    border-radius: 15px;
+    margin-top: 10%;
+    padding: 7px;
+    border: none;
+
+
+}
+.card-list{
+    margin: 15px;
+}
+.sectionstyling{
+    margin: 10px;
+}
+.para-content{
+    text-align: center;
+}
+.content-mpost-section{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    // width: 100vw;
+}
+.btn-section{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    // margin: 10;
+}
+.mpost-sections{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.column-mpost{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ width: 100vw;
+}

@@ -1,11 +1,12 @@
 $primary_color : #fff;
-$bgPrimary: #1c1d1e ;
+$bgPrimary: #111d42;
 $ashcolor:#474848;
 $violetColor:#211036;
 $btn-yellow : #F1C40F;
 $btn-pink : #fc0298;
-$font : monospace;
+// $font : monospace;
 $secondary_color: #fcfcfc;
+
 
 body
 {
@@ -13,7 +14,8 @@ body
     color: $primary_color;
     margin: 0px;
     padding: 0px;
-    font-family: poppins;
+    // padding-top: 20rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 a
@@ -29,7 +31,32 @@ a
     
 }
 
+.green
+{
+    color: darkgreen !important;
+}
+
+.warning
+{
+    color: #F1C40F !important;
+}
+
+.error{
+    color: red !important
+}
+
+.nav-count
+{
+    color: red;
+    margin-left: 25%;
+}
+
 .bold-text
+{
+    font-weight: 800;
+}
+
+.bold-text-600
 {
     font-weight: 600;
 }
@@ -48,6 +75,13 @@ a
     justify-content: space-between;
 }
 
+.center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .para-content
 {
     font-size: 18px;
@@ -58,6 +92,20 @@ a
 .icon
 {
     font-size: 30px;
+}
+
+.font-30
+{
+    font-size: 30px;
+}
+
+.font-20
+{
+    font-size: 20px;
+}
+.font-12
+{
+    font-size: 16px;
 }
 
 .media-icon
@@ -144,6 +192,12 @@ a
 .margin-top-10rm
 {
     margin-top: 12.4rem;
+    
+}
+
+.mar-top-5{
+    margin-top: -3rem;
+    margin-left: -1.8rem;
 }
 
 .center-align
@@ -151,7 +205,15 @@ a
     display: flex;
     align-items: center;
     justify-content: center;
-    // margin-top: 45rem;
+ 
+}
+
+.align-start
+{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 
@@ -203,4 +265,31 @@ and (max-device-width : 640px)
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+.rowdirection
+{
+    flex-direction: row;
+    padding-right: 1rem !important;
+}
+.column
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.align-end
+{
+    display: flex;
+    justify-content: flex-end;
+    // padding-right: 19rem;
+    // justify-content: space-between;
+    // align-items: ;
+}
+
+.text-end
+{
+
 }

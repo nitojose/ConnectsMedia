@@ -2,7 +2,7 @@
 
 .view-msg
 {
-    background-color: antiquewhite;
+    background-color: var(--bg);
     width: auto;
     height: auto;
 }
@@ -20,4 +20,16 @@
 {
     width: 100%;
     border: transparent;
+}
+
+.msg_textarea
+{
+    border: none;
+    background-color: transparent;
+    width:25%;
+}
+
+.arrow-color
+{
+    color: $primary_color;
 }

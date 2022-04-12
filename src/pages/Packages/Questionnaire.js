@@ -9,6 +9,7 @@ import Service from '../../components/Packages/servicelist'
 import { useParams,useHistory } from 'react-router-dom';
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
+import Parallax from 'react-rellax'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,7 +28,7 @@ export default function Questionnaire() {
     const Questions =["Name and address of your ministry/church","How many branches do you have?","Total active members on premises?","Active online regular viewers?","How often do you live stream in a week?","What are the challenges you face right now?","What are your goals using our services?","How serious are you to take your online presence to the next level?"];
 
     function onSubmit(data)
-  {
+    {
       
       
     //   console.log(data);
@@ -178,10 +179,17 @@ export default function Questionnaire() {
 
   return (
     <div>
+             <Parallax speed={5}>
+        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+              objectFit:'cover'
+          }}/>
 
+       </Parallax>
         <Container>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-                        <Row>
+        <Form onSubmit={handleSubmit(onSubmit)} className='mx-5 mt-5'>
+
+           
+                        <Row >
 
                             <Col sm={12} md={12} xl={6} xxl={6}> 
                                 <div className='center-align'>

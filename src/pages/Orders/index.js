@@ -1,8 +1,9 @@
 import React,{useEffect} from 'react';
 import { Url } from '../../GLOBAL/global';
-import { Container,Row,Col,Table,Button } from 'react-bootstrap';
+import { Container,Row,Col,Table,Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 import '../../style/messages.scss';
+import '../../style/order.scss';
 import { useHistory} from "react-router-dom";
 import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
@@ -44,7 +45,7 @@ export default function Index() {
                 // If request is good...
                 
                 setOrders(response.data);
-                console.log("order",response.data);
+                console.log("orders : ",response.data);
                 response.data.map((data, idx) => {
                   
                   if(data.order.order_item ===  "EVENT")
@@ -100,226 +101,267 @@ export default function Index() {
        </Parallax>
 
     <Container className='py-5 '>
+
+      <h2 className='text-center my-5'>My Orders</h2>
         <Row className='py-5'>
             
 
             <Col sm={12} md={12} xl={12} xxl={12}>
 
               <div className='table-title'>
-                <div className='table-icons'>
+                <div onClick={()=>events()} className='table-icons'>
                   <img src={require('../../assets/images/Group 338.png')} alt="events" width={150} height={150} id="icon1"  style={{objectFit:'contain'}} />
-                  <p onClick={()=>events()} id="event">EVENTS</p>
+                  <p  id="event">EVENTS</p>
                 </div>
 
-                <div className='table-icons'>
+                <div className='table-icons' onClick={()=>camp()}>
                   <img src={require('../../assets/images/OBJECTS.png')} alt="events" width={150} height={150} id="icon2" style={{objectFit:'contain'}} />
-                  <p id='campaign' onClick={()=>camp()}>CAMPAIGNS</p>
+                  <p id='campaign' >CAMPAIGNS</p>
                 </div>
                
 
-                <div className='table-icons'>
-                  <img src={require('../../assets/images/Group 338.png')} alt="events" width={150} height={150} id="icon3" />
-                  <p id='pkg' onClick={()=>pkg()}>PACKAGES</p>
+                <div className='table-icons' onClick={()=>pkg()}>
+                  <img src={require('../../assets/images/pkgOrder.png')} alt="events" width={150} height={150} id="icon3" />
+                  <p id='pkg' >PACKAGES</p>
                 </div>
                
                 
               </div>
                 
-                    <div className='view-msg'>
+                    <section className='view-msg'>
                       
                        {plans &&
-                        <Table striped bordered hover style={{backgroundColor:'azure'}} className="text-center">
-                            <thead>
-                                <tr>
-                                    <th>Ordered Date</th>
-                                    <th>Title</th>
-                                    <th>From - To Date</th>
-                                    <th>Drive Id</th>
-                                    <th>Cost</th>
-                                    <th>Status</th>
-                                   
-                                   
-                                </tr>
-                            </thead>
+                      
 
-                            <tbody>
+                      <Row >
 
-                           
-                              {/* {console.log(orders.splice(0,1))} */}
-                                {/* {console.log(orders.length)} */}
-                              
-                              { planData.length === 0 ? <p className='text-center'>no orders</p> :
+                        {planData.length === 0 ? <p className='text-center green'>No Orders</p> :
                                 planData.map((data, idx) => (
-                             
-                                // console.log()
-                            
-                                <tr key={idx}>
-                                    <td>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
-                                    <td>{data.plan[0].event_title}</td>
+                                  <>
+                       
+                                <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                                  <Card className='card-event '>
                                  
-                                    <td>{ dateFormat(data.plan[0].event_from , "mmmm dS, yyyy")}{' - '} {dateFormat(data.plan[0].event_to , "mmmm dS, yyyy")} </td>
+                                    <div className='card-header-color align-start' >
+                                      <div className='space-between'>
+                                        <p className='px-5 pt-2'> {data.plan[0].event_title}</p>
 
-                                    <td><a href={data.order.drive_id}>{data.order.drive_id}</a></td>
-
-                                    <td>{data.order.order_amt}</td>
-                                    <td>{data.order.order_status}</td>
-                                   
-                                    <td>
+                                        <p className='px-5 light-white mt-2'>Event Tittle</p>
                                         
-                                        <Button variant="dark" onClick={()=>{view(data,"event")}}>view</Button><br></br>
-                                    
-                                    
-                                    </td>
-                                </tr>  
-                               
-                              
-                                   
-                                )) }
-                     
-    
+                                      </div>
+                                    </div>
+                                    <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card' />
+
+                                    <Card.Body className='card-bg'>
+                                      
+                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
+
+                                          <div className='space-between text-color mt-5'>
+                                            <p className=''>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</p>
+                                            <p className='text-end'>Order date</p>
+                                        
+                                          </div>
+                                            <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                            <p className='bold-text'>{data.order.order_amt}</p>
+                                              <p className='text-end'>Cost</p>
+                                              
+                                            </div>
+                                            <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                          <a href={data.order.drive_id} target="_blank" rel="noreferrer">click here</a>
+                                            <p className='text-end'>Drive id</p>
+                                            
+                                          </div>
+                                          <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                            <p className=''>{data.order.order_status === 'PP'?(<><span className='warning bold-text'>Payment Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'S'?(<><span className='green bold-text'>Success</span></>):(<></>)}
+                                            {data.order.order_status === 'P'?(<><span className='warning bold-text'>Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'R'?(<><span className='error bold-text'>Rejected</span></>):(<></>)}</p>
+                                            <p className='text-end'>Status</p>
+                                            
+                                          </div>
+                                        
+
+                                          <div className='text-center'>
+                                          <span><Button variant="dark" className='px-5 b-3' onClick={()=>{view(data,"event")}}>view</Button></span>
+                                          </div>
+                                    </Card.Body>
+                                  
+                                  </Card>
                                 
-                            </tbody>
-                            
-                        </Table>
+                                </Col>
+                         
+                        </>
+                        
+                        )) 
+                        
                       }
-
-
+                    </Row>
+                    }
+                        
 
                     {camps &&
-                        <Table striped bordered hover style={{backgroundColor:'azure'}} className="text-center">
-                            <thead>
-                                <tr>
-                                    <th>Ordered Date</th>
-                                    <th>Title</th>
-                                    <th>Type of Item</th>
-                                    <th>Drive Id</th>
-                                    <th>Cost</th>
-                                    <th>Status</th>
-                                   
-                                   
-                                </tr>
-                            </thead>
+                        
+                        <Row >
 
-                            <tbody>
-
-                           
-                              {/* {console.log(orders.splice(0,1))} */}
-                                {/* {console.log(orders.length)} */}
-                              
-                              { campData.length === 0 ? <p className='text-center'>no orders</p> :
+                              { campData.length === 0 ? <p className='text-center green'>No Orders</p> :
                                 campData.map((data, idx) => (
-                             
-                                // console.log(data.plan[0].camp_type)
-                            
-                                <tr key={idx}>
-                                    <td>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
-                                    <td>{data.plan[0].camp_title}</td>
+                                  <>
+                       
+                                <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                                  <Card className='card-event '>
                                  
-                                    <td>{data.order.order_item}  { data.plan[0].camp_type } </td>
+                                    <div className='card-header-color align-start' >
+                                      <div className='space-between'>
+                                        <p className='px-5 pt-2 bold-text'>{ data.plan.camp_type === 'MPOST'?" Million Posts":" Static Posts"}</p>
 
-                                    <td><a href={data.order.drive_id}>{data.order.drive_id}</a></td>
-
-                                    <td>{data.order.order_amt}</td>
-                                    <td>{data.order.order_status}</td>
-                                   
-                                    <td>
+                                        <p className='px-5 light-white mt-2'>Campaign Type</p>
                                         
-                                        <Button variant="dark" onClick={()=>{view(data,"camp")}}>view</Button><br></br>
-                                    
-                                    
-                                    </td>
-                                </tr>  
-                               
-                              
-                                   
-                                )) }
-                     
-    
+                                      </div>
+                                    </div>
+                                    <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card'/>
+
+                                    <Card.Body className='card-bg'>
+                                      
+                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
+
+                                          <div className='space-between text-color mt-5'>
+                                            <p className=''>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</p>
+                                            <p>Order date</p>
+                                        
+                                          </div>
+                                            <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                            <p className='bold-text'>{data.order.order_amt}</p>
+                                              <p>Cost</p>
+                                              
+                                            </div>
+                                            <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                          <a href={data.order.drive_id} target="_blank" rel="noreferrer">click here</a>
+                                            <p>Drive id</p>
+                                            
+                                          </div>
+                                          <hr className='text-color'></hr>
+
+
+                                          <div className='space-between text-color '>
+                                            <p className=''>{data.order.order_status === 'PP'?(<><span className='warning bold-text'>Payment Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'S'?(<><span className='green bold-text'>Success</span></>):(<></>)}
+                                            {data.order.order_status === 'P'?(<><span className='warning bold-text'>Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'R'?(<><span className='error bold-text'>Rejected</span></>):(<></>)}</p>
+                                            <p>Status</p>
+                                            
+                                          </div>
+                                        
+
+                                          <div className='text-center'>
+                                          <span><Button variant="dark" className='px-5 b-3' onClick={()=>{view(data,"camp")}}>view</Button></span>
+                                          </div>
+                                    </Card.Body>
+                                  
+                                  </Card>
                                 
-                            </tbody>
-                            
-                        </Table>
+                                </Col>
+                         
+                        </>
+                        
+                        )) 
+                        
+                      }
+                    </Row>
+
                       }
 
 
 
                   {packages &&
-                        <Table striped bordered hover style={{backgroundColor:'azure'}} className="text-center col-gap">
-                            <thead>
-                                <tr >
-                                    <th >Ordered Date</th>
-                                    <th>Package Details
-                                      
-                                    <tr className='p1pkg p1pkg-heading'>
-                                      <th className='mr-left'>No:</th>
-                                      <th className='mr-left'>Type</th>
-                                      <th className='mr-left'>Months</th>
-                                     
-                                    
-                                  </tr>
-                                    </th>
-                                    <th >Type of PKG</th>
-                                    <th >Drive Id</th>
-                                    <th >Cost</th>
-                                    <th >Status</th>
-                                   
-                                   
-                                </tr>
-                                
-                            </thead>
-
-                            <tbody>
-
-                        
-                              { pkgData.length === 0 ? <p className='text-center'>no orders</p> :
-                                pkgData.map((data, idx) => (
-                              
-                                  // console.log("pkgdata inside",pkgData)
-                                
-                                <tr key={idx}>
-                                    <td>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
-                                    <td>
-                                      {/* {console.log('type',data.PACKAGE.packages_type)} */}
-                                      {data.PACKAGE_details.length === 0 ? '' : 
-                                        data.PACKAGE_details.map((d ,id)=>(
-                                          <>
-                                           
-                                              <tr className='p1pkg' key={id}>
-                                                <td className='mr-left' colSpan={2}>{id+1}</td>
-                                                <td  className='mr-left' colSpan={2}>{d.pspec_text}</td>
-                                            
-                                                <td className='mr-left' colSpan={2}>{d.pspec_ans}</td>
-                                                
-                                                
-                                            </tr>
-                                            <hr></hr>
-                                        </>
-                                        ))}
-                                    </td>
-                                   
-                                      <td>{data.PACKAGE.packages_type !== null?data.PACKAGE.packages_type:''}</td>
-                                    <td><a href={data.order.drive_id}>{data.order.drive_id}</a></td>
-
-                                    <td>{data.PACKAGE.packages_cost}</td>
-                                    <td>{data.PACKAGE.packages_status}</td>
-                                   
-                                    <td>
-                                        
-                                        <Button variant="dark" onClick={()=>{view(data,"pkg")}}>view</Button><br></br>
-                                    
-                                    
-                                    </td>
-                                </tr>  
-                              
-                                )) }
                      
-    
+                        <Row >
+
+                          { pkgData.length === 0 ? <p className='text-center green'>No Orders</p> :
+                                pkgData.map((data, idx) => (
+                            <>
+                 
+                          <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
+                            <Card className='card-event '>
+                           
+                              <div className='card-header-color align-start' >
+                                <div className='space-between'>
+                                  <p className='px-5 pt-2 bold-text'> {data.PACKAGE.packages_type === "CUST"?"Customized ":"Standard "}</p>
+                                  
+                                  <p className='px-5 light-white mt-2'>Type of package</p>
+                                </div>
+                              </div>
+                              <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card'/>
+
+                              <Card.Body className='card-bg'>
                                 
-                            </tbody>
+                                {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
+
+                                    <div className='space-between text-color mt-5'>
+                                      <p className=''>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</p>
+                                      <p>Order date</p>
+                                  
+                                    </div>
+                                      <hr className='text-color'></hr>
+
+
+                                    <div className='space-between text-color '>
+                                      <p className='bold-text'>{data.PACKAGE.packages_cost}</p>
+                                        <p>Cost</p>
+                                        
+                                      </div>
+                                      <hr className='text-color'></hr>
+
+
+                                    <div className='space-between text-color '>
+                                      <a href={data.order.drive_id} target="_blank" rel="noreferrer">click here</a>
+                                      <p>Drive id</p>
+                                      
+                                    </div>
+                                    <hr className='text-color'></hr>
+
+
+                                    <div className='space-between text-color '>
+                                      <p className=''>{data.order.order_status === 'PP'?(<><span className='warning bold-text'>Payment Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'S'?(<><span className='green bold-text'>Success</span></>):(<></>)}
+                                            {data.order.order_status === 'P'?(<><span className='warning bold-text'>Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'R'?(<><span className='error bold-text'>Rejected</span></>):(<></>)}</p>
+                                      <p>Status</p>
+                                      
+                                    </div>
+                                  
+
+                                    <div className='text-center'>
+                                    <span><Button variant="dark" className='px-5 b-3'onClick={()=>{view(data,"pkg")}}>view</Button></span>
+                                    </div>
+                              </Card.Body>
                             
-                        </Table>
+                            </Card>
+                          
+                          </Col>
+                   
+                  </>
+                  
+                  )) 
+                  
+                }
+              </Row>
                       }
-                    </div>
+                    </section>
              
 
 

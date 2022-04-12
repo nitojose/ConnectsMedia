@@ -98,8 +98,8 @@ export default function Index() {
             console.log(response.data);
             if(response.data === "profile Updated Successfully")
             {
-              toast.success("Profile Updated Successfully");
-              history.push('/home')
+              toast.success("Profile Updated Successfully",{autoClose:3000});
+              setTimeout(() => history.push('/home'),3000)
             }
             
         })
@@ -111,23 +111,34 @@ export default function Index() {
     }
 
   return (
+      <>
+     <Parallax speed={5}>
+     <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
+           objectFit:'cover'
+       }}/>
 
-    <div className='margintop-27 mx-5 my-5'>
+    </Parallax>
+
+    <div className='margintop-27 '>
+
+        
        
         <Container >
-            <Parallax speed={-3}>
+        
+            <Parallax speed={5}>
+            <h2 className='my-5 text-center'>My Profile</h2>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" , { required: true })} className='textbox' defaultValue={customerInfo.cust_name} /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" )} className='textbox' defaultValue={customerInfo.cust_name} /> </Col>
 
-                            <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Ministry" type="text" {...register('ministry' , { required: true })} className='textbox' defaultValue={customerInfo.cust_ministry} /> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Ministry" type="text" {...register('ministry')} className='textbox' defaultValue={customerInfo.cust_ministry} /> </Col>
 
                         </Row>
 
                         <Row>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Email" type="email"  className='textbox' defaultValue={customerInfo.cust_email} disabled={true} style={{color:'#000',backgroundColor:'#fff'}}/> </Col>
 
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Phone" type="tel-in" {...register("phone" , { required: true })} className='textbox' defaultValue={customerInfo.cust_phone}/> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Phone" type="tel-in" {...register("phone")} className='textbox' defaultValue={customerInfo.cust_phone}/> </Col>
 
                         </Row>
 
@@ -158,6 +169,7 @@ export default function Index() {
         </Container>
         <ToastContainer />
     </div>
+    </>
   );
 
     // function signout()

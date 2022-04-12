@@ -1,0 +1,137 @@
+@media (min-width:601px) and (max-width:850px){
+:root{
+--mainpad:8vmax 7vmax 5vmax 5vmax;
+}
+
+#video>div{
+flex-direction:column;
+}
+#video #player-wrap{
+padding: var(--mainpad);
+padding-top:80px;
+padding-left:15vmax;
+padding-right:15vmax;
+flex: 1 1 20%
+}
+#video #video-text{
+flex: 1 1 80%;
+font-size:100%;
+padding-right:7vmax;
+line-height:3.25vmax;
+
+background-color: var(--bg);
+background-image: url('../../assets/imgs/video-bg.jpg');
+background-blend-mode: multiply;
+background-size: cover;
+background-position: center bottom;
+background-repeat: no-repeat;
+}
+
+#about>div{
+padding:var(--mainpad);
+flex-direction:column;
+}
+#about .video {
+min-width:300px;
+}
+#about .content{
+font-size:100%;
+}
+
+#pillars h1 {
+margin-right: 5vmax;
+}
+#pillars.onfocus li:nth-child(1) {
+width:30vw;
+}
+#pillars.onfocus li:nth-child(3) {
+top: 21vh;left: 43vw;
+width: 42vw;
+}
+#pillars.onfocus li:nth-child(1) h2{
+left:auto;right:10px;
+}
+#pillars.onfocus li:nth-child(4) {
+bottom: 11vw;
+}
+
+#services>div{
+padding:var(--mainpad);
+}
+#service-wrap {
+height:90%;
+}
+#service-list{
+overflow-x:auto;
+overflow-y:hidden;
+flex-direction: column;
+scroll-snap-type: x mandatory;
+}
+#service-list li{
+flex:1 1 auto;
+min-width:100%;
+scroll-snap-align: center;
+}
+#service-list li>div{
+position:relative;
+}
+#socials{
+width:100%;
+}
+
+#packages>div{
+padding-top:5vmax;
+}
+#packages h1{
+font-size:110%;
+}
+.main-packages{
+flex-direction: column;
+}
+.main-packages .package-wrap{
+padding:0;
+overflow:visible;
+width: 100%;
+}
+.package-wrap .package:before{
+background-position:top center;
+height:60px;
+}
+.package h4{
+text-align:center;
+}
+
+#testimonials>div{
+padding:var(--mainpad);
+}
+#testimonials h2{
+font-size:200%;
+color:var(--bg);
+}
+#testimonials #txt-version,
+#testimonials #vid-version {
+margin-right:0;
+flex: 1 1 100%;
+margin-bottom:2vh;
+margin-top:2vh;
+}
+#testimonials li{
+padding: 25px 25px 80px 25px;
+}
+#testimonials li:before {
+height:35px;
+}
+#testimonials li img{
+width:50px;height:50px;
+}
+
+#contact>div{
+padding:var(--mainpad);
+flex-direction:column;
+}
+#contact #card-wrap{
+width:100%;
+margin-left: -5vmax;
+margin-right: -7vmax;
+}
+}

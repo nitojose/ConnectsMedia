@@ -9,9 +9,8 @@ import Parallax from 'react-rellax'
 
 export default function index() {
     return (
-        <div>      
-        <Parallax speed={-3.2}>
-        <Row className=' footer-div margin-top-10rm' >
+        <>      
+        <Row className=' footer-div ' >
         <Col sm={12} md={12} xl={2} xxl={2}></Col>
         <Col sm={12} md={12} xl={2} xxl={8} className=' footer-div py-5'>
 
@@ -26,8 +25,7 @@ export default function index() {
         </Col>
         <Col sm={12} md={12} xl={2} xxl={2}></Col>
     </Row>
-    </Parallax>
-    </div>
+    </>
 
     )
 }
