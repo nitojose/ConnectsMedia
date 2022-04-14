@@ -5,7 +5,7 @@ import PackageDetails from './Packages/package_details'
 import Login from './Login/Index'
 import Profile from './Profile/index'
 import ResetPassword from './ResetPassword/index'
-import {useLocation} from "react-router-dom"
+import {useLocation,useParams} from "react-router-dom"
 import CustomizedList from './Packages/customizedList'
 import StandardList from './Packages/standardList'
 import Questionnaire from './Packages/Questionnaire'
@@ -25,7 +25,8 @@ import PendingReq from '../../src/pages/pendingRequest/pendingRequest'
 import Forgotpwd from '../../src/pages/forgotPassword/Index'
 import Forgotpwd1 from '../../src/pages/forgotPassword/forgot1'
 import EachRequest from '../../src/pages/pendingRequest/EachRequest'
-// import Homepage from '../../src/pages/HomePage/index'
+import Homepage from '../../src/pages/HomePage/index'
+import PaymentForm from '../../src/pages/Payment/index'
 
 import {
     BrowserRouter as Router,
@@ -36,7 +37,7 @@ import {
 import UserHeader from '../components/header/UserHeader'
 
 export default function Index() {
-    let data = useLocation();
+    let data = useParams();
   
 
     return (
@@ -57,84 +58,87 @@ export default function Index() {
 
                 </Route>
 
-               <Router>
-                    <UserHeader/>
+                {/* <Homepage /> */}
+
+               {/* <Router> */}
+                    {/* <UserHeader/> */}
 
                 <Route exact path='/registration' >
-                    
+                <UserHeader/>
                     <Registration name={data.name}/>
 
                 </Route>
 
                 <Route exact path='/faq'>
+                <UserHeader/>
                     <Faq />
                 </Route>
-
+                
                     <Route exact path='/pkg-details'>
-
+                    <UserHeader/>
                 <PackageDetails />
 
                 </Route>
 
                 <Route exact path='/login'>
-
+                <UserHeader/>
                     <Login />
 
                 </Route>
 
                 <Route exact path='/login/:standard-list'>
-
+                <UserHeader/>
                 <Login  />
 
                 </Route>
 
 
                 <Route exact path='/login/:customized-list'>
-
+                <UserHeader/>
                 <Login  />
 
                 </Route>
 
                 <Route exact path='/profile'>
-
+                <UserHeader/>
                    <Profile />
 
                 </Route>
 
                 <Route exact path='/reset_password'>
-
+                <UserHeader/>
                     <ResetPassword />
 
                     </Route>
 
                     <Route exact path='/forgot_password'>
-
+                    <UserHeader/>
                     <Forgotpwd />
 
                     </Route>
 
                     <Route exact path='/forgot_password1'>
-
+                    <UserHeader/>
                     <Forgotpwd1 />
 
                     </Route>
 
                
                 <Route exact path='/order-view'>
-
-                    <EachOrder order={data.order} type={data.type} />
+                <UserHeader/>
+                    <EachOrder />
                 
                 </Route>
 
                 <Route exact path='/customized-list'>
-
+                <UserHeader/>
                     <CustomizedList />
 
                 </Route>
 
 
                 <Route exact path='/standard-list'>
-
+                <UserHeader/>
                     <StandardList />
 
                 </Route>
@@ -142,50 +146,50 @@ export default function Index() {
 
                 <Route exact path='/Questionnaire/:id'>
 
-                   
+                <UserHeader/>
                     <Questionnaire />
                 </Route>
 
                 <Route exact path='/events-creation'>
-
+                <UserHeader/>
                     <EventsCreation />
 
                 </Route>
 
                 <Route exact path='/million-posts'>
-
+                <UserHeader/>
                     <MillionPosts />
 
                 </Route>
 
                 <Route exact path='/staticPosts'>
-
+                <UserHeader/>
                     <StaticPosts />
 
                 </Route>
                 
                 <Route exact path='/messages'>
-
+                <UserHeader/>
                     <Messages />
 
                 </Route>
 
                 <Route exact path='/orders'>
-
+                <UserHeader/>
                     <Orders  />
 
                 </Route>
 
                 <Route exact path='/pending_req/:id'>
-
+                <UserHeader/>
                     <EachRequest/>
 
                 </Route>
 
 
                 <Route exact path='/pending_req'>
-
-                    <EachRequest data={data.data}/>
+                <UserHeader/>
+                    <EachRequest/>
 
                 </Route>
 
@@ -193,24 +197,33 @@ export default function Index() {
 
                 
                 <Route exact path='/request/:type/:id'>
-
+                <UserHeader/>
                     <Requets/>
                     
                 </Route>
 
                 <Route exact path='/my-requests'>
+                <UserHeader/>
                     <PendingReq />
                 </Route>
 
                 <Route exact path='/related-msgs'>
-                    <Relatedmsgs data={data.data}/>
+                <UserHeader/>
+                    <Relatedmsgs/>
+                </Route>
+
+                <Route exact path='/payment-form'>
+                <UserHeader/>
+                <PaymentForm/>
+                    
                 </Route>
 
                 <Route exact path='/gene-enquiry'>
+                <UserHeader/>
                     <Enquiry/>
                 </Route>
 
-                </Router>
+                {/* </Router> */}
 
                 {/* <Route exact path='/sidebar'>
                     <Sidebar />

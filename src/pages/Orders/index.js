@@ -16,7 +16,7 @@ export default function Index() {
     
 
     const[orders,setOrders] = React.useState([]);
-    // const [length,setLength] = React.useState(0);
+    
     const [plans,setPlans] = React.useState(false);
     const [camps ,setCamps] = React.useState(false)
     const [packages,setPackages] = React.useState(false);
@@ -25,7 +25,7 @@ export default function Index() {
     const [pkgData] = React.useState([]);
     const [campData] = React.useState([]);
     const [p1pkg] = React.useState([]);
-    const[pkg_type,setPkg_type] =React.useState('STD');
+    
 
     useEffect(() => {
 
@@ -379,12 +379,15 @@ export default function Index() {
 
   function view(data,value)
   {
-      
-    
+   
     //   setOrderId(orderId)
-    console.log("data",data)
-    history.push( { pathname: '/order-view',order:data,type:value})
-      
+    console.log(data.order.order_id)
+    sessionstorage.setItem("orderID",JSON.stringify(data));
+    sessionstorage.setItem("orderType",value);
+
+    
+    history.push( '/order-view');
+    history.go(0);
   }
 
   function events()

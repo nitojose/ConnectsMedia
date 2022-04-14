@@ -8,38 +8,85 @@ import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
 import { toast, ToastContainer } from 'react-toastify';
 
+
 var sessionstorage = require('sessionstorage');
 
-export default function EachOrder(props) {
+export default  function EachOrder() {
     let history = useHistory();
-    const order = props.order;
-    console.log("props",order);
+    // const order = props.order;
+    // console.log("props",order);
     
-    const _type = props.type;
-   
+    // const type = props.type;
+    // console.log("props",_type);
+
+    
    
 
     const [subOrder,setSubOrder] = React.useState([]);
     const [Order,setOrder] =React.useState({});
     const [frame,setFrame] = React.useState(false);
     const [subId,setSubId] = React.useState();
-
-    
-    if((_type === "camp") || (_type === "event")) 
-    {
-        console.log("type",_type)
-       
-    }
-
-    React.useEffect(()=>
-    {
-        getOrders();
-    },[]);
-       
-    
+    // const[type,setType] = React.useState('');
+    // const[orderId,setOrderId] = React.useState();
     const [modelmsg,setmodelmsg] = React.useState(false);
+   
 
+    // const[order,setorderDet] = React.useState({});
 
+    const type =  sessionstorage.getItem("orderType");
+    const order =  JSON.parse(sessionstorage.getItem("orderID"))
+
+    console.log("oId", JSON.parse(sessionstorage.getItem("orderID")) , "type",type)
+    
+
+    React.useEffect( ()=>
+    {
+      
+        getOrders();
+      
+
+    },[]);
+
+    
+
+    // async function getOrderDet()
+    //     {
+    //         const token = sessionstorage.getItem("token");
+    //         const customer_id =  sessionstorage.getItem("customerId");
+    
+    //         var data = new FormData();
+    //         data.append("customer_id",customer_id);
+    //         data.append("order_id",orderId);
+            
+    
+    //         const headers ={
+    //             'Content-Type': 'multipart/form-data',
+    //             'Authorization': `Bearer ${token}`,
+                
+    //           }
+    
+    //         await axios({
+    //             method: 'post',
+    //             url: Url+'getorderid',
+    //             data: data,
+    //             headers: headers
+    //             })
+    //             .then(function (response) {
+    //                 //handle success
+    //                 console.log("res",response.data); 
+    //                 setorderDet(response.data);
+    //                 console.log("order details",order); 
+                   
+    //             })
+    //             .catch(function (response) {
+    //                 //handle error
+    //                 console.log(response);
+    //             });
+    
+    //     };
+        
+       
+    
     async function getOrders()
       {
         const token = sessionstorage.getItem("token");
@@ -66,7 +113,7 @@ export default function EachOrder(props) {
             .then(function (response) {
                 //handle success
                 console.log("pkg /event order",response.data); 
-               setSubOrder(response.data.suborder);
+                setSubOrder(response.data.suborder);
                 setOrder(response.data.order);
             
                
@@ -92,13 +139,13 @@ export default function EachOrder(props) {
     
             <Container >
 
-                            { _type === "camp" || _type === "event"  ? (
+                            { type === "camp" || type ==="event"  ? (
 
                                 <>
                                 
                                 
                                     <div className='vertical-text '>
-                                        <p>{_type === "event" ?"EVENTS":"CAMPAIGNS"}</p>
+                                        <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p>
                                     </div>
 
                                     <div className='second_section my-5'>
@@ -153,7 +200,7 @@ export default function EachOrder(props) {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.order.order_amt,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                         ))
@@ -163,54 +210,16 @@ export default function EachOrder(props) {
                                         </table>
                                     </div>
 
-                                    {frame &&
-
-                                            <div className='center-align rowdirection '>
-
-                                            <form name="tokenform" id="tokenform"  >
-
-                                                
-                                                <div className='space-between rowdirection'>
-                                                    <input type="text" name='name' placeholder='Account Number' className='mx-5 my-5 ' /> 
-                                                    <input type="text" name='cardno' placeholder='Card No' className='mx-5 '  />
-
-                                                </div>
-                                                    
-                                                <div className='space-between rowdirection'>
-                                                    <input type="text" name='ex-date' placeholder='expirayDate' className=' ' />
-
-                                                    <input type="text" name='cvv' placeholder='CVV' className=' ' />  
-                                                </div>
-
-
-                                                    
-                                                <div className='space-between rowdirection'>
-                                                    <label>Amount : </label> <input type="text" name='amt' value={order.order.order_amt} className='my-5 ' />
-                                                </div>
-                                                
-                                                    
-                                                
-
-                                                <div className=' center-align '>
-                                                    <Button variant="light" className='' onClick={() => paySubmit()} >submit</Button>
-                                                </div>
-                                                
-                                                
-
-                                            </form> 
-                                            </div>
-                                    }
-
+                                    
                                 </>
 
                                 )
                                     : 
                                     (
+                                        type==="pkg" ? (
                                         
                                      <>
-                                          
-                                        
-
+                                      
                                         <div className='vertical-text '>
                                             <p>PACKAGE</p>
                                         </div>
@@ -279,7 +288,7 @@ export default function EachOrder(props) {
 
                                         </div>
 
-                                    <div>
+                                    {subOrder ? (<div>
                                         <table className="table table-striped table-light mx-5 my-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
@@ -296,7 +305,7 @@ export default function EachOrder(props) {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                         ))
@@ -304,47 +313,11 @@ export default function EachOrder(props) {
                                                                         
                                                 </tbody>
                                         </table>
-                                    </div>
+                                    </div>):(<></>)}
 
 
-                                        {frame &&
-
-                                        <div className='center-align rowdirection '>
-
-                                        <form name="tokenform" id="tokenform"  >
-
-                                            
-                                            <div className='space-between rowdirection'>
-                                                <input type="text" name='name' placeholder='Account Number' className='mx-5 my-5 ' /> 
-                                                <input type="text" name='cardno' placeholder='Card No' className='mx-5 '  />
-
-                                            </div>
-                                                
-                                            <div className='space-between rowdirection'>
-                                                <input type="text" name='ex-date' placeholder='expirayDate' className=' ' />
-
-                                                <input type="text" name='cvv' placeholder='CVV' className=' ' />  
-                                            </div>
-
-
-                                                
-                                            <div className='space-between rowdirection'>
-                                                <label>Amount : </label> <input type="text" name='amt' value={order.PACKAGE.packages_cost} className='my-5 ' />
-                                            </div>
-                                            
-                                                
-                                            
-
-                                            <div className=' center-align '>
-                                                <Button variant="light" className='' onClick={() => paySubmit()} >submit</Button>
-                                            </div>
-                                            
-                                            
-
-                                        </form> 
-                                        </div>
-                                        }
-                                        </>  
+                                        
+                                        </>  ):(<></>)
                                        
                                     )
                               
@@ -399,11 +372,17 @@ export default function EachOrder(props) {
         setmodelmsg(false)
     }
 
-    function paynow(subId)
+    function paynow(subId,cost,orderid)
     {
          setSubId(subId);
         // console.log("clicked")
-        setFrame(true);
+        // setFrame(true);
+        sessionstorage.setItem("subId",subId);
+        sessionstorage.setItem("amount",cost);
+        sessionstorage.setItem("orderId",orderid);
+        console.log("payment")
+        history.push('/payment-form');
+        history.go(0);
      
     }
 
@@ -456,125 +435,9 @@ export default function EachOrder(props) {
 
     function paySubmit()
     {
-     
-        // var data = {
-        //     "createTransactionRequest": {
-        //         "merchantAuthentication": {
-        //             "name": "3Hv96gAPe7Mj",
-        //             "transactionKey": "2wX8n46uT37EvB7h"
-        //         },
-        //         "refId": "123456",
-        //         "transactionRequest": {
-        //             "transactionType": "authOnlyTransaction",
-        //             "amount": "5",
-        //             "payment": {
-        //                 "creditCard": {
-        //                     "cardNumber": "5424000000000015",
-        //                     "expirationDate": "2025-12",
-        //                     "cardCode": "999"
-        //                 }
-        //             },
-        //             "lineItems": {
-        //                 "lineItem": {
-        //                     "itemId": "1",
-        //                     "name": "vase",
-        //                     "description": "Cannes logo",
-        //                     "quantity": "18",
-        //                     "unitPrice": "45.00"
-        //                 }
-        //             },
-        //             "tax": {
-        //                 "amount": "4.26",
-        //                 "name": "level2 tax name",
-        //                 "description": "level2 tax"
-        //             },
-        //             "duty": {
-        //                 "amount": "8.55",
-        //                 "name": "duty name",
-        //                 "description": "duty description"
-        //             },
-        //             "shipping": {
-        //                 "amount": "4.26",
-        //                 "name": "level2 tax name",
-        //                 "description": "level2 tax"
-        //             },
-        //             "poNumber": "456654",
-        //             "customer": {
-        //                 "id": "99999456654"
-        //             },
-        //             "billTo": {
-        //                 "firstName": "Ellen",
-        //                 "lastName": "Johnson",
-        //                 "company": "Souveniropolis",
-        //                 "address": "14 Main Street",
-        //                 "city": "Pecan Springs",
-        //                 "state": "TX",
-        //                 "zip": "44628",
-        //                 "country": "US"
-        //             },
-        //             "shipTo": {
-        //                 "firstName": "China",
-        //                 "lastName": "Bayles",
-        //                 "company": "Thyme for Tea",
-        //                 "address": "12 Main Street",
-        //                 "city": "Pecan Springs",
-        //                 "state": "TX",
-        //                 "zip": "44628",
-        //                 "country": "US"
-        //             },
-        //             "customerIP": "192.168.1.1",
-        //             "userFields": {
-        //                 "userField": [
-        //                     {
-        //                         "name": "MerchantDefinedFieldName1",
-        //                         "value": "MerchantDefinedFieldValue1"
-        //                     },
-        //                     {
-        //                         "name": "favorite_color",
-        //                         "value": "blue"
-        //                     }
-        //                 ]
-        //             },
-        //         "processingOptions": {
-        //              "isSubsequentAuth": "true"
-        //             },
-        //          "subsequentAuthInformation": {
-        //              "originalNetworkTransId": "123456789NNNH",
-        //              "originalAuthAmount": "45.00",
-        //              "reason": "resubmission"
-        //             },			
-        //             "authorizationIndicatorType": {
-        //             "authorizationIndicator": "pre"
-        //           }
-        //         }
-        //     }
-        // }
-        //   console.log(data);
 
-        //   const headers = {
-        //       'Content-Type':'application/json'
-        //   }
-        
-           
-        //   await axios({
-        //     method: 'post',
-        //     url: 'https://apitest.authorize.net/xml/v1/request.api',
-        //     data: data,
-        //     headers: headers
-        //     })
-        //     .then(function (response) {
-        //         //handle success
-        //         console.log("response",response.data); 
-        //         toast.success('Order Created !!',{autoClose:3000});
-        //         setTimeout(() => history.push('/home'),3000);
-        //     })
-        //     .catch(function (response) {
-        //         //handle error
-        //         console.log(response);
-        //         toast.success('Order Created !!',{autoClose:3000});
-        //         setTimeout(() => history.push('/home'),3000);
-        //     });
-         
+
+     
         const token = sessionstorage.getItem("token");
 
         const headers ={

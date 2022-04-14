@@ -12,6 +12,7 @@ import {
 } from 'react-router-dom';
 
 import React from'react';
+import Navbar from './components/header/UserHeader';
 
 function App() {
 
@@ -23,8 +24,7 @@ function App() {
     <>
     <Router>
      
-  
-
+    {/* <Navbar /> */}
 	      <Index />
 
       </Router>  

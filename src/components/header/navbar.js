@@ -75,7 +75,7 @@ export default function Navbar(props,id) {
     
                         {/* header logo */}
         <div id="page-head">
-          <div id="page-logo"><a href="#">
+          <div id="page-logo"><a href="/">
             <img src={require('../../../src/assets/imgs/connect-media-logo.png')}  alt='header-logo-img' onClick={()=>home()}/></a></div>
             <div id="head-filler"></div>
                 <div id="user-menu">
@@ -200,7 +200,7 @@ export default function Navbar(props,id) {
     function homePage()
     {
         console.log('home')
-        history.push('/home');
+        history.push('/');
     }
 
     

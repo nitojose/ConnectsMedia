@@ -9,11 +9,11 @@ import Parallax from 'react-rellax'
 import { useHistory} from "react-router-dom";
 var sessionstorage = require('sessionstorage');
 
-export default function Relatedmsgs(props) {
+export default function Relatedmsgs() {
 
     const[relatedMsg,setRelatedMsg] = React.useState([{}]);
-    const msg = props.data;
-    // console.log("related msg",msg);
+    const msg =  JSON.parse(sessionstorage.getItem("relatedMsg"))
+    console.log("pkgdata",msg)
     
     const [modelmsg,setmodelmsg] = React.useState(false);
     const [length,setLength] = React.useState(0);
@@ -65,7 +65,7 @@ export default function Relatedmsgs(props) {
                  
                         <div className='view-msg'>
                             {/* <p>Purchased Items</p> */}
-                            {length !== 0 ? ( 
+                            {relatedMsg.length !== 0 ? ( 
                             
                               
                                <>

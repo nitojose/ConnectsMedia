@@ -764,9 +764,17 @@ transform:rotate(90deg);
 }
 
 @supports ((-webkit-offset-path: none) or (offset-path: none)) {
-	#graph-pointer{
+	/* #graph-pointer{
 	offset-path: path("M134.652,856.757l232.836.07s22.427-.329,27.592-4.07,9.62-11.5,12.449-15.992c14.991-23.8,20.735-132.136,62.822-142.975,56.193-15.681,116.491-20.995,145.523-32.617s101.751-87.807,168.1-95.343,250.177-13.636,283.52-15.054,169.129-87.026,214.728-87.426,160.257,1.348,200.722,0S1757.48,302.383,1757.48,302.383");
 	animation: move-graph-pointer 18000ms ease-in-out infinite;
+	} */
+
+    #graph,#graph-pointer{
+		display:none;
+	}
+	#graph-container{
+	background:url('../../assets/imgs/stat-graph.png') no-repeat;
+	background-size:contain;
 	}
 }
 @supports not ((-webkit-offset-path: none) or (offset-path: none)) {
@@ -1266,6 +1274,7 @@ object-fit:contain;
 }
 #campaigns li span{
 font-size:90%;
+letter-spacing: 0;
 }
 #campaigns li div{
 text-align:center;
@@ -1400,6 +1409,7 @@ text-shadow:2px 2px 3px #555;
 }
 #give button{
 width:20vmax;
+font-size: 50%;
 }
 
 #testimonials{

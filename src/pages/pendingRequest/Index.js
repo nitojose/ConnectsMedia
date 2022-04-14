@@ -10,7 +10,9 @@ import Parallax from 'react-rellax';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Buffer} from 'buffer';
-
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from '../CheckoutForm';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -31,6 +33,8 @@ export default function Index() {
 
 
     const [image,setImage] = React.useState(); 
+
+    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
 
 
     React.useEffect(() => {
@@ -149,7 +153,7 @@ export default function Index() {
         }
 
         
-      },[ history, id, type]);
+      },[history, id, type]);
 
 
       async function getOrders()
@@ -247,42 +251,8 @@ export default function Index() {
                                                 <div className='space-between'>
                                         
                                                 {paybtn || eventList.event_status === "Accepted" ? (<> 
-                                                    {/* {!frame &&
-                                                    <Button variant="light" className='width-100' onClick={()=>paynow(eventList.event_cost)}>pay Now</Button> } */}
-
-                                                    {frame &&
-
-                                                        <div className='space-between rowdirection'>
-                                                        
-                                                        <form name="tokenform" id="tokenform"  >
-
-                                                            
-                                                            <div className='space-between rowdirection'>
-                                                                <input type="text" name='name' placeholder='Account Number' /> 
-                                                                <input type="text" name='cardno' placeholder='Card No' className='mx-5 '  />
-                                                        
-                                                            </div>
-                                                                
-                                                        
-                                                            
-                                                        
-                                                                <input type="text" name='ex-date' placeholder='expirayDate' className='my-5 ' />
-
-                                                                <input type="text" name='cvv' placeholder='CVV' className='mx-5 ' />  
-
-                                                                <label>Amount : </label> <input type="text" name='amt' value={eventList.event_cost} className='mx-5' />
-                                                                
-                                                            
-
-                                                            <div className='center-align mt-5'>
-                                                                <Button variant="light" className='width-100' onClick={() => paySubmit()} >submit</Button>
-                                                            </div>
-                                                            
-                                                            
-                                                        
-                                                        </form> 
-                                                        </div>
-                                                    }
+                                                    
+                                                       
                                                     
 
                                                 
@@ -300,7 +270,7 @@ export default function Index() {
                                                     
 
                                                     {(pkgReject && <>
-                                                        <select name="reason" style={{marginLeft:10}} onClick={()=>reject(eventList.event_cost,type)}>
+                                                        <select name="reason"  id="reason" style={{marginLeft:10}} onClick={()=>reject(eventList.event_cost,type)}>
                                                             <option>Select Reason</option>
                                                             <option value="Not Intrested">Not Intrested</option>
                                                             <option value="Need to Add/Remove features">Need to Add/Remove features</option>
@@ -338,7 +308,7 @@ export default function Index() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                         ))
@@ -347,7 +317,11 @@ export default function Index() {
                                                     </tbody>
                                                 </table>
 
+
+                                             
                                     </div>}
+
+                                   
 
                             </>
 
@@ -408,41 +382,13 @@ export default function Index() {
                                         
 
 
-                                    <div className='space-between'>
+                                    <div >
                                    
                                          {paybtn || pkgData.packages_status === "Accepted"  ? (<> 
 
-                                                   {/* {!frame &&(
-                                                    <Button variant="light " onClick={()=>paynow(pkgData.packages_cost)}>pay Now</Button> ) 
-                                                    } */}
-
-                                                   {frame &&
-                                                       
-                                                       <form name="tokenform" id="tokenform" >
-
-                                                          
-                                                              
-                                                       Acc. Name : &nbsp; <input type="text" name='name' /> <br></br><br></br>
-                                                        Card No : &nbsp; &nbsp;&nbsp;&nbsp; <input type="text" name='cardno' /><br></br><br></br>
-                                               
-
-                                               
-                                                       Expiry Date  :&nbsp; <input type="text" name='ex-date' /><br></br><br></br>
-
-                                                       CVV  : &nbsp;<input type="text" name='cvv'/>  <br></br><br></br>
-                                                       Amount &nbsp; : <input type="text" name='amt' value={pkgData.packages_cost}  />
-                                                        
-                                                   
-
-                                                     <div className='center-align mt-5'>
-                                                         <Button variant="light" className='width-100 text-center' onClick={() => paySubmit()} >Submit</Button>
-                                                    </div>
-                                                    
-                                                    
                                                 
-                                                </form> 
-                                                     }
 
+                                                  
 
                                                    
                                                 <table className="table table-striped table-light mx-5 my-5 ">
@@ -462,7 +408,7 @@ export default function Index() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.packages_cost,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                             ))
@@ -475,16 +421,19 @@ export default function Index() {
 
                                                 </>):
                                        (
-                                        pkgData.packages_status === "Success" ? '' :(
-                                           <>
+                                           pkgData.packages_status === "Success" ? '' :(
+                                               <>
+                                           <div className='space-between'>
+                                          
                                         {!pkgReject && <Button variant="light" onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
                                         <Button variant="light" onClick={()=>reason()}>Reject</Button>
 
+                                        </div>
                                         </>)
                                        )}
 
                                        {pkgReject && <>Select Reason : <select id="reason" onChange={()=>reject(pkgData.packages_cost,type)}>
-                                       <option>Select Reason</option>
+                                       <option value="select">Select Reason</option>
                                                         <option value="Not Intrested">Not Intrested</option>
                                                         <option value="Need to Add/Remove features">Need to Add/Remove features</option>
                                                         <option value="Change of mind">Change of mind</option>
@@ -493,7 +442,8 @@ export default function Index() {
                                        }
                                     </div>
 
-                                    </>
+                                   </>
+                                   
                                     )
                               
                             }
@@ -548,6 +498,7 @@ export default function Index() {
                 .then(function (response) {
                     //handle success
                     console.log("response",response); 
+                    history.go(0);
                     setPayBtn(true);
                     
                     
@@ -581,6 +532,7 @@ export default function Index() {
                     //handle success
                     console.log("response",response); 
                     setPayBtn(true);
+                    history.go(0);
                 })
                 .catch(function (response) {
                     //handle error
@@ -597,11 +549,12 @@ export default function Index() {
 
     function reject(cost,value)
     {
-
+        console.log("select")
         // var r = reason();
-        var r = document.getElementById("reason");
-        var reason = r.options[r.selectedIndex].value;
-        console.log(reason);
+    
+        var e = document.getElementById("reason");
+        console.log("reason1",e);
+        var reason = e.options[e.selectedIndex].value;
 
         console.log("reason2",reason);
 
@@ -681,136 +634,25 @@ export default function Index() {
         
     }
 
-    function paynow(subId)
+    function paynow(subId,cost,orderid)
     {
          setSubId(subId);
-        // console.log("clicked")
-        setFrame(true);
-     
+        console.log("clicked")
+        sessionstorage.setItem("subId",subId);
+        sessionstorage.setItem("amount",cost);
+        sessionstorage.setItem("orderId",orderid);
+        console.log("payment")
+        history.push('/payment-form');
+        history.go(0);
     }
 
 
      function paySubmit()
     {
      
-        // var data = {
-        //     "createTransactionRequest": {
-        //         "merchantAuthentication": {
-        //             "name": "3Hv96gAPe7Mj",
-        //             "transactionKey": "2wX8n46uT37EvB7h"
-        //         },
-        //         "refId": "123456",
-        //         "transactionRequest": {
-        //             "transactionType": "authOnlyTransaction",
-        //             "amount": "5",
-        //             "payment": {
-        //                 "creditCard": {
-        //                     "cardNumber": "5424000000000015",
-        //                     "expirationDate": "2025-12",
-        //                     "cardCode": "999"
-        //                 }
-        //             },
-        //             "lineItems": {
-        //                 "lineItem": {
-        //                     "itemId": "1",
-        //                     "name": "vase",
-        //                     "description": "Cannes logo",
-        //                     "quantity": "18",
-        //                     "unitPrice": "45.00"
-        //                 }
-        //             },
-        //             "tax": {
-        //                 "amount": "4.26",
-        //                 "name": "level2 tax name",
-        //                 "description": "level2 tax"
-        //             },
-        //             "duty": {
-        //                 "amount": "8.55",
-        //                 "name": "duty name",
-        //                 "description": "duty description"
-        //             },
-        //             "shipping": {
-        //                 "amount": "4.26",
-        //                 "name": "level2 tax name",
-        //                 "description": "level2 tax"
-        //             },
-        //             "poNumber": "456654",
-        //             "customer": {
-        //                 "id": "99999456654"
-        //             },
-        //             "billTo": {
-        //                 "firstName": "Ellen",
-        //                 "lastName": "Johnson",
-        //                 "company": "Souveniropolis",
-        //                 "address": "14 Main Street",
-        //                 "city": "Pecan Springs",
-        //                 "state": "TX",
-        //                 "zip": "44628",
-        //                 "country": "US"
-        //             },
-        //             "shipTo": {
-        //                 "firstName": "China",
-        //                 "lastName": "Bayles",
-        //                 "company": "Thyme for Tea",
-        //                 "address": "12 Main Street",
-        //                 "city": "Pecan Springs",
-        //                 "state": "TX",
-        //                 "zip": "44628",
-        //                 "country": "US"
-        //             },
-        //             "customerIP": "192.168.1.1",
-        //             "userFields": {
-        //                 "userField": [
-        //                     {
-        //                         "name": "MerchantDefinedFieldName1",
-        //                         "value": "MerchantDefinedFieldValue1"
-        //                     },
-        //                     {
-        //                         "name": "favorite_color",
-        //                         "value": "blue"
-        //                     }
-        //                 ]
-        //             },
-        //         "processingOptions": {
-        //              "isSubsequentAuth": "true"
-        //             },
-        //          "subsequentAuthInformation": {
-        //              "originalNetworkTransId": "123456789NNNH",
-        //              "originalAuthAmount": "45.00",
-        //              "reason": "resubmission"
-        //             },			
-        //             "authorizationIndicatorType": {
-        //             "authorizationIndicator": "pre"
-        //           }
-        //         }
-        //     }
-        // }
-        //   console.log(data);
 
-        //   const headers = {
-        //       'Content-Type':'application/json'
-        //   }
+
         
-           
-        //   await axios({
-        //     method: 'post',
-        //     url: 'https://apitest.authorize.net/xml/v1/request.api',
-        //     data: data,
-        //     headers: headers
-        //     })
-        //     .then(function (response) {
-        //         //handle success
-        //         console.log("response",response.data); 
-        //         toast.success('Order Created !!',{autoClose:3000});
-        //         setTimeout(() => history.push('/home'),3000);
-        //     })
-        //     .catch(function (response) {
-        //         //handle error
-        //         console.log(response);
-        //         toast.success('Order Created !!',{autoClose:3000});
-        //         setTimeout(() => history.push('/home'),3000);
-        //     });
-         
         const token = sessionstorage.getItem("token");
 
         const headers ={

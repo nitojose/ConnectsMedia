@@ -141,10 +141,7 @@ export default function CreateForm() {
                 
                 </Form> 
                 }
-{/* 
-                    {payButton && 
-                        <button onClick={paynow}>Pay Now</button>
-                    } */}
+
 
                     </Parallax>
                     </Col>

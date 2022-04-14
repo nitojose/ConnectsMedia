@@ -106,7 +106,16 @@ export default function Index() {
                         </ul>
                     </div>
                     <div align="center">
-                    <button>Register</button>
+                    {sessionstorage.getItem('token') ===null ?(
+                        <>
+                    <button onClick={()=>redirecttoList("std")}>Register</button>
+                    </>
+                    ):(
+                        <>
+                    <button onClick={()=>history.push('/standard-list')}>Buy</button>
+                    </>
+                    )
+                    }
                     </div>
                 </div>
             </div>
@@ -120,7 +129,16 @@ export default function Index() {
                         </ul>
                     </div>
                     <div align="center">
-                    <button>Register</button>
+                    {sessionstorage.getItem('token') ===null ?(
+                        <>
+                    <button onClick={()=> redirecttoList("custom")}>Register</button>
+                    </>
+                    ):(
+                        <>
+                    <button onClick={()=>history.push('/customized-list')}>Buy</button>
+                    </>
+                    )
+                    }
                     </div>
                 </div>
             </div>
@@ -138,10 +156,12 @@ export default function Index() {
         {
             sessionstorage.setItem("list","standard-list");
             history.push('/login/standard-list');
+            history.go(0);
         }
         if(type === "custom"){
             sessionstorage.setItem("list","customized-list");
             history.push('/login/customized-list');
+            history.go(0);
         }
     }
     

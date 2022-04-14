@@ -143,11 +143,10 @@ export default function Index() {
 
     function viewall(data)
     {
-        // setPmsg(data);
-        // setmodelmsg(true);
-        
-        // console.log("pmsg",data);
-        history.push({pathname:'/related-msgs',data:data});
+       
+        sessionstorage.setItem("relatedMsg",JSON.stringify(data));
+        history.push('/related-msgs');
+        history.go(0);
     }
 
     

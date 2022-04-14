@@ -10,17 +10,11 @@ import Parallax from 'react-rellax';
 
 var sessionstorage = require('sessionstorage');
 
-export default function EachRequest(props) {
+export default function EachRequest() {
 
-    const {id} = useParams();
-    const [pkgList,setpkgList] = React.useState([{}]);
-    // const [pkgData,setPkgData] = React.useState({});
-    let history = useHistory();
-
-    console.log("props" ,props.data)
-    const pkgData = props.data;
-
-    console.log("data" ,pkgData)
+   
+    const pkgData =  JSON.parse(sessionstorage.getItem("pendPkg"))
+    console.log("pkgdata",pkgData)
 
    
   return (

@@ -319,6 +319,7 @@ export default function Index() {
                                                       
 
                                                         <div className='text-center'>
+                                                        {console.log("pending",pend_pack[data])}
                                                         <span><Button variant="dark" className='px-5 b-3'onClick={()=>{view_pkg(pend_pack[data])}}>view</Button></span>
                                                         </div>
                                                   </Card.Body>
@@ -391,6 +392,7 @@ export default function Index() {
                                                       
 
                                                         <div className='text-center'>
+                                                          {console.log("process",process_pack[data])}
                                                         <span><Button variant="dark" className='px-5 b-3'onClick={()=>{view_pkg(process_pack[data])}}>view</Button></span>
                                                         </div>
                                                   </Card.Body>
@@ -434,13 +436,12 @@ export default function Index() {
     // history.go(0)
   }
 
-  function view_pkg(pkg_id,type)
+  function view_pkg(pkg,type)
   {
-    console.log("view_pkg",pkg_id)
-    // console.log('/pending_req/'+pkg_id);
-    // history.push('/pending_req/'+pkg_id);
-    history.push({pathname:'/pending_req',data:pkg_id});
-    // history.go(0)
+    
+    sessionstorage.setItem("pendPkg",JSON.stringify(pkg));
+    history.push('/pending_req');
+    history.go(0);
   }
 
   function events()
