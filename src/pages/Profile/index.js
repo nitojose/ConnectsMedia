@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container,Row,Col,Spinner,Button } from 'react-bootstrap';
 import Buttons from '../../components/Packages/Buttons';
 import Form from 'react-bootstrap/Form'
 import { useForm } from 'react-hook-form';
@@ -17,6 +17,7 @@ var sessionstorage = require('sessionstorage');
 export default function Index() {
 
     const [customerInfo,setCustomerInfo] = useState({});
+    const [spinner,setSpinner] = React.useState(false);
     let history = useHistory();
 
     useEffect(()=>{
@@ -66,7 +67,7 @@ export default function Index() {
     function onSubmit(data)
     {
         
-
+        setSpinner(true);
         const customer_id = sessionstorage.getItem("customerId");
         console.log("id",customer_id);
      let formdata = new FormData();
@@ -96,6 +97,7 @@ export default function Index() {
             //handle success
             // console.log("success");
             console.log(response.data);
+            setSpinner(false);
             if(response.data === "profile Updated Successfully")
             {
               toast.success("Profile Updated Successfully",{autoClose:3000});
@@ -154,27 +156,33 @@ export default function Index() {
                         </Row> */}
 
                         <Row className='extraRowSpace'>
-                          <Buttons text="Update" type="submit" />
-                        {/* <input type="submit" /> */}
+                        {(!spinner === false)? <Buttons text="Update " type="submit" disabled={true} /> : <Buttons text="Update " type="submit" />} 
+
+                            {spinner && 
+                            <Spinner
+
+                            style={{marginLeft:'53%',marginTop:'-3.5rem'}}
+                            animation="border"
+
+                            role="status"
+
+                            >
+                            </Spinner>
+
+                            }
+                       
                         </Row>
                         
 
-                        
-                      
-                    
                     </Form>    
 
-                    {/* <button onClick={signout}>Signout</button> */}
+                   
                 </Parallax>
         </Container>
-        <ToastContainer />
+        <ToastContainer  position="top-center"  style={{marginTop:'50vh'}}/>
     </div>
     </>
   );
 
-    // function signout()
-    // {
-    //     sessionstorage.clear();
-    //     history.push('/login');
-    // }
+ 
 }

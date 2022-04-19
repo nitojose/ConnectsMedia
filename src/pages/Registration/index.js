@@ -1,13 +1,13 @@
 'use strict';
 import React,{useState} from 'react';
-import { Row,Col, Container } from 'react-bootstrap'
+import { Row,Col, Container,Button ,Spinner} from 'react-bootstrap'
 import Form from 'react-bootstrap/Form'
 import Textbox from '../../components/TextBox'
 import TextArea from '../../components/TextArea';
 import Buttons from '../../components/Packages/Buttons';
 import { useHistory,Link} from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import { Button } from 'bootstrap';
+// import { Button } from 'bootstrap';
 import Parallax from 'react-rellax'
 import axios from 'axios'
 import { Url } from '../../GLOBAL/global';
@@ -25,11 +25,12 @@ export default function Index(props) {
   console.log("props",props.name);
   
   const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+  const [spinner,setSpinner] = React.useState(false);
 
   function onSubmit(data)
   {
     
-
+    setSpinner(true);
      let formdata = new FormData();
      formdata.append('name',data.name);
      formdata.append('email',data.email);
@@ -54,6 +55,7 @@ export default function Index(props) {
         .then(function (response) {
             //handle success
            console.log(response.data);
+           setSpinner(false);
             if(response.data.message === "Registered Successfully...")
             {
               sessionstorage.setItem("token",response.data.token);
@@ -130,8 +132,22 @@ export default function Index(props) {
                         </Row>
 
                         <Row className='extraRowSpace'>
-                          <Buttons text="Register" type="submit" />
-                        {/* <input type="submit" /> */}
+                         {(!spinner === false)?<Buttons text="Register" type="submit" disabled={true} />:<Buttons text="Register" type="submit" /> } 
+
+                         {spinner && 
+                          <Spinner
+                        
+                            style={{marginLeft:'58%',marginTop:'-3.5rem'}}
+                            animation="border"
+                            
+                            role="status"
+                            
+                          >
+                        
+                          </Spinner>
+                        
+                      }
+                       
                         </Row>
                         
 
@@ -151,7 +167,9 @@ export default function Index(props) {
              
             </Row>
 
-            <ToastContainer />
+            
+
+            <ToastContainer  position="top-center"  style={{marginTop:'50vh'}}/>
             
             </Container>
     </div>

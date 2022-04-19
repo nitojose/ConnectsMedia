@@ -149,6 +149,7 @@ export default function Relatedmsgs() {
 
                             <Modal.Body>
                                 <input type="text" placeholder='type here ..' id="message" className='msg-text' />
+                              
                             </Modal.Body>
 
                             <Modal.Footer>

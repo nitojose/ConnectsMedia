@@ -1,5 +1,5 @@
 import React ,{useState} from 'react';
-import { Row,Col, Container } from 'react-bootstrap'
+import { Row,Col, Container ,Spinner,Button} from 'react-bootstrap'
 import Parallax from 'react-rellax'
 import { useForm } from 'react-hook-form';
 import Buttons from '../../components/Packages/Buttons';
@@ -11,6 +11,8 @@ import '../../style/login.scss'
 import {useLocation} from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Popup from '../../components/popUp/Index';
+import { flip } from 'react-animations';
 
 var sessionstorage = require('sessionstorage');
 
@@ -19,6 +21,7 @@ export default function Index() {
 
   // const [value ,setValue] = React.useState({});
   const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+  const [spinner,setSpinner] = React.useState(false);
     let history  =new useHistory();
 
     let d = window.location.pathname.slice(7);
@@ -33,6 +36,7 @@ export default function Index() {
     function onSubmit(data)
     {
       
+      setSpinner(true);
       // console.log(data);
      let formdata = new FormData();
      formdata.append('email',data.email);
@@ -54,10 +58,10 @@ export default function Index() {
         })
         .then(function (response) {
           //handle success
-          // console.log(response.data.message);
+          console.log(response.data.message);
           
 
-          
+          setSpinner(false);
 
           sessionstorage.setItem("token",response.data.token);
           sessionstorage.setItem("customerId",response.data.id);
@@ -73,13 +77,15 @@ export default function Index() {
           if(response.data === "Email Not verified")
           {
             toast.warning("Verify EmailId !");
-            history.push('/login')
+            // <Popup msg="Verify EmailId !" color="yellow" />
+            setTimeout(() => history.push('/login'),3000 ) 
           }
 
           if(response.data.message === "user not found")
           {
             toast.error("Check email-id and password !!");
-            history.push('/login')
+            // <Popup msg="Check email-id and password !!" color="yellow" />
+            setTimeout(() => history.push('/login'),3000 ) 
           }
           
          
@@ -88,12 +94,13 @@ export default function Index() {
           {
             console.log(" no home");
             toast.error("Check email-id and password !!");
-            history.push('/login')
+            // <Popup msg="Check email-id and password !!" color="yellow" />
+            setTimeout(() => history.push('/login'),3000 ) 
             
           }
           else if((response.data.message === 'loggedin') && ( sessionstorage.getItem('list')=== ('standard-list' || 'customized-list')) )
           {
-            history.push('/'+sessionstorage.getItem('list'));
+            setTimeout(() => history.push('/'+sessionstorage.getItem('list')),3000 ) ;
             // history.go(0)
             console.log(" package list");
           }
@@ -157,9 +164,36 @@ export default function Index() {
                             <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Password" type="password" {...register("pass" , { required: true })} className='textbox login-box'/> </Col>
                             
                         </Row>
+                      
 
                         <Row className='extraRowSpace'>
-                          <Buttons text="Login" type="submit" />
+                       
+                       {(!spinner ===false )? (<> <Buttons text="Login" type="submit" disabled={true}/> {spinner && 
+                      <Spinner
+                    
+                      style={{marginLeft:'56%',marginTop:'-3.5rem'}}
+                        animation="border"
+                        
+                        role="status"
+                        
+                      >
+                  
+                  </Spinner>} </>)
+                
+            : (<><Buttons text="Login" type="submit" />{ spinner && 
+                  <Spinner
+                 
+                   
+                    animation="border"
+                    
+                    role="status"
+                    
+                  >
+                  
+                  </Spinner> }</>)
+                
+}
+                       
                         </Row>
                         
                         
@@ -183,9 +217,12 @@ export default function Index() {
                 </Col>
              
             </Row>
+
+            
             
             </Container>
-            <ToastContainer />
+            
+            <ToastContainer position="top-center"  style={{marginTop:'50vh'}}/>
   </>
   );
 }

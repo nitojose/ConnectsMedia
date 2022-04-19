@@ -226,10 +226,10 @@ export default function Index() {
                                         </div>
 
 
-                                    <div className='align-end pt-3'>
-                                            < img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5 "/>
+                                    <div className='space-between pt-3'>
+                                            < img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
 
-                                        <div className='font-12 content-end'>
+                                        <div className='font-12 content-end ' >
                                                 <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
 
                                                 <p>Cost : 
@@ -246,11 +246,17 @@ export default function Index() {
                                             </>)}
 
                                             <p>Status : <span className='bold-text green'>{eventList.event_status?eventList.event_status:campList.camp_status} </span></p>
+
+                                            </div>
+                                    </div>
+
+                                    <div className='extraRowSpace'></div>
+
                                  
 
-                                                <div className='space-between'>
+                                <div className='space-between'>
                                         
-                                                {paybtn || eventList.event_status === "Accepted" ? (<> 
+                                {paybtn || eventList.event_status === "Accepted" ? (<> 
                                                     
                                                        
                                                     
@@ -279,19 +285,21 @@ export default function Index() {
                                                         
                                                         </select></>)
                                                     
-                                                    }
+                                                    }              
 
                                                         
-                                                </div>
-
-                                        </div>
-
-
                                     </div>
 
+                                       
+
+                                   
                                  </div>
 
-                                 {(paybtn || eventList.event_status === "Accepted") && <div className='row'>
+                                 {(paybtn || eventList.event_status === "Accepted") && 
+                                 
+                                 <Container className='mx-5 '>
+                                 <div className='row mx-5 px-5'>
+                                 {subOrder && subOrder.map((s,id) =>(
                                         <table className="table table-striped table-light mx-5 my-5 ">
                                             <thead class="thead-dark">
                                                 <tr>
@@ -302,7 +310,7 @@ export default function Index() {
                                                 </tr>
                                                 </thead>
                                                     <tbody>
-                                                        {subOrder && subOrder.map((s,id) =>(
+                                                       
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
@@ -311,15 +319,15 @@ export default function Index() {
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
-                                                        ))
-                                                        }
+                                                        
                                                                         
                                                     </tbody>
                                                 </table>
 
-
+                                            ))  }
                                              
-                                    </div>}
+                                    </div>
+                                    </Container>}
 
                                    
 
@@ -386,11 +394,7 @@ export default function Index() {
                                    
                                          {paybtn || pkgData.packages_status === "Accepted"  ? (<> 
 
-                                                
-
-                                                  
-
-                                                   
+                                            {subOrder && subOrder.map((s,id) =>(
                                                 <table className="table table-striped table-light mx-5 my-5 ">
                                                         <thead class="thead-dark">
                                                             <tr>
@@ -401,8 +405,7 @@ export default function Index() {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        {
-                                                            subOrder && subOrder.map((s,id) =>(
+                                                        
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
@@ -411,13 +414,13 @@ export default function Index() {
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.packages_cost,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
-                                                            ))
-                                                        }
+                                                           
                                                                         
                                                                         
                                                     </tbody>
                                                 </table>
-                                                     
+                                                     ))
+                                                    } 
 
                                                 </>):
                                        (
@@ -636,7 +639,7 @@ export default function Index() {
 
     function paynow(subId,cost,orderid)
     {
-         setSubId(subId);
+        setSubId(subId);
         console.log("clicked")
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);

@@ -1,105 +1,72 @@
-import React,{useState} from 'react'
-import '../../style/sidebar.scss'
-import { FiMenu } from 'react-icons/fi';
-import { AiOutlineClose } from "react-icons/ai";
+import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import 'react-pro-sidebar/dist/css/styles.css';
 import { useHistory } from 'react-router-dom';
-import Pillars from '../../pages/About/pillars';
-import { HashLink as Link} from 'react-router-hash-link';
-var sessionstorage = require('sessionstorage');
-export default function Sidebar() {
+import {FaHome,FaShoppingBag,FaArrowDown,FaArrowUp,FaInstagram,FaYoutube} from 'react-icons/fa'
+import {FiPackage,FiInfo} from 'react-icons/fi'
+import {MdEmojiEvents,MdCampaign,MdQuestionAnswer,MdPendingActions,MdPermContactCalendar,MdOutlineMail,MdFacebook} from 'react-icons/md'
+import {CgProfile,CgUserAdd} from 'react-icons/cg'
+import {GrLinkedin} from 'react-icons/gr'
 
+export default function Sidebar()
+{
   let history = useHistory();
 
-  const [isOpen, setIsopen] = useState(false);
 
-  const sidebar = () => {
-    isOpen === true ? setIsopen(false) : setIsopen(true);
-  }
-
-
-  return (
+  return(
     <>
-    <div>
-      <div className="container-fluid">
+    <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}} className="">
+        <div style={{flex:1,heigth:'90rem'}}>    
+
+          <ProSidebar style={{width:'300px',}}>
+            <Menu iconShape="square">
+              <MenuItem onClick={() => home()} icon={<FaHome/>}>Home</MenuItem>
+                <SubMenu title="Orders"  icon={<FaShoppingBag/>} >
+                  <MenuItem icon={<FiPackage/>}>Packages</MenuItem>
+                  <MenuItem icon={<MdEmojiEvents/>}>Events </MenuItem>
+                  <MenuItem icon={<MdCampaign/>}>Campaigns </MenuItem>
+                </SubMenu>
+
+                <SubMenu title="Requests" icon={<MdPendingActions/>} >
+                  <MenuItem icon={<FiPackage/>}>Packages</MenuItem>
+                  <MenuItem icon={<MdEmojiEvents/>}>Events </MenuItem>
+                  <MenuItem icon={<MdCampaign/>}>Campaigns </MenuItem>
+                </SubMenu>
+
+                <SubMenu icon={<MdQuestionAnswer/>} title="Messages"  >
+                  <MenuItem icon={<FaArrowUp/>}>Sent</MenuItem>
+                  <MenuItem icon={<FaArrowDown/>}>Receive </MenuItem>
                 
-              
-                {/* <div className="btn btn-primary" onClick={sidebar} ></div> */}
-                <FiMenu style={{cursor: "pointer"}} size={40} onClick={sidebar}/>
-                <div className={`sidebar ${isOpen == true ? 'active' : ''}`}>
-                    <div className="sd-header">
-                        <h4 className="mb-0"></h4>
-                        <AiOutlineClose size={40} onClick={sidebar}/>
-                        {/* <div className="btn btn-primary" onClick={sidebar} ><i className="fa fa-close"></i></div> */}
-                    </div>
-                    <div className="sd-body">
-                        <ul>
+                </SubMenu>
 
-                        {sessionstorage.getItem('token') === null ? (
-                            <>
-                            <li>
-                                <Link className="sd-link" to="/login">Login</Link>
-                            </li>
-                            <li>
-                                <Link className="sd-link" to="/registration">Register</Link>
-                            </li>
-                            </>
-                          ):(
-                            <>
-                            <li>
-                               <> <a onClick={() => signOut()} className="sd-link">LogOut</a></>
-                            </li>
-                            </>
-                          )
-                          }
-                            {/* <li>
-                                <Link smooth className="sd-link" to="#Home1">Home</Link>
-                            </li> */}
-                            <li>
-                                <Link smooth className="sd-link" to="#About1">About Us</Link>
-                            </li>
-                            {/* <li>
-                                <Link smooth className="sd-link" to="#faq1">FAQ</Link>
-                            </li> */}
-                            <li>
-                              <Link smooth className="sd-link" to="#whyconnect1">Why Connect</Link>
-                            </li>
-                            <li>
-                              <Link smooth className="sd-link" to="#statistics1">Statistics</Link>
-                            </li>
-                            <li>
-                              <Link smooth className="sd-link" to="#service1">Services</Link>
-                            </li>
-                            <li>
-                              <Link smooth className="sd-link" to="#campaigns1">Campaigns</Link>
-                            </li>
-                            <li>
-                              <Link smooth className="sd-link" to="#package1">Packages</Link>
-                            </li>
-                            <li>
-                              <Link  className="sd-link" to="/faq">FAQ</Link>
-                            </li>
-                            <li>
-                              <Link smooth className="sd-link" to="#contact1">Contact</Link>
-                            </li>
-                            {/* <li><a className="sd-link">Contact</a></li> */}
-                            {/* <li><a className="sd-link">Admin</a></li> */}
-                        </ul>
-                    </div>
-                </div>
-                <div className={`sidebar-overlay ${isOpen == true ? 'active' : ''}`} onClick={sidebar} ></div>
-       </div>
-       
-    </div></>
+                <MenuItem icon={<FiInfo/>}>General Enquiry </MenuItem>
 
+                <SubMenu title="Profile" icon={<CgProfile/>} >
+                  <MenuItem icon={<CgUserAdd/>}>Modify Profile</MenuItem>
+                  
+                </SubMenu>
+
+                {/* <SubMenu title="Contact Us" icon={<MdPermContactCalendar/>} open={true}>
+                <MenuItem icon={<MdOutlineMail/>}>connect@connectmedianetworks.com</MenuItem>
+                <MenuItem icon={<MdFacebook/>}>@Connectmedianetworks</MenuItem>
+                <MenuItem icon={<FaInstagram/>}>ConnectMediaNetworks</MenuItem>
+                <MenuItem icon={<FaYoutube/>}>Connect Media Networks</MenuItem>
+                <MenuItem icon={<GrLinkedin/>}>ConnectMediaNetworks</MenuItem>
+                </SubMenu> */}
+
+            </Menu>
+          </ProSidebar>
+        </div>
+
+        <div>
+        
+        </div>
+    </div>
+
+    </>
   )
-  function gotoabout(){
-    <Pillars />
-  }
 
-  function signOut()
-  {
-    sessionstorage.clear();
-    history.push('/login');
-    history.go(0)
+  function home(){
+    history.push('/');
   }
 }
+

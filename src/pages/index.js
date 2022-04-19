@@ -25,8 +25,11 @@ import PendingReq from '../../src/pages/pendingRequest/pendingRequest'
 import Forgotpwd from '../../src/pages/forgotPassword/Index'
 import Forgotpwd1 from '../../src/pages/forgotPassword/forgot1'
 import EachRequest from '../../src/pages/pendingRequest/EachRequest'
-import Homepage from '../../src/pages/HomePage/index'
-import PaymentForm from '../../src/pages/Payment/index'
+import Homepage from '../../src/pages/HomePage/index';
+import PaymentForm from '../../src/pages/Payment/index';
+import EventPending from './pendingRequest/EventPending';
+import Sidebar from '../components/sidebar/Sidebar';
+import LogoHeader from '../components/logo/LogoHeader'
 
 import {
     BrowserRouter as Router,
@@ -35,6 +38,7 @@ import {
   } from 'react-router-dom';
 
 import UserHeader from '../components/header/UserHeader'
+import Navbar from '../components/header/navbar'
 
 export default function Index() {
     let data = useParams();
@@ -49,7 +53,7 @@ export default function Index() {
                 <Route exact path="/">
                     
                 <MainScreen />
-
+            
                 </Route>
 
                 <Route exact path='/home'>
@@ -65,12 +69,13 @@ export default function Index() {
 
                 <Route exact path='/registration' >
                 <UserHeader/>
-                    <Registration name={data.name}/>
+                    <Registration />
 
                 </Route>
 
                 <Route exact path='/faq'>
                 <UserHeader/>
+               
                     <Faq />
                 </Route>
                 
@@ -169,8 +174,9 @@ export default function Index() {
                 </Route>
                 
                 <Route exact path='/messages'>
-                <UserHeader/>
-                    <Messages />
+                <LogoHeader/>
+                <Sidebar/>
+                    {/* <Messages /> */}
 
                 </Route>
 
@@ -193,9 +199,14 @@ export default function Index() {
 
                 </Route>
 
-                
 
-                
+                <Route exact path='/request-event'>
+                <UserHeader/>
+                    <EventPending/>
+
+                </Route>
+
+               
                 <Route exact path='/request/:type/:id'>
                 <UserHeader/>
                     <Requets/>

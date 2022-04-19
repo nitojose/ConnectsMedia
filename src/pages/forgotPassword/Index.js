@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container,Row,Col,Spinner,Button } from 'react-bootstrap';
 import axios from 'axios';
 import Parallax from 'react-rellax'
 import { useForm } from 'react-hook-form';
@@ -7,19 +7,21 @@ import Buttons from '../../components/Packages/Buttons';
 import { Form } from 'react-bootstrap';
 import { Link,useHistory } from 'react-router-dom';
 import { Url } from '../../GLOBAL/global';
-import { toast } from 'react-toastify';
 
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Index() {
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+    const [spinner,setSpinner] = React.useState(false);
     
     let history = new useHistory();
 
     function onSubmit(data)
     {
       
-
+      setSpinner(true);
      let formdata = new FormData();
      
      formdata.append('email',data.email);
@@ -40,6 +42,7 @@ export default function Index() {
         .then(function (response) {
             //handle success
             console.log(response.data);
+            setSpinner(false);
             if(response.data.msg === "Reset password link sent on your email id.")
             {
                 toast.success("Reset password link sent on your email id. !!",{autoClose:3000});
@@ -84,14 +87,31 @@ export default function Index() {
 
                         
                         <Row className='extraRowSpace'>
-                          <Buttons text="Submit " type="submit" />
-                        {/* <input type="submit" /> */}
+                         {(!spinner === false)? <Buttons text="Submit " type="submit" disabled={true} /> : <Buttons text="Submit " type="submit" />} 
+
+                         {spinner && 
+                      <Spinner
+                    
+                          style={{marginLeft:'53%',marginTop:'-3.5rem'}}
+                        animation="border"
+                       
+                        role="status"
+                        
+                      >
+                        </Spinner>
+                     
+                    }
+                       
                         </Row>
                     
                     </Form>
 
 
                     </Parallax>
+                    
+
+
+                    <ToastContainer position="top-center"  style={{marginTop:'50vh'}}/>
           </Container>
           
       </div>

@@ -235,6 +235,11 @@ export default function Index() {
                                             <p>Status</p>
                                             
                                           </div>
+
+                                          <div className='text-center'>
+                                            
+                                            <span><Button variant="dark" className='px-5 b-3'onClick={()=>{viewEvent(process_event[0])}}>view</Button></span>
+                                          </div>
                                         
 
                                     </Card.Body>
@@ -429,18 +434,21 @@ export default function Index() {
   );
 
 
-  function view(data,value)
-  {
-      
-    history.push( { pathname: '/order-view',order:data,type:value})
-    // history.go(0)
-  }
+  
 
   function view_pkg(pkg,type)
   {
     
     sessionstorage.setItem("pendPkg",JSON.stringify(pkg));
     history.push('/pending_req');
+    history.go(0);
+  }
+
+  function viewEvent(event)
+  {
+    
+    sessionstorage.setItem("RequestEvent",JSON.stringify(event));
+    history.push('/request-event');
     history.go(0);
   }
 

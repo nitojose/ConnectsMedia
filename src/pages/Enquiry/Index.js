@@ -227,7 +227,7 @@ export default function Index() {
                    
                
         
-            <ToastContainer/>
+            <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
         </Container>
 
   </div>);

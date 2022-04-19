@@ -341,7 +341,7 @@ export default function CustomizedList() {
   
 
 
-       <ToastContainer/>
+       <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
         </Container> 
     </div>
     );
@@ -520,11 +520,7 @@ export default function CustomizedList() {
                       {
                           
                           // history.push('/home');
-                          toast.success("Order Request has been send !!",{
-                              position:'top-right',
-                              autoClose:3000,
-                              closeOnClick:true
-                          });
+                          toast.success("Order Request has been send !!");
       
                           setTimeout(() => history.push('/home'), 3000);
                       }

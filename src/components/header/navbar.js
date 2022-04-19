@@ -8,7 +8,7 @@ import { useHistory} from "react-router-dom";
 import { fadeInUp } from 'react-animations'
 import { StyleSheet, css } from 'aphrodite';
 import { Dropdown } from 'react-bootstrap';
-import Sidebar from '../sidebar/sidebar';
+import Sidebar from '../sidebar/Sidebar';
 import Buttons from '../Packages/Buttons';
 // import '../../style/button.scss'
 import { animateScroll as scroll } from "react-scroll";

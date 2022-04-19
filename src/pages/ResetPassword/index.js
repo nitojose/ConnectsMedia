@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container,Row,Col,Spinner,Button } from 'react-bootstrap';
 import axios from 'axios';
 import Parallax from 'react-rellax'
 import { useForm } from 'react-hook-form';
@@ -13,13 +13,14 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Index() {
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
+    const[spinner,setspinner] = React.useState(false);
     
     let history = new useHistory();
 
     function onSubmit(data)
     {
       
-
+        setspinner(true);
         if(data.pass1 === data.pass2)
         {
             let formdata = new FormData();
@@ -40,6 +41,7 @@ export default function Index() {
             headers: headers
             })
             .then(function (response) {
+                setspinner(false);
                 //handle success
                 console.log(response.data.data.message);
                 if(response.data.data.message === "Password updated successfully.")
@@ -98,16 +100,29 @@ export default function Index() {
                         </Row>
 
                         <Row className='extraRowSpace'>
-                          <Buttons text="Reset " type="submit" />
-                        {/* <input type="submit" /> */}
+
+                          {(!spinner===false)? <Buttons text="Reset " type="submit" disabled={true}/> :<Buttons text="Reset " type="submit" />}
+
+                          {spinner && 
+                            <Spinner
+                            
+                                style={{marginLeft:'53%',marginTop:'-3.5rem'}}
+                                animation="border"
+                            
+                                role="status"
+                            
+                            ></Spinner>
+                        }
                         </Row>
                     
                     </Form>
 
 
                     </Parallax>
+
+                   
           </Container>
-          <ToastContainer/>
+          <ToastContainer style={{marginTop:'50%'}} position="top-center"/>
       </div>
   );
 }

@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { ElementsConsumer, CardElement ,useElements,useStripe} from "@stripe/react-stripe-js";
 import axios from 'axios';
-import { Container } from "react-bootstrap";
+import { Container,Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory,Link} from "react-router-dom";
@@ -18,7 +18,7 @@ export default function CheckoutForm()
   let history = useHistory();
 const stripe = useStripe();
 const elements = useElements();
-const [success,setSuccess] = React.useState(false);
+const [spinner,setSpinner] = React.useState(false);
 
 const CARD_ELEMENT_OPTIONS = {
     style: {
@@ -55,16 +55,21 @@ const CARD_ELEMENT_OPTIONS = {
 
     const handleSubmit = async (e) =>
     {
+
+      
         e.preventDefault();
         const {error,paymentMethod} = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement),
             billing_details: billingDetails
         }) 
-    
+        
+        
 
     if(!error)
     {
+      setSpinner(true);
+      toast.warning("payment initiated .!",{autoClose:2500});
         try{
             const {id} = paymentMethod 
             const res = await axios.post("https://connectmedia.gitdr.com/api/stripe",{
@@ -133,6 +138,7 @@ const CARD_ELEMENT_OPTIONS = {
                             })
                             .then(function (response) {
                                 //handle success
+                                setSpinner(false);
                                 console.log("pay After",response); 
             
                                 toast.success('Payment Success!!',{autoClose:5000});
@@ -169,16 +175,23 @@ const CARD_ELEMENT_OPTIONS = {
 
   
     return (
-      <Container className="mx-5 px-5 my-3 py-5">
-       
-        
-            <form onSubmit={handleSubmit}>
-          {/* <CardSection /> */}
-          <CardElement options={CARD_ELEMENT_OPTIONS} />
-          <button  className="btn-pay space-between" onClick={()=>payment()} >
-            Submit
-          </button>
-        </form>
+      // 
+       <>
+         <Container className="py-5 ">
+              <form onSubmit={handleSubmit}>
+                {/* <CardSection /> */}
+                <CardElement options={CARD_ELEMENT_OPTIONS} />
+                <div className="space-between mt-5">
+                  <button  className="px-5">
+                    Submit
+                  </button>
+                  
+                </div>
+                {spinner && <Spinner animation="border"  role="status" style={{marginLeft:'53%',top:'-3rem',position:'relative'}}/> } 
+             
+              </form>
+
+             </Container> 
 
         <div id="iframecont">
 
@@ -187,15 +200,13 @@ const CARD_ELEMENT_OPTIONS = {
 
          
 
-<ToastContainer/>
+<ToastContainer position="top-center" style={{marginTop:'50vh'}}/>
          
-      </Container>
+      {/* //  */}
+      </>
     );
   
 
-    function payment()
-    {
-      toast.warning("payment initiated .!",{autoClose:2500});
-    }
+   
 }
 

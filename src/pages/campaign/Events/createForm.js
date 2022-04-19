@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container,Row,Col,Spinner } from 'react-bootstrap';
 import Parallax from 'react-rellax';
 import { Link,useHistory} from "react-router-dom";
 import { useForm } from 'react-hook-form';
@@ -21,11 +21,13 @@ export default function CreateForm() {
     const [showForm,setShowForm] = useState(true);
     const [payButton,setPayButton] = useState(false);
     const [eventId,setEventId] = useState('');
+    const [spinner,setSpinner] = React.useState(false);
 
     let history = useHistory();
 
   function onSubmit(data)
   {
+    setSpinner(true);
     const customer_id =  sessionstorage.getItem("customerId");
     const token = sessionstorage.getItem("token");
     
@@ -54,6 +56,7 @@ export default function CreateForm() {
         })
         .then(function (response) {
             //handle success
+            setSpinner(false)
             console.log(response.data);
             if(response.data.message === "event Created Successfully")
             {
@@ -134,7 +137,7 @@ export default function CreateForm() {
 
                     <Row className='extraRowSpace'>
                       <Buttons text="Create" type="submit" />
-                    {/* {/ <input type="submit" /> /} */}
+                      {spinner && <Spinner animation="border" style={{marginLeft:'22.5rem',marginTop:'-3.5rem'}}></Spinner>}
                     </Row>
                     
 
@@ -146,7 +149,7 @@ export default function CreateForm() {
                     </Parallax>
                     </Col>
              </Row>
-             <ToastContainer />
+             <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
          </Container>
      </div>
  )

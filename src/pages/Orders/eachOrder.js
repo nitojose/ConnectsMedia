@@ -115,7 +115,7 @@ export default  function EachOrder() {
                 console.log("pkg /event order",response.data); 
                 setSubOrder(response.data.suborder);
                 setOrder(response.data.order);
-            
+                console.log("sss",response.data.suborder)
                
             })
             .catch(function (response) {
@@ -184,6 +184,7 @@ export default  function EachOrder() {
                                     </div>
 
                                     <div>
+                                    {subOrder && subOrder.map((s,id) =>(
                                         <table className="table table-striped table-light mx-5 my-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
@@ -194,7 +195,7 @@ export default  function EachOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                        {subOrder && subOrder.map((s,id) =>(
+                                                        
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
@@ -203,11 +204,12 @@ export default  function EachOrder() {
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.order.order_amt,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
-                                                        ))
-                                                        }
+                                                        
                                                                         
                                                 </tbody>
                                         </table>
+                                        ))
+                                    }
                                     </div>
 
                                     
@@ -287,8 +289,9 @@ export default  function EachOrder() {
                                             <Button variant="light" className='px-5 ' onClick={()=>sent()}>sent</Button> 
 
                                         </div>
-
+                                                    
                                     {subOrder ? (<div>
+                                        {subOrder && subOrder.map((s,id) =>(
                                         <table className="table table-striped table-light mx-5 my-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
@@ -299,20 +302,21 @@ export default  function EachOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                        {subOrder && subOrder.map((s,id) =>(
-                                                            <>
+                                                        
+                                                           
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
-                                                            </>
-                                                        ))
-                                                        }
+                                                           
+                                                       
                                                                         
                                                 </tbody>
                                         </table>
+                                         ))
+                                        }
                                     </div>):(<></>)}
 
 
@@ -355,7 +359,7 @@ export default  function EachOrder() {
          
      
 
-        <ToastContainer />
+        <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
 
     </Container>
 </div>
