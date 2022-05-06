@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { Url } from '../../GLOBAL/global';
+import { Url ,isLoggin} from '../../GLOBAL/global';
 import { Container,Row,Col,Table,Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 import '../../style/messages.scss';
@@ -28,10 +28,25 @@ export default function Index() {
     
 
     useEffect(() => {
-
+      logginornot();
         getDatas();
 
       },[]);
+
+
+      async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    
 
 
       async function getDatas()
@@ -70,11 +85,12 @@ export default function Index() {
                       data.PACKAGE_details.map(d=>{
                         // console.log("p1pkg : ",d)
                         return p1pkg.push(d);
+                        
                       })
 
                   }
 
-                  // return data.order.order_item === "CAMPAIGN"  ? planData.push(data) : pkgData.push(data);
+                 
 
                 })
                   
@@ -93,13 +109,14 @@ export default function Index() {
   return (
     <div >
      
-     <Parallax speed={5}>
+     {/* <Parallax speed={5}>
         <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
               objectFit:'cover'
           }}/>
 
-       </Parallax>
+       </Parallax> */}
 
+{console.log("pkgdata",pkgData)}
     <Container className='py-5 '>
 
       <h2 className='text-center my-5'>My Orders</h2>
@@ -108,7 +125,7 @@ export default function Index() {
 
             <Col sm={12} md={12} xl={12} xxl={12}>
 
-              <div className='table-title'>
+           <div className='table-title'>
                 <div onClick={()=>events()} className='table-icons'>
                   <img src={require('../../assets/images/Group 338.png')} alt="events" width={150} height={150} id="icon1"  style={{objectFit:'contain'}} />
                   <p  id="event">EVENTS</p>
@@ -123,14 +140,14 @@ export default function Index() {
                 <div className='table-icons' onClick={()=>pkg()}>
                   <img src={require('../../assets/images/pkgOrder.png')} alt="events" width={150} height={150} id="icon3" />
                   <p id='pkg' >PACKAGES</p>
-                </div>
+                </div> 
                
                 
               </div>
                 
                     <section className='view-msg'>
                       
-                       {plans &&
+                      {plans &&
                       
 
                       <Row >
@@ -154,8 +171,7 @@ export default function Index() {
 
                                     <Card.Body className='card-bg'>
                                       
-                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
-
+                                    
                                           <div className='space-between text-color mt-5'>
                                             <p className=''>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</p>
                                             <p className='text-end'>Order date</p>
@@ -205,10 +221,10 @@ export default function Index() {
                         
                       }
                     </Row>
-                    }
+                    } 
                         
 
-                    {camps &&
+                 {camps &&
                         
                         <Row >
 
@@ -231,7 +247,6 @@ export default function Index() {
 
                                     <Card.Body className='card-bg'>
                                       
-                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
 
                                           <div className='space-between text-color mt-5'>
                                             <p className=''>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</p>
@@ -283,7 +298,7 @@ export default function Index() {
                       }
                     </Row>
 
-                      }
+                      } 
 
 
 
@@ -291,7 +306,7 @@ export default function Index() {
                      
                         <Row >
 
-                          { pkgData.length === 0 ? <p className='text-center green'>No Orders</p> :
+                          { pkgData && pkgData.length === 0  ?  <p className='text-center green'>No Orders</p> :
                                 pkgData.map((data, idx) => (
                             <>
                  
@@ -309,7 +324,7 @@ export default function Index() {
 
                               <Card.Body className='card-bg'>
                                 
-                                {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
+                               
 
                                     <div className='space-between text-color mt-5'>
                                       <p className=''>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</p>

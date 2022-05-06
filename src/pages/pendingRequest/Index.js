@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 import { Container,Row,Col,Card,Button,Modal,Table } from 'react-bootstrap';
 import '../../style/order.scss'
-import { Url,imgUrl,notImage } from '../../GLOBAL/global';
+import { Url,imgUrl,notImage,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
 import dateFormat from 'dateformat';
@@ -36,8 +36,23 @@ export default function Index() {
 
     const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
 
+    async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+  
+  
 
     React.useEffect(() => {
+        logginornot();
         console.log("type",type);
         const token = sessionstorage.getItem("token");
         const customer_id =  sessionstorage.getItem("customerId");
@@ -196,15 +211,7 @@ export default function Index() {
     
   return (
     <>
-        <Parallax speed={5}>
-            <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
-
-        </Parallax>
         
-
-                <Container>
        
 
                             { type === "campaign" || type === "event"  ? (
@@ -218,51 +225,56 @@ export default function Index() {
                                         <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p>
                                     </div>
 
-                                <div className='second_section my-5'>
+                                    <div className='second_section'>
 
-                                        <div className='mx-5 px-2'>
-                                            <h2>{campList.camp_type==='MPOST'?"MILLION":"STATIC"}<span className='warning'>POSTS</span></h2>
-                                            <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
-                                        </div>
-
-
-                                    <div className='space-between pt-3'>
-                                            < img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
-
-                                        <div className='font-12 content-end ' >
-                                                <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
-
-                                                <p>Cost : 
-                                                <span >${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)} </span>
-                                                </p>
-
-                                            {type === "event" ? (<>
-                                            <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
-                                                <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
-                                                </>):(<>
-                                            <p className='underline'> Description </p>
-                                            
-                                            <p style={{marginTop:'-1rem;'}}><span>{campList.camp_desc?campList.camp_desc.camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
-                                            </>)}
-
-                                            <p>Status : <span className='bold-text green'>{eventList.event_status?eventList.event_status:campList.camp_status} </span></p>
-
+                                            <div className='mx-5 px-2'>
+                                                <h2>{campList.camp_type==='MPOST'?"MILLION":"STATIC"}<span className='warning'>POSTS</span></h2>
+                                                <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
+
+                                    </div>
+                                    <div className='padding-8rem pt-3 space-between'>
+                                            <Row>
+                                                <Col>
+                                                    < img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
+
+                                                </Col>
+
+                                                <Col className='content-end'>
+                                                    <div className='font-12 content-end ' >
+                                                        <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
+
+                                                        <p>Cost : 
+                                                        <span >${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)} </span>
+                                                        </p>
+
+                                                        {type === "event" ? (<>
+                                                        <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
+                                                            <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
+                                                            </>):(<>
+                                                        <p className='underline'> Description </p>
+                                                        
+                                                        <p style={{marginTop:'-1rem;'}}><span>{campList.camp_desc?campList.camp_desc.camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
+                                                        </>)}
+
+                                                        <p>Status : <span className='bold-text green'>{eventList.event_status?eventList.event_status:campList.camp_status} </span></p>
+
+                                                    </div>
+                                                
+                                                </Col>
+                                            </Row>
+                                             
                                     </div>
 
                                     <div className='extraRowSpace'></div>
 
                                  
 
-                                <div className='space-between'>
+                                    <div className=' padding-8rem space-between'>
                                         
-                                {paybtn || eventList.event_status === "Accepted" ? (<> 
+                                        {paybtn || eventList.event_status === "Accepted" ? (<> 
                                                     
-                                                       
-                                                    
-
                                                 
-
                                                     </>):
                                                     ( eventList.event_status === 'Success' ? '' : (
                                                         <>
@@ -276,7 +288,7 @@ export default function Index() {
                                                     
 
                                                     {(pkgReject && <>
-                                                        <select name="reason"  id="reason" style={{marginLeft:10}} onClick={()=>reject(eventList.event_cost,type)}>
+                                                        <select name="reason"  id="reason" style={{marginLeft:10,height:'50%'}} onClick={()=>reject(eventList.event_cost,type)}>
                                                             <option>Select Reason</option>
                                                             <option value="Not Intrested">Not Intrested</option>
                                                             <option value="Need to Add/Remove features">Need to Add/Remove features</option>
@@ -293,13 +305,13 @@ export default function Index() {
                                        
 
                                    
-                                 </div>
+                                
 
                                  {(paybtn || eventList.event_status === "Accepted") && 
                                  
-                                 <Container className='mx-5 '>
-                                 <div className='row mx-5 px-5'>
-                                 {subOrder && subOrder.map((s,id) =>(
+                                 <Container style={{marginLeft:'14rem'}}>
+                                  <div className='px-5 mx-5'>
+                                        {subOrder && 
                                         <table className="table table-striped table-light mx-5 my-5 ">
                                             <thead class="thead-dark">
                                                 <tr>
@@ -310,7 +322,7 @@ export default function Index() {
                                                 </tr>
                                                 </thead>
                                                     <tbody>
-                                                       
+                                                    {subOrder.map((s,id) =>(
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
@@ -319,15 +331,15 @@ export default function Index() {
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
-                                                        
+                                                    ))}
                                                                         
                                                     </tbody>
                                                 </table>
 
-                                            ))  }
+                                             }
                                              
                                     </div>
-                                    </Container>}
+                                </Container>}
 
                                    
 
@@ -340,11 +352,13 @@ export default function Index() {
                                         
                                        
                                         <>
+                                       <Container className='padding-bottom-5rem'>
 
-                                        <div className='vertical-text '>
+                                        <div className='vertical-text-pkg  '>
                                             <p>PACKAGE</p>
                                         </div>
-                                        <div className='sec-pkg-section mt-5'>
+
+                                        <div className='sec-pkg-section'>
                                             <div className=' '>
                                                 <h2>{pkgData.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
@@ -390,11 +404,11 @@ export default function Index() {
                                         
 
 
-                                    <div >
+                                    <div style={{paddingLeft:'15rem'}}>
                                    
                                          {paybtn || pkgData.packages_status === "Accepted"  ? (<> 
 
-                                            {subOrder && subOrder.map((s,id) =>(
+                                            {subOrder && 
                                                 <table className="table table-striped table-light mx-5 my-5 ">
                                                         <thead class="thead-dark">
                                                             <tr>
@@ -405,7 +419,7 @@ export default function Index() {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                        
+                                                        {subOrder.map((s,id) =>(
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
@@ -414,12 +428,12 @@ export default function Index() {
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.packages_cost,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
-                                                           
+                                                         ))}  
                                                                         
                                                                         
                                                     </tbody>
                                                 </table>
-                                                     ))
+                                                     
                                                     } 
 
                                                 </>):
@@ -444,7 +458,7 @@ export default function Index() {
                                                         </select></>
                                        }
                                     </div>
-
+                                    </Container>
                                    </>
                                    
                                     )
@@ -453,7 +467,7 @@ export default function Index() {
 
 
                     <ToastContainer/>
-                </Container>
+               
     </>
   )
 
@@ -591,13 +605,13 @@ export default function Index() {
                     //handle success
                     console.log("response",response); 
                     toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/home'),3000);
+                    setTimeout(() => history.push('/dashboard'),3000);
                 })
                 .catch(function (response) {
                     //handle error
                     console.log(response);
                     toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/home'),3000);
+                    setTimeout(() => history.push('/dashboard'),3000);
                 });
 
         }
@@ -621,13 +635,13 @@ export default function Index() {
                     //handle success
                     console.log("response",response); 
                     toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/home'),3000);
+                    setTimeout(() => history.push('/dashboard'),3000);
                 })
                 .catch(function (response) {
                     //handle error
                     console.log(response);
                     toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/home'),3000);
+                    setTimeout(() => history.push('/dashboard'),3000);
                 });
         }
        
@@ -699,7 +713,7 @@ export default function Index() {
                                 console.log("pay After",response); 
             
                                 toast.success('Payment Success!!',{autoClose:3000});
-                                setTimeout(() => history.push('/orders'),3000);
+                                setTimeout(() => history.push('/dashboard'),3000);
                             })
                             .catch(function (response) {
                                 //handle error

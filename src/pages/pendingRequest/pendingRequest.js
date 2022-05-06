@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { Url } from '../../GLOBAL/global';
+import { Url,isLoggin } from '../../GLOBAL/global';
 import { Container,Row,Col,Table,Button,Card } from 'react-bootstrap';
 import axios from 'axios';
 import '../../style/messages.scss';
@@ -13,6 +13,24 @@ export default function Index() {
 
 
     let history = useHistory();
+
+    async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    React.useEffect(() => {
+  
+      logginornot();
+    },[]);
+  
     
 
     const[orders,setOrders] = React.useState([]);
@@ -207,13 +225,10 @@ export default function Index() {
                                         
                                       </div>
                                     </div>
-                                    <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='img-card' />
+                                    
 
                                     <Card.Body className='card-bg mt-5'>
-                                      
-                                      {/* <img src={require('../../assets/images/card-bg.jpg')} alt='bg-card' className='card-bg'/> */}
-
-                                          <div className='space-between text-color mt-5'>
+                                       <div className='space-between text-color mt-5'>
                                             <p className=''>{process_event[0].created_at !== null? dateFormat(process_event[0].created_at, "mmmm dS, yyyy"):""}</p>
                                             <p>Order date</p>
                                         

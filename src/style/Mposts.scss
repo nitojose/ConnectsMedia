@@ -1,64 +1,74 @@
 @import './main.scss';
 
-.Mposts
+.mpost-div
 {
-    display: flex;
-    flex-direction: row;
-    
-}
-.content-mpost{
-    display: flex;
-    // flex-direction: cen;
-    justify-content: center;
-    align-items: center;
-    // width: 100vw;
-
-}
-.spacing{
-    display: flex;
-    flex-direction: row;
-}
-.btnstyle{
-    color: #fff;
-    background-color: black;
-    border-radius: 15px;
-    margin-top: 10%;
-    padding: 7px;
-    border: none;
-
-
-}
-.card-list{
-    margin: 15px;
-}
-.sectionstyling{
-    margin: 10px;
-}
-.para-content{
-    text-align: center;
-}
-.content-mpost-section{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    // width: 100vw;
-}
-.btn-section{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    // margin: 10;
-}
-.mpost-sections{
+    position: relative;
+    padding: 12px;
+    width: 500px;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    color: #000;
+    font-family: 'Nunito', sans-serif !important;
+    margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
-.column-mpost{
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
- width: 100vw;
+
+.img-card-post
+{
+    object-fit: contain;
+    height: 300px;
+    width: -webkit-fill-available;
+    border-radius: 10px!important;
+    border: solid 2px rgb(230, 227, 227);
+}
+
+.mpost-div .inner-div h1{
+    font-size: 18px;
+    padding: 10px;
+    color: rgb(146, 86, 86);
+}
+
+.mpost-div .inner-div p{
+    text-align: justify;
+    // padding: 15px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.mpost-div .inner-div
+{
+    flex: 1 1 auto;
+    padding: 20px 20px 0 20px;
+}
+
+.mpost-div .months
+{
+   
+    padding: 0 20px 20px 20px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.months button
+{
+    position: absolute;
+    right: 20px;
+    bottom: 30px;
+}
+
+.btnstyle
+{
+    font-style: italic;
+    font-size: 15px;
+    padding: 4px;
+    border-radius: 5px;
+}
+
+.align-center
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

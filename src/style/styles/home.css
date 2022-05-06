@@ -1,16 +1,15 @@
 :root {
 --bg:#111d42;
+/* --bg:#fff; */
 --comp1:#CC2024;
 --comp2:#F5C812;
 }
 html,body{
 font-family: 'Nunito', sans-serif;
 font-size:14px;
-background:var(--bg);
-color:#FFF;
 scroll-behavior: smooth;
 letter-spacing:0.05em;
-padding-top: 50px;
+/* padding-top: 50px; */
 
 /*must for snap-scroll*/
 /*height: 100vh;
@@ -19,8 +18,17 @@ scroll-snap-stop: always;
 scroll-snap-type: y mandatory;
 -webkit-overflow-scrolling:touch;
 }
+#scroll-snap{
+    background:var(--bg);
+    color:#fff;
+}
 h1,h2,h3,h4{
 font-weight:700;
+}
+
+.dash-menu
+{
+    margin-right: 2rem;
 }
 
 a{
@@ -1091,10 +1099,7 @@ background-size: contain;
 /*PACKAGES*/
 #packages{
 background:url('../../assets/imgs/wood-bg1.jpg?1'); /*#8DA0B4*/
-background-position:right center;
-/*background-size:cover;
-background-blend-mode:luminosity;*/
-background-repeat: repeat;
+background-size:cover;
 }
 #packages>div{
 padding:4vmax 10vmax;
@@ -1205,6 +1210,8 @@ background:url('../../assets/imgs/wood-bg2.jpg?1');
 background-position:right center;
 /*background-size:cover;*/
 background-repeat: repeat;
+
+
 }
 #campaigns h1{
 text-align:center;
@@ -1215,6 +1222,7 @@ padding:4vmax 7vmax;
 display:flex;
 flex-direction:column;
 justify-content:center;
+
 }
 #campaigns ul{
 display:flex;
@@ -1222,6 +1230,7 @@ justify-content:center;
 flex-wrap:wrap;
 margin-top:20px;
 height:100%;
+z-index: 1000;
 }
 #campaigns li{
 position:relative;
@@ -1232,11 +1241,15 @@ box-shadow:1px 1px 10px rgb(0,0,0,0.2);
 background:var(--bg);
 border-radius:10px;
 transition:all 500ms;
-opacity:0;transform:rotateX(-10deg) rotateY(0deg) translateY(20px);
+opacity:1;
+transform:rotateX(-10deg) rotateY(0deg) translateY(20px);
+z-index: 1000;
 }
 #campaigns:not(.onfocus) li{
 background:red;	
 }
+
+
 @keyframes box-swing{
 0%{transform: rotateX(-10deg) rotateY(0deg)}
 25%{transform: rotateX(-10deg) rotateY(10deg)}

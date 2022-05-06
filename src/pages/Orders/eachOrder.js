@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container,Row,Col,Card,Button,Modal } from 'react-bootstrap';
 import '../../style/order.scss'
-import { Url,notImage } from '../../GLOBAL/global';
+import { Url,notImage,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
 import dateFormat from 'dateformat';
@@ -13,13 +13,23 @@ var sessionstorage = require('sessionstorage');
 
 export default  function EachOrder() {
     let history = useHistory();
-    // const order = props.order;
-    // console.log("props",order);
-    
-    // const type = props.type;
-    // console.log("props",_type);
+    async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    React.useEffect(() => {
+  
+      logginornot();
+    },[]);
 
-    
    
 
     const [subOrder,setSubOrder] = React.useState([]);
@@ -130,14 +140,6 @@ export default  function EachOrder() {
   
     <div>
 
-        <Parallax speed={5}>
-            <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
-
-       </Parallax>
-    
-            <Container >
 
                             { type === "camp" || type ==="event"  ? (
 
@@ -145,19 +147,23 @@ export default  function EachOrder() {
                                 
                                 
                                     <div className='vertical-text '>
-                                        <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p>
+                                        <p>{type === "event" ?"EVENTS":""}</p>
                                     </div>
 
-                                    <div className='second_section my-5'>
+                                    <div className='vertical-text camp-text'>
+                                        <p>{type === "camp" ?"CAMPAIGN":""}</p>
+                                    </div>
 
-                                        <div className='mx-5 px-2'>
+                                    <div className='second_section'>
+
+                                        <div className=''>
                                             <h2>{order.plan[0].camp_type === "MPOST"?"MILLION ":"STATIC "}<span className='warning'>POSTS</span></h2>
                                             <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                         </div>
 
 
-                                        <div className='align-end pt-3'>
-                                            <img src={order.plan[0].photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5 "/>
+                                        <div className='space-between'>
+                                            <img src={order.plan[0].photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className='mt-5 mx-5'/>
 
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{order.plan[0].camp_title?order.plan[0].camp_title:order.plan[0].event_title }</span></p>
@@ -168,9 +174,9 @@ export default  function EachOrder() {
 
                                                 <p className='underline'> Description </p>
                                             
-                                                <p style={{marginTop:'-1rem;'}}><span>{order.plan[0].camp_desc?order.plan[0].camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
+                                                <p style={{marginTop:'-1rem;',width:'60%'}}><span>{order.plan[0].camp_desc?order.plan[0].camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
                                                 
-                                                <Button variant="light" className='px-5 width-100' onClick={()=>sent()}>sent</Button>
+                                                <Button variant="light" className='px-5 '  style={{width:'60%'}} onClick={()=>sent()}>Message</Button>
 
                                             </div>
 
@@ -184,8 +190,9 @@ export default  function EachOrder() {
                                     </div>
 
                                     <div>
-                                    {subOrder && subOrder.map((s,id) =>(
-                                        <table className="table table-striped table-light mx-5 my-5 ">
+
+                                    <Container className='padding-8rem'>
+                                        <table className="table table-striped table-light my-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th scope="col">Bill Id</th>
@@ -195,6 +202,8 @@ export default  function EachOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                    {subOrder && subOrder.map((s,id) =>(
+                                        
                                                         
                                                             <>
                                                                 <tr>
@@ -206,10 +215,12 @@ export default  function EachOrder() {
                                                             </>
                                                         
                                                                         
-                                                </tbody>
-                                        </table>
+                                                
                                         ))
                                     }
+                                    </tbody>
+                                        </table>
+                                        </Container>
                                     </div>
 
                                     
@@ -219,15 +230,16 @@ export default  function EachOrder() {
                                     : 
                                     (
                                         type==="pkg" ? (
-                                        
+                                      <div className='padding-7rem'>  
                                      <>
+                                   
                                       
-                                        <div className='vertical-text '>
+                                        <div className='vertical-text-pkg '>
                                             <p>PACKAGE</p>
                                         </div>
 
 
-                                        <div className='sec-pkg-section mt-5'>
+                                        <div className='sec-pkg-section '>
 
 
                                             <div className=' '>
@@ -286,13 +298,16 @@ export default  function EachOrder() {
                                             )}
 
 
-                                            <Button variant="light" className='px-5 ' onClick={()=>sent()}>sent</Button> 
+                                            <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button> 
 
                                         </div>
+
+                                      
                                                     
                                     {subOrder ? (<div>
                                         {subOrder && subOrder.map((s,id) =>(
-                                        <table className="table table-striped table-light mx-5 my-5 ">
+                                              <Container className='padding-8rem '>
+                                        <table className="table table-striped table-light mt-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th scope="col">Bill Id</th>
@@ -315,18 +330,19 @@ export default  function EachOrder() {
                                                                         
                                                 </tbody>
                                         </table>
+                                        </Container>
                                          ))
                                         }
                                     </div>):(<></>)}
 
 
                                         
-                                        </>  ):(<></>)
+                                        </> </div> ):(<></>)
                                        
                                     )
                               
                             }
-
+                           
 
 
                         {
@@ -334,13 +350,13 @@ export default  function EachOrder() {
 
                         <Modal.Dialog className='modal-msg'>
                             <Modal.Header >
-                                <Modal.Title style={{color:'black'}}>Sent </Modal.Title>
+                                <Modal.Title style={{color:'black'}}>Message Box </Modal.Title>
                                {/* <p style={{color:'black'}}>title : {order.plan[0]?(order.plan[0].camp_title?order.plan[0].camp_title:order.plan[0].event_title):(order.PACKAGE.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED ")}</p> */}
                                 {/* {title==="replay"?"Replay To Messages" :" Sent Message"} */}
                             </Modal.Header>
 
                             <Modal.Body>
-                                <input type="text" placeholder='type here ..' id="message" className='msg-text' />
+                                <textarea placeholder='type your message..' id="message" className='msg-text' />
                             </Modal.Body>
 
                             <Modal.Footer>
@@ -361,7 +377,7 @@ export default  function EachOrder() {
 
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
 
-    </Container>
+    
 </div>
   );
 

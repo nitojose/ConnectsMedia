@@ -5,10 +5,11 @@ import { Link,useHistory} from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import Form from 'react-bootstrap/Form'
 import Buttons from '../../../components/Packages/Buttons';
-import { Url } from '../../../GLOBAL/global';
+import { Url,isLoggin } from '../../../GLOBAL/global';
 import axios from 'axios'
 import Button from '../../../components/Button'
-
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,6 +25,25 @@ export default function CreateForm() {
     const [spinner,setSpinner] = React.useState(false);
 
     let history = useHistory();
+
+    async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    React.useEffect(() => {
+  
+      logginornot();
+    },[]);
+
+
 
   function onSubmit(data)
   {
@@ -61,10 +81,22 @@ export default function CreateForm() {
             if(response.data.message === "event Created Successfully")
             {
                 toast.success("Event Created Successfully !",{autoClose:3000});
-                // setShowForm(false);
-                // setPayButton(true);
+
+
+                
                 setEventId(response.data.id);
-                setTimeout(() => history.push('/home'),3000);
+                  setTimeout(() => 
+                              confirmAlert({
+                                title: 'Thanks,.',
+                                message: 'you can view the order request in Request -> Events section',
+                                buttons: [
+                                  {
+                                    label: 'Yes',
+                                    onClick: () => history.push('/dashboard')
+                                  },
+                                  
+                                ]
+                              }),3000);
             }
         })
         .catch(function (response) {
@@ -75,15 +107,15 @@ export default function CreateForm() {
 
  return(
      <div>
-         <Parallax speed={5}>
+         {/* <Parallax speed={5}>
             <img src={require('../../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
               objectFit:'cover'
           }}/>
 
-       </Parallax>
+       </Parallax> */}
 
-         <Container>
-            <Row>
+         <Container className='my-5'>
+            <Row >
                 <Col xl={6} sm={12} md={12} xxl={5} className='py-5 my-5'>
 
                     <Parallax speed={5} >  
@@ -97,7 +129,7 @@ export default function CreateForm() {
     
                 <Parallax speed={5}>
                    {showForm && 
-                    <h6 className='heading'>Create Event</h6>
+                    <h5 className='heading'>Create Event</h5>
                    }
         
                      {showForm && 

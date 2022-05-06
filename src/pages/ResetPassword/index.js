@@ -6,16 +6,55 @@ import { useForm } from 'react-hook-form';
 import Buttons from '../../components/Packages/Buttons';
 import { Form } from 'react-bootstrap';
 import { Link,useHistory } from 'react-router-dom';
-import { Url } from '../../GLOBAL/global';
+import { Url,picture } from '../../GLOBAL/global';
+import {RiLockPasswordFill} from 'react-icons/ri';
+import {AiOutlineCamera} from 'react-icons/ai';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+var sessionstorage = require('sessionstorage');
 
 export default function Index() {
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     const[spinner,setspinner] = React.useState(false);
+    const [customerInfo,setCustomerInfo] = React.useState();
     
     let history = new useHistory();
+
+    async function getUserInfo()
+    {
+        const token = sessionstorage.getItem("token");
+        
+        let formdata = new FormData();
+        const customer_id = sessionstorage.getItem("customerId");
+
+        formdata.append("customer_id",customer_id);
+        
+        const headers ={
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          }
+
+        await axios({
+            method: 'post',
+            url: Url+'getProfile',
+            data: formdata,
+            headers: headers
+            })
+            .then(function (response) {
+                //handle success
+               
+                console.log("getprofile",response.data.data[0]);
+                setCustomerInfo(response.data.data[0]);
+               
+                
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+    
+    }
 
     function onSubmit(data)
     {
@@ -25,7 +64,7 @@ export default function Index() {
         {
             let formdata = new FormData();
      
-             formdata.append('email',data.email);
+            formdata.append('email',data.email);
             formdata.append('password',data.pass1);
      
 
@@ -47,10 +86,9 @@ export default function Index() {
                 if(response.data.data.message === "Password updated successfully.")
                 {
                     toast.success("password reset successfully !!",{autoClose:3000});
-                    setTimeout(() => history.push('/home'),3000);
+                    setTimeout(() => history.push('/dashboard'),3000)
                 }
-                // history.push('/home');
-                
+               
             })
             .catch(function (response) {
                 //handle error
@@ -60,69 +98,107 @@ export default function Index() {
         else
         {
             toast.error('password doesnot match !!',{autoclose:2000});
-            setTimeout(() => history.push('/reset_password'),2000);
+            // setTimeout(() => history.push('/change_password'),2000);
+            setspinner(false);
         }
 
      
 
     
     }
+
+    React.useEffect(() => {
+        getUserInfo();
+    },[])
     
   return (
-      <div>
+      <>
 
-<Parallax speed={5}>
-        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
 
-       </Parallax>
 
-          <Container className='my-5'>
-          <Parallax speed={-3}>
-                    <h6 className='heading my-5'>Reset Password</h6>
-                    
-                    
-                    <Form onSubmit={handleSubmit(onSubmit)}>
+          <Container >
+
+          <div className='profileBefore' >
+            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+           
+        </div> 
+
+        <div className='row-flex-align'>
+
+          <div className='profileDiv'>
+            <div className='profileInner'>
+              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              
+
+
+            </div>
+            
+          </div>
+            <div className='header-banner' style={{marginLeft:'245px'}}>
+                <RiLockPasswordFill color='black' className='mt-4 mx-4' size={22}/>
+                <p className='header-banner-text'>Change Password</p>
+            </div>
+        </div>
+
+
+            <Parallax speed={-3}>
+                <div className='view-msg '>
+                    <Row className='align-div pwd-div mt-5'>
+                    <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         
 
-                        <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box'/> </Col>
+                        <Row style={{marginLeft:'3rem'}} className='mx-5'>
+                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box' defaultValue={customerInfo === undefined?'':customerInfo.cust_email} style={{color:'#aaa'}} disabled={true}/> </Col>
                             
                         </Row>
 
             
 
-                        <Row>
+                        <Row style={{marginLeft:'3rem'}} className='mx-5'>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox login-box'/> </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox login-box'/> </Col>
                         </Row>
 
                         <Row className='extraRowSpace'>
-
-                          {(!spinner===false)? <Buttons text="Reset " type="submit" disabled={true}/> :<Buttons text="Reset " type="submit" />}
-
-                          {spinner && 
+                       
+                            {(!spinner ===false )? (<> <Buttons text="Change Password" type="submit" disabled={true}/> {spinner && 
                             <Spinner
-                            
-                                style={{marginLeft:'53%',marginTop:'-3.5rem'}}
-                                animation="border"
-                            
-                                role="status"
-                            
-                            ></Spinner>
-                        }
+                          
+                            style={{marginLeft:'56%',marginTop:'-3.5rem'}}
+                              animation="border"
+                              
+                              role="status"
+                              
+                            >
+                        
+                          </Spinner>} </>)
+                      
+                            : (<><Buttons text="Change Password" type="submit" />{ spinner && 
+                            <Spinner
+                      
+                        
+                              animation="border"
+                              
+                              role="status"
+                              
+                            >
+                        
+                          </Spinner> }</>)
+                      
+                      }
+                       
                         </Row>
                     
                     </Form>
-
+                </Row>
+                </div>
 
                     </Parallax>
 
                    
           </Container>
-          <ToastContainer style={{marginTop:'50%'}} position="top-center"/>
-      </div>
+          <ToastContainer position="top-center"  style={{marginTop:'50vh'}}/>
+      </>
   );
 }

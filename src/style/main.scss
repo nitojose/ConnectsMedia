@@ -36,6 +36,12 @@ a
     color: darkgreen !important;
 }
 
+
+ .pro-inner-list-item 
+ {
+     background-color: #efefef !important;
+ }
+
 .warning
 {
     color: #F1C40F !important;
@@ -56,6 +62,20 @@ a
     font-weight: 800;
 }
 
+.error-card
+{
+    height: 50px;
+    width: 100%;
+    background-color: #93d0f8;
+    border: 1px solid #93d0f8;
+    border-radius: 12px;
+    box-shadow: 2px 2px 2px #93d0f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0rem -1rem;
+   
+}
 .bold-text-600
 {
     font-weight: 600;
@@ -82,10 +102,17 @@ a
     flex-direction: column;
 }
 
+
+
+.profile-pic-margin
+{
+    margin-top: 30%;
+}
+
 .para-content
 {
     font-size: 18px;
-    color: $primary_color;
+    color: rgb(32, 31, 31);
     font-weight: 400;
 }
 
@@ -120,6 +147,21 @@ a
     padding:5px;
     margin: 10px 0;
     width:100%;
+    border: solid 1px #bbb;
+    background-color: #f7f4f4;
+}
+
+.pwd-div
+{
+    margin-top: 7rem;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.margin-10px
+{
+    margin: 10px 0;
 }
 
 .textArea
@@ -208,6 +250,7 @@ a
  
 }
 
+
 .align-start
 {
     display: flex;
@@ -217,17 +260,39 @@ a
 }
 
 
+.text-left
+{
+    text-align: left;
+}
+
 .payment
 {
-    width: 100%;
-    // margin:10%;
-    margin: 10% auto;
-    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.4);
+    width: 50%;
+    margin: 11% auto;
+    box-shadow: 0px 15px 30px rgb(0 0 0 / 40%);
     border-radius: 10px;
     overflow: hidden;
     background-color: #fff;
+    margin-left: 35%;
 }
 
+
+.margin-left-6rem{
+    margin-left: 6rem;
+}
+
+
+.card-bg .space-between a{
+    color:'red'
+}
+
+.light-bg
+{
+    background-image: url('../assets/imgs/light\ bg.jpg');
+    width:'100%';
+    object-fit: cover;
+    opacity:0.5
+}
 
 @media only screen and (min-width: 1400px) {
 
@@ -294,13 +359,18 @@ and (max-device-width : 640px)
 .align-end
 {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
+    align-items: flex-end;
+    // text-align-last: right;
     // padding-right: 19rem;
-    // justify-content: space-between;
+    // justify-content: center;
     // align-items: ;
 }
 
-.text-end
+.align-last
 {
-
+    text-align: end;
 }
+
+
+

@@ -4,7 +4,7 @@ import Registration from '../pages/Registration/index'
 import PackageDetails from './Packages/package_details'
 import Login from './Login/Index'
 import Profile from './Profile/index'
-import ResetPassword from './ResetPassword/index'
+import ChangePassword from './ResetPassword/index'
 import {useLocation,useParams} from "react-router-dom"
 import CustomizedList from './Packages/customizedList'
 import StandardList from './Packages/standardList'
@@ -25,11 +25,11 @@ import PendingReq from '../../src/pages/pendingRequest/pendingRequest'
 import Forgotpwd from '../../src/pages/forgotPassword/Index'
 import Forgotpwd1 from '../../src/pages/forgotPassword/forgot1'
 import EachRequest from '../../src/pages/pendingRequest/EachRequest'
-import Homepage from '../../src/pages/HomePage/index';
 import PaymentForm from '../../src/pages/Payment/index';
 import EventPending from './pendingRequest/EventPending';
 import Sidebar from '../components/sidebar/Sidebar';
-import LogoHeader from '../components/logo/LogoHeader'
+import GetCampaign from '../User/Campaign/Index';
+import DashHome from "../User/Dashboard/Index";
 
 import {
     BrowserRouter as Router,
@@ -40,9 +40,25 @@ import {
 import UserHeader from '../components/header/UserHeader'
 import Navbar from '../components/header/navbar'
 
+import RequestPkg from '../User/Packages/Requests';
+import RequestEvent from "../User/Events/Request";
+
+import OrderEvent from "../User/Events/Order";
+import OrderPack from "../User/Packages/Order";
+import OrderCamp from "../User/Campaign/Order";
+
+import SentMessage from "../User/Message/Outbox";
+import RecieveMsg from "../User/Message/Inbox";
+import MsgView from '../User/Message/MsgView';
+
+import Dashboard from "../User/Dashboard/Index";
+import GetPackages from '../User/Packages/Index';
+
+import RaiseReq from '../User/RaiseRequest/Index';
+
 export default function Index() {
     let data = useParams();
-  
+  console.log("slug page");
 
     return (
             <>
@@ -62,34 +78,41 @@ export default function Index() {
 
                 </Route>
 
-                {/* <Homepage /> */}
+                {/* <Sidebar/> */}
 
-               {/* <Router> */}
-                    {/* <UserHeader/> */}
+                <Route exact path='/dashboard'>
+                    <Sidebar/>
+                   <DashHome/>
+                  
+                </Route>
 
-                <Route exact path='/registration' >
+                <Route exact path='/sidebar'>
+                    <Sidebar/>
+                   
+                </Route>
+
+
+
+                <Route exact path='/login' >
+                <UserHeader/>
+                    <Login />
+
+                </Route>
+               
+               
+
+               <Route exact path='/registration' >
                 <UserHeader/>
                     <Registration />
 
                 </Route>
 
-                <Route exact path='/faq'>
+                {/* <Route exact path='/faq'>
                 <UserHeader/>
                
                     <Faq />
-                </Route>
-                
-                    <Route exact path='/pkg-details'>
-                    <UserHeader/>
-                <PackageDetails />
-
-                </Route>
-
-                <Route exact path='/login'>
-                <UserHeader/>
-                    <Login />
-
-                </Route>
+                </Route> */}
+            
 
                 <Route exact path='/login/:standard-list'>
                 <UserHeader/>
@@ -105,34 +128,45 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/profile'>
-                <UserHeader/>
+                    <Sidebar/>
                    <Profile />
 
                 </Route>
 
-                <Route exact path='/reset_password'>
-                <UserHeader/>
-                    <ResetPassword />
-
-                    </Route>
+                
 
                     <Route exact path='/forgot_password'>
-                    <UserHeader/>
-                    <Forgotpwd />
+                        <UserHeader/>
+                        <Forgotpwd />
 
                     </Route>
 
-                    <Route exact path='/forgot_password1'>
+
+                    <Route exact path='/forgot_password1/:email'>
                     <UserHeader/>
                     <Forgotpwd1 />
 
                     </Route>
 
+                    <Route exact path='/raise-request'>
+                        <Sidebar/>
+                        <RaiseReq/>
+
+                    </Route>
+
+                    
+
                
                 <Route exact path='/order-view'>
-                <UserHeader/>
+                    <Sidebar/>
                     <EachOrder />
                 
+                </Route>
+
+                <Route exact path='/change_password'>
+                         <Sidebar/>
+                    <ChangePassword />
+
                 </Route>
 
                 <Route exact path='/customized-list'>
@@ -143,17 +177,17 @@ export default function Index() {
 
 
                 <Route exact path='/standard-list'>
-                <UserHeader/>
+                     <UserHeader/>
                     <StandardList />
 
                 </Route>
 
 
-                <Route exact path='/Questionnaire/:id'>
+                {/* <Route exact path='/Questionnaire/:id'>
 
                 <UserHeader/>
                     <Questionnaire />
-                </Route>
+                </Route> */}
 
                 <Route exact path='/events-creation'>
                 <UserHeader/>
@@ -168,89 +202,156 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/staticPosts'>
-                <UserHeader/>
+                    <UserHeader/>
                     <StaticPosts />
 
                 </Route>
                 
-                <Route exact path='/messages'>
-                <LogoHeader/>
+                {/* <Route exact path='/messages'>
+               
                 <Sidebar/>
-                    {/* <Messages /> */}
+                 
+                </Route> */}
 
-                </Route>
 
-                <Route exact path='/orders'>
+               
+
+                {/* <Route exact path='/orders'>
                 <UserHeader/>
                     <Orders  />
 
+                </Route> */}
+
+                <Route exact path='/request/package'>
+               
+                    <Sidebar/>
+                    <RequestPkg  />
+                    
                 </Route>
 
+                <Route exact path='/request/event'>
+               
+                    <Sidebar/>
+                   < RequestEvent/>
+                </Route>
+
+                <Route exact path='/order/event'>
+                
+                    <Sidebar/>
+                   
+                   < OrderEvent/>
+                </Route>
+
+
+                <Route exact path='/order/package'>
+                
+                    <Sidebar/>
+                   
+                   < OrderPack/>
+                </Route>
+
+
+                <Route exact path='/order/campaign'>
+                
+                    <Sidebar/>
+                   
+                   < OrderCamp/>
+                </Route>
+
+
+                <Route exact path='/message/Outbox'>
+                
+                    <Sidebar/>
+                   
+                   < SentMessage/>
+                </Route>
+
+
+                <Route exact path='/message/Inbox'>
+                
+                    <Sidebar/>
+                   
+                   < RecieveMsg/>
+                </Route>
+
+
+                <Route exact path='/message/msgView'>
+                
+                    <Sidebar/>
+                   <MsgView/>
+                   
+                </Route>
+
+
                 <Route exact path='/pending_req/:id'>
-                <UserHeader/>
+                <Sidebar/>
+                    <EachRequest/>
+
+                </Route>
+
+                <Route exact path='/pending_req'>
+                <Sidebar/>
                     <EachRequest/>
 
                 </Route>
 
 
-                <Route exact path='/pending_req'>
-                <UserHeader/>
+                <Route exact path='/request-pkg'>
+                    <Sidebar/>
                     <EachRequest/>
 
                 </Route>
 
 
                 <Route exact path='/request-event'>
-                <UserHeader/>
+                <Sidebar/>
                     <EventPending/>
 
                 </Route>
 
                
                 <Route exact path='/request/:type/:id'>
-                <UserHeader/>
+                <Sidebar/>
                     <Requets/>
                     
                 </Route>
 
-                <Route exact path='/my-requests'>
-                <UserHeader/>
+                {/* <Route exact path='/my-requests'>
+                <Sidebar/>
                     <PendingReq />
-                </Route>
+                </Route> */}
 
-                <Route exact path='/related-msgs'>
-                <UserHeader/>
+                {/* <Route exact path='/related-msgs'>
+                <Sidebar/>
                     <Relatedmsgs/>
-                </Route>
+                </Route> */}
+
+
+                    <Route exact path='/getCampaigns'>
+                        <Sidebar/>
+                        <GetCampaign/>
+                    
+                    </Route>
+
+                    <Route exact path='/getPackages'>
+                        <Sidebar/>
+                        <GetPackages/>
+                    
+                    </Route>
 
                 <Route exact path='/payment-form'>
-                <UserHeader/>
+                <Sidebar/>
                 <PaymentForm/>
                     
                 </Route>
 
-                <Route exact path='/gene-enquiry'>
-                <UserHeader/>
+                {/* <Route exact path='/gene-enquiry'>
+                 <Sidebar/>
                     <Enquiry/>
-                </Route>
+                </Route> */}
 
-                {/* </Router> */}
-
-                {/* <Route exact path='/sidebar'>
-                    <Sidebar />
-                </Route>
-                 */}
-                {/* <Route exact path="/Home1" component={Home}/>
-                <Route exact path="/About1" component={About}/>
-                <Route exact path="/whyconnect1" component={Whyconnect}/>
-                <Route exact path="/service1" component={Service}/>
-                <Route exact path="/package1" component={Package}/>
-                <Route exact path="/statistics1" component={Statistics}/>
-                <Route exact path="/contact1" component={Contact}/>
-                <Route exact path="/faq1" component={Faq}/>
-                <Route exact path="/campaigns1" component={Campaign}/> */}
-
-
+                
+               
             </Switch>
             {/* <Footer /> */}
         </div>

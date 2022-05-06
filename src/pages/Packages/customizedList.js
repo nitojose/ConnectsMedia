@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { Container,Row,Col, Form } from 'react-bootstrap';
 import Service from '../../components/Packages/servicelist';
 import axios from 'axios'
-import { Url } from '../../GLOBAL/global';
+import { Url,isLoggin } from '../../GLOBAL/global';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory } from 'react-router-dom';
@@ -10,10 +10,31 @@ import Parallax from 'react-rellax'
 import '../../style/package.scss'
 import { useForm } from 'react-hook-form';
 import Buttons from '../../components/Packages/Buttons';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 var sessionstorage = require('sessionstorage');
 
 export default function CustomizedList() {
+
+  
+  React.useEffect(() =>
+  {
+    logginornot();
+  },[]);
+
+ async function logginornot()
+  {
+    const cust =  await isLoggin();
+    console.log("cust",cust);
+    if(cust === null)
+    {
+      history.push('/login');
+    }
+    
+
+  }
+
   let history = useHistory();
      const [months,setMonths] = React.useState();
      const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
@@ -119,39 +140,42 @@ export default function CustomizedList() {
      ]
 
   return (
-    <div>
+    <div className='mt-5'>
       
-     <Parallax speed={5}>
-        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
+     
+        <Container className='pkg-div' >
 
-       </Parallax>
-        <Container className='py-5' >
-
-        <h1 className='text-center'>Customized Package</h1>
+        
 
          
-        <div className='center text-center card-list my-5 py-5'>
-                  <p className='extraRowSpace font-30'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has been the industry's standard dummy text ever since the 1500s,  </p>
+        <div className='first-div '>
+                  <p className=' font-30'> </p>
 
-                  <p className='extraRowSpace font-20 text-center'>Thsese are the services we provide : </p>
-                  <Row className='mx-5 '>
+                  <p className=' font-20 '>Services under Customized Package : </p>
+                  <p style={{color:'#bbb'}}>Choose your required services </p>
+                  <Row >
 
                   {
                       lists.map((item,id) => (
                       <>
                           <Col sm={6} md={6} xl={6} xxl={6}>
-                          <label className='checkbox-label ' key={id}>
+
+                            <div className='checkbox-label'>
                             <input
                               type="checkbox"
                               key={item.id}
                               value={item.id}
                               className='checkbox'
                               onChange={(e)=> handleChange(e,item.value)}
-                            /> &nbsp;{item.value}
-                          </label> <br></br>
+                            /> 
+
+                              <label style={{marginLeft:'1rem'}}>
+                                {item.value}
+                              </label> 
+                              
+                            </div>
+                          
+
                           </Col>
                           </>
                       ))
@@ -160,11 +184,11 @@ export default function CustomizedList() {
           </div>
 
 
-          <div className=' text-center card-list my-5 py-5'>
-            <p className='extraRowSpace font-20'>The period of package can be selected by user</p>
-                <label>Number of Months : </label>&nbsp; &nbsp;
+          <div className=' first-div'>
+            <p className=' font-20'>Duration of Package</p>
+                <label>Number of Months : </label>
 
-                <select id="months" required={true} className="select-months" >
+                <select id="months" required={true} className="select-months-number" >
                   <option value="1" >1 month</option>
                   <option value="2" >2 month</option>
                   <option value="3">3 month</option>
@@ -182,23 +206,26 @@ export default function CustomizedList() {
           </div>
 
 
-          <div className='my-5 py-5 card-list '>
-                        <Form onSubmit={handleSubmit(onSubmit)} className='mx-5 mt-5'>
+          <div className='first-div'>
+                        <Form onSubmit={handleSubmit(onSubmit)} className=''>
 
            
                                 <Row >
 
                                     <Col sm={12} md={12} xl={6} xxl={6}> 
-                                        <div className='center-align'>
-                                            <label>1.</label> &nbsp;&nbsp;&nbsp;<input placeholder="Name and address of your ministry/church" type="text" name="ministry" {...register("ministry" , { required: true })} className='textbox' />
+                                        <div className=''>
+                                            {/* <label>1.</label> 
+                                             */}
+                                             <p> Name and address of your ministry/church</p>
+                                            <input type="text" name="ministry" {...register("ministry" , { required: true })} className='textbox' />
                                         </div>
                                     </Col>
 
                                     <Col sm={12} md={12} xl={6} xxl={6}> 
-                                        {/* <div className='center-align'> */}
+                                        <div className=''>
 
-                                            <label>2.&nbsp; How many branches do you have?</label> &nbsp;
-
+                                            {/* <label>2.&nbsp; How many branches do you have?</label> &nbsp; */}
+                                             <p> How many branches do you have?</p>
                                             <select name="branches" {...register("branches" , { required: true })} className='select-months' >
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
@@ -212,15 +239,15 @@ export default function CustomizedList() {
                                                 <option value="10">10</option>
                                     
                                             </select>
-                                    
+                                    </div>
                                     </Col>
                                 </Row>
 
                                 <Row className='extraRowSpace'>
                                     <Col sm={12} md={12} xl={6} xxl={6}>  
                                     
-                                        <label>3. &nbsp;&nbsp;Total active members on premises?</label>&nbsp;
-                                        
+                                        {/* <label>3. &nbsp;&nbsp;Total active members on premises?</label>&nbsp; */}
+                                        <p>Total active members on premises? </p>
                                         <select name="members" {...register("members" , { required: true })} className='select-months'>
                                             <option value="not sure">Not Sure</option>
                                             <option value="1-30">1-30</option>
@@ -233,7 +260,8 @@ export default function CustomizedList() {
                                     </Col>
                                     <Col sm={12} md={12} xl={6} xxl={6}>  
 
-                                    <label>4. &nbsp;&nbsp;Active online regular viewers?</label> &nbsp;
+                                    {/* <label>6. &nbsp;&nbsp;Active online regular viewers?</label> &nbsp; */}
+                                    <p> Active online regular viewers?</p>
                                         
                                         <select name="viewers" {...register("viewers" , { required: true })} className='select-months'>
                                             <option value="not sure">Not Sure</option>
@@ -248,8 +276,8 @@ export default function CustomizedList() {
 
                                 <Row className='extraRowSpace'>
                                     <Col sm={12} md={12} xl={6} xxl={6}>
-                                    <label>5. &nbsp;&nbsp;How often do you live stream in a week?</label> &nbsp;
-                                        
+                                    {/* <label>5. &nbsp;&nbsp;How often do you live stream in a week?</label> &nbsp; */}
+                                        <p>How often do you live stream in a week?</p>
                                         <select name="liveStream" {...register("liveStream" , { required: true })}  className='select-months'>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -261,32 +289,34 @@ export default function CustomizedList() {
                                     </Col>
 
                                     <Col sm={12} md={12} xl={6} xxl={6}> 
-                                    <div className='center-align'>
-                                        <label>6.</label> &nbsp;&nbsp; &nbsp;
-                                    <textarea name="challeges" placeholder="What are the challenges you face right now?" {...register("challenges" , { required: true })} className='textbox textArea' rows={3}></textarea>  
+                                    <div className=''>
+                                        {/* <label>6.</label> &nbsp;&nbsp; &nbsp; */}
+                                        <p>What are the challenges you face right now?</p>
+                                    <textarea name="challeges" {...register("challenges" , { required: true })} className='textbox textArea' rows={3}></textarea>  
                                     </div>
                                     </Col>
 
                                 </Row>
 
-                                <Row className='extraRowSpace'>
+                                <Row className=''>
                                     
 
                                     <Col sm={12} md={12} xl={6} xxl={6}>
-                                        <label>7.  &nbsp;&nbsp;What are your goals using our services? </label><br></br><br></br>
-
+                                        {/* <label>7.  &nbsp;&nbsp;What are your goals using our services? </label><br></br><br></br> */}
+                                              <p>What are your goals using our services? </p>
                                         {
                                             lists_1.map(item => (
                                             <>
-                                                <label className='checkbox-label label-width'>
+                                               <div className='checkbox-label'>
                                                 <input
                                                     type="checkbox"
                                                     key={item.id}
                                                     value={item.id}
                                                     className='checkbox'
                                                     onChange={(e)=> handle(item.value)}
-                                                />&nbsp; {item.value}
-                                                </label> <br></br>
+                                                />  <label style={{marginLeft:'1rem'}}> {item.value}
+                                                </label> 
+                                                </div> 
                                                 </>
                                             ))
                                         }
@@ -296,10 +326,10 @@ export default function CustomizedList() {
 
                                     <Col sm={12} md={12} xl={6} xxl={6}>  
                                     
-                                        <label>8. &nbsp;&nbsp;How serious are you to take your online presence to the next level?</label><br></br><br></br>
+                                        {/* <label>8. &nbsp;&nbsp;How serious are you to take your online presence to the next level?</label><br></br><br></br> */}
                                     
-                                        
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="online_presence" {...register("online_presence" , { required: true })} className='select-months'>
+                                        <p>How serious are you to take your online presence to the next level?</p>
+                                        <select name="online_presence" {...register("online_presence" , { required: true })} className='select-months'>
                                             <option value="SURE">HIGH. We see great potential in this approach</option>
                                             <option value="MEDIUM">MEDIUM. Exploring the options</option>
                                             <option value="LOW">LOW. Testing the waters</option>
@@ -321,24 +351,6 @@ export default function CustomizedList() {
 
                         </Form>
                       </div>
-
-   
-
-
-     
-
-  
-
-
-
-
-
-
-
-{/* <div className='my-5 mx-5'>
-<button type='button' onClick={handleSubmit} className='button-text px-5' >Submit</button>
-</div> */}
-  
 
 
        <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
@@ -522,7 +534,18 @@ export default function CustomizedList() {
                           // history.push('/home');
                           toast.success("Order Request has been send !!");
       
-                          setTimeout(() => history.push('/home'), 3000);
+                          setTimeout(() => 
+                              confirmAlert({
+                                title: 'Thanks,.',
+                                message: 'you can view the order request in Request -> Packages section',
+                                buttons: [
+                                  {
+                                    label: 'Yes',
+                                    onClick: () => history.push('/dashboard')
+                                  },
+                                  
+                                ]
+                              }),3000);
                       }
                   })
                   .catch(function (response) {

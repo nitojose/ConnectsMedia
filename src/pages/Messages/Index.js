@@ -110,7 +110,7 @@ export default function Index() {
 
 
                                           <div className='space-between text-color '>
-                                            <p className=' bold-text'>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
+                                            <p className=' '>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
                                             <p>Status</p>
                                             
                                           </div>

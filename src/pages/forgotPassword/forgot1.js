@@ -1,12 +1,13 @@
 import React from 'react';
-import { Container,Row,Col,Spinner,Button } from 'react-bootstrap';
+import { Container,Row,Col,Spinner, } from 'react-bootstrap';
 import axios from 'axios';
 import Parallax from 'react-rellax'
 import { useForm } from 'react-hook-form';
 import Buttons from '../../components/Packages/Buttons';
 import { Form } from 'react-bootstrap';
-import { Link,useHistory } from 'react-router-dom';
+import { Link,useHistory,useParams } from 'react-router-dom';
 import { Url } from '../../GLOBAL/global';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -16,10 +17,13 @@ export default function Index() {
     const [spinner,setSpinner] = React.useState(false);
     
     let history = new useHistory();
+    const { email } = useParams();
+   
 
     function onSubmit(data)
     {
       
+        console.log("hello")
         setSpinner(true);
         if(data.pass1 === data.pass2)
         {
@@ -47,7 +51,7 @@ export default function Index() {
                 if(response.data.data.message === "Password updated successfully.")
                 {
                     toast.success("password reset successfully !!",{autoClose:3000});
-                    setTimeout(() => history.push('/login'),3000);
+                    setTimeout(() => history.push('/dashboard'),3000);
                 }
                 // history.push('/home');
                 
@@ -60,7 +64,8 @@ export default function Index() {
         else
         {
             toast.error('password doesnot match !!',{autoclose:2000});
-            setTimeout(() => history.push('/reset_password'),2000);
+          
+            setSpinner(false);
         }
 
     
@@ -69,51 +74,60 @@ export default function Index() {
   return (
       <div>
 
-<Parallax speed={5}>
-        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
 
-       </Parallax>
 
-          <Container className='my-5'>
+          <Container className='pwd-div'>
           <Parallax speed={-3}>
-                    <h6 className='heading my-5'>forgot Password</h6>
+                    <h6 className='heading text-center mt-5'>Change Password</h6>
                     
                     
-                    <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         
 
                         <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box'/> </Col>
+                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox ' value={email} disabled={true}/> </Col>
                             
                         </Row>
 
             
 
                         <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox login-box'/> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox '/> </Col>
 
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox login-box'/> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox '/> </Col>
                         </Row>
 
-                        <Row className='extraRowSpace'>
-                        {(!spinner === false)? <Buttons text="Submit " type="submit" disabled={true} /> : <Buttons text="Submit " type="submit" />} 
-
-                        {spinner && 
-                      <Spinner
-                    
-                          style={{marginLeft:'53%',marginTop:'-3.5rem'}}
-                        animation="border"
-                       
-                        role="status"
                         
-                      >
-                        </Spinner>
-                     
-                    }
-                      
+                        <Row className='extraRowSpace'>
+                       
+                                {(!spinner ===false )? (<> <Buttons text="Submit" type="submit" disabled={true}/> {spinner && 
+                                <Spinner
+                                
+                                style={{marginLeft:'56%',marginTop:'-3.5rem'}}
+                                    animation="border"
+                                    
+                                    role="status"
+                                    
+                                >
+                            
+                                </Spinner>} </>)
+                            
+                                : (<><Buttons text="Submit" type="submit" />{ spinner && 
+                                <Spinner
+                            
+                            
+                                    animation="border"
+                                    
+                                    role="status"
+                                    
+                                >
+                            
+                                </Spinner> }</>)
+                            
+                            }
+                       
                         </Row>
+
                     
                     </Form>
 

@@ -7,6 +7,7 @@ import { useHistory,Link} from "react-router-dom";
 import { FcLeftDown,FcRightUp } from "react-icons/fc";
 import dateFormat from 'dateformat';
 import Parallax from 'react-rellax';
+import {FiInfo} from 'react-icons/fi'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -62,21 +63,23 @@ export default function Index() {
 
   return (
   
-  <div>
-<Parallax speed={5}>
-        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
+  <Container>
 
-       </Parallax>
-                        <Modal.Dialog className='modal-msg'>
-                            <Modal.Header style={{backgroundColor:'#000914',color:'rgb(81, 87, 89);'}} >
+      <div className='header-banner' style={{marginLeft:'245px'}}>
+        <FiInfo color='black' className='mt-4 mx-4' size={22}/>
+        <p className='header-banner-text'>General Enquiry</p>
+      </div>
+
+                    <div style={{marginLeft:'20rem'}}>
+
+                          <Modal.Dialog className='modal-msg mt-5'>
+                            <Modal.Header style={{backgroundColor:'#000914',color:'#fff'}} >
                                 <Modal.Title >General Enquiry </Modal.Title>
                                
                             </Modal.Header>
 
                             <Modal.Body>
-                                <input type="text" placeholder='type here ..' id="message" className='msg-text' />
+                                <textarea placeholder='type here ..' id="message" className='msg-text' />
                             </Modal.Body>
 
                             <Modal.Footer>
@@ -90,20 +93,21 @@ export default function Index() {
                             </Modal.Footer>
                         </Modal.Dialog>
 
-                        <Container>
-           
-                 
+                    </div>
+                        
+
+                     
                  
                         <div className='view-msg'>
                           
                                   
                                
-                            <Row >
+                            <Row className='align-div'>
                                 {allmessages.length >0 ? allmessages.map((data, idx) => (
                             
                               <>
-                                <Col xxl={6} xl={6} md={12} sm={12} className='center-align mt-5'>
-                                  <Card className='card-event '>
+                                <Col xxl={6} xl={6} md={12} sm={12} className='center-align '>
+                                  <Card className='card-event mt-5'>
                                  
                                     <div className='card-header-color align-start' >
                                       <div className='space-between'>
@@ -138,7 +142,7 @@ export default function Index() {
 
 
                                           <div className='space-between text-color '>
-                                            <p className=' bold-text'>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
+                                            <p className=' '>{data.msg_status === "Read"?<span className='green'>Read</span> :<span className='error'>NotRead</span>} </p>
                                             <p>Status</p>
                                             
                                           </div>
@@ -228,9 +232,9 @@ export default function Index() {
                
         
             <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
-        </Container>
+        
 
-  </div>);
+  </Container>);
 
 
    

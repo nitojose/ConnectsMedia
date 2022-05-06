@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 import { Container,Row,Col,Card,Button,Modal,Spinner } from 'react-bootstrap';
 import '../../style/order.scss'
-import { Url,imgUrl } from '../../GLOBAL/global';
+import { Url,imgUrl,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
 import dateFormat from 'dateformat';
@@ -24,33 +24,49 @@ export default function EachRequest() {
     const [Order,setOrder] =React.useState({});
     const [spinner,setSpinner] = React.useState(false);
     const [pkgReject,setPkgReject] = React.useState(false);
+    const [condition ,setCondition] = React.useState(false);
 
     let history = useHistory();
-   
+
+    async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    React.useEffect(() => {
+  
+      logginornot();
+    },[]);
+
+    
   return (
     
-    <div>
-       <Parallax speed={5}>
-        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
+                    <div>
+      
+                                    <Container className='padding-bottom-5rem'>
 
-       </Parallax>
-         
-                                    <Container>
-
-                                        <div className='vertical-text '>
+                                        <div className='vertical-text-pkg '>
                                             <p>PACKAGE</p>
                                         </div>
-                                        <div className='sec-pkg-section mt-5'>
+
+                                        <div className='sec-pkg-section '>
                                             <div className=' '>
                                                 <h2>{pkgData.pack.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
+
+                                            <hr></hr>
                                             <p className='heading bold-text py-3'>Package Details</p>
                                             <p>Package Cost : <span className='bold-text'>{pkgData.pack.packages_cost}</span></p>
                                             <p>Selected Months : <span className='bold-text'>{pkgData.pack.months}</span></p>
-                                            <p>Drive Id : <a href={pkgData.pack.drive_id} target="_blank" rel="noreferrer">click here</a></p>
+                                           {pkgData.pack.drive_id ? (<p>Drive Id : <a href={pkgData.pack.drive_id} target="_blank" rel="noreferrer">click here</a></p>):(<></>)} 
 
                                             <p className='heading bold-text py-3'>{pkgData.spec.length === 0 ? '':"Specifications"}</p>
                                             {
@@ -64,6 +80,9 @@ export default function EachRequest() {
                                             )}
                                             
                                             <p className='heading bold-text py-3'>{pkgData.question.length ===0 ? "":'Questionnaire'}</p>
+
+
+                                            
                                             {pkgData.question && pkgData.question.map((d,id) =>
                                             
                                             
@@ -86,12 +105,21 @@ export default function EachRequest() {
 
                                         </div>
 
-                                        <div>
-                                            {pkgData.pack.packages_status === "Processing"?(<div className='space-between'>
-                                                <><Button variant="light" className="px-5" onClick={()=>accept()}>Accept</Button> {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}</>
+
+                                        <div style={{paddingLeft:'15rem'}}>
+                                       
+                                                
+                                            {pkgData.pack.packages_status === "Processing" ?(<div className='space-between'>
+
+                                                {!pkgReject && <Button variant="light" className="px-5" onClick={()    =>accept()}>Accept</Button> }
+                                                       
+                                                
+
+                                                {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
+
 
                                                 <><Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button> 
-                                                {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>} 
+                                                
                                                 {pkgReject && <>Select Reason : <select id="reason" onChange={()=>reject()}>
                                                         <option value="select">Select Reason</option>
                                                         <option value="Not Intrested">Not Intrested</option>
@@ -103,11 +131,11 @@ export default function EachRequest() {
                                                 }</></div>):(<></>)}
                                         </div>
 
-
+                                    <Container className='padding-8rem '>
                                         {payBtn && Order.order_status === "PP"? 
                                         (<>
-                                        {subOrder && subOrder.map((s,id) =>(
-                                            <table className="table table-striped table-light mx-5 my-5 ">
+                                                {subOrder &&
+                                            <table className="table table-striped table-light mt-5 ">
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th scope="col">Bill Id</th>
@@ -117,26 +145,26 @@ export default function EachRequest() {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
+                                                            { subOrder.map((s,id) =>(
+                                            
                                                          <tr>
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.pack.packages_cost,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
-                                                           
-                                                            
-                                                                        
-                                                                        
-                                                    </tbody>
-                                                </table>
+                                                          
                                                 ))
                                             }
+                                               </tbody>
+                                            </table>
+                                        }
                                         </>):(<></>)}
 
-                                       
+                                        </Container>   
 
                                   
-                                        </Container>
+                                </Container>
                       
                 
          
@@ -198,9 +226,9 @@ export default function EachRequest() {
                             console.log("pkg /event order",response.data); 
                             setSubOrder(response.data.suborder);
                             setOrder(response.data.order);
+                            
                             setPayBtn(true);
-                           
-                           
+                          
                         })
                         .catch(function (response) {
                             //handle error
@@ -210,8 +238,6 @@ export default function EachRequest() {
                     }
 
                     
-                        
-                   
                 })
                 .catch(function (response) {
                     //handle error
@@ -270,13 +296,13 @@ export default function EachRequest() {
                     setSpinner(false);
                     console.log("response",response); 
                     toast.success('order Rejected !!',{autoClose:3000})
-                     history.push('/home');
+                     history.push('/dashboard');
                 })
                 .catch(function (response) {
                     //handle error
                     console.log(response);
                     toast.success('order Rejected !!',{autoClose:3000})
-                     history.push('/home');
+                     history.push('/dashboard');
                 });
 
   }

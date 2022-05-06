@@ -23,10 +23,11 @@ function App() {
   return (
     <>
     <Router>
+    
      
-    {/* <Navbar /> */}
+  
 	      <Index />
-
+ 
       </Router>  
     </>
   );

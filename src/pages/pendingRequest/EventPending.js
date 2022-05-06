@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams } from "react-router-dom";
 import { Container,Row,Col,Card,Button,Modal,Spinner } from 'react-bootstrap';
 import '../../style/order.scss'
-import { Url,imgUrl,notImage } from '../../GLOBAL/global';
+import { Url,imgUrl,notImage,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
 import dateFormat from 'dateformat';
@@ -26,91 +26,114 @@ export default function EventPending() {
     const [Order,setOrder] =React.useState({});
     const [subId,setSubId] = React.useState();
 
+    async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    React.useEffect(() => {
+  
+      logginornot();
+    },[]);
+
 
   return (
     <>
                                 
                                 
-                                    <div className='vertical-text '>
+                                    <div className='vertical-text'>
                                         <p>EVENTS</p>
                                     </div>
 
-                                <div className='second_section my-5'>
+                                <div className='second_section '>
 
                                         <div className='mx-5 px-2'>
                                             <h2>STATIC<span className='warning'>POSTS</span></h2>
                                             <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                         </div>
 
+                                        <hr></hr>
 
-                                 </div>
 
-                                    <div className=' pt-3 space-between'>
-                                            <img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5 "/>
+                                </div>
 
-                                        <div className='font-12 content-end ' style={{marginLeft:'-35rem'}}>
-                                                <p> Tittle : <span >{eventList.event_title}</span></p>
+                                <div className='padding-8rem pt-3 space-between'>
+                                    <Row>
+                                        <Col>
+                                        <img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5 "/>
+                                        </Col>
 
-                                                <p>Cost : 
-                                                <span >${eventList.event_cost} </span>
-                                                </p>
+                                        <Col className='content-end'>
+                                            <div className='font-12 content-end ' style={{marginLeft:'3rem'}}>
+                                                    <p> Tittle : <span >{eventList.event_title}</span></p>
 
-                                            
-                                            <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
-                                                <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
-                                               
-                                            <p>Status : <span className='bold-text green'>{eventList.event_status} </span></p>
-                                 
+                                                    <p>Cost : 
+                                                    <span >${eventList.event_cost} </span>
+                                                    </p>
 
                                                 
+                                                <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
+                                                    <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
+                                                
+                                                <p>Status : <span className='bold-text green'>{eventList.event_status} </span></p>
+                                    
 
-                                        </div>
+                                                    
+
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                
+
+                                </div>
+
+                                <div className='extraRowSpace'>
+                                </div>
+
+                                    <div className='padding-8rem space-between '>
+                                        {paybtn || eventList.event_status === "Accepted" ? (<> 
+                                            </>):
+                                            ( eventList.event_status === 'Success' ? '' : (
+                                            <>
+                                                 {!pkgReject && <Button variant="light" onClick={()=>accept()}>Accept</Button>}
+                                                  <Button variant="light" onClick={()=>reason()}>Reject</Button>
 
 
+                                            </>
+                                            ))
+                                        }
+                                                        
+
+                                            {(pkgReject && 
+                                                <>
+                                                    <select name="reason"  id="reason" style={{marginLeft:10,height:'50%'}} onClick={()=>reject(eventList.event_cost)}>
+                                                            <option>Select Reason</option>
+                                                            <option value="Not Intrested">Not Intrested</option>
+                                                            <option value="Need to Add/Remove features">Need to Add/Remove features</option>
+                                                            <option value="Change of mind">Change of mind</option>
+                                                            <option value="Decided for alternative product">Decided for alternative product</option>
+                                                            
+                                                    </select>
+                                                </>)
+                                                        
+                                            }  
+                                                
                                     </div>
 
-                                    <div className='extraRowSpace'></div>
+                                {(paybtn || eventList.event_status === "Accepted") && 
 
-                                 <div className='space-between'>
-                                        
-                                                    {paybtn || eventList.event_status === "Accepted" ? (<> 
-                                                        
-                                                        
-
-                                                        </>):
-                                                        ( eventList.event_status === 'Success' ? '' : (
-                                                            <>
-                                                            {!pkgReject && <Button variant="light" onClick={()=>accept()}>Accept</Button>}
-                                                                <Button variant="light" onClick={()=>reason()}>Reject</Button>
-
-
-                                                                </>
-                                                            )
-                                                        )}
-                                                        
-
-                                                        {(pkgReject && <>
-                                                            <select name="reason"  id="reason" style={{marginLeft:10,height:'50%'}} onClick={()=>reject(eventList.event_cost)}>
-                                                                <option>Select Reason</option>
-                                                                <option value="Not Intrested">Not Intrested</option>
-                                                                <option value="Need to Add/Remove features">Need to Add/Remove features</option>
-                                                                <option value="Change of mind">Change of mind</option>
-                                                                <option value="Decided for alternative product">Decided for alternative product</option>
-                                                            
-                                                            </select></>)
-                                                        
-                                                        }
-
-                                                        
-                                                </div>
-
-                                 {(paybtn || eventList.event_status === "Accepted") && 
-
-                                 <Container className='mx-5'>
+                                <Container style={{marginLeft:'14rem'}}>
                                  
-                                    <div className='row mx-5 px-5'>
-                                         {subOrder && subOrder.map((s,id) =>(
-                                        <table className="table table-striped table-light mx-5 my-5 ">
+                                    <div className='px-5 mx-5'>
+                                         {subOrder && 
+                                        <table className="table table-striped table-light px-5 mx-5 ">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th scope="col">Bill Id</th>
@@ -121,7 +144,7 @@ export default function EventPending() {
                                                 </thead>
                                                     <tbody>
                                                        
-                                                           
+                                                    {subOrder.map((s,id) =>(
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
@@ -130,15 +153,15 @@ export default function EventPending() {
                                                                 </tr>
                                                           
                                                        
-                                                                        
+                                                          ))}                    
                                                     </tbody>
                                                 </table>
-                                             ))}
+                                            }
 
                                        
                                     </div>
-                                    </Container>  
-                                    }
+                                </Container>  
+                                }
                                    
 
                                    
@@ -149,7 +172,7 @@ export default function EventPending() {
 
   function accept()
   {
-    
+    toast.success("accepted .!!",{autoClose:1000});
     const token = sessionstorage.getItem("token");
     const customer_id =  sessionstorage.getItem("customerId");
 
@@ -182,8 +205,9 @@ export default function EventPending() {
                     let data1 = new FormData();
                         data1.append("customer_id",customer_id);
                         data1.append("item_id",eventList.event_id);
-                        data1.append("item","EVENT")
-                       
+                        data1.append("item","EVENT");
+
+                      
 
                     axios({
                         method: 'post',
@@ -197,7 +221,7 @@ export default function EventPending() {
                             setSubOrder(response.data.suborder);
                             setOrder(response.data.order);
                             setPayBtn(true);
-                           
+                            // history.go(0);
                            
                         })
                         .catch(function (response) {
@@ -265,13 +289,13 @@ export default function EventPending() {
                     // setSpinner(false);
                     console.log("response",response); 
                     toast.success('order Rejected !!')
-                     history.push('/home');
+                     history.push('/dashboard');
                 })
                 .catch(function (response) {
                     //handle error
                     console.log(response);
                     toast.success('order Rejected !!')
-                    history.push('/home');
+                    history.push('/dashboard');
                 });
 
   }

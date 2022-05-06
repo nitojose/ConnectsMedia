@@ -3,6 +3,8 @@ import { Url,notImage } from '../../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Container,Row,Col } from 'react-bootstrap';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 var sessionstorage = require('sessionstorage');
@@ -36,7 +38,7 @@ export default function Index() {
         })
         .then(function (response) {
             //handle success
-            // console.log(response.data);
+            console.log(response.data);
             setpost(response.data);
             // console.log("mpost",Mpost)
         })
@@ -48,54 +50,55 @@ export default function Index() {
 
   return (
   
-    <div>
-    <section className='card-list'>
+<>
+<div style={{marginTop:100}}>
+        <Container>
+        <Row style={{marginLeft:'1.3rem'}}>
+            {post.map((mpost,id) => (
+                <Col xl={6} sm={12} md={12} xxl={6} >
+                    <div className='mpost-div'>
+                        <img src={mpost.photo === (undefined || null) ? notImage :('http://connectmedia.gitdr.com/public/'+mpost.photo)} alt='million' className='img-card-post'/>
 
-    {post.map((post,id) => (
-       
-     
-            <section className='sectionstyling'>
-                <div className='Mposts' style={{backgroundColor:'azure'}}>
-                <img src={post.photo === (undefined || null) ? notImage :'http://connectmedia.gitdr.com/public/'+post.photo} alt='million' width={700} height={500} style={{objectFit:'contain'}}/>
-                    <div className='column-mpost'>
-                    <div className='content-mpost'>
-                        <h2 style={{color: '#000',padding: 10}} className='para-content'>{post.camp_title}&nbsp; :</h2>
-                        <h2  className='paragrah '>&nbsp;₹ {post.camp_cost}</h2>
-                    </div>
-                    <div className='content-mpost-section'> 
-                        <div className='' style={{backgroundColor:'azure'}}>
-                            <label style={{color: '#000',padding:10}}>Number of Months : </label>
-                            <select className='btnstyle' id="months" required={true} >
-                                <option value="1">1 month</option>
-                                <option value="2">2 month</option>
-                                <option value="3">3 month</option>
-                                <option value="4">4 month</option>
-                                <option value="5">5 month</option>
-                                <option value="6">6 month</option>
-                                <option value="7">7 month</option>
-                                <option value="8">8 month</option>
-                                <option value="9">9 month</option>
-                                <option value="10">10 month</option>
-                                <option value="11">11 month</option>
-                                <option value="12">12 month</option>
-                            </select>
+                        <div className='inner-div'>
+                            <h1 className='text-center'>{mpost.camp_title}</h1>
+                            <p>{mpost.camp_desc}</p>
+                            <p>Cost : $<span className='bold-text'>{mpost.camp_cost}</span></p>
+
+                            <div className='months'>
+                                <label >Number of Months : </label>
+                                <select className='btnstyle' id="months" required={true} >
+                                    <option value="1">1 month</option>
+                                    <option value="2">2 month</option>
+                                    <option value="3">3 month</option>
+                                    <option value="4">4 month</option>
+                                    <option value="5">5 month</option>
+                                    <option value="6">6 month</option>
+                                    <option value="7">7 month</option>
+                                    <option value="8">8 month</option>
+                                    <option value="9">9 month</option>
+                                    <option value="10">10 month</option>
+                                    <option value="11">11 month</option>
+                                    <option value="12">12 month</option>
+                                </select>
+                                <button className='align-center ' onClick={(e) => purchaseCamp(e,mpost)}>Purchase</button>
+                                
+                            </div>
+                            
                         </div>
+                        
+                        
                     </div>
-                    <div className='btn-section'>
-                        <button className='btnstyle' onClick={(e) => purchaseCamp(e,post)}>Purchase</button>
-                    </div>
+                    
+                </Col>
+                 ))}
+            </Row>
 
-                    </div>
-                </div> 
-            </section>
-    
-     
-       
-        ))}
+        </Container>
+  
 
-    </section>
-    <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
-</div>
+        <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
+    </div>
+</>
     );
 
     function purchaseCamp(e,mpost)
@@ -137,7 +140,18 @@ export default function Index() {
             if(response.data.message === "Created")
             {
                 toast.success("Order Created !!",{autoClose:3000});
-                setTimeout(() => history.push('/my-requests'),3000)
+                setTimeout(() => 
+                              confirmAlert({
+                                title: 'Thanks,.',
+                                message: 'you can view the order request in Request -> Campaigns section',
+                                buttons: [
+                                  {
+                                    label: 'Yes',
+                                    onClick: () => history.push('/dashboard')
+                                  },
+                                  
+                                ]
+                              }),3000);
 
             }
         })

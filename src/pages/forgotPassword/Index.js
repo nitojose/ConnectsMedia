@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container,Row,Col,Spinner,Button } from 'react-bootstrap';
+import { Container,Row,Col,Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import Parallax from 'react-rellax'
 import { useForm } from 'react-hook-form';
@@ -21,11 +21,12 @@ export default function Index() {
     function onSubmit(data)
     {
       
+      console.log("hello")
       setSpinner(true);
      let formdata = new FormData();
      
-     formdata.append('email',data.email);
-        formdata.append('link',"http://connect.gitdr.com/reset_password");
+      formdata.append('email',data.email);
+        formdata.append('link',"https://connect.gitdr.com/change_password");
      
 
      
@@ -41,12 +42,13 @@ export default function Index() {
         })
         .then(function (response) {
             //handle success
-            console.log(response.data);
+            console.log(response.data.msg);
             setSpinner(false);
             if(response.data.msg === "Reset password link sent on your email id.")
             {
                 toast.success("Reset password link sent on your email id. !!",{autoClose:3000});
-                setTimeout(() => history.push('/login',3000))
+                // setTimeout(() => history.push('/login',3000))
+                setTimeout(() => history.push('/login'),3000)
             }
            
             
@@ -62,24 +64,18 @@ export default function Index() {
   return (
       <div>
 
-<Parallax speed={5}>
-        <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
-
-       </Parallax>
 
 
-          <Container className='my-5'>
+          <Container className='pwd-div'>
           <Parallax speed={-3}>
-                    <h6 className='heading my-5'>Forgot Password</h6>
+                    <h6 className='heading text-center my-5 '>Forgot Password</h6>
                     
                     
-                    <Form onSubmit={handleSubmit(onSubmit)} className='my-5 py-5'>
+                    <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         
 
                         <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box'/> </Col>
+                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box '/> </Col>
                             
                         </Row>
 
@@ -87,23 +83,34 @@ export default function Index() {
 
                         
                         <Row className='extraRowSpace'>
-                         {(!spinner === false)? <Buttons text="Submit " type="submit" disabled={true} /> : <Buttons text="Submit " type="submit" />} 
-
-                         {spinner && 
-                      <Spinner
-                    
-                          style={{marginLeft:'53%',marginTop:'-3.5rem'}}
-                        animation="border"
                        
-                        role="status"
+                            {(!spinner ===false )? (<> <Buttons text="Submit" type="submit" disabled={true}/> {spinner && 
+                            <Spinner
+                          
+                            style={{marginLeft:'54%',marginTop:'-3.5rem'}}
+                              animation="border"
+                              
+                              role="status"
+                              
+                            >
                         
-                      >
-                        </Spinner>
-                     
-                    }
+                          </Spinner>} </>)
+                      
+                            : (<><Buttons text="Submit" type="submit" />{ spinner && 
+                            <Spinner
+                      
+                        
+                              animation="border"
+                              
+                              role="status"
+                              
+                            >
+                        
+                          </Spinner> }</>)
+                      
+                      }
                        
                         </Row>
-                    
                     </Form>
 
 

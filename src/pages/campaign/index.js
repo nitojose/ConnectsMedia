@@ -145,8 +145,21 @@ export default function Campaigns() {
     	<h2>Missions</h2>
 		<img src={require('../../../src/assets/imgs/stand-mic.png')} alt="Million Post - Mic"/>
         <span>Click below to support missionaries from across the globe</span>
-		<div><button>Start Here</button></div>
+		{/* <div><button>Start Here</button></div> */}
+
+        {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("million")}>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/million-posts')}>Start Here</button>
+                                </>
+                                )
+                            }
 	</li>
+
+
     <li>
     	<h2>Strengthening Marriage</h2>
 		<img src={require('../../../src/assets/imgs/strengthen-marriage.png')} alt="Strengthening Marriage"/>

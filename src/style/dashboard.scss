@@ -1,0 +1,408 @@
+// @import './main.scss';
+
+body{
+    color:#222;
+    font-family: 'Nunito', sans-serif !important;
+
+    background-color: linear-gradient(rgb(208, 231, 240), rgb(189, 223, 238),rgb(255, 255, 255));
+
+ 	background-attachment:fixed;
+	background-size: cover;
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+      background-repeat: no-repeat;
+      background-position: bottom;
+    padding-bottom: 5rem;
+}
+.profileBefore{
+    position:absolute;
+    content:' ';
+    z-index:-1;
+    left:0;
+    top:0;
+    width:100%;
+    height:36vh !important;
+    
+    background-attachment:fixed;
+	background-size: cover;
+	  -webkit-background-size: cover;
+	  -moz-background-size: cover;
+      background-repeat: no-repeat;
+    
+    // background-image: url('../assets//imgs/dash-bg.jpg');
+    
+    }
+
+
+.processNoti
+{
+    font-size: 20px;
+    color: red;
+    margin-top: 0rem;
+    position: absolute;
+    margin-left: 9rem;
+    font-weight: 900;
+    border-radius: 50%;
+}
+
+.dash-card
+{
+    width: 150px;
+    height: 100px;
+    background-color: aliceblue;
+
+    // margin-top: 60% ;
+    border-radius: 12px;
+    position: relative;
+    text-align: left;
+    padding: 15px;
+}
+
+
+.dash-band
+{
+    position: absolute;
+    background-color: rgb(40, 218, 231);
+    height: 55px;
+    width:55px;
+    right: 1.5rem;
+    bottom: -1.5rem;
+    border-radius: 12px;
+}
+
+.dash-text
+{
+    font-size: 18px;
+    position: relative;
+    color: brown;
+    // margin-top: 2rem;
+    // margin-left: 4rem;
+    font-weight: 600;
+
+}
+
+.number-text
+{
+    position: relative;
+    font-size: 16px;
+    // margin-top: 1rem;
+    // margin-left: 1rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+
+
+.header-banner
+{
+//     background-color: azure;
+//     height: 70px;
+//     width: 55%;
+//    position: absolute;
+//    margin-left:30rem;
+//   top: 30% !important;
+//    padding-top: 0.2rem;
+//   border-radius: 12px;
+//   box-shadow: 0px 0px 25px 1px rgb(83, 83, 83);
+//   z-index: 1000;
+//   margin-bottom: 3rem;
+
+    background-color: rgb(255, 255, 255);
+    height: 70px;
+    width: 50%;
+    /* position: absolute; */
+    margin-left: 30rem;
+    /* padding-top: 0.2rem; */
+    border-radius: 12px;
+    box-shadow: 0px 0px 25px 1px #535353;
+    z-index: 1000;
+    //  margin-bottom: 3rem;
+}
+
+.header-banner-text
+{
+    color: black;
+    margin-left: 60px;
+    margin-top: -1.5rem;
+   
+}
+
+.home-links
+{
+    width: 82%;
+    background-color: #fff;
+    margin-left:245px;
+    margin-top: 8%;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 1px rgb(83, 83, 83,0.2);
+    margin-bottom: 3%;
+}
+
+.order-no-links
+{
+    width: 82%;
+    background-color: #fff;
+    margin-left:120px;
+    margin-top: 8%;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px 1px rgb(83, 83, 83,0.2);
+    margin-bottom: 3%;
+}
+
+.inner-links
+{
+    position: relative;
+    padding: 15px;
+}
+
+.inboxCount
+{
+
+
+    float: right;
+    color: #fff;
+    border: 1px solid red;
+    border-radius: 50%;
+    /* padding: 0px 0px; */
+    height: auto;
+    width: auto;
+    padding: -1px;
+    background-color: red;
+    font-weight: 600;
+    padding: 0px 4px;
+}
+
+.pro-item-content
+{
+    color: black!important;
+}
+
+.heading-links
+{
+    font-size: 18px;
+    font-weight: 600;
+    color: rgb(105, 157, 206);
+}
+
+.button-links
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.button-links button{
+    flex: 1 1 33%;
+    margin: 5px;
+    
+}
+
+.button-links button:hover{
+    transform: none;
+}
+
+.profileDiv
+{
+    border-radius: 50%;
+    width: 115px;
+    height: 115px;
+    background-color: aliceblue;
+    // margin-top: 50% !important;
+    // position: relative;
+    text-align: left;
+    padding: 5px 5px;
+    margin-left:245px ;
+}
+
+.profileInner
+{
+    border-radius: 50%;
+    width: 105px;
+    height: 105px;
+    border: 1px solid #bbb;
+    position: relative;
+    text-align: left;
+}
+
+.profileInner img{
+    object-fit: contain;
+    height: 102px; 
+    width: 104px;
+    border-radius: 50%;
+}
+
+.profileInner .img-camera
+{
+    background-color: #eee;
+    width: 40px;
+    height: 35px;
+    position: relative;
+    float: right;
+    margin-top: -1rem;
+    padding: 5px 7px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.cover-camera
+{
+    background-color: #eee;
+    width: 40px;
+    height: 35px;
+    // position: relative;
+    float: right;
+    // margin-top: 5rem;
+    // margin-right: -8rem;
+    // margin-top: -3rem;
+    padding: 6px 8px;
+    margin: 1rem 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.row-flex-align
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15%;
+}
+
+.ministry
+{
+    text-transform: uppercase;
+
+}
+
+.imageup
+{
+    display: block;
+}
+
+.notimageup
+{
+    display: none;
+}
+
+@media (min-width:601px) and (max-width:850px){
+
+    :root{
+        --mainpad:8vmax 7vmax 5vmax 5vmax;
+        }
+
+    .header-banner
+    {
+        width:68%
+    }
+
+    .align-div .pkg-div
+    {
+       left: 14% !important;
+    }
+
+     .camp-div
+    {
+       margin-left: 14% !important;
+    }
+
+    .align-div .event-div
+    {
+        margin-left: 10%!important;
+    }
+
+    .dash-card
+    {
+        margin-left: 15%;
+    }
+
+}
+
+
+@media (max-width:600px){
+    // :root{
+    // --mainpad:8vmax 3vmax 5vmax 3vmax;
+    // }
+
+    .pro-sidebar .pro-menu
+    {
+        width: 90px;
+    }
+
+    .header-banner
+    {
+        
+        margin-left: -8px !important ;
+        width: auto !important;
+        margin-top: 12%;
+        padding :0 20px 5px 0;
+    }
+
+    .dash-header
+    {
+        margin-left: 100px !important;
+    }
+
+    .profileDiv
+    {
+        margin-left: 0px;
+    }
+    .processNoti
+    {
+        margin-left: 4rem;
+    }
+    .pro-sidebar
+    {
+        min-width: 90px !important;
+        width: 90px !important;
+    }
+    .profileBefore
+    {
+        height: 36vh !important;
+        
+    }
+
+    .profileBefore img 
+    {
+        width: 100%;
+    }
+   
+    .row-flex-align
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: 2rem 2rem 2rem 9rem;
+
+    }
+
+    .row-flex-align button
+    {
+        margin-top: 7%;
+    }
+
+    .dash-card
+    {
+        margin-top: 2rem;
+    }
+
+    .view-msg .msg-align
+    {
+        width: fit-content;
+    }
+
+    .align-div
+    {
+        margin-right: 0.5rem;
+    }
+
+    .error-card
+    {
+        width: inherit;
+    }
+    
+}

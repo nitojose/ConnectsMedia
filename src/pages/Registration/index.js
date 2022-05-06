@@ -109,7 +109,7 @@ export default function Index(props) {
                   
                   <Parallax speed={-3}>
                     <h6 className='heading'>Register</h6>
-                    <p className='para-content'>Come To The Fold And More Jesus Viral</p>
+                    <p className='para-content'>Come To Fold And Make Jesus Viral</p>
                     
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <Row>
@@ -153,7 +153,7 @@ export default function Index(props) {
 
                         <Row align="center" >
                           <Col>Already Have An Account? &nbsp;
-                          <Link to='/login'>Sign in</Link></Col>
+                          <Link to='/login' style={{color:'black'}}>Sign in</Link></Col>
                         </Row>
 
                         

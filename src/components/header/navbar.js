@@ -16,9 +16,10 @@ import { HashLink as Link} from 'react-router-hash-link';
 import { FaUserTie }  from "react-icons/fa";
 import axios from 'axios';
 import { Url } from '../../GLOBAL/global';
+import {MdDashboard} from 'react-icons/md';
 var sessionstorage = require('sessionstorage');
 
-console.log('token is',sessionstorage.getItem('token'));
+// console.log('token is',sessionstorage.getItem('token'));
 
 
 
@@ -81,7 +82,7 @@ export default function Navbar(props,id) {
                 <div id="user-menu">
 
                 {sessionstorage.getItem('token')!== null ? (<>
-                    <Dropdown>
+                    {/* <Dropdown>
                                     <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
                                     <FaUserTie size={35} className='menu-nav' color='white'/>
                                     </Dropdown.Toggle>
@@ -99,7 +100,9 @@ export default function Navbar(props,id) {
                                        
                                         
                                     </Dropdown.Menu>
-                            </Dropdown>
+                            </Dropdown> */}
+                            <Dropdown variant="Secondary" id="dropdown-basic " className='menu-btn pointer dash-menu' onClick={() => history.push('/dashboard')}> <MdDashboard size={35} color='white' className='menu-btn pointer'/> </Dropdown>
+                            
                 </>): (homePath ? (<><Dropdown>
                                 <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
                                 <FaUserTie size={35} className='menu-nav' color='white'/>

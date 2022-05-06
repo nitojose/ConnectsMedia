@@ -15,10 +15,7 @@ import axios from 'axios';
 import { Url } from '../../GLOBAL/global';
 var sessionstorage = require('sessionstorage');
 
-console.log('token is',sessionstorage.getItem('token'));
-
-
-
+// console.log('token is',sessionstorage.getItem('token'));
 
 
 export default function LogoHeader() {
@@ -38,9 +35,6 @@ export default function LogoHeader() {
                     <img src={require('../../../src/assets/imgs/connect-media-logo.png')}  alt='header-logo-img' onClick={()=>home()}/></a>
                 </div>
             
-
-        
-                 
             </div>
            
     {/* header logo end */}

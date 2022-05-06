@@ -29,7 +29,7 @@ export default function Index() {
     
     // setValue(d);
 
-    console.log("token in login ",sessionstorage.getItem('token'))
+    // console.log("token in login ",sessionstorage.getItem('token'))
 
     
 
@@ -68,15 +68,15 @@ export default function Index() {
 
           if((response.data.message === 'loggedin') && ( sessionstorage.getItem('camp') === ('events-creation' || 'staticPosts' || 'million-posts')) )
           {
-            // window.location.href= siteUrl+'/'+sessionstorage.getItem('camp');
-            console.log("url", window.location.href= siteUrl+'/'+sessionstorage.getItem('camp'))
-            // history.go(0)
+            window.location.href= siteUrl+'/'+sessionstorage.getItem('camp');
+            // console.log("url", window.location.href= siteUrl+'/'+sessionstorage.getItem('camp'))
+            history.go(0)
            
           }
 
           if(response.data === "Email Not verified")
           {
-            toast.warning("Verify EmailId !");
+            toast.warning("Verify your Email !");
             // <Popup msg="Verify EmailId !" color="yellow" />
             setTimeout(() => history.push('/login'),3000 ) 
           }
@@ -84,7 +84,7 @@ export default function Index() {
           if(response.data.message === "user not found")
           {
             toast.error("Check email-id and password !!");
-            // <Popup msg="Check email-id and password !!" color="yellow" />
+            
             setTimeout(() => history.push('/login'),3000 ) 
           }
           
@@ -94,7 +94,7 @@ export default function Index() {
           {
             console.log(" no home");
             toast.error("Check email-id and password !!");
-            // <Popup msg="Check email-id and password !!" color="yellow" />
+            
             setTimeout(() => history.push('/login'),3000 ) 
             
           }
@@ -102,18 +102,19 @@ export default function Index() {
           {
             setTimeout(() => history.push('/'+sessionstorage.getItem('list')),3000 ) ;
             // history.go(0)
-            console.log(" package list");
+            // console.log(" package list",sessionstorage.getItem('list'));
           }
           else if((response.data.message === 'loggedin') && (sessionstorage.getItem('request') !== null) )
           {
             window.location.href= siteUrl+sessionstorage.getItem('request');
             // history.go(0)
+            // console.log(siteUrl+sessionstorage.getItem('request'));
             console.log("request url");
 
           }
           else{
-            history.push('/')
-            history.go(0)
+            history.push('/dashboard');
+            // history.go(0);
             console.log(" home");
           }
           
@@ -148,7 +149,7 @@ export default function Index() {
                   
                   <Parallax speed={-3}>
                     <h6 className='heading'>Login</h6>
-                    <p className='para-content'>Come To The Fold And More Jesus Viral</p>
+                    <p className='para-content'>Come To Fold And Make Jesus Viral</p>
                     
                     <Form onSubmit={handleSubmit(onSubmit)}>
                        
@@ -178,39 +179,41 @@ export default function Index() {
                         
                       >
                   
-                  </Spinner>} </>)
+                    </Spinner>} </>)
                 
-            : (<><Buttons text="Login" type="submit" />{ spinner && 
-                  <Spinner
+                      : (<><Buttons text="Login" type="submit" />{ spinner && 
+                      <Spinner
                  
                    
-                    animation="border"
-                    
-                    role="status"
-                    
-                  >
+                        animation="border"
+                        
+                        role="status"
+                        
+                      >
                   
-                  </Spinner> }</>)
+                    </Spinner> }</>)
                 
-}
+                }
                        
                         </Row>
+
+                        </Form>
                         
                         
 
                         <Row align="center" >
-                          <Col> To Become New User? &nbsp;
-                          <Link to='/registration'>Register</Link></Col>
+                          <Col className=''> Not a User? &nbsp;
+                          <Link className='bold-text' to='/registration' style={{color:'#000'}}>Register</Link></Col>
                         </Row>
 
                         <Row align="center" >
                          
-                          <Link to='/forgot_password'>forgot password</Link>
+                          <Link to='/forgot_password' style={{color:'#000'}}>Forgot Password</Link>
                         </Row>
             
                       
                     
-                    </Form>
+                   
 
 
                     </Parallax>

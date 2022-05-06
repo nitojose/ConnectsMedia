@@ -7,6 +7,7 @@ import dateFormat from 'dateformat';
 import { FcLeftDown,FcRightUp } from "react-icons/fc";
 import Parallax from 'react-rellax'
 import { useHistory} from "react-router-dom";
+import {FaArrowUp,FaArrowDown} from 'react-icons/fa';
 var sessionstorage = require('sessionstorage');
 
 export default function Relatedmsgs() {
@@ -53,15 +54,13 @@ export default function Relatedmsgs() {
   return (
   <div>
 
-        <Parallax speed={5}>
-            <img src={require('../../assets/images/Rectangle 40.png')} alt="bg" width='100%' height={250} style={{
-              objectFit:'cover'
-          }}/>
-
-       </Parallax>
+        
         <Container>
-            <h2 className='text-center my-5'>Messages</h2>
-            
+          
+        <div className='header-banner' style={{marginLeft:'245px'}}>
+          <FaArrowUp color='black' className='mt-4 mx-2' size={22}/> <FaArrowDown color='black' className='mt-4 ' size={22}/>
+          <p className='header-banner-text' style={{marginLeft:'5rem'}}>Related Messages</p>
+      </div>
                  
                         <div className='view-msg'>
                             {/* <p>Purchased Items</p> */}
@@ -69,7 +68,7 @@ export default function Relatedmsgs() {
                             
                               
                                <>
-                                <Row >
+                                <Row className='align-div'>
                                {relatedMsg.map((data, idx) => (
                                   
                                     <>

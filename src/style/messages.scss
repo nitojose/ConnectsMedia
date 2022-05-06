@@ -2,20 +2,68 @@
 
 .view-msg
 {
-    background-color: var(--bg);
+    
     width: auto;
     height: auto;
+    margin-top: 2% !important;
+    background-color: #f7f4f4;
+    border-radius: 8px!important;
+    // margin-left: -8rem!important;
 }
+
+// .view-msg button{
+//     margin-top: 3rem;
+// }
 
 .modal-msg
 {
-    // margin-top: -40rem;
-    // position: absolute;
-    // margin-left: 8%;
+  
     width: 50%;  
     
 }
 
+
+
+.msg-align
+{
+    width: 100%;
+    height: fit-content;
+    background-color: #f7f4f4;
+    border-radius: 10px;
+    margin: 3rem 0rem ;
+    // top: 10%;
+    position: relative;
+    padding: 20px;
+}
+
+
+.msg-align button:hover
+{
+    background-image: none;
+   
+}
+
+.msg-align button 
+{
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+
+.card-msg
+{
+    height: 370px !important;
+}
+
+.img-card-msg
+{
+    height: 355px;
+    border-radius: 20px;
+}
 .msg-text
 {
     width: 100%;
@@ -29,7 +77,103 @@
     width:25%;
 }
 
+.flex-align .msg_textarea
+{
+    border-radius: 8px;
+    width: 80%;
+    border: #d4d0d0 1px solid;
+    padding: 5px;
+}
+
+.reply-msg
+{
+    width: 100%;
+    background: transparent;
+    border: #d4d0d0 1px solid;
+    border-radius: 8px;
+    padding: 5px;
+}
+
 .arrow-color
 {
     color: $primary_color;
 }
+
+.hr-line
+{
+    padding: 10px 0;
+}
+
+
+.msg-header
+{
+    height:60px;
+    width: auto;
+    background-color: rgb(243, 232, 171);
+}
+
+//  msg -view
+
+.msg-container {
+    clear: both;
+    position: relative;
+    float: right;
+  }
+  
+  .msg-container .arrow {
+    width: 12px;
+    height: 20px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    top: 6px;
+    right: -1px;
+  }
+  
+  .msg-container .arrow .outer {
+    width: 0;
+    height: 0;
+    border-right: 20px solid #000000;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .msg-container .arrow .inner {
+    width: 0;
+    height: 0;
+    border-right: 20px solid #ffffff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 2px;
+  }
+  
+  .msg-container .message-body {
+    float: left;
+    width: 300px;
+    height: auto;
+    border: 1px solid #CCC;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    padding: 15px 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+  }
+  
+  .msg-container .message-body p {
+    margin: 0;
+  }
+
+  .flex-center
+  {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  }

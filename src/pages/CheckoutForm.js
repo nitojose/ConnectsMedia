@@ -5,7 +5,8 @@ import { Container,Spinner } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useHistory,Link} from "react-router-dom";
-import { Url } from "../GLOBAL/global";
+import { Url,isLoggin } from "../GLOBAL/global";
+
 var sessionstorage = require('sessionstorage');
 
 export default function CheckoutForm()
@@ -19,6 +20,24 @@ export default function CheckoutForm()
 const stripe = useStripe();
 const elements = useElements();
 const [spinner,setSpinner] = React.useState(false);
+
+async function logginornot()
+    {
+      const cust =  await isLoggin();
+      console.log("cust",cust);
+      if(cust === null)
+      {
+        history.push('/login');
+      }
+      
+  
+    }
+  
+    React.useEffect(() => {
+  
+      logginornot();
+    },[]);
+  
 
 const CARD_ELEMENT_OPTIONS = {
     style: {
@@ -142,7 +161,7 @@ const CARD_ELEMENT_OPTIONS = {
                                 console.log("pay After",response); 
             
                                 toast.success('Payment Success!!',{autoClose:5000});
-                                setTimeout(() => history.push('/orders'),6000);
+                                setTimeout(() => history.push('/dashboard'),6000);
                             })
                             .catch(function (response) {
                                 //handle error
@@ -177,29 +196,27 @@ const CARD_ELEMENT_OPTIONS = {
     return (
       // 
        <>
-         <Container className="py-5 ">
-              <form onSubmit={handleSubmit}>
-                {/* <CardSection /> */}
-                <CardElement options={CARD_ELEMENT_OPTIONS} />
-                <div className="space-between mt-5">
-                  <button  className="px-5">
-                    Submit
-                  </button>
-                  
-                </div>
-                {spinner && <Spinner animation="border"  role="status" style={{marginLeft:'53%',top:'-3rem',position:'relative'}}/> } 
-             
-              </form>
-
-             </Container> 
-
-        <div id="iframecont">
-
-        </div>
        
 
-         
+            <Container className="py-5 ">
+                <form onSubmit={handleSubmit}>
+                  
+                  <CardElement options={CARD_ELEMENT_OPTIONS} />
+                  <div className="space-between mt-5">
+                    <button  className="px-5">
+                      Submit
+                    </button>
+                    
+                  </div>
+                  {spinner && <Spinner animation="border"  role="status" style={{marginLeft:'53%',top:'-3rem',position:'relative'}}/> } 
+              
+                </form>
 
+            </Container> 
+
+             <div id="iframecont"></div>
+
+   
 <ToastContainer position="top-center" style={{marginTop:'50vh'}}/>
          
       {/* //  */}
