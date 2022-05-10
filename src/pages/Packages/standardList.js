@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Container,Row,Col } from 'react-bootstrap';
+import { Container,Row,Col ,Spinner} from 'react-bootstrap';
 import Service from '../../components/Packages/servicelist';
 import { Form } from 'react-bootstrap';
 import axios from 'axios'
@@ -41,7 +41,7 @@ export default function StandardList() {
     },[]);
     
     const [Items,setItems] =  React.useState([]);
-
+    const [spinner,setSpinner] = React.useState(false);
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     const [Items_1,setItems_1] =  React.useState([]);
     const [QueAns] = React.useState([]);
@@ -92,6 +92,15 @@ export default function StandardList() {
         <Container className='pkg-div'>
 
           {/* <h1 className='text-center'>Standard Package</h1> */}
+          <div className='first-div'>
+            <p className='extraRowSpace font-30'> Standard Package </p>
+                 <label className='checkbox-label '>1. 3 Done-for-you Posts Per Week(1 video, 2 pictures / posters)</label><br></br>
+                  <label className='checkbox-label '>2. Upto 2 Social Media Platforms</label><br></br>
+                  <label className='checkbox-label'>3. Post Boosting – for more views</label><br></br>
+                  <label className='checkbox-label'>4. 1 Ad Promotion per month</label><br></br>
+                  <label className='checkbox-label'>5. All Images, Graphics Copyrighting included</label><br></br>
+                
+          </div>
 
          
                         <div className='first-div'>
@@ -241,13 +250,14 @@ export default function StandardList() {
                                         {
                                             lists_1.map(item => (
                                             <>
-                                               <div className='checkbox-label'>
+                                               <div className='checkbox-label' >
                                                 <input
+                                                        
                                                         type="checkbox"
                                                         key={item.id}
-                                                        value={item.id}
+                                                        value={item.value}
                                                         className='checkbox'
-                                                        onChange={(e)=> handle(item.value)}
+                                                        onChange={(e)=> handle(e,item.value)}
                                                         
                                                     />
                                                 <label style={{marginLeft:'1rem'}}>{item.value}</label> 
@@ -283,8 +293,31 @@ export default function StandardList() {
                                 </Row>
 
                                 <Row className='extraRowSpace'>
-                                  <Buttons text="Submit" type="submit" />
-                                    {/* <input type="submit" /> */}
+                                {(!spinner ===false )? (<> <Buttons text="Submit" type="submit" disabled={true}/> {spinner && 
+                                  <Spinner
+                                
+                                  style={{marginLeft:'54%',marginTop:'-3.5rem',color:'white'}}
+                                    animation="border"
+                                    
+                                    role="status"
+                                    
+                                  >
+                  
+                                    </Spinner>} </>)
+                                
+                                      : (<><Buttons text="Submit" type="submit" />{ spinner && 
+                                      <Spinner
+                                
+                                  
+                                        animation="border"
+                                        
+                                        role="status"
+                                        
+                                      >
+                                  
+                                    </Spinner> }</>)
+                                
+                                }
                                 </Row>
 
 
@@ -307,9 +340,9 @@ export default function StandardList() {
     function onSubmit(data)
     {
       
-
+      setSpinner(true);
       lists.map((d,id) => {
-        // Items.push(d.value)
+        
         var temp ={
             "question":d.value,
             "answer":"NULL"
@@ -323,7 +356,7 @@ export default function StandardList() {
       // console.log("months",months);
       const member_id =  sessionstorage.getItem("customerId");
       const token = sessionstorage.getItem("token");
-
+     
 
       Questions.map(q => {
           
@@ -408,11 +441,7 @@ export default function StandardList() {
       data1.append("package_type",'STD');
       data1.append("package_cost",0);
       data1.append("months",months);
-    //   data1.append('package_services',JSON.stringify(Items))
     
-      // for (var value of data.values()) {
-      //     console.log(value); 
-      // }  
       
          
       const headers ={
@@ -459,11 +488,12 @@ export default function StandardList() {
                   {
                       
                       // history.push('/home');
+                      setSpinner(false);
                       toast.success("Order Request has been send !!");
   
                       setTimeout(() => 
                               confirmAlert({
-                                title: 'Thanks,.',
+                                title: 'Thanks, Whats Next ?',
                                 message: 'you can view the order request in Request -> Packages section',
                                 buttons: [
                                   {
@@ -515,18 +545,19 @@ export default function StandardList() {
     // }
 
 
-    function handle(item)
+    function handle(e,item)
     {
-        if(item === "All of the above")
-        {
-          selection = "In 1 year we want to expand our online reach , We are a new church. We want to make our presence in the current location , We are planting new churches in new locations. We want to attract new members in different areas ," + selection
-        }
-        else{
-          selection = item +", "+ selection;
-  
-        }
-        console.log("selection :",selection);
-        setItems_1(selection);
+      if(item === "All of the above")
+      {
+        selection = "In 1 year we want to expand our online reach , We are a new church. We want to make our presence in the current location , We are planting new churches in new locations. We want to attract new members in different areas"
+      }
+      else{
+        selection = item +", "+ selection;
+
+      }
+      console.log("selection :",selection);
+      setItems_1(selection);
+    
     }
 
 

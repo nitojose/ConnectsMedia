@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import { Container,Row,Col,Card,Button,Modal,Spinner } from 'react-bootstrap';
+import { Container,Row,Col,Card,Button,Spinner } from 'react-bootstrap';
 import '../../style/order.scss'
 import { Url,imgUrl,notImage,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';

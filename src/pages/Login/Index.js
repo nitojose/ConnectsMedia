@@ -58,7 +58,7 @@ export default function Index() {
         })
         .then(function (response) {
           //handle success
-          console.log(response.data.message);
+          console.log(response.data);
           
 
           setSpinner(false);
@@ -90,7 +90,7 @@ export default function Index() {
           
          
           
-          if(response.data.message !== 'loggedin')
+          if(response.data.message !== "loggedin")
           {
             console.log(" no home");
             toast.error("Check email-id and password !!");

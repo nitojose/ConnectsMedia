@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react';
-import { Container,Row,Col,Table,Button,Modal,Card } from 'react-bootstrap';
+import { Container,Row,Col,Table,Button,Card } from 'react-bootstrap';
 import { Url,isLoggin,picture } from '../../GLOBAL/global';
 import axios from 'axios';
 import '../../style/messages.scss';
@@ -165,24 +165,24 @@ export default function Index() {
                               {allmessages.map((data, idx) => 
 
                                   data.msg_status === "NotRead" ? (
-                                <tr className='bold-text'>
+                                <tr className='bold-text pointer'>
                                 <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
                                 <td onClick={() => msgView(data)}>{data.msg_user}</td>
                                 <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
                                 <td onClick={() => msgView(data)}>{data.msg_status}</td>
                                 <td>
                                 
-                            <RiDeleteBin6Line size={23} onClick={() => deleteMSg(data)}/>
+                            <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
                             </td>
                                 </tr>
                                   ):(
 
-                                    <tr>
+                                    <tr className='pointer'>
                                 <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
                                 <td onClick={() => msgView(data)}>{data.msg_user}</td>
                                 <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
                                 <td onClick={() => msgView(data)}>{data.msg_status}</td>
-                                <td><RiDeleteBin6Line size={23} onClick={() => deleteMSg(data)}/></td>
+                                <td><RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/></td>
                                 </tr>
 
                                   )
@@ -243,9 +243,6 @@ export default function Index() {
             console.log(response);
         });
 
-
-
-      
     }
 
 

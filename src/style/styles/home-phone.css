@@ -249,6 +249,11 @@ animation:fly-from-right 900ms forwards;
 flex-direction:column;
 }
 
+#give button {
+  width: 15vmax;
+  font-size: 43%;
+}
+
 #services h1{
 font-size:110%;
 padding-bottom:5px;
@@ -265,11 +270,24 @@ overflow-y:hidden;
 flex-direction: column;
 scroll-snap-type: x mandatory;
 }
-#service-list li{
+/* #service-list li{
 flex:1 1 auto;
 min-width:100%;
 scroll-snap-align: center;
-}
+} */
+
+#service-list li{
+    flex:1 1 auto;
+    min-width:100%;
+    scroll-snap-align: center;
+    transition-delay:0;
+    transition:none;
+    transform:none;
+    }
+
+    #services.onfocus #service-list li{
+      transform:none;
+      }
 #service-list li>div{
 position:relative;
 }
@@ -280,6 +298,14 @@ width:100%;
 #packages>div{
 padding:var(--mainpad);
 }
+
+#packages.onfocus .main-packages>div:first-child .package{
+  animation:fly-from-bottom 300ms forwards;
+  }
+  #packages.onfocus .main-packages>div:last-child .package{
+  animation:fly-from-bottom 300ms forwards;
+  }
+
 .main-packages{
 flex-direction: column;
 }
@@ -322,6 +348,20 @@ width:85%;
 #campaigns li{
 min-height: 40%;
 scroll-snap-align: center;
+}
+
+#contact #contact-card ul {
+  left: 42px;
+    right: 25px;
+    bottom: 14px;
+    top: 4px;
+}
+
+#contact #contact-card {
+  padding: 25% 26% 18% 25% !important;
+}
+#contact #card-wrap {
+  width: 100% !important;
 }
 
 #faqs{
@@ -386,3 +426,4 @@ display:block;
 display:none;
 }
 }
+

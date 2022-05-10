@@ -221,15 +221,15 @@ console.log("imi",initialValues);
                     
                         {pkgData.map((data, idx) => 
                         
-                          <tr>
+                          <tr className='pointer'>
                             
                             <td onClick={()=>{view(data,"pkg")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
                             <td onClick={()=>{view(data,"pkg")}}>{data.PACKAGE.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>
                             <td onClick={()=>{view(data,"pkg")}}>{data.PACKAGE.packages_cost}</td>
-                            <td ><a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a></td>
+                            <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
                             <td onClick={()=>{view(data,"pkg")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
                                               {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
-                                              {data.order.order_status === 'P'?(<><span className='warning '>Pending</span></>):(<></>)}
+                                              {data.order.order_status === 'P'?(<><span className='warning '>Order Pending</span></>):(<></>)}
                                               {data.order.order_status === 'R'?(<><span className='error '>Rejected</span></>):(<></>)}
                             </td>
                            
@@ -246,7 +246,7 @@ console.log("imi",initialValues);
                   
                   ) :(<>
 
-                        <div class="main-packages msg-align">
+                        <div class="main-packages dash-packages msg-align">
                           <div class="package-wrap">
                               <div class="package">
                                   <h4>Standard</h4>

@@ -340,8 +340,8 @@ export default function Index() {
                     </Route>
 
                 <Route exact path='/payment-form'>
-                <Sidebar/>
-                <PaymentForm/>
+                    <Sidebar/>
+                    <PaymentForm/>
                     
                 </Route>
 

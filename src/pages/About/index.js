@@ -18,7 +18,7 @@ export default function index() {
                 <i id="incvolume" class="fa fa-volume-up" aria-hidden="true" style={{display:"block"}}></i>
                 <i id="stop-play" class="fa fa-stop-circle-o" aria-hidden="true" style={{display:"block"}}></i>
 
-                <video autoPlay={false} muted={true} loop onLoadStart="this.volume=0.05">
+                <video autoPlay={false} loop onLoadStart="this.volume=0.05">
                   <source src={require('../../../src/assets/imgs/video.mp4')} type="video/mp4"/>
                 </video>
                

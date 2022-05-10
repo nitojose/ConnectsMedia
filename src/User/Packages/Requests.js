@@ -92,7 +92,7 @@ export default function Index() {
                 // If request is good...
                 
                 
-                console.log("pending",response.data);    
+                console.log("pending",response.data.pack);    
                
                 setPend_pack(response.data.pack);
 
@@ -107,10 +107,10 @@ export default function Index() {
 
            await axios.get(Url+'processingrequest', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
             .then(response => {
-                 console.log("processing",response.data);   
+                 console.log("processing",response.data.pack);   
                
                 setProcess_pack(response.data.pack);
-               setPackages(true);
+                setPackages(true);
                 
                
                
@@ -165,14 +165,15 @@ export default function Index() {
               </div>
         </div>
            
-                  <div className='view-msg'>
-                         
-
-                      <div className='msg-align '>
+                  
                            
                          {packages ?  (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col> :
                                  (
 
+                                  <div className='view-msg'>
+                         
+
+                                    <div className='msg-align '>
                                   
                                     <Table striped bordered hover>
                                       <thead>
@@ -202,7 +203,8 @@ export default function Index() {
                                         ))}
                                       </tbody>
                                     </Table>
-                                     
+                                    </div>
+                                    </div>                                     
                                      ) ):(<></>)
                                      
                          }
@@ -211,7 +213,10 @@ export default function Index() {
 
                            {packages ?(process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>:
                            (
+                        <div className='view-msg'>
+                         
 
+                         <div className='msg-align '>
                              
                               <Table striped bordered hover>
                               <thead>
@@ -229,8 +234,8 @@ export default function Index() {
                                 
                                   <tr>
                                     
-                                    <td onClick={()=>{view_pkg(process_pack[data])}}>process_event[0].created_at !== null? dateFormat(process_event[0].created_at, "mmmm dS, yyyy"):""}</td>
-                                    <td onClick={()=>{view_pkg(process_pack[data])}}>{data.PACKAGE.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>
+                                    <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.created_at !== null? dateFormat(process_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
+                                    <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_cost}</td> 
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.months}</td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}} className='error '>{process_pack[data].pack.packages_status}</td>
@@ -241,6 +246,9 @@ export default function Index() {
                                 ))}
                               </tbody>
                             </Table>
+
+                          </div>
+                          </div>
                                      
                             ) ):(<></>)
                           
@@ -251,7 +259,12 @@ export default function Index() {
                         {(process_pack === "No packages Available")  && (pend_pack === "No packages Available") ?(
 
                           <>
-                            <div class="main-packages ">
+
+                        <div className='view-msg'>
+                         
+
+                         <div className='msg-align '>
+                            <div class="main-packages dash-packages">
                                     <div class="package-wrap">
                                         <div class="package">
                                             <h4>Standard</h4>
@@ -302,6 +315,8 @@ export default function Index() {
                                         </div>
                                     </div>
                                   </div>
+                                  </div>
+                            </div>
                             </>
                             
                   
@@ -309,10 +324,7 @@ export default function Index() {
 
 
 
-                      </div>
-    
-                      
-                  </div>
+                    
         
         </Container>
    

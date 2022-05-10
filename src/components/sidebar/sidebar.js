@@ -17,6 +17,9 @@ export default function Sidebar()
   let history = useHistory();
  const [inboxCount,setInboxCount] =  React.useState();
  const [processCount,setprocessCount] = React.useState();
+ const [pkgCount,setpkgCount] = React.useState();
+ const [eveCount,seteveCount] = React.useState();
+ const [campCount,setcampCount] = React.useState();
 
  async function logginornot()
     {
@@ -78,6 +81,9 @@ export default function Sidebar()
             console.log(response.data);
 
             setprocessCount(response.data.Process_count);
+            setpkgCount(response.data.notification.package);
+            seteveCount(response.data.notification.event);
+            setcampCount(response.data.notification.campaign);
             // setAlmessages(response.data.data);
             // setLength(allmessages.length)
         })
@@ -161,14 +167,14 @@ function msgRecieve()
               <MenuItem icon={<FaHome/>} onClick={()=>history.push('/dashboard')}> Dashboard</MenuItem>
               {/* <MenuItem onClick={() => home()} icon={<FaHome/>}>Home</MenuItem> */}
 
-              {processCount === 0 ? '' :<span className='processNoti'>.</span>}
-                <SubMenu title="Orders"    icon={<FaShoppingBag/>} style={{backgroundColor:'white'}} > 
-                  <MenuItem icon={<FiPackage/>} onClick={() => orderpkg()}>Packages</MenuItem>
-                  <MenuItem icon={<MdEmojiEvents/>} onClick={() => orderEvent()}>Events </MenuItem>
-                  <MenuItem icon={<MdCampaign/>} onClick={() => orderCamp() }>Campaigns </MenuItem>
+              {processCount === 0 ? '' :<span className='processNoti'></span>}
+                <SubMenu title="Active Orders"    icon={<FaShoppingBag/>} style={{backgroundColor:'white'}} > 
+                  <MenuItem icon={<FiPackage/>} onClick={() => orderpkg()}>Packages {pkgCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{pkgCount}</span>)}</MenuItem>
+                  <MenuItem active={true} icon={<MdEmojiEvents/>} onClick={() => orderEvent()}>Events {eveCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{eveCount}</span>)}</MenuItem>
+                  <MenuItem icon={<MdCampaign/>} onClick={() => orderCamp() }>Campaigns {campCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{campCount}</span>)}</MenuItem>
                 </SubMenu>
 
-                <SubMenu title="Requests" icon={<MdPendingActions/>} style={{backgroundColor:'white'}}>
+                <SubMenu title="Order Requests" icon={<MdPendingActions/>} style={{backgroundColor:'white'}}>
                   <MenuItem icon={<FiPackage/>} onClick={() => reqPkg()}>Packages</MenuItem>
                   <MenuItem icon={<MdEmojiEvents/>} onClick={() => reqEvent()}>Events </MenuItem>
                  

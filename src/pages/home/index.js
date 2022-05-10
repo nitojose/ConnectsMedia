@@ -32,7 +32,7 @@ export default function index() {
                             </div>
                         </div>
                         
-                            <video autoPlay={true} loop muted={true}  playsInline>
+                            <video autoPlay={true} loop muted={true}  playsInline={true}>
                             <source src={require('../../../src/assets/imgs/earth-connect.mp4')} type="video/mp4" />
                             </video>
                             

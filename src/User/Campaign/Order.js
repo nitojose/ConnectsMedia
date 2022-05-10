@@ -189,15 +189,15 @@ export default function Index() {
                         
                             {campData.map((data, idx) => 
                             
-                              <tr>
+                              <tr className='pointer'>
                                 
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
                                 <td onClick={()=>{view(data,"camp")}}>{ data.plan.camp_type === 'MPOST'?" Million Posts":" Static Posts"}</td>
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.order_amt}</td>
-                                <td > <a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a></td>
+                                <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
                                             {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
-                                            {data.order.order_status === 'P'?(<><span className='warning '>Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'P'?(<><span className='warning '>Order Pending</span></>):(<></>)}
                                             {data.order.order_status === 'R'?(<><span className='error '>Rejected</span></>):(<></>)}
                                 </td>
                                
@@ -220,17 +220,17 @@ export default function Index() {
 
                             <li>
                               <h2>Missions</h2>
-                            <img src={require('../../../src/assets/imgs/stand-mic.png')} alt="Million Post - Mic"/>
-                                <span>Click below to support missionaries from across the globe</span>
+                            <img className='mt-3' src={require('../../../src/assets/imgs/stand-mic.png')} alt="Million Post - Mic"/>
+                                <span className='mt-3 text-center'>Click below to support missionaries from across the globe</span>
                             {/* <div><button>Start Here</button></div> */}
 
                                 {sessionstorage.getItem('token') ===null ?(
                                                         <>
-                                                        <button onClick={()=> redirectto("million")}>Register to start</button>
+                                                        <button onClick={()=> redirectto("million")} className='mt-3'>Register to start</button>
                                                         </>
                                                         ):(
                                                             <>
-                                                        <button onClick={()=>history.push('/million-posts')}>Start Here</button>
+                                                        <button onClick={()=>history.push('/million-posts')} className='mt-3'>Start Here</button>
                                                         </>
                                                         )
                                                     }
@@ -239,65 +239,65 @@ export default function Index() {
 
                             <li>
                               <h2>Strengthening Marriage</h2>
-                            <img src={require('../../../src/assets/imgs/strengthen-marriage.png')} alt="Strengthening Marriage"/>
-                                <span>Register and support for this special campaign and we will keep on posting inspirational content and bible scriptures, about togetherness and marriage on social media</span>
+                            <img className='mt-3' src={require('../../../src/assets/imgs/strengthen-marriage.png')} alt="Strengthening Marriage"/>
+                                <span className='mt-3 text-center'>Register and support for this special campaign and we will keep on posting inspirational content and bible scriptures, about togetherness and marriage on social media</span>
                             
 
                                                     {sessionstorage.getItem('token') ===null ?(
                                                         <>
-                                                        <button onClick={()=> redirectto("million")}>Register to start</button>
+                                                        <button onClick={()=> redirectto("million")} className='mt-3'>Register to start</button>
                                                         </>
                                                         ):(
                                                             <>
-                                                        <button onClick={()=>history.push('/million-posts')}>Start Here</button>
+                                                        <button onClick={()=>history.push('/million-posts')} className='mt-3'>Start Here</button>
                                                         </>
                                                         )
                                                     }
                           </li>
                             <li>
                               <h2>Youth Section</h2>
-                            <img src={require('../../../src/assets/imgs/youth.png')} alt="Praying Youth"/>
-                                <span>Register for this special campaign to engage our future generation with youthful Christian content on social media</span>
+                            <img className='mt-3' src={require('../../../src/assets/imgs/youth.png')} alt="Praying Youth"/>
+                                <span className='mt-3 text-center'>Register for this special campaign to engage our future generation with youthful Christian content on social media</span>
                                                 {sessionstorage.getItem('token') ===null ?(
                                                         <>
-                                                        <button onClick={()=> redirectto("static")}>Register to start</button>
+                                                        <button onClick={()=> redirectto("static")} className='mt-3'>Register to start</button>
                                                         </>
                                                         ):(
                                                             <>
-                                                        <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                                        <button onClick={()=>history.push('/staticPosts')} className='mt-3'>Start Here</button>
                                                         </>
                                                         )
                                                     }
                           </li>
                             <li>
                               <h2>Pray For Israel</h2>
-                            <img src={require('../../../src/assets/imgs/israel.png')} alt="Pray for Israel"/>
-                                <span>God loves Israel. So do we. Bible clearly mentions – “Pray for the peace of Jerusalem. May they prosper who love you”. We are creating an opportunity for you to bless Israel & Jerusalem. We will optimize videos and posters and publish on your behalf. Prosper!
+                            <img className='mt-3' src={require('../../../src/assets/imgs/israel.png')} alt="Pray for Israel"/>
+                                <span className='mt-3 text-center'>God loves Israel. So do we. Bible clearly mentions – “Pray for the peace of Jerusalem. May they prosper who love you”. We are creating an opportunity for you to bless Israel & Jerusalem. We will optimize videos and posters and publish on your behalf. Prosper!
                             </span>
                                                 {sessionstorage.getItem('token') ===null ?(
                                                         <>
-                                                        <button onClick={()=> redirectto("static")}>Register to start</button>
+                                                        <button onClick={()=> redirectto("static")} className='mt-3'>Register to start</button>
                                                         </>
                                                         ):(
                                                             <>
-                                                        <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                                        <button onClick={()=>history.push('/staticPosts')} className='mt-3'>Start Here</button>
                                                         </>
                                                         )
                                                     }
                           </li>
                             <li>
                               <h2>Evangelism</h2>
-                            <img src={require('../../../src/assets/imgs/evangelism.png')} alt="Evangelism"/>
-                                <span>Great opportunity to share the gospel while you are busy.
+                            <img className='mt-3' src={require('../../../src/assets/imgs/evangelism.png')} alt="Evangelism"/>
+                                <span className='mt-3 text-center'>Great opportunity to share the gospel while you are busy.
                           Register, and we will keep on posting word of God on social media ON YOUR NAME.
                             </span>
                                                 {sessionstorage.getItem('token') ===null ?(
                                                         <>
-                                                        <button onClick={()=> redirectto("static")}>Register to start</button>
+                                                        <button onClick={()=> redirectto("static")} className='mt-3'>Register to start</button>
                                                         </>
                                                         ):(
                                                             <>
-                                                        <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
+                                                        <button onClick={()=>history.push('/staticPosts')} className='mt-3'>Start Here</button>
                                                         </>
                                                         )
                                                     }

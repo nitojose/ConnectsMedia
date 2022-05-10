@@ -79,27 +79,11 @@ export default function UserHeader() {
 
             {sessionstorage.getItem('token')!== null  ? (<>
                 
-                {/* <Dropdown>
-                                <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
-                                <FaUserTie size={35} className='menu-nav' color='white'/>
-                                </Dropdown.Toggle>
+               
+                        
+            </>):(<><Dropdown variant="Secondary" id="dropdown-basic " className='menu-btn pointer dash-menu' onClick={() => history.push('/dashboard')}> <MdDashboard size={35} color='white' className='menu-btn pointer'/> </Dropdown></>)}
 
-
-
-                                <Dropdown.Menu style={{border: 'none'}}>  
-                                        <Dropdown.Item onClick={LogOut}>LogOut</Dropdown.Item>
-                                        <Dropdown.Item onClick={()=>history.push('/home')}>Home</Dropdown.Item>
-                                        <Dropdown.Item onClick={profileInfo}>Modify Profile</Dropdown.Item>
-                                        <Dropdown.Item href="/my-requests">My Requests</Dropdown.Item>
-                                        <Dropdown.Item href="/orders">My Orders <span className='nav-count'>{orderCount}</span></Dropdown.Item>
-                                        <Dropdown.Item href="/messages">Messages</Dropdown.Item>
-                                        <Dropdown.Item href="/gene-enquiry">General Enquiry</Dropdown.Item>
-                                
-                                    
-                                </Dropdown.Menu>
-                        </Dropdown> */}
-                        <Dropdown variant="Secondary" id="dropdown-basic " className='menu-btn pointer dash-menu' onClick={() => history.push('/dashboard')}> <MdDashboard size={35} color='white' className='menu-btn pointer'/> </Dropdown>
-            </>):(homePath ? (<><Dropdown>
+            {/* <Dropdown>
                                 <Dropdown.Toggle variant="Secondary" id="dropdown-basic" className='menu-btn pointer'>
                                 <FaUserTie size={35} className='menu-nav' color='white'/>
                                 </Dropdown.Toggle>
@@ -110,7 +94,7 @@ export default function UserHeader() {
                                         <Dropdown.Item onClick={homePage()}>Home</Dropdown.Item>
                                     
                                 </Dropdown.Menu>
-                        </Dropdown></>):(<></>))}
+                        </Dropdown> */}
 
                     
             </div>

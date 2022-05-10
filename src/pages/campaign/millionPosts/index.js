@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Container,Row,Col,Card } from 'react-bootstrap';
 import axios from 'axios'
-import { Url ,notImage} from '../../../GLOBAL/global';
+import { Url ,notImage,isLoggin} from '../../../GLOBAL/global';
 import '../../../style/Mposts.scss'
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -18,11 +18,24 @@ export default function Index() {
     let history = useHistory();
 
     useEffect(() => {
-
+        logginornot();
         getMillionPosts();
 
       },[Mpost!== null]);
 
+  
+
+ async function logginornot()
+  {
+    const cust =  await isLoggin();
+    console.log("cust",cust);
+    if(cust === null)
+    {
+      history.push('/login');
+    }
+    
+
+  }
 
     async function getMillionPosts()
     {
@@ -141,23 +154,13 @@ export default function Index() {
         })
         .then(function (response) {
             //handle success
-            console.log("mpost-res",response.data.message);
+            console.log("mpost-res",response.data);
             if(response.data.message === "Created")
             {
                 toast.success("Order Created !!",{autoClose:3000});
-                setTimeout(() => 
-                              confirmAlert({
-                                title: 'Thanks,.',
-                                message: 'you can view the order in Order -> Campaigns section',
-                                buttons: [
-                                  {
-                                    label: 'Yes',
-                                    onClick: () => history.push('/order/campaign')
-                                  },
-                                  
-                                ]
-                              }),3000);
-               
+                sessionstorage.setItem("campOrder",JSON.stringify(response.data));
+                setTimeout(() => history.push('/payment-form'),3000);
+
             }
         })
         .catch(function (response) {

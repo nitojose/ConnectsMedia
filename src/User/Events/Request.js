@@ -165,11 +165,12 @@ export default function Index() {
       </div>
 
      
-                    <div className='view-msg'>
-                     
-                      <div className='msg-align mx-0'>
+                   
                           {plans ? (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
                            (
+                            <div className='view-msg'>
+                     
+                            <div className='msg-align mx-0'>
                               <Table striped bordered hover>
                                 <thead>
                                   <tr className='bold-text'>
@@ -196,7 +197,9 @@ export default function Index() {
                                   )}
                                 </tbody>
                               </Table>
+                              </div>
 
+</div>
                            ))
                            :(<></>)}
 
@@ -210,7 +213,9 @@ export default function Index() {
                               (
                                 process_event.map((data, idx) => (
                                  
-                            
+                                  <div className='view-msg'>
+                     
+                                  <div className='msg-align mx-0'>
                                   <Table striped bordered hover>
                                 <thead>
                                   <tr className='bold-text'>
@@ -237,13 +242,18 @@ export default function Index() {
                                   )}
                                 </tbody>
                               </Table>
-                                     
+                              </div>
+
+</div>                                     
                                   ))))
                                 :(<></>)
                            } 
                        
 
                        {(pend_event ==="No events available")  && (process_event === "No events available") ?(<>
+                        <div className='view-msg'>
+                     
+                      <div className='msg-align mx-0'>
                         <div id='campaigns'>
                             <div>
                                 <ul>
@@ -266,14 +276,10 @@ export default function Index() {
                                 </ul>
                                 </div>
                           </div>
+                          </div>
+                          </div>
                        </>):(<></>) }
 
-                      </div> 
-
-                    
-                    </div>
-
-                    
         
     </Container>
 

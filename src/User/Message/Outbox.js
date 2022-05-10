@@ -161,26 +161,26 @@ export default function Index() {
                            
                               {allmessages.map((data, idx) => 
                                   data.msg_status === "NotRead" ? (
-                                    <tr className='bold-text'>
+                                    <tr className='bold-text pointer'>
                                     <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_user}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_status}</td>
                                     <td>
                                     
-                                <RiDeleteBin6Line size={23}/>
+                                <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
                                 </td>
                                     </tr>
                                       ):(
     
-                                        <tr>
+                                        <tr className='pointer'>
                                     <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_user}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_status}</td>
                                     <td>
                                     
-                                <RiDeleteBin6Line size={23}/>
+                                <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
                                 </td>
                                     </tr>
     
@@ -207,8 +207,44 @@ export default function Index() {
     function msgView(data)
     {
       sessionstorage.setItem("msgview",JSON.stringify(data));
-      history.push('/message/msgView');
-      history.go(0);
+
+
+      let formdata = new FormData();
+     formdata.append("message_id",data.msg_id);
+
+     console.log(formdata);
+    
+     const token = sessionstorage.getItem("token");
+
+     const headers ={
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+
+        axios({
+        method: 'post',
+        url: Url+'messagereadstatus',
+        data: formdata,
+        headers: headers
+        })
+        .then(function (response) {
+            //handle success
+            // console.log("success");
+            console.log(response.data);
+            if(response.data === "Message Read")
+            {
+              history.push('/message/msgView');
+              history.go(0);
+            }
+            
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
+
+
+
     }
     
 
@@ -256,6 +292,45 @@ export default function Index() {
  
 
   
+    }
+
+    function deleteMSg(data)
+    {
+      let formdata = new FormData();
+     formdata.append("message_id",data.msg_id);
+
+     console.log(formdata);
+    
+     const token = sessionstorage.getItem("token");
+
+     const headers ={
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${token}`
+      }
+
+        axios({
+        method: 'post',
+        url: Url+'deleteMessage',
+        data: formdata,
+        headers: headers
+        })
+        .then(function (response) {
+            //handle success
+            // console.log("success");
+            console.log(response.data);
+           if(response.data === "Message deleted")
+           {
+             history.go(0);
+           }
+            
+        })
+        .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
+
+
+
     }
 
 }

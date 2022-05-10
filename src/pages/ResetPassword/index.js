@@ -58,7 +58,7 @@ export default function Index() {
 
     function onSubmit(data)
     {
-      
+        console.log("hello");
         setspinner(true);
         if(data.pass1 === data.pass2)
         {
@@ -162,7 +162,7 @@ export default function Index() {
 
                         <Row className='extraRowSpace'>
                        
-                            {(!spinner ===false )? (<> <Buttons text="Change Password" type="submit" disabled={true}/> {spinner && 
+                            {(!spinner ===false )? (<> <Buttons  text="Change Password" type="submit" ></Buttons> {spinner && 
                             <Spinner
                           
                             style={{marginLeft:'56%',marginTop:'-3.5rem'}}
@@ -174,7 +174,7 @@ export default function Index() {
                         
                           </Spinner>} </>)
                       
-                            : (<><Buttons text="Change Password" type="submit" />{ spinner && 
+                            : (<><Buttons  text="Change Password" type="submit" ></Buttons>{ spinner && 
                             <Spinner
                       
                         

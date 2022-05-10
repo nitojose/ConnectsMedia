@@ -129,6 +129,7 @@ export default function index() {
             <li><img src={require('../../../src/assets/imgs/youtube.png')} alt="youtube"/></li>
             <li><img src={require('../../../src/assets/imgs/facebook.png')} alt="facebook"/></li>
             <li><img src={require('../../../src/assets/imgs/instagram.png')} alt="instagram"/></li>
+            <li><img src={require('../../../src/assets/imgs/twitter.png')} alt="twitter"/></li>
             <li><img src={require('../../../src/assets/imgs/box.png')} alt="box"/></li>
             <li><img src={require('../../../src/assets/imgs/web.png')} alt="web"/></li>
             <li><img src={require('../../../src/assets/imgs/truth.png')} alt="truth"/></li>
@@ -278,6 +279,17 @@ export default function index() {
         </div>
         <div id="social4" class="subtitle">
             <div class="content">
+            <h2>Twitter</h2>
+            <ul>
+            <li>We will prepare and post tweets</li>
+            <li>Done-for-you personalized Short videos</li>
+            <li>Done-for-you personalized posters / pictures with your name and logo</li>
+            </ul>
+            </div>
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+       </div>
+        <div id="social5" class="subtitle">
+            <div class="content">
             <h2>Digital Marketing</h2>
             <ul>
             <li>Promote your church / ministry on google and increase your search ranking on google<br></br>
@@ -289,7 +301,7 @@ export default function index() {
             </div>
             <i class="fa fa-times-circle" aria-hidden="true"></i>
         </div>
-        <div id="social5" class="subtitle">
+        <div id="social6" class="subtitle">
             <div class="content">
             <h2>Website</h2>
             <ul>
@@ -300,7 +312,7 @@ export default function index() {
             </div>
             <i class="fa fa-times-circle" aria-hidden="true"></i>
         </div>
-        <div id="social6" class="subtitle">
+        <div id="social7" class="subtitle">
             <div class="content">
             <h2>Truth Social</h2>
             <ul>

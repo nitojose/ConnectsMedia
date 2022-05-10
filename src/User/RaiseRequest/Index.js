@@ -100,7 +100,7 @@ export default function Index() {
 
               {type === "Package"? 
               (<>
-              <div class="main-packages ">
+              <div class="main-packages dash-packages">
                                     <div class="package-wrap">
                                         <div class="package">
                                             <h4>Standard</h4>
@@ -143,70 +143,21 @@ export default function Index() {
 
               (<>
 
-<div id="campaigns" style={{borderRadius:'8px'}}>
+                                <div id="campaigns" style={{borderRadius:'8px'}}>
                                         <div>
 
-                                        <ul>
+                                        <ul style={{width:'70%',alignSelf:'center'}}>
 
-                                        <li>
+                                        <li >
                                             <h2>Upcoming Event</h2>
-                                            <img src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                            <span>Share your calendar here. We will pick all your future events from here</span>
-                                                        <button onClick={()=>history.push('/events-creation')}>Start Here</button>
+                                            <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                                            <span className='text-center mt-3'>Share your calendar here. We will pick all your future events from here</span>
+                                                        <button onClick={()=>history.push('/events-creation')} className='mt-3'>Start Here</button>
                                                     
-                                    </li>
+                                        </li>
 
-                                        {/* <li>
-                                        <h2>Missions</h2>
-                                        <img src={require('../../../src/assets/imgs/stand-mic.png')} alt="Million Post - Mic"/>
-                                            <span>Click below to support missionaries from across the globe</span>
+                                        
                                      
-                                            <button onClick={()=>history.push('/million-posts')}>Start Here</button>
-                                                     
-                                    </li>
-
-
-                                        <li>
-                                        <h2>Strengthening Marriage</h2>
-                                        <img src={require('../../../src/assets/imgs/strengthen-marriage.png')} alt="Strengthening Marriage"/>
-                                            <span>Register and support for this special campaign and we will keep on posting inspirational content and bible scriptures, about togetherness and marriage on social media</span>
-                                
-                                             <button onClick={()=>history.push('/million-posts')}>Start Here</button>
-                                                            
-                                    </li>
-
-                                        <li>
-                                        <h2>Youth Section</h2>
-                                        <img src={require('../../../src/assets/imgs/youth.png')} alt="Praying Youth"/>
-                                            <span>Register for this special campaign to engage our future generation with youthful Christian content on social media</span>
-                                             
-                                             <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
-                                           
-                                    </li>
-
-                                        <li>
-                                        <h2>Pray For Israel</h2>
-                                        <img src={require('../../../src/assets/imgs/israel.png')} alt="Pray for Israel"/>
-                                            <span>God loves Israel. So do we. Bible clearly mentions – “Pray for the peace of Jerusalem. May they prosper who love you”. We are creating an opportunity for you to bless Israel & Jerusalem. We will optimize videos and posters and publish on your behalf. Prosper!
-                                        </span>
-                                                           
-                                        <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
-                                                                   
-                                                                   
-                                    </li>
-
-
-                                        <li>
-                                        <h2>Evangelism</h2>
-                                        <img src={require('../../../src/assets/imgs/evangelism.png')} alt="Evangelism"/>
-                                            <span>Great opportunity to share the gospel while you are busy.
-                                    Register, and we will keep on posting word of God on social media ON YOUR NAME.
-                                        </span>
-                                         
-                                         <button onClick={()=>history.push('/staticPosts')}>Start Here</button>
-                                                            
-                                    </li>
-                                     */}
                                         </ul>
                                     </div>
                     </div>

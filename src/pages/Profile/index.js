@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React,{useEffect,useState} from 'react';
 import { Container,Row,Col,Spinner,Button } from 'react-bootstrap';
 import Buttons from '../../components/Packages/Buttons';
@@ -22,7 +23,9 @@ export default function Index() {
     const [spinner,setSpinner] = React.useState(false);
     let history = useHistory();
     const [upload,setaupload] = React.useState(false);
-    const [pic,setPic] = React.useState();
+    
+    const [profileUpload,setProfileupload] = React.useState({});
+    const [coverUpload,setCoverupload] = React.useState({});
 
     useEffect(()=>{
         
@@ -130,16 +133,17 @@ export default function Index() {
 
     }
 
-    async function filechoose(e)
+    async function filechoose(e,pic)
     {
-       console.log("files",e[0])
+        
+      
         const token = sessionstorage.getItem("token");
         
         let formdata = new FormData();
         const customer_id = sessionstorage.getItem("customerId");
 
         formdata.append("customer_id",customer_id);
-        formdata.append("photo",e[0]);
+        formdata.append("photo",e.target.files[0]);
         
         const headers ={
             'Content-Type': 'multipart/form-data',
@@ -149,6 +153,8 @@ export default function Index() {
 
             if(pic === "profile")
             {
+                setProfileupload(URL.createObjectURL(e.target.files[0]));
+
                 await axios({
                 method: 'post',
                 url: Url+'profilephoto',
@@ -157,10 +163,11 @@ export default function Index() {
                 })
                 .then(function (response) {
                     console.log("file upload",response.data);
-                    toast.success('Profie picture Updated!..',3000);
-                    setTimeout(() =>  history.go(0),3000)
-                   
-                    setaupload(false);
+                    if(response.data.photo !== "")
+                    {
+                        toast.success('Profie picture Updated!..',3000);
+                    }
+                    
                     
                 })
                 .catch(function (response) {
@@ -170,6 +177,8 @@ export default function Index() {
             }
             else
             {
+
+                setCoverupload(URL.createObjectURL(e.target.files[0]));
                 await axios({
                     method: 'post',
                     url: Url+'coverphoto',
@@ -177,10 +186,11 @@ export default function Index() {
                     headers: headers
                     })
                     .then(function (response) {
-                        console.log("file upload",response.data);
-                        toast.success('Cover picture Updated!..',3000);
-                        setTimeout(() =>  history.go(0),3000)
-                        setaupload(false);
+                         console.log("file upload",response.data);
+                        if(response.data.photo !== "")
+                        {
+                            toast.success('Cover picture Updated!..',3000);
+                        }
                         
                     })
                     .catch(function (response) {
@@ -191,11 +201,17 @@ export default function Index() {
         
     }
 
-    function viewImageUpload(type)
-    {
-        setPic(type);
-        setaupload(!upload);
-    }
+    // function viewImageUpload(type)
+    // {
+    //     setPic(type);
+    //     setaupload(!upload);
+    // }
+
+    // function onImageChange(e)
+    // {
+    //     console.log("file",e)
+        
+    // }
 
   return (
       <>
@@ -204,23 +220,36 @@ export default function Index() {
         <Container>
 
         <div className='profileBefore' >
-            <img src={customerInfo.cover_photo === (undefined || null)?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+
+            {/* <img src={customerInfo.cover_photo === (undefined || null)?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' /> */}
+
+            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo.cover_photo === (undefined || null)?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />):(<><img src={coverUpload?coverUpload : picture} className='profileBefore' /></>)}
+            
             <div className='cover-camera'>
-            <AiOutlineCamera color='black' size={24} onClick={()=> viewImageUpload("cover")}/>
+                <label htmlFor='cover-image'><AiOutlineCamera  size={24} /></label> 
+        
+                <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype" style={{visibility:'hidden'}} id="cover-image"/>
             </div>
         </div>   
 
             <div className='row-flex-align'>
 
                 <div className='profileDiv'>
-                <div className='profileInner'>
-                    <img src={customerInfo.photo === (undefined || null)?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+                <div className='profileInner' >
                     
+                  
+
+                    {Object.keys(profileUpload).length === 0 ? (<img src={customerInfo.photo === (undefined || null) ? picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)}  style={{objectFit:'contain'}} />):(<><img src={profileUpload?profileUpload : picture} /></>)}
+
+                
+
                     <div className='img-camera'>
-                        <AiOutlineCamera color='black' size={24} onClick={()=> viewImageUpload("profile")}/>
+                        <label htmlFor='group_image'><AiOutlineCamera  size={24} /></label> 
+        
+                        <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" style={{visibility:'hidden'}}id="group_image"/>
                         
                     </div>  
-
+                    
 
                 </div>
                 
@@ -238,17 +267,17 @@ export default function Index() {
 
                     <Row className='align-div pwd-div mt-5 '>
 
-                    
+{/*                     
                     <ImageUploader
                        className={upload?'imageup':'notimageup'}
-                       fileContainerStyle={{width:'50%',backgroundColor:'#f2d1b5'}}
+                       fileContainerStyle={{backgroundColor:'#f2d1b5'}}
                        withIcon={true}
                        buttonText='Choose images'
                        onChange={(e) => filechoose(e)}
                        imgExtension={['.jpg', '.gif', '.png', '.gif']}
                        maxFileSize={5242880}
                  />
-         
+          */}
                     <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         <Row style={{marginLeft:'3rem'}} className='mx-5'>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" )} className='textbox login-box' defaultValue={customerInfo.cust_name} /> </Col>

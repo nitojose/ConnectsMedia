@@ -87,7 +87,7 @@ export default function CreateForm() {
                 setEventId(response.data.id);
                   setTimeout(() => 
                               confirmAlert({
-                                title: 'Thanks,.',
+                                title: 'Thanks, Whats Next ?',
                                 message: 'you can view the order request in Request -> Events section',
                                 buttons: [
                                   {
@@ -118,8 +118,9 @@ export default function CreateForm() {
             <Row >
                 <Col xl={6} sm={12} md={12} xxl={5} className='py-5 my-5'>
 
-                    <Parallax speed={5} >  
-                    <p className='para-content'>A small description</p> 
+                    <Parallax speed={5} > 
+                    <img src={require('../../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events" width='300px' height='300px'/> 
+                    <p className='para-content'>Share your calendar here. We will pick all your future events from here</p> 
                     </Parallax>
                 </Col>
 
@@ -129,11 +130,11 @@ export default function CreateForm() {
     
                 <Parallax speed={5}>
                    {showForm && 
-                    <h5 className='heading'>Create Event</h5>
+                    <h5 className='heading mt-5'>Create Event</h5>
                    }
         
                      {showForm && 
-                    <Form onSubmit={handleSubmit(onSubmit)}>
+                    <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                     <Row>
                         <Col sm={12} md={12} xl={12} xxl={12}> 
                         <div style={{display: 'flex',flexDirection: 'row'}} className='' >
@@ -158,7 +159,7 @@ export default function CreateForm() {
         
 
                     <Row>
-                        <Col sm={8} md={12} xl={12} xxl={12}>
+                        <Col sm={12} md={12} xl={12} xxl={12}>
                         <div style={{display: 'flex',flexDirection: 'row'}} className='' >
                             <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >To:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               <input type="date" placeholder="To Date" {...register("to" , { required: true })} className='textbox login-box'/> 

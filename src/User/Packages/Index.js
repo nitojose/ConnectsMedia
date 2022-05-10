@@ -82,9 +82,9 @@ export default function Index() {
     
     </div>
 
-        <div className='view-msg' style={{borderRadius:'8px'}}>
+        <div className='view-msg  mt-5' style={{borderRadius:'8px'}}>
                 <div className='msg-align'>
-                    <div class="main-packages ">
+                    <div class="main-packages dash-packages">
                                                 <div class="package-wrap">
                                                     <div class="package">
                                                         <h4>Standard</h4>

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Container,Row,Col, Form } from 'react-bootstrap';
+import { Container,Row,Col, Form,Spinner } from 'react-bootstrap';
 import Service from '../../components/Packages/servicelist';
 import axios from 'axios'
 import { Url,isLoggin } from '../../GLOBAL/global';
@@ -37,6 +37,7 @@ export default function CustomizedList() {
 
   let history = useHistory();
      const [months,setMonths] = React.useState();
+     const [spinner,setSpinner] = React.useState(false);
      const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     const [Items_1,setItems_1] =  React.useState([]);
     const [QueAns] = React.useState([]);
@@ -145,7 +146,13 @@ export default function CustomizedList() {
      
         <Container className='pkg-div' >
 
-        
+        <div className='first-div'>
+            <p className='extraRowSpace font-30'> Customized Package </p>
+
+              <label className='checkbox-label '>1. Register and check all our services</label><br></br>
+              <label className='checkbox-label '>2. Pick the services that suits your ministry needs</label><br></br>
+                
+          </div>
 
          
         <div className='first-div '>
@@ -343,8 +350,31 @@ export default function CustomizedList() {
                                 </Row>
 
                                 <Row className='extraRowSpace'>
-                                  <Buttons text="Submit" type="submit" />
-                                    {/* <input type="submit" /> */}
+                                {(!spinner ===false )? (<> <Buttons text="Submit" type="submit" disabled={true}/> {spinner && 
+                                  <Spinner
+                                
+                                  style={{marginLeft:'54%',marginTop:'-3.5rem',color:'white'}}
+                                    animation="border"
+                                    
+                                    role="status"
+                                    
+                                  >
+                  
+                                    </Spinner>} </>)
+                                
+                                      : (<><Buttons text="Submit" type="submit" />{ spinner && 
+                                      <Spinner
+                                
+                                  
+                                        animation="border"
+                                        
+                                        role="status"
+                                        
+                                      >
+                                  
+                                    </Spinner> }</>)
+                                
+                                }
                                 </Row>
 
 
@@ -396,6 +426,7 @@ export default function CustomizedList() {
     function onSubmit(data)
     {
 
+      setSpinner(true);
 
               Questions.map(q => {
                   
@@ -530,13 +561,13 @@ export default function CustomizedList() {
                       console.log("response - cust",response);
                       if(response.status === 201)
                       {
-                          
+                          setSpinner(false);
                           // history.push('/home');
                           toast.success("Order Request has been send !!");
       
                           setTimeout(() => 
                               confirmAlert({
-                                title: 'Thanks,.',
+                                title: 'Thanks, Whats Next ?',
                                 message: 'you can view the order request in Request -> Packages section',
                                 buttons: [
                                   {

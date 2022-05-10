@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { Url,notImage } from '../../../GLOBAL/global';
+import { Url,notImage,isLoggin } from '../../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Container,Row,Col } from 'react-bootstrap';
@@ -16,10 +16,22 @@ export default function Index() {
   let history = useHistory();
 
     useEffect(() => {
-
+        logginornot();
         getMillionPosts();
 
       },[post!== null]);
+
+    async function logginornot()
+    {
+        const cust =  await isLoggin();
+        console.log("cust",cust);
+        if(cust === null)
+        {
+        history.push('/login');
+        }
+    
+
+    }
 
 
     async function getMillionPosts()
@@ -140,18 +152,8 @@ export default function Index() {
             if(response.data.message === "Created")
             {
                 toast.success("Order Created !!",{autoClose:3000});
-                setTimeout(() => 
-                              confirmAlert({
-                                title: 'Thanks,.',
-                                message: 'you can view the order request in Request -> Campaigns section',
-                                buttons: [
-                                  {
-                                    label: 'Yes',
-                                    onClick: () => history.push('/dashboard')
-                                  },
-                                  
-                                ]
-                              }),3000);
+                sessionstorage.setItem("campOrder",JSON.stringify(response.data));
+                setTimeout(() => history.push('/payment-form'),3000);
 
             }
         })

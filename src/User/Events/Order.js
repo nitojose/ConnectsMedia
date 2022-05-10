@@ -189,15 +189,15 @@ export default function Index() {
                         
                             {planData.map((data, idx) => 
                             
-                              <tr>
+                              <tr className='pointer'>
                                 
                                 <td onClick={()=>{view(data,"event")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
                                 <td onClick={()=>{view(data,"event")}}>{data.plan[0].event_title}</td>
                                 <td onClick={()=>{view(data,"event")}}>{data.order.order_amt}</td>
-                                <td > <a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a></td>
+                                <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
                                 <td onClick={()=>{view(data,"event")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
                                             {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
-                                            {data.order.order_status === 'P'?(<><span className='warning '>Pending</span></>):(<></>)}
+                                            {data.order.order_status === 'P'?(<><span className='warning '>Order Pending</span></>):(<></>)}
                                             {data.order.order_status === 'R'?(<><span className='error '>Rejected</span></>):(<></>)}
                                 </td>
                                
@@ -215,19 +215,19 @@ export default function Index() {
                       ) :(<>
                           <div id='campaigns'>
                             <div>
-                                <ul>
+                                <ul style={{width:'70%',alignSelf:'center'}}>
                                   <li>
                                         <h2>Upcoming Event</h2>
-                                        <img src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                        <span>Share your calendar here. We will pick all your future events from here</span>
+                                        <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                                        <span className='mt-3'>Share your calendar here. We will pick all your future events from here</span>
                                   
                                                 {sessionstorage.getItem('token') ===null ?(
                                                     <>
-                                                    <button onClick={()=> redirectto("event")}>Register to start</button>
+                                                    <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
                                                     </>
                                                     ):(
                                                         <>
-                                                    <button onClick={()=>history.push('/events-creation')}>Start Here</button>
+                                                    <button onClick={()=>history.push('/events-creation')} className='mt-3'>Start Here</button>
                                                     </>
                                                     )
                                                 }

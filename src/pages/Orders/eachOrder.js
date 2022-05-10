@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Container,Row,Col,Card,Button,Modal } from 'react-bootstrap';
 import '../../style/order.scss'
@@ -7,7 +8,8 @@ import { useHistory,Link} from "react-router-dom";
 import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
 import { toast, ToastContainer } from 'react-toastify';
-
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 var sessionstorage = require('sessionstorage');
 
@@ -176,7 +178,7 @@ export default  function EachOrder() {
                                             
                                                 <p style={{marginTop:'-1rem;',width:'60%'}}><span>{order.plan[0].camp_desc?order.plan[0].camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
                                                 
-                                                <Button variant="light" className='px-5 '  style={{width:'60%'}} onClick={()=>sent()}>Message</Button>
+                                                <Button variant="light" className='px-5 ' style={{width:'50%'}} onClick={()=>sent()}>Message</Button>
 
                                             </div>
 
@@ -191,7 +193,7 @@ export default  function EachOrder() {
 
                                     <div>
 
-                                    <Container className='padding-8rem'>
+                                    {subOrder.length !==0 ? <Container className='padding-8rem'>
                                         <table className="table table-striped table-light my-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
@@ -220,7 +222,7 @@ export default  function EachOrder() {
                                     }
                                     </tbody>
                                         </table>
-                                        </Container>
+                                        </Container>:(<></>)}
                                     </div>
 
                                     
@@ -299,15 +301,17 @@ export default  function EachOrder() {
 
 
                                             <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button> 
+                                           
+                                            
 
                                         </div>
 
                                       
                                                     
-                                    {subOrder ? (<div>
-                                        {subOrder && subOrder.map((s,id) =>(
+                                    {subOrder.length !== 0 ? (<div className='suborder'>
+                                       
                                               <Container className='padding-8rem '>
-                                        <table className="table table-striped table-light mt-5 ">
+                                            <table className="table table-striped table-light mt-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>
                                                         <th scope="col">Bill Id</th>
@@ -317,7 +321,7 @@ export default  function EachOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                        
+                                                {subOrder && subOrder.map((s,id) =>( 
                                                            
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
@@ -325,14 +329,14 @@ export default  function EachOrder() {
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
-                                                           
+                                                     ))
+                                                    }       
                                                        
                                                                         
                                                 </tbody>
                                         </table>
                                         </Container>
-                                         ))
-                                        }
+                                        
                                     </div>):(<></>)}
 
 
@@ -345,32 +349,29 @@ export default  function EachOrder() {
                            
 
 
-                        {
-                        modelmsg &&
+                        
+                           {modelmsg === true &&
 
-                        <Modal.Dialog className='modal-msg'>
-                            <Modal.Header >
-                                <Modal.Title style={{color:'black'}}>Message Box </Modal.Title>
-                               {/* <p style={{color:'black'}}>title : {order.plan[0]?(order.plan[0].camp_title?order.plan[0].camp_title:order.plan[0].event_title):(order.PACKAGE.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED ")}</p> */}
-                                {/* {title==="replay"?"Replay To Messages" :" Sent Message"} */}
-                            </Modal.Header>
+                                confirmAlert({
 
-                            <Modal.Body>
-                                <textarea placeholder='type your message..' id="message" className='msg-text' />
-                            </Modal.Body>
+                                    customUI: ({onClose}) => {
+                                        return (
+                                        <div className='custom-ui'>
+                                            <h1> Message</h1>
+                                        
+                                            <textarea placeholder='Type your message..' id="message" className='msg-text' rows={4} required={true} ></textarea>
 
-                            <Modal.Footer>
+                                            <button onClick={()=>onClose()}>Close</button>
+                                            <button className='mx-2' onClick={() => sentmessage()}> Sent </button>
+                                            
+                                        </div>
+                                        
+                                        );
+                                        
+                                    }
+                                })
 
-                                
-                                <Button variant="secondary" onClick={closebtn}>Close</Button>
-                                
-                                <Button variant="dark" onClick={()=>sentmessage()}>sent</Button>
-                                
-                                
-                            </Modal.Footer>
-                        </Modal.Dialog>
-                    }
-                 
+                            }
                 
          
      
@@ -381,16 +382,19 @@ export default  function EachOrder() {
 </div>
   );
 
+  function onClose()
+  {
+      console.log("hello")
+      setmodelmsg(false);
+  }
+
     function sent()
     {
-        
-        setmodelmsg(!modelmsg);
+        console.log("message box clicked")
+        setmodelmsg(true);
     }
 
-    function closebtn()
-    {
-        setmodelmsg(false)
-    }
+    
 
     function paynow(subId,cost,orderid)
     {
@@ -409,46 +413,58 @@ export default  function EachOrder() {
 
     function sentmessage()
     {
+        setmodelmsg(false)
         var msg = document.getElementById('message').value;
-        console.log(msg)
+        console.log("msg",msg)
 
-        const token = sessionstorage.getItem("token");
-        const customer_id = sessionstorage.getItem("customerId");
+        if(msg)
+        {
+            const token = sessionstorage.getItem("token");
+            const customer_id = sessionstorage.getItem("customerId");
 
-        var formdata = new FormData();
-
-
-
-        formdata.append("customer_id",customer_id);
-        formdata.append("order_id",order.order.order_id);
-        formdata.append("message",msg);
-        formdata.append("msg_parentmsg",0);
-        formdata.append("msg_type",'I');
+            var formdata = new FormData();
 
 
-        const headers ={
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`
+
+            formdata.append("customer_id",customer_id);
+            formdata.append("order_id",order.order.order_id);
+            formdata.append("message",msg);
+            formdata.append("msg_parentmsg",0);
+            formdata.append("msg_type",'I');
+
+
+            const headers ={
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${token}`
+            }
+
+            axios({
+            method: 'post',
+            url: Url+'Message',
+            data:formdata,
+            headers: headers
+            })
+            .then(function (response) {
+                //handle success
+                console.log(response.data);
+                toast.success("Message Sent !!",{autoClose:3000})
+                setmodelmsg(false);
+               
+                setTimeout(() => history.go(0),3000) 
+                
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+
         }
-
-        axios({
-        method: 'post',
-        url: Url+'Message',
-        data:formdata,
-        headers: headers
-        })
-        .then(function (response) {
-            //handle success
-            console.log(response.data);
-            toast.success("Message Sent !!",{autoClose:3000})
-            setTimeout(() => history.push( { pathname: '/orders'}),3000) 
-            
-        })
-        .catch(function (response) {
-            //handle error
-            console.log(response);
-        });
-
+        else{
+            toast.error("type any message !!",{autoClose:2000})
+        }
+       
+    
+        
     }
 
 
