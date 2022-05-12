@@ -7,7 +7,7 @@ import {FaShoppingBag} from 'react-icons/fa';
 import {MdPendingActions,MdDashboard} from 'react-icons/md';
 import {CgUserAdd} from 'react-icons/cg';
 import axios from 'axios';
-import {Url,isLoggin,picture} from '../../GLOBAL/global';
+import {Url,isLoggin,picture,imgUrl} from '../../GLOBAL/global';
 import { useHistory,Link} from "react-router-dom";
 import {MdAddPhotoAlternate} from 'react-icons/md';
 import {AiOutlineCamera} from 'react-icons/ai';
@@ -128,10 +128,10 @@ export default function Index() {
 
        
 
-            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />):(<><img src={coverUpload?coverUpload : picture} className='profileBefore' /></>)}
+            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash'/>):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
 
             <div className='cover-camera'>
-                <label htmlFor='cover-image'><AiOutlineCamera  size={24} /></label> 
+                {/* <label htmlFor='cover-image'><AiOutlineCamera  size={24} /></label>  */}
 
                 <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype" style={{visibility:'hidden'}} id="cover-image"/>
             </div>
@@ -142,13 +142,13 @@ export default function Index() {
 
             <div className='profileDiv'>
               <div className='profileInner'>
-                {/* <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/> */}
-                {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)}  style={{objectFit:'contain'}} />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+               
+                {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)}  style={{objectFit:'contain'}} />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
                 <div className='img-camera'>
                     <label htmlFor='group_image'><AiOutlineCamera  size={24} /></label> 
         
-                    <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" style={{visibility:'hidden'}}id="group_image"/>
+                    <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" style={{visibility:'hidden'}} id="group_image"/>
                 </div>  
 
 
@@ -201,18 +201,19 @@ export default function Index() {
    
        
            
-            <div className='view-msg ' style={{backgroundColor:'#fff'}}>
-              
-                <div id="campaigns" className='mt-5' style={{borderRadius:'8px'}}>
-                         
+        <div className='view-msg mt-5'>
+                <div className='align-div pwd-div'>
+                   
+                    <div id="campaigns" style={{borderRadius:'8px'}}>
+                    
                                         <div>
-                                        <h1 className=' font-20'>Campaigns</h1>
+                                        <h1 className=' font-20 text-center'>Campaigns</h1>
                                         <ul>
 
                                         <li>
                                             <h2>Upcoming Event</h2>
                                             <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                            <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
+                                            <span className='mt-3'>Share your calendar here. We will pick all your future events from here</span>
                                     
                                                     {sessionstorage.getItem('token') ===null ?(
                                                         <>
@@ -229,8 +230,8 @@ export default function Index() {
                                         <li>
                                         <h2>Missions</h2>
                                         <img className='mt-3' src={require('../../../src/assets/imgs/stand-mic.png')} alt="Million Post - Mic"/>
-                                            <span className='mt-3  text-center'>Click below to support missionaries from across the globe</span>
-                                       
+                                            <span className='mt-3'>Click below to support missionaries from across the globe</span>
+                                        {/* <div><button>Start Here</button></div> */}
 
                                             {sessionstorage.getItem('token') ===null ?(
                                                                     <>
@@ -248,7 +249,7 @@ export default function Index() {
                                         <li>
                                         <h2>Strengthening Marriage</h2>
                                         <img className='mt-3' src={require('../../../src/assets/imgs/strengthen-marriage.png')} alt="Strengthening Marriage"/>
-                                            <span className='mt-3 text-center'>Register and support for this special campaign and we will keep on posting inspirational content and bible scriptures, about togetherness and marriage on social media</span>
+                                            <span className='mt-3'>Register and support for this special campaign and we will keep on posting inspirational content and bible scriptures, about togetherness and marriage on social media</span>
                                         
 
                                                                 {sessionstorage.getItem('token') ===null ?(
@@ -265,7 +266,7 @@ export default function Index() {
                                         <li>
                                         <h2>Youth Section</h2>
                                         <img className='mt-3' src={require('../../../src/assets/imgs/youth.png')} alt="Praying Youth"/>
-                                            <span className='mt-3 text-center'>Register for this special campaign to engage our future generation with youthful Christian content on social media</span>
+                                            <span className='mt-3'>Register for this special campaign to engage our future generation with youthful Christian content on social media</span>
                                                             {sessionstorage.getItem('token') ===null ?(
                                                                     <>
                                                                     <button onClick={()=> redirectto("static")} className='mt-3'>Register to start</button>
@@ -280,7 +281,7 @@ export default function Index() {
                                         <li>
                                         <h2>Pray For Israel</h2>
                                         <img className='mt-3'src={require('../../../src/assets/imgs/israel.png')} alt="Pray for Israel"/>
-                                            <span className='mt-3 text-center'>God loves Israel. So do we. Bible clearly mentions – “Pray for the peace of Jerusalem. May they prosper who love you”. We are creating an opportunity for you to bless Israel & Jerusalem. We will optimize videos and posters and publish on your behalf. Prosper!
+                                            <span className='mt-3'>God loves Israel. So do we. Bible clearly mentions – “Pray for the peace of Jerusalem. May they prosper who love you”. We are creating an opportunity for you to bless Israel & Jerusalem. We will optimize videos and posters and publish on your behalf. Prosper!
                                         </span>
                                                             {sessionstorage.getItem('token') ===null ?(
                                                                     <>
@@ -296,7 +297,7 @@ export default function Index() {
                                         <li>
                                         <h2>Evangelism</h2>
                                         <img src={require('../../../src/assets/imgs/evangelism.png')} alt="Evangelism" className='mt-3'/>
-                                            <span className='mt-3 text-center'>Great opportunity to share the gospel while you are busy.
+                                            <span className='mt-3'>Great opportunity to share the gospel while you are busy.
                                     Register, and we will keep on posting word of God on social media ON YOUR NAME.
                                         </span>
                                                             {sessionstorage.getItem('token') ===null ?(
@@ -312,12 +313,13 @@ export default function Index() {
                                     </li>
                                         </ul>
                                     </div>
+                    </div>
+                    </div>
                 </div>
 
-              </div>
-
-              <div className='view-msg mt-5 py-5 px-5'>
-                    <h1 className=' font-20 pb-5 text-center'>Packages</h1>
+              <div className='view-msg mt-5 '>
+                <div className='align-div pwd-div'>
+                    <h1 className=' font-20 py-3 text-center'>Packages</h1>
 
                     <div class="main-packages  dash-packages">
                     <div class="package-wrap">
@@ -371,6 +373,11 @@ export default function Index() {
                                                 </div>
                     </div>
 
+            
+            
+            
+            
+                </div>
             </div>
 
            

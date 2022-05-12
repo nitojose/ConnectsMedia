@@ -1,9 +1,8 @@
 
-import { useHistory } from 'react-router-dom';
-const Url = 'https://connectmedia.gitdr.com/api/';
+const Url = 'https://connectapi.gitdr.com/api/';
 
 // const Url = 'http://192.168.1.42:8000/api/';
-const imgUrl = "https://connectmedia.gitdr.com/public/";
+const imgUrl = "https://connectapi.gitdr.com/public/";
 // const siteUrl ="https://localhost";
 
 const siteUrl ="https://connect.gitdr.com";

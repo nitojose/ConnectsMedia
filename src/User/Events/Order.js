@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React,{useEffect} from 'react';
-import { Url,isLoggin,picture } from '../../GLOBAL/global';
+import { Url,isLoggin,picture,imgUrl } from '../../GLOBAL/global';
 import { Container,Row,Col,Table,Button, Card } from 'react-bootstrap';
 import axios from 'axios';
 import '../../style/messages.scss';
@@ -141,7 +141,7 @@ export default function Index() {
     <Container>
 
     <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
@@ -149,7 +149,7 @@ export default function Index() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}} className='cover-img-dash'/>
               
 
 
@@ -173,7 +173,7 @@ export default function Index() {
                                     
                                 <>
                      
-                     <div className='msg-align'>
+                     <div className='align-div pwd-div'>
     
                         <Table striped bordered hover>
                           <thead>
@@ -213,28 +213,32 @@ export default function Index() {
                       </>
                       
                       ) :(<>
-                          <div id='campaigns'>
-                            <div>
-                                <ul style={{width:'70%',alignSelf:'center'}}>
-                                  <li>
-                                        <h2>Upcoming Event</h2>
-                                        <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                        <span className='mt-3'>Share your calendar here. We will pick all your future events from here</span>
-                                  
-                                                {sessionstorage.getItem('token') ===null ?(
-                                                    <>
-                                                    <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
-                                                    </>
-                                                    ):(
-                                                        <>
-                                                    <button onClick={()=>history.push('/events-creation')} className='mt-3'>Start Here</button>
-                                                    </>
-                                                    )
-                                                }
-                                  </li>
-                                </ul>
-                                </div>
+                        
+                          <div className='align-div pwd-div'>
+                            <div id='campaigns'>
+                              <div>
+                                  <ul style={{width:'70%',alignSelf:'center'}}>
+                                    <li>
+                                          <h2>Upcoming Event</h2>
+                                          <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                                          <span className='mt-3'>Share your calendar here. We will pick all your future events from here</span>
+                                    
+                                                  {sessionstorage.getItem('token') ===null ?(
+                                                      <>
+                                                      <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
+                                                      </>
+                                                      ):(
+                                                          <>
+                                                      <button onClick={()=>history.push('/events-creation')} className='mt-3'>Start Here</button>
+                                                      </>
+                                                      )
+                                                  }
+                                    </li>
+                                  </ul>
+                                  </div>
+                            </div>
                           </div>
+                        
                       </> )
                       
                     }

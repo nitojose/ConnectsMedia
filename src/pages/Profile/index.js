@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import { useForm } from 'react-hook-form';
 import  Parallax  from 'react-rellax';
 import axios from 'axios'
-import { Url,isLoggin, notImage,picture } from '../../GLOBAL/global';
+import { Url,isLoggin, notImage,picture,imgUrl } from '../../GLOBAL/global';
 import { useHistory,Link} from "react-router-dom";
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -221,9 +221,7 @@ export default function Index() {
 
         <div className='profileBefore' >
 
-            {/* <img src={customerInfo.cover_photo === (undefined || null)?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' /> */}
-
-            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo.cover_photo === (undefined || null)?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />):(<><img src={coverUpload?coverUpload : picture} className='profileBefore' /></>)}
+            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo.cover_photo === (undefined || null)?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
             
             <div className='cover-camera'>
                 <label htmlFor='cover-image'><AiOutlineCamera  size={24} /></label> 
@@ -239,7 +237,7 @@ export default function Index() {
                     
                   
 
-                    {Object.keys(profileUpload).length === 0 ? (<img src={customerInfo.photo === (undefined || null) ? picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)}  style={{objectFit:'contain'}} />):(<><img src={profileUpload?profileUpload : picture} /></>)}
+                    {Object.keys(profileUpload).length === 0 ? (<img src={customerInfo.photo === (undefined || null) ? picture :(imgUrl+customerInfo.photo)}  style={{objectFit:'contain'}} />):(<><img src={profileUpload?profileUpload : picture} /></>)}
 
                 
 
@@ -265,7 +263,7 @@ export default function Index() {
             <div className='view-msg '>
                 
 
-                    <Row className='align-div pwd-div mt-5 '>
+                    <Row className='align-div pwd-div  '>
 
 {/*                     
                     <ImageUploader
@@ -279,21 +277,21 @@ export default function Index() {
                  />
           */}
                     <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
-                        <Row style={{marginLeft:'3rem'}} className='mx-5'>
+                        <Row >
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" )} className='textbox login-box' defaultValue={customerInfo.cust_name} /> </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Ministry" type="text" {...register('ministry')} className='textbox login-box' defaultValue={customerInfo.cust_ministry} /> </Col>
 
                         </Row>
 
-                        <Row style={{marginLeft:'2rem'}} className='mx-5'>
+                        <Row  >
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Email" type="email"  className='textbox login-box' value={customerInfo.cust_email} disabled={true} style={{color:'#aaa',backgroundColor:'#f7f4f4'}}/> </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Phone" type="tel-in" {...register("phone")} className='textbox login-box' value={customerInfo.cust_phone}/> </Col>
 
                         </Row>
 
-                        <Row style={{marginLeft:'2rem'}} className='mx-5'>
+                        <Row  >
                             
                             <Col sm={12} md={12} xl={12} xxl={12}>
                                 <textarea placeholder="Full Address" {...register("add" , { required: true })} className='textbox '  rows={3} defaultValue={customerInfo.cust_address==='undefined'?'':customerInfo.cust_address} disabled={false} inputMode={'text'}></textarea></Col>

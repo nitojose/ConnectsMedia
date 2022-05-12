@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from "react-router-dom";
-import { Container,Row,Col,Card,Button,Table } from 'react-bootstrap';
+import { Container,Row,Col,Card,Button,Table,Spinner } from 'react-bootstrap';
 import '../../style/order.scss'
 import { Url,imgUrl,notImage,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';
@@ -30,6 +30,8 @@ export default function Index() {
     const [subOrder,setSubOrder] = React.useState([]);
     const [Order,setOrder] =React.useState({});
     const [subId,setSubId] = React.useState();
+    const [rejectbtn,setrejectbtn] = React.useState(false);
+    const [spinner,setSpinner] = React.useState(false);
 
 
     const [image,setImage] = React.useState(); 
@@ -65,20 +67,20 @@ export default function Index() {
 
         sessionstorage.setItem('request',window.location.pathname);
 
-        const headers ={
+        const headers = {
             'Content-Type': 'multipart/form-data',
             'Authorization': `Bearer ${token}`,
             'Access-Control-Allow-Origin' : '*',
             'Access-Control-Allow-Methods': 'POST'
-          }
-
-        if(customer_id === null)
-        {
-            history.push('/login');
         }
 
-        else
-        {
+        // if(customer_id === null)
+        // {
+        //     history.push('/login');
+        // }
+
+        // else
+        // {
             if(type==="event")
             {
                     var events = new FormData();
@@ -165,7 +167,7 @@ export default function Index() {
    
             }
     
-        }
+        // }
 
         
       },[history, id, type]);
@@ -236,7 +238,7 @@ export default function Index() {
                                     <div className='padding-8rem pt-3 space-between'>
                                             <Row>
                                                 <Col>
-                                                    < img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
+                                                    < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
 
                                                 </Col>
 
@@ -279,7 +281,7 @@ export default function Index() {
                                                     ( eventList.event_status === 'Success' ? '' : (
                                                         <>
                                                         {!pkgReject && <Button variant="light" onClick={()=>accept(eventList.event_cost,type,0)}>Accept</Button>}
-                                                            <Button variant="light" onClick={()=>reason()}>Reject</Button>
+                                                        {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
 
 
                                                             </>
@@ -287,17 +289,23 @@ export default function Index() {
                                                     )}
                                                     
 
-                                                    {(pkgReject && <>
-                                                        <select name="reason"  id="reason" style={{marginLeft:10,height:'50%'}} onClick={()=>reject(eventList.event_cost,type)}>
-                                                            <option>Select Reason</option>
-                                                            <option value="Not Intrested">Not Intrested</option>
-                                                            <option value="Need to Add/Remove features">Need to Add/Remove features</option>
-                                                            <option value="Change of mind">Change of mind</option>
-                                                            <option value="Decided for alternative product">Decided for alternative product</option>
-                                                        
-                                                        </select></>)
                                                     
-                                                    }              
+
+                                        {pkgReject &&( <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject(eventList.event_cost,type)}>
+                                            <option value="">Select Reason</option>
+                                            <option value="Not Intrested">Not Intrested</option>
+                                            <option value="Need to Add/Remove features">Need to Add/Remove features</option>
+                                            <option value="Change of mind">Change of mind</option>
+                                            <option value="Decided for alternative product">Decided for alternative product</option>
+                                            </select>&nbsp;&nbsp;
+               
+                                            <label> OR </label>
+
+                                            <textarea type="text" id="reason-text" rows={5} className='msg-text mx-3 px-2' placeholder=' type your reject reason' ></textarea> 
+                                            <button onClick={() => reject()}>Submit</button>
+                                        </div>)
+                                                        
+                                        }          
 
                                                         
                                     </div>
@@ -404,12 +412,12 @@ export default function Index() {
                                         
 
 
-                                    <div style={{paddingLeft:'15rem'}}>
+                                    <div className='align-div' >
                                    
                                          {paybtn || pkgData.packages_status === "Accepted"  ? (<> 
 
                                             {subOrder && 
-                                                <table className="table table-striped table-light mx-5 my-5 ">
+                                                <table className="table table-striped table-light mx-5 my-5 table-pkg-pending ">
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th scope="col">Bill Id</th>
@@ -442,21 +450,33 @@ export default function Index() {
                                                <>
                                            <div className='space-between'>
                                           
-                                        {!pkgReject && <Button variant="light" onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
-                                        <Button variant="light" onClick={()=>reason()}>Reject</Button>
+                                        {!pkgReject && <Button variant="light" className='px-5' onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
+
+                                        {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
+
+                                        {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
 
                                         </div>
                                         </>)
                                        )}
 
-                                       {pkgReject && <>Select Reason : <select id="reason" onChange={()=>reject(pkgData.packages_cost,type)}>
-                                       <option value="select">Select Reason</option>
-                                                        <option value="Not Intrested">Not Intrested</option>
-                                                        <option value="Need to Add/Remove features">Need to Add/Remove features</option>
-                                                        <option value="Change of mind">Change of mind</option>
-                                                        <option value="Decided for alternative product">Decided for alternative product</option>
-                                                        </select></>
-                                       }
+                                       
+
+                                        {pkgReject &&( <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject(pkgData.packages_cost,type)}>
+                                            <option value="">Select Reason</option>
+                                            <option value="Not Intrested">Not Intrested</option>
+                                            <option value="Need to Add/Remove features">Need to Add/Remove features</option>
+                                            <option value="Change of mind">Change of mind</option>
+                                            <option value="Decided for alternative product">Decided for alternative product</option>
+                                            </select>&nbsp;&nbsp;
+               
+                                            <label> OR </label>
+
+                                            <textarea type="text" id="reason-text" rows={5} className='msg-text mx-3 px-2' placeholder=' type your reject reason' ></textarea> 
+                                            <button onClick={() => reject()}>Submit</button>
+                                        </div>)
+                                                        
+                                        }
                                     </div>
                                     </Container>
                                    </>
@@ -479,12 +499,13 @@ export default function Index() {
  function reason()
 {
     setPkgReject(true);
+    setrejectbtn(true);
 }
 
     function accept(cost,value,month)
     {
         
-        
+        setSpinner(true);
 
         console.log("va",value)
         const token = sessionstorage.getItem("token");
@@ -515,9 +536,9 @@ export default function Index() {
                 .then(function (response) {
                     //handle success
                     console.log("response",response); 
-                    history.go(0);
+                    setSpinner(false);
                     setPayBtn(true);
-                    
+                    history.go(0);
                     
                 })
                 .catch(function (response) {
@@ -548,6 +569,8 @@ export default function Index() {
                 .then(function (response) {
                     //handle success
                     console.log("response",response); 
+                    
+                    setSpinner(false);
                     setPayBtn(true);
                     history.go(0);
                 })
@@ -573,6 +596,8 @@ export default function Index() {
         console.log("reason1",e);
         var reason = e.options[e.selectedIndex].value;
 
+        var reText = document.getElementById("reason-text").value;
+
         console.log("reason2",reason);
 
         const token = sessionstorage.getItem("token");
@@ -587,63 +612,74 @@ export default function Index() {
         console.log("cost",cost === undefined?0:cost)
         var data = new FormData();
 
-        if(value==="event")
+        if(reason === "" && reText === "")
         {
-            data.append("event_id",id);
-            data.append("customer_id",c_id);
-            data.append("cost",cost === undefined?0:cost);
-            data.append("status","R");
-            data.append("reason",reason);
-
-            axios({
-                method: 'post',
-                url: Url+'eventorder',
-                data: data,
-                headers: headers
-                })
-                .then(function (response) {
-                    //handle success
-                    console.log("response",response); 
-                    toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/dashboard'),3000);
-                })
-                .catch(function (response) {
-                    //handle error
-                    console.log(response);
-                    toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/dashboard'),3000);
-                });
-
+            console.log("not");
+            toast.error('Select any reason !!',{autoClose:3000});
         }
-
-        if(value==="package")
+        else
         {
-            data.append("package_id",id);
-            data.append("customer_id",c_id);
-            data.append("cost",cost === undefined?0:cost);
-            data.append("status","R");
-            data.append("reason",reason);
+            if(value==="event")
+            {
+                data.append("event_id",id);
+                data.append("customer_id",c_id);
+                data.append("cost",cost === undefined?0:cost);
+                data.append("status","R");
+                data.append("reason",reason===""?reText:reason);
+
+                axios({
+                    method: 'post',
+                    url: Url+'eventorder',
+                    data: data,
+                    headers: headers
+                    })
+                    .then(function (response) {
+                        //handle success
+                        console.log("response",response); 
+                        toast.success('order Rejected !!',{autoClose:3000})
+                        setTimeout(() => history.push('/dashboard'),3000);
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                        toast.success('order Rejected !!',{autoClose:3000})
+                        setTimeout(() => history.push('/dashboard'),3000);
+                    });
+
+            }
+
+            if(value==="package")
+            {
+                data.append("package_id",id);
+                data.append("customer_id",c_id);
+                data.append("cost",cost === undefined?0:cost);
+                data.append("status","R");
+                data.append("reason",reason===""?reText:reason);
 
 
-            axios({
-                method: 'post',
-                url: Url+'packageorder',
-                data: data,
-                headers: headers
-                })
-                .then(function (response) {
-                    //handle success
-                    console.log("response",response); 
-                    toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/dashboard'),3000);
-                })
-                .catch(function (response) {
-                    //handle error
-                    console.log(response);
-                    toast.success('order Rejected !!',{autoClose:3000})
-                    setTimeout(() => history.push('/dashboard'),3000);
-                });
+                axios({
+                    method: 'post',
+                    url: Url+'packageorder',
+                    data: data,
+                    headers: headers
+                    })
+                    .then(function (response) {
+                        //handle success
+                        console.log("response",response); 
+                        toast.success('order Rejected !!',{autoClose:3000})
+                        setTimeout(() => history.push('/dashboard'),3000);
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                        toast.success('order Rejected !!',{autoClose:3000})
+                        setTimeout(() => history.push('/dashboard'),3000);
+                    });
+            }
         }
+        
+
+        
        
         
         

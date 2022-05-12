@@ -25,6 +25,8 @@ export default function EventPending() {
     const [subOrder,setSubOrder] = React.useState([]);
     const [Order,setOrder] =React.useState({});
     const [subId,setSubId] = React.useState();
+    const [rejectbtn,setrejectbtn] = React.useState(false);
+    const [spinner,setSpinner] = React.useState(false);
 
     async function logginornot()
     {
@@ -45,7 +47,7 @@ export default function EventPending() {
 
 
   return (
-    <>
+    <div className='event-pending'>
                                 
                                 
                                     <div className='vertical-text'>
@@ -61,49 +63,49 @@ export default function EventPending() {
 
                                         <hr></hr>
 
+                                        <div className='space-between'>
+                                            
 
-                                </div>
+                                            <img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5" id="event_req_img"/>
 
-                                <div className='padding-8rem pt-3 space-between'>
-                                    <Row>
-                                        <Col>
-                                        <img src={eventList.photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5 "/>
-                                        </Col>
+                                            <div className='font-12 content-end'>
+                                                <p> Tittle : <span >{eventList.event_title}</span></p>
 
-                                        <Col className='content-end'>
-                                            <div className='font-12 content-end ' style={{marginLeft:'3rem'}}>
-                                                    <p> Tittle : <span >{eventList.event_title}</span></p>
+                                                <p>Cost : <span >${eventList.event_cost}{''} </span></p>
 
-                                                    <p>Cost : 
-                                                    <span >${eventList.event_cost} </span>
-                                                    </p>
-
-                                                
                                                 <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
                                                     <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
-                                                
-                                                <p>Status : <span className='bold-text green'>{eventList.event_status} </span></p>
-                                    
 
-                                                    
+                                                <p className='underline'> Description </p>
+                                            
+                                                <p>Status : <span className='bold-text green'>{eventList.event_status} </span></p>
 
                                             </div>
-                                        </Col>
-                                    </Row>
-                                
+
+
+
+                                        </div>
+
 
                                 </div>
+
+                               
+
+                                
 
                                 <div className='extraRowSpace'>
                                 </div>
 
-                                    <div className='padding-8rem space-between '>
+                                    <div className='padding-8rem space-between'>
                                         {paybtn || eventList.event_status === "Accepted" ? (<> 
                                             </>):
                                             ( eventList.event_status === 'Success' ? '' : (
                                             <>
-                                                 {!pkgReject && <Button variant="light" onClick={()=>accept()}>Accept</Button>}
-                                                  <Button variant="light" onClick={()=>reason()}>Reject</Button>
+                                                 {!pkgReject && <Button variant="light" className='px-5' onClick={()=>accept()}>Accept</Button>}
+
+                                                 {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
+
+                                                 {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
 
 
                                             </>
@@ -111,25 +113,26 @@ export default function EventPending() {
                                         }
                                                         
 
-                                            {(pkgReject && 
-                                                <>
-                                                    <select name="reason"  id="reason" style={{marginLeft:10,height:'50%'}} onClick={()=>reject(eventList.event_cost)}>
-                                                            <option>Select Reason</option>
-                                                            <option value="Not Intrested">Not Intrested</option>
-                                                            <option value="Need to Add/Remove features">Need to Add/Remove features</option>
-                                                            <option value="Change of mind">Change of mind</option>
-                                                            <option value="Decided for alternative product">Decided for alternative product</option>
-                                                            
-                                                    </select>
-                                                </>)
+                                                        {pkgReject &&( <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject()}>
+                                                        <option value="">Select Reason</option>
+                                                        <option value="Not Intrested">Not Intrested</option>
+                                                        <option value="Need to Add/Remove features">Need to Add/Remove features</option>
+                                                        <option value="Change of mind">Change of mind</option>
+                                                        <option value="Decided for alternative product">Decided for alternative product</option>
+                                                        </select>&nbsp;&nbsp;
+
+                                                        <label> OR </label>
+                                                        <textarea type="text" id="reason-text" rows={5} className='msg-text mx-3 px-2' placeholder=' type your reject reason' ></textarea> 
+                                                        <button onClick={() => reject()}>Submit</button>
+                                                        </div>)
                                                         
-                                            }  
+                                                }
                                                 
                                     </div>
 
                                 {(paybtn || eventList.event_status === "Accepted") && 
 
-                                <Container style={{marginLeft:'14rem'}}>
+                                <Container className="event-accept-suborder" style={{marginLeft:'14rem'}}>
                                  
                                     <div className='px-5 mx-5'>
                                          {subOrder && 
@@ -166,13 +169,13 @@ export default function EventPending() {
 
                                    
 
-                            </>
+                            </div>
 
   )
 
   function accept()
   {
-    toast.success("accepted .!!",{autoClose:1000});
+    setSpinner(true);
     const token = sessionstorage.getItem("token");
     const customer_id =  sessionstorage.getItem("customerId");
 
@@ -201,7 +204,7 @@ export default function EventPending() {
                     //handle success
                     console.log("response",response); 
                     // history.go(0);
-                    toast.success("request Accepted !!")
+                    
                     let data1 = new FormData();
                         data1.append("customer_id",customer_id);
                         data1.append("item_id",eventList.event_id);
@@ -217,6 +220,8 @@ export default function EventPending() {
                         })
                         .then(function (response) {
                             //handle success
+                            setSpinner(false);
+                            toast.success("request Accepted !!",{autoClose:2000})
                             console.log("pkg /event order",response.data); 
                             setSubOrder(response.data.suborder);
                             setOrder(response.data.order);
@@ -245,6 +250,7 @@ export default function EventPending() {
   function reason()
   {
     setPkgReject(true);
+    setrejectbtn(true);
   }
 
   function reject()

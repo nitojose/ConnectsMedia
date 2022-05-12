@@ -25,6 +25,7 @@ export default function EachRequest() {
     const [spinner,setSpinner] = React.useState(false);
     const [pkgReject,setPkgReject] = React.useState(false);
     const [condition ,setCondition] = React.useState(false);
+    const [rejectbtn,setrejectbtn] = React.useState(false);
 
     let history = useHistory();
 
@@ -48,7 +49,7 @@ export default function EachRequest() {
     
   return (
     
-                    <div>
+                    <div className='pkg-req-section'>
       
                                     <Container className='padding-bottom-5rem'>
 
@@ -106,29 +107,43 @@ export default function EachRequest() {
                                         </div>
 
 
-                                        <div style={{paddingLeft:'15rem'}}>
+                                        <div >
                                        
                                                 
-                                            {pkgData.pack.packages_status === "Processing" ?(<div className='space-between'>
+                                            {Order.order_status === "PP" ? (<></>) :(
+                                                <>
+                                                <div className='space-between '>
 
-                                                {!pkgReject && <Button variant="light" className="px-5" onClick={()    =>accept()}>Accept</Button> }
-                                                       
-                                                
-
-                                                {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
-
-
-                                                <><Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button> 
-                                                
-                                                {pkgReject && <>Select Reason : <select id="reason" onChange={()=>reject()}>
-                                                        <option value="select">Select Reason</option>
-                                                        <option value="Not Intrested">Not Intrested</option>
-                                                        <option value="Need to Add/Remove features">Need to Add/Remove features</option>
-                                                        <option value="Change of mind">Change of mind</option>
-                                                        <option value="Decided for alternative product">Decided for alternative product</option>
-                                                        </select></>
+                                                    {<Button variant="light" className="px-5" onClick={()=>accept()}>Accept</Button> }
                                                         
-                                                }</></div>):(<></>)}
+                                                    
+
+                                                    {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
+
+                                                    { <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
+
+                                                
+                                                
+                                                    
+                                                </div>
+                                                </>
+                                            )} 
+
+                                                {pkgReject &&( 
+                                                    <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject()}>
+                                                            <option value="">Select Reason</option>
+                                                            <option value="Not Intrested">Not Intrested</option>
+                                                            <option value="Need to Add/Remove features">Need to Add/Remove features</option>
+                                                            <option value="Change of mind">Change of mind</option>
+                                                            <option value="Decided for alternative product">Decided for alternative product</option>
+                                                            </select>&nbsp;&nbsp;
+
+                                                            <label> OR </label>
+                                                            <textarea type="text" id="reason-text" rows={5} className='msg-text mx-3 px-2' placeholder=' type your reject reason' ></textarea> 
+                                                            <button onClick={() => reject()}>Submit</button>
+                                                    </div>)
+                                                        
+                                                }
                                         </div>
 
                                     <Container className='padding-8rem '>
@@ -147,7 +162,7 @@ export default function EachRequest() {
                                                         <tbody>
                                                             { subOrder.map((s,id) =>(
                                             
-                                                         <tr>
+                                                         <tr className='pointer'>
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
@@ -167,7 +182,7 @@ export default function EachRequest() {
                                 </Container>
                       
                 
-         
+                                <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
                     </div>
 
   )
@@ -176,6 +191,7 @@ export default function EachRequest() {
   {
 
     setSpinner(true)
+    // setPkgReject(true);
     const token = sessionstorage.getItem("token");
     const customer_id =  sessionstorage.getItem("customerId");
 
@@ -204,7 +220,7 @@ export default function EachRequest() {
                 .then(function (response) {
                     //handle success
                     console.log("response",response); 
-                    setSpinner(false)
+                    
 
                     if(response.data.message === "Mail Send Successfully." )
                     {
@@ -215,7 +231,7 @@ export default function EachRequest() {
                         data1.append("item","PACKAGE")
                        
 
-                    axios({
+                        axios({
                         method: 'post',
                         url: Url+'getorderbyid',
                         data: data1,
@@ -223,12 +239,17 @@ export default function EachRequest() {
                         })
                         .then(function (response) {
                             //handle success
-                            console.log("pkg /event order",response.data); 
+                            setSpinner(false);
+                            toast.success("Order Accepted .!!",{autoClose:2000})
+                            
+                            console.log("pkg /event order",response.data.order); 
                             setSubOrder(response.data.suborder);
                             setOrder(response.data.order);
+
+                            
                             
                             setPayBtn(true);
-                          
+                            // setTimeout(()=>history.go(0),2000);
                         })
                         .catch(function (response) {
                             //handle error
@@ -250,7 +271,7 @@ export default function EachRequest() {
   {
     // setSpinner(true);
     setPkgReject(true);
-
+    setrejectbtn(true)
   }
 
   function reject()
@@ -259,52 +280,65 @@ export default function EachRequest() {
     console.log("select")
     // var r = reason();
 
+
     const token = sessionstorage.getItem("token");
     const customer_id =  sessionstorage.getItem("customerId");
 
     var e = document.getElementById("reason");
-    console.log("reason1",e);
+    
     var reason = e.options[e.selectedIndex].value;
+
+    var reText = document.getElementById("reason-text").value;
+    console.log("reason1",reText);
 
     console.log("reason2",reason);
 
+    if(reason === "" && reText === " ")
+    {
+        console.log("not");
+        toast.error('Select any reason !!',{autoClose:3000});
+    }
+    else
+    {
+        const headers ={
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'POST'
+        }
+    
+                let data = new FormData();
+                data.append("package_id",pkgData.pack.packages_id);
+                data.append("customer_id",customer_id);
+                data.append("cost",pkgData.pack.packages_cost);
+                data.append("status","R");
+                data.append("reason",reason===""?reText:reason);
+    
+    
+                axios({
+                    method: 'post',
+                    url: Url+'packageorder',
+                    data: data,
+                    headers: headers
+                    })
+                    .then(function (response) {
+                        //handle success
+                        setSpinner(false);
+                        console.log("response",response); 
+                        toast.success('order Rejected !!',{autoClose:3000})
+                        setTimeout(() => history.push('/dashboard'),3000) ;
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        console.log(response);
+                        toast.success('order Rejected !!',{autoClose:3000})
+                        setTimeout(() => history.push('/dashboard'),3000) ;
+                    });
+    
+    }
    
 
-    const headers ={
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`,
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods': 'POST'
-    }
-
-    let data = new FormData();
-        data.append("package_id",pkgData.pack.packages_id);
-            data.append("customer_id",customer_id);
-            data.append("cost",pkgData.pack.packages_cost);
-            data.append("status","R");
-            data.append("reason",reason);
-
-
-            axios({
-                method: 'post',
-                url: Url+'packageorder',
-                data: data,
-                headers: headers
-                })
-                .then(function (response) {
-                    //handle success
-                    setSpinner(false);
-                    console.log("response",response); 
-                    toast.success('order Rejected !!',{autoClose:3000})
-                     history.push('/dashboard');
-                })
-                .catch(function (response) {
-                    //handle error
-                    console.log(response);
-                    toast.success('order Rejected !!',{autoClose:3000})
-                     history.push('/dashboard');
-                });
-
+    
   }
 
   function paynow(subId,cost,orderid)

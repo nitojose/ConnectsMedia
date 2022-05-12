@@ -6,7 +6,7 @@ import dateFormat from 'dateformat';
 import {AiOutlineCamera} from 'react-icons/ai';
 import {MdQuestionAnswer} from 'react-icons/md';
 import axios from 'axios';
-import { Url,picture } from '../../GLOBAL/global';
+import { Url,picture,imgUrl } from '../../GLOBAL/global';
 var sessionstorage = require('sessionstorage');
 
 
@@ -62,7 +62,7 @@ export default function MsgView() {
 
 
 <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
@@ -70,7 +70,7 @@ export default function MsgView() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 

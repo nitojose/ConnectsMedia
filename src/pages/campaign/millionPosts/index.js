@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import { Container,Row,Col,Card } from 'react-bootstrap';
 import axios from 'axios'
-import { Url ,notImage,isLoggin} from '../../../GLOBAL/global';
+import { Url ,notImage,isLoggin,imgUrl} from '../../../GLOBAL/global';
 import '../../../style/Mposts.scss'
 import { useHistory } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -71,7 +71,7 @@ export default function Index() {
             {Mpost.map((mpost,id) => (
                 <Col xl={6} sm={12} md={12} xxl={6} >
                     <div className='mpost-div'>
-                        <img src={mpost.photo === (undefined || null) ? notImage :('http://connectmedia.gitdr.com/public/'+mpost.photo)} alt='million' className='img-card-post'/>
+                        <img src={mpost.photo === (undefined || null) ? notImage :(imgUrl+mpost.photo)} alt='million' className='img-card-post'/>
 
                         <div className='inner-div'>
                             <h1 className='text-center'>{mpost.camp_title}</h1>

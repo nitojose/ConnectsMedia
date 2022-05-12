@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container,Row,Col,Table,Button, Card } from 'react-bootstrap';
 import { useHistory} from "react-router-dom";
-import {Url,isLoggin,picture} from '../../GLOBAL/global';
+import {Url,isLoggin,picture,imgUrl} from '../../GLOBAL/global';
 import {AiOutlineCamera} from 'react-icons/ai';
 import {FiPackage} from 'react-icons/fi';
 import axios from 'axios' 
@@ -58,7 +58,7 @@ export default function Index() {
     <Container>
 
 <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
@@ -66,7 +66,7 @@ export default function Index() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 
@@ -82,8 +82,8 @@ export default function Index() {
     
     </div>
 
-        <div className='view-msg  mt-5' style={{borderRadius:'8px'}}>
-                <div className='msg-align'>
+        <div className='view-msg  ' style={{borderRadius:'8px'}}>
+                <div className='align-div pwd-div'>
                     <div class="main-packages dash-packages">
                                                 <div class="package-wrap">
                                                     <div class="package">

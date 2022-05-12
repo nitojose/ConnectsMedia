@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import { Container,Row,Col,Table,Button,Card } from 'react-bootstrap';
-import { Url,isLoggin,picture } from '../../GLOBAL/global';
+import { Url,isLoggin,picture,imgUrl } from '../../GLOBAL/global';
 import axios from 'axios';
 import '../../style/messages.scss';
 import dateFormat from 'dateformat';
@@ -117,7 +117,7 @@ export default function Index() {
         <Container >
         
         <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
@@ -125,7 +125,7 @@ export default function Index() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 
@@ -234,7 +234,7 @@ export default function Index() {
             if(response.data === "Message Read")
             {
               history.push('/message/msgView');
-              history.go(0);
+              // history.go(0);
             }
             
         })

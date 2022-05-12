@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
 import {AiOutlineCamera} from 'react-icons/ai';
 import {MdPayment} from 'react-icons/md';
-import { Url,isLoggin,picture } from '../../GLOBAL/global';
+import { Url,isLoggin,picture,imgUrl } from '../../GLOBAL/global';
 import axios from 'axios';
 
 
@@ -62,7 +62,7 @@ export default function Index() {
   <Container>
 
         <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
            
         </div> 
 
@@ -70,7 +70,7 @@ export default function Index() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 

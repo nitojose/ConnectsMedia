@@ -91,7 +91,7 @@ const CARD_ELEMENT_OPTIONS = {
       toast.warning("payment initiated .!",{autoClose:2500});
         try{
             const {id} = paymentMethod 
-            const res = await axios.post("https://connectmedia.gitdr.com/api/stripe",{
+            const res = await axios.post(Url+"stripe",{
                 amount:1000,
                 id
             })

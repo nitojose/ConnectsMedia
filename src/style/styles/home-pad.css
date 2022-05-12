@@ -134,4 +134,9 @@ width:100%;
 margin-left: -5vmax;
 margin-right: -7vmax;
 }
+
+#contact #contact-card {
+    padding: 10% 24% 20% 21% !important;
+    margin-top: -2rem;
+}
 }

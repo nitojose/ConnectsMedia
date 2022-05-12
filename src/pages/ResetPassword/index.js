@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import Buttons from '../../components/Packages/Buttons';
 import { Form } from 'react-bootstrap';
 import { Link,useHistory } from 'react-router-dom';
-import { Url,picture } from '../../GLOBAL/global';
+import { Url,picture,imgUrl } from '../../GLOBAL/global';
 import {RiLockPasswordFill} from 'react-icons/ri';
 import {AiOutlineCamera} from 'react-icons/ai';
 import { ToastContainer, toast } from 'react-toastify';
@@ -64,7 +64,7 @@ export default function Index() {
         {
             let formdata = new FormData();
      
-            formdata.append('email',data.email);
+            formdata.append('email',customerInfo.cust_email);
             formdata.append('password',data.pass1);
      
 
@@ -85,7 +85,7 @@ export default function Index() {
                 console.log(response.data.data.message);
                 if(response.data.data.message === "Password updated successfully.")
                 {
-                    toast.success("password reset successfully !!",{autoClose:3000});
+                    toast.success("Password updated successfully. !!",{autoClose:3000});
                     setTimeout(() => history.push('/dashboard'),3000)
                 }
                
@@ -97,14 +97,12 @@ export default function Index() {
         }
         else
         {
+            setspinner(false);
             toast.error('password doesnot match !!',{autoclose:2000});
             // setTimeout(() => history.push('/change_password'),2000);
-            setspinner(false);
+            
         }
 
-     
-
-    
     }
 
     React.useEffect(() => {
@@ -119,7 +117,7 @@ export default function Index() {
           <Container >
 
           <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
@@ -127,7 +125,7 @@ export default function Index() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 
@@ -141,20 +139,20 @@ export default function Index() {
         </div>
 
 
-            <Parallax speed={-3}>
+            
                 <div className='view-msg '>
-                    <Row className='align-div pwd-div mt-5'>
+                    <Row className='align-div pwd-div '>
                     <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         
 
-                        <Row style={{marginLeft:'3rem'}} className='mx-5'>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox login-box' defaultValue={customerInfo === undefined?'':customerInfo.cust_email} style={{color:'#aaa'}} disabled={true}/> </Col>
+                        <Row  className=''>
+                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("emailid")} className='textbox login-box'  style={{color:'#aaa'}} defaultValue={customerInfo === undefined?'':customerInfo.cust_email} readOnly={true}/> </Col>
                             
                         </Row>
-
+                       
             
 
-                        <Row style={{marginLeft:'3rem'}} className='mx-5'>
+                        <Row  className=''>
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox login-box'/> </Col>
 
                             <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox login-box'/> </Col>
@@ -165,7 +163,7 @@ export default function Index() {
                             {(!spinner ===false )? (<> <Buttons  text="Change Password" type="submit" ></Buttons> {spinner && 
                             <Spinner
                           
-                            style={{marginLeft:'56%',marginTop:'-3.5rem'}}
+                            style={{marginLeft:'60%',marginTop:'-3.5rem'}}
                               animation="border"
                               
                               role="status"
@@ -174,7 +172,7 @@ export default function Index() {
                         
                           </Spinner>} </>)
                       
-                            : (<><Buttons  text="Change Password" type="submit" ></Buttons>{ spinner && 
+                            : (<><Buttons  text="Change Password"  type="submit"></Buttons>{ spinner && 
                             <Spinner
                       
                         
@@ -184,18 +182,17 @@ export default function Index() {
                               
                             >
                         
-                          </Spinner> }</>)
+                          </Spinner> }</>) 
                       
                       }
-                       
+                      {/* <Buttons  text="Change Password"  type="submit"></Buttons> */}
                         </Row>
                     
                     </Form>
                 </Row>
                 </div>
 
-                    </Parallax>
-
+                  
                    
           </Container>
           <ToastContainer position="top-center"  style={{marginTop:'50vh'}}/>

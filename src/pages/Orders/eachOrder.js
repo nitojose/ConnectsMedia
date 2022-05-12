@@ -2,7 +2,7 @@
 import React from 'react';
 import { Container,Row,Col,Card,Button,Modal } from 'react-bootstrap';
 import '../../style/order.scss'
-import { Url,notImage,isLoggin } from '../../GLOBAL/global';
+import { Url,notImage,isLoggin,imgUrl } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
 import dateFormat from 'dateformat';
@@ -127,7 +127,7 @@ export default  function EachOrder() {
                 console.log("pkg /event order",response.data); 
                 setSubOrder(response.data.suborder);
                 setOrder(response.data.order);
-                console.log("sss",response.data.suborder)
+                // console.log("sss",response.data.suborder)
                
             })
             .catch(function (response) {
@@ -165,7 +165,7 @@ export default  function EachOrder() {
 
 
                                         <div className='space-between'>
-                                            <img src={order.plan[0].photo === (undefined || null) ?notImage :'http://connectmedia.gitdr.com/public/'+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className='mt-5 mx-5'/>
+                                            <img src={order.plan[0].photo === (undefined || null) ?notImage :imgUrl+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className='mt-5 mx-5'/>
 
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{order.plan[0].camp_title?order.plan[0].camp_title:order.plan[0].event_title }</span></p>
@@ -193,7 +193,7 @@ export default  function EachOrder() {
 
                                     <div>
 
-                                    {subOrder.length !==0 ? <Container className='padding-8rem'>
+                                    {subOrder.length !==0 ? <Container className='event-suborder'>
                                         <table className="table table-striped table-light my-5 ">
                                                 <thead class="thead-dark">
                                                     <tr>

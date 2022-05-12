@@ -17,8 +17,8 @@ export default function Index() {
     const [spinner,setSpinner] = React.useState(false);
     
     let history = new useHistory();
-    const { email } = useParams();
-   
+    const { emailid } = useParams();
+   console.log("email",emailid)
 
     function onSubmit(data)
     {
@@ -29,7 +29,7 @@ export default function Index() {
         {
             let formdata = new FormData();
      
-             formdata.append('email',data.email);
+             formdata.append('email',emailid);
             formdata.append('password',data.pass1);
      
 
@@ -76,65 +76,64 @@ export default function Index() {
 
 
 
-          <Container className='pwd-div'>
+          <Container className='password-forgot'>
           <Parallax speed={-3}>
-                    <h6 className='heading text-center mt-5'>Change Password</h6>
-                    
-                    
+          <div className='view-msg '>
+                    <Row className='align-div pwd-div '>
                     <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         
 
-                        <Row>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("email" , { required: true })} className='textbox ' value={email} disabled={true}/> </Col>
+                        <Row  className=''>
+                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("emailid")} className='textbox login-box'  style={{color:'#aaa'}} defaultValue={emailid} readOnly={true}/> </Col>
                             
                         </Row>
-
+                       
             
 
-                        <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox '/> </Col>
+                        <Row  className=''>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox login-box'/> </Col>
 
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox '/> </Col>
+                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox login-box'/> </Col>
                         </Row>
 
-                        
                         <Row className='extraRowSpace'>
                        
-                                {(!spinner ===false )? (<> <Buttons text="Submit" type="submit" disabled={true}/> {spinner && 
-                                <Spinner
-                                
-                                style={{marginLeft:'56%',marginTop:'-3.5rem'}}
-                                    animation="border"
-                                    
-                                    role="status"
-                                    
-                                >
-                            
-                                </Spinner>} </>)
-                            
-                                : (<><Buttons text="Submit" type="submit" />{ spinner && 
-                                <Spinner
-                            
-                            
-                                    animation="border"
-                                    
-                                    role="status"
-                                    
-                                >
-                            
-                                </Spinner> }</>)
-                            
-                            }
-                       
+                            {(!spinner ===false )? (<> <Buttons  text="Change Password" type="submit" ></Buttons> {spinner && 
+                            <Spinner
+                          
+                            style={{marginLeft:'61%',marginTop:'-3.5rem'}}
+                              animation="border"
+                              
+                              role="status"
+                              
+                            >
+                        
+                          </Spinner>} </>)
+                      
+                            : (<><Buttons  text="Change Password"  type="submit"></Buttons>{ spinner && 
+                            <Spinner
+                      
+                        
+                              animation="border"
+                              
+                              role="status"
+                              
+                            >
+                        
+                          </Spinner> }</>) 
+                      
+                      }
+                      {/* <Buttons  text="Change Password"  type="submit"></Buttons> */}
                         </Row>
-
                     
                     </Form>
+                </Row>
+                </div>
 
-
-                    </Parallax>
+                  </Parallax>
+                   
           </Container>
-          <ToastContainer  position="top-center"  style={{marginTop:'50vh'}}/>
+          <ToastContainer position="top-center"  style={{marginTop:'50vh'}}/>
       </div>
   )
 }

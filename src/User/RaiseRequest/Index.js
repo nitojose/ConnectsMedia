@@ -4,7 +4,7 @@ import {AiOutlineCamera} from 'react-icons/ai';
 import {MdPendingActions} from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Url,picture,isLoggin } from '../../GLOBAL/global';
+import { Url,picture,isLoggin,imgUrl } from '../../GLOBAL/global';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -69,7 +69,7 @@ export default function Index() {
   return (
     <Container>
      <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.cover_photo)} alt="cover" className='profileBefore' />
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
@@ -77,7 +77,7 @@ export default function Index() {
 
           <div className='profileDiv'>
             <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :('http://connectmedia.gitdr.com/public/'+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 

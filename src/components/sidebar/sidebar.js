@@ -78,7 +78,7 @@ export default function Sidebar()
         'Access-Control-Allow-Methods': 'get' } ,params:{customer_id: customer_id} })
         .then(response => {
             // If request is good...
-            console.log(response.data);
+            // console.log(response.data);
 
             setprocessCount(response.data.Process_count);
             setpkgCount(response.data.notification.package);

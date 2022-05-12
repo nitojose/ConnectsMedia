@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { Url,notImage,isLoggin } from '../../../GLOBAL/global';
+import { Url,notImage,isLoggin,imgUrl } from '../../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { Container,Row,Col } from 'react-bootstrap';
@@ -69,7 +69,7 @@ export default function Index() {
             {post.map((mpost,id) => (
                 <Col xl={6} sm={12} md={12} xxl={6} >
                     <div className='mpost-div'>
-                        <img src={mpost.photo === (undefined || null) ? notImage :('http://connectmedia.gitdr.com/public/'+mpost.photo)} alt='million' className='img-card-post'/>
+                        <img src={mpost.photo === (undefined || null) ? notImage :(imgUrl+mpost.photo)} alt='million' className='img-card-post'/>
 
                         <div className='inner-div'>
                             <h1 className='text-center'>{mpost.camp_title}</h1>

@@ -58,7 +58,7 @@ import RaiseReq from '../User/RaiseRequest/Index';
 
 export default function Index() {
     let data = useParams();
-  console.log("slug page");
+  
 
     return (
             <>
