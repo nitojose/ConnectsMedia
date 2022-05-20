@@ -60,8 +60,8 @@ body{
 
 .dash-card
 {
-    width: 150px;
-    height: 100px;
+    width: 165px;
+    height: 65px;
     background-color: aliceblue;
 
     // margin-top: 60% ;
@@ -76,16 +76,48 @@ body{
 {
     position: absolute;
     background-color: rgb(40, 218, 231);
-    height: 55px;
-    width:55px;
-    right: 1.5rem;
+    height: 40px;
+    width:40px;
+    right: 0.5rem;
     bottom: -1.5rem;
     border-radius: 12px;
 }
 
+.profile-pic-view
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px dotted rgb(100, 100, 100);
+    border-radius: inherit;
+    padding: 20px;
+    flex-direction: column;
+    position: relative;
+}
+
+.profile-pic-view img 
+{
+    width: 500px;
+    height: 500px;
+    border-radius: 8px;
+   
+}
+
+.Ai-close
+{
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+
+.profile-pic-view div 
+{
+    padding: 20px;
+}
+
 .dash-text
 {
-    font-size: 18px;
+    font-size: 12px;
     position: relative;
     color: brown;
     // margin-top: 2rem;
@@ -97,7 +129,7 @@ body{
 .number-text
 {
     position: relative;
-    font-size: 16px;
+    font-size: 14px;
     // margin-top: 1rem;
     // margin-left: 1rem;
     font-weight: 600;
@@ -176,15 +208,15 @@ body{
 
     float: right;
     color: #fff;
-    border-color:  red;
+    border-color: red;
     border-radius: 50%;
     /* padding: 0px 0px; */
-    height: auto;
-    width: auto;
+    height: 25px;
+    width: 25px;
     padding: -1px;
-    background-color: red;
+    background-color: #f13232;
     font-weight: 600;
-    padding: 0px 4px;
+    padding: 1px 4px;
 }
 
 .pro-item-content
@@ -253,8 +285,8 @@ body{
 .profileDiv
 {
     border-radius: 50%;
-    width: 115px;
-    height: 115px;
+    width: 125px;
+    height: 125px;
     background-color: aliceblue;
     // margin-top: 50% !important;
     // position: relative;
@@ -266,8 +298,8 @@ body{
 .profileInner
 {
     border-radius: 50%;
-    width: 105px;
-    height: 105px;
+    width: 115px;
+    height: 115px;
     border: 1px solid #bbb;
     position: relative;
     text-align: left;
@@ -275,39 +307,49 @@ body{
 
 .profileInner img{
     object-fit: contain;
-    height: 102px; 
-    width: 104px;
+    height: 112px; 
+    width: 114px;
     border-radius: 50%;
+}
+
+.pagination
+{
+    justify-content: flex-end;
 }
 
 .profileInner .img-camera
 {
     background-color: #eee;
-    width: 40px;
+    width: 35px;
     height: 35px;
     position: relative;
     float: right;
     margin-top: -1rem;
-    padding: 5px 7px;
+    padding: 5px 5px;
     border-radius: 50%;
-    cursor: pointer;
+   
 }
 
 .cover-camera
 {
     position: absolute;
     background-color: #eee;
-    width: 40px;
+    width: 35px;
     height: 35px;
-    right: 10px;
-    bottom: 10px;
-    padding: 6px 8px;
+    left: 12px;
+    top: 12px;
+    padding: 6px 6px;
     /* margin: 1rem 2rem; */
     border-radius: 50%;
     cursor: pointer;
 }
 
 #cover-image
+{
+    cursor: pointer;
+}
+
+#group_image
 {
     cursor: pointer;
 }
@@ -370,13 +412,18 @@ body{
 
     .view-msg #campaigns li button{
         position: absolute;
-        bottom: 10px;
+        bottom: 20px;
         left: 20%;
         right: 20%;
     }
 
     .view-msg #campaigns li{
-        height: 350px !important;
+        height: 330px !important;
+        width: 250px !important;
+    }
+
+    .view-msg #campaigns>div{
+        padding: 2vmax 2vmax;
     }
 
     .password-forgot .view-msg{
@@ -390,7 +437,38 @@ body{
         margin-right: 0;
     }
 
-@media (min-width:601px) and (max-width:850px){
+    .view-msg .align-div #campaigns #event-dash-req
+    {
+        height: 240px !important;
+    }
+
+    .event-suborder
+    {
+        margin-left: 9rem;
+    }
+
+    .suborder
+    {
+        margin-left: -7rem;
+    }
+
+    .payment
+    {
+        width: 100%;
+        background-color: rgb(236, 235, 235);
+        color: #fff;
+        box-shadow: 0px 0px 25px 1px #535353;
+        
+    }
+
+    .react-confirm-alert
+    {
+        width: 60%;
+        margin-left: 15%;
+        border-radius: 8px;
+    }
+
+@media (min-width:401px) and (max-width:850px){
 
     :root{
         --mainpad:8vmax 7vmax 5vmax 5vmax;
@@ -439,8 +517,260 @@ body{
 
 // }
 
+@media (max-width:400px)
+{
+    :root{
+        --mainpad:8vmax 7vmax 5vmax 5vmax;
+        }
+    .pro-sidebar .pro-menu .pro-menu-item {
+        font-size: 15px;
+        margin-left: -1rem;
+    }
 
-@media (max-width:850px){
+    .pro-sidebar 
+    {
+        width: 70px;
+        min-width: 70px !important; 
+    }
+
+    .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-item-content
+    {
+        display: none;
+    }
+
+    .pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu .pro-inner-list-item .pro-inner-item > .pro-icon-wrapper
+    {
+        margin-left: 1rem;
+    }
+    .header-banner 
+    {
+        margin-top: 4rem !important;
+        margin-left: 70px !important ;
+        width: 70% !important;
+    }
+
+    .profileBefore
+    {
+        left: 70px;
+        width: calc(100% - 70px);
+    }
+    .row-flex-align
+    {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .profileDiv
+    {
+        margin-left: 95px;
+        margin-top: -2rem
+
+    }
+
+    .dash-card
+    {
+        display: none;
+    }
+
+    .view-msg {
+        margin-left: 15% !important;
+        margin-right: -2% !important;
+    }
+
+    .view-msg #campaigns li {
+       min-height: 400px !important;
+       width: auto !important;
+      
+    }
+
+    .profile-pic-view img
+    {
+        width: auto;
+        height: auto;
+    }
+
+    .profile-pic-view div {
+        padding: 20px;
+        display: flex;
+    }
+
+    .camp-text
+    {
+       display: none;
+    }
+
+    .second_section 
+    {
+        margin-left: 3rem;
+        width: 100%;
+    }
+
+    
+    .align-div 
+    {
+        border-radius: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .raise-req
+    {
+        margin-left: 37%;
+        padding-left: 3rem;
+        padding-right: 3rem;
+        margin-top: 1rem
+    }
+    .view-msg .align-div table .cost{
+        display: none;
+    }
+
+    .vertical-text-pkg
+    {
+        display: none;
+    }
+
+    .sec-pkg-section div .font-12
+    {
+        width: 100%;
+    }
+
+    .sec-pkg-section
+    {
+        margin-left: -2rem !important;
+        margin-right: -3rem !important;
+    }
+
+    .sec-pkg-section .heading
+    {
+        font-size: 23px;
+    }
+    .padding-7rem .suborder
+    {
+        margin: -5rem 9% 0px -13% !important;
+    }
+    .custom-ui
+    {
+        margin-left: -1rem !important;
+    }
+    .error-card
+    {
+        margin: 1rem 0rem;
+
+    }
+    
+    .vertical-text 
+    {
+        display: none;
+    }
+
+    .second_section .camp-400
+    {
+        display: flex;
+        flex-direction: column;
+    }
+    .camp-400 img
+    {
+        height: 350px !important;
+        width: 100% !important;
+        margin-left: 3rem !important;
+        border-radius: 20px;
+    }
+
+    .camp-400 .content-end
+    {
+        margin: 1rem 1rem;
+    }
+
+    .event-suborder
+    {
+        margin: 5px 1px !important;
+    }
+
+    .event-req-400 .mx-5
+    {
+        margin-right: 0rem!important;
+        margin-left: 0rem!important;
+    }
+    .event-req-400 .px-2
+    {
+        padding-right: 0rem!important; 
+        padding-left: 0rem!important;
+      
+    }
+    .pkg-400
+    {
+        margin-left: 2rem !important;
+    }
+    .pkg-bill-400
+    {
+        margin: -4rem 1% 0px 1% !important;
+    }
+
+    .pkg-req-section .space-between {
+        margin-left: 5rem;
+    }
+
+    .pkg-req-section .padding-8rem
+    {
+        padding-left: 5rem;
+    }
+
+    .event-pending .mx-5
+    {
+        margin-right: 0rem!important;
+        margin-left: 0rem!important;
+    }
+    .event-pending .px-2
+    {
+        padding-right: 0rem!important; 
+        padding-left: 0rem!important;
+      
+    }
+
+    .event-pending .padding-8rem
+    {
+        padding-left: 5rem;
+        margin-top: -4rem;
+    }
+    .event-accept-suborder
+    {
+        margin-left: 4rem !important;
+    }
+
+    .event-reqs-400 img 
+    {
+        height: 350px !important;
+    width: 300px !important;
+    border-radius: 20px;
+    margin-right: 0rem;
+    margin-left: -11rem !important;
+    }
+    
+    .event-req-400 .font-12
+    {
+        width: 100% !important;
+    }
+
+    .event-reqs-400 .content-end
+    {
+        margin-left: -3rem;
+    }
+
+    .event-bill-400
+    {
+        margin-left: 0rem !important;
+    }
+
+    .event-bill-400 .px-5
+    {
+        padding-right: 0rem!important;
+        padding-left: 0rem!important;
+    }
+}
+
+@media (min-width:401px) and (max-width:850px){
     // :root{
     // --mainpad:8vmax 3vmax 5vmax 3vmax;
     // }
@@ -456,8 +786,8 @@ body{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-       margin-top: 0 !important;
-        margin: 0 0 0 6rem;
+     margin-top: 0 !important;
+    margin: 1rem 0 0 6rem !important;
     }
 
     .profileDiv
@@ -470,6 +800,23 @@ body{
         height: 76px;
     }
 
+    #dashcard1
+    {
+        position: relative;
+        margin-left: -28rem;
+    }
+
+    #dashcard2
+    {
+        position: relative;
+    margin-top: -5rem;
+    }
+
+    #dashcard3
+    {
+        position: relative;
+        margin: -5.5rem 0 0 28rem;
+    }
     .dash-band
     {
         height: 45px;
@@ -559,11 +906,13 @@ body{
         margin-left: 8px;
         padding: 10px;
     }
-    .payment
-    {
-        margin-left: 82px;
-        width: auto;
-    }
+    // .payment
+    // {
+    //     margin-left: 82px;
+    //     width: auto;
+    // }
+
+    
 
     .event-suborder
     {
@@ -655,6 +1004,14 @@ body{
         display: flex;
         flex-direction: column;
 
+    }
+
+    .view-msg #campaigns li {
+        height:380px !important;
+    }
+
+    .view-msg #campaigns>div{
+        padding: 2vmax 0vmax;
     }
 
     .dash-packages .package-wrap

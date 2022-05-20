@@ -77,7 +77,7 @@ export default function UserHeader() {
             <div id="head-filler"></div>
             <div id="user-menu">
 
-            {sessionstorage.getItem('token')!== null  ? (<>
+            {sessionstorage.getItem('token')=== null  ? (<>
                 
                
                         

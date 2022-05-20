@@ -92,7 +92,7 @@ const CARD_ELEMENT_OPTIONS = {
         try{
             const {id} = paymentMethod 
             const res = await axios.post(Url+"stripe",{
-                amount:1000,
+                amount:amount,
                 id
             })
 
@@ -112,6 +112,7 @@ const CARD_ELEMENT_OPTIONS = {
                 iframe.width = '100%';
                 iframe.height = 400;
                 myCont.appendChild(iframe);
+                
 
                 // toast.success("payment Success",{autoClose:10000});
 
@@ -119,62 +120,63 @@ const CARD_ELEMENT_OPTIONS = {
 
                 const token = sessionstorage.getItem("token");
 
-        const headers ={
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`,
-            
-        }
+                const headers ={
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${token}`,
+                    
+                }
 
-        var data = new FormData();
-        console.log(subId)
-        data.append("suborder_id",subId);
-        data.append("order_id",orderId);
-        data.append("amount",amount);
-            
+                var data = new FormData();
+                console.log(subId)
+                data.append("suborder_id",subId);
+                data.append("order_id",orderId);
+                data.append("amount",amount);
+                    
            
 
-            axios({
-                method: 'post',
-                url: Url+'paybefore',
-                data: data,
-                headers: headers
-                })
-                .then(function (response) {
-                    //handle success
-                    console.log("pay Before",response); 
+                axios({
+                    method: 'post',
+                    url: Url+'paybefore',
+                    data: data,
+                    headers: headers
+                    })
+                    .then(function (response) {
+                        //handle success
+                        console.log("pay Before",response); 
 
-                        var data1 = new FormData();
-                        data1.append("transaction_id",response.data.id);
-                        data1.append("order_id",response.data.txn_order);
-                        data1.append("status","Success");
-                        data1.append("suborder_id",response.data.txn_suborder);
+                            var data1 = new FormData();
+                            data1.append("transaction_id",response.data.id);
+                            data1.append("order_id",response.data.txn_order);
+                            data1.append("status","Success");
+                            data1.append("suborder_id",response.data.txn_suborder);
 
-                        axios({
-                            method: 'post',
-                            url: Url+'payafter',
-                            data: data1,
-                            headers: headers
-                            })
-                            .then(function (response) {
-                                //handle success
-                                setSpinner(false);
-                                console.log("pay After",response); 
-            
-                                toast.success('Payment Success!!',{autoClose:5000});
-                                setTimeout(() => history.push('/dashboard'),6000);
-                            })
-                            .catch(function (response) {
-                                //handle error
-                                console.log(response);
-                            
-                            });
+                            axios({
+                                method: 'post',
+                                url: Url+'payafter',
+                                data: data1,
+                                headers: headers
+                                })
+                                .then(function (response) {
+                                    //handle success
+                                    setSpinner(false);
+                                    console.log("pay After",response); 
+                                    toast.success('Payment Success!!',{autoClose:5000});
+                                  setTimeout(() => history.go(0),6000);
+                                })
+                                .catch(function (response) {
+                                    //handle error
+                                    toast.error('Try again!!',{autoClose:5000});
+                                    console.log(response);
+                                
+                                });
 
-                })
-                .catch(function (response) {
-                    //handle error
-                    console.log(response);
-                   
-                });
+                    })
+                    .catch(function (response) {
+                        //handle error
+                        // toast.error('Try again!!',{autoClose:5000});
+                        console.log(response);
+                      
+                    });
 
                 
         
@@ -198,7 +200,7 @@ const CARD_ELEMENT_OPTIONS = {
        <>
        
 
-            <Container className="py-5 ">
+            <Container className="py-5">
                 <form onSubmit={handleSubmit}>
                   
                   <CardElement options={CARD_ELEMENT_OPTIONS} />
@@ -217,7 +219,7 @@ const CARD_ELEMENT_OPTIONS = {
              <div id="iframecont"></div>
 
    
-<ToastContainer position="top-center" style={{marginTop:'50vh'}}/>
+            <ToastContainer position="top-center" style={{marginTop:'50vh'}}/>
          
       {/* //  */}
       </>

@@ -10,6 +10,7 @@ import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
 import {FiPackage} from 'react-icons/fi';
 import {AiOutlineCamera} from 'react-icons/ai'
+import Pagination from '../../pages/Pagination';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -42,12 +43,30 @@ export default function Index() {
     const [pend_pack,setPend_pack] = React.useState({});
    
   
-    const [process_pack,setProcess_pack] = React.useState({});
+    const [process_pack,setProcess_pack] = React.useState([]);
     const [customerInfo,setCustomerInfo] = React.useState();
 
+    const [currentPage,setCurrentPage] = React.useState(1);
+    const [postsPerPage] = React.useState(10);
+    const indexOfLastPost = currentPage*postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    // const currentPosts1 = process_pack.slice(indexOfFirstPost,indexOfLastPost);
+
+    // const currentPosts2 = pend_pack.slice(indexOfFirstPost,indexOfLastPost);
+    
+    const currentPosts2 = Object.keys(pend_pack).slice(indexOfFirstPost,indexOfLastPost);
+
+    function paginate(pageNumber)
+    {
+      setCurrentPage(pageNumber);
+    }
+
+    
+
+    
     async function getInfos()
         {
-        console.log("get cust info")
+        // console.log("get cust info")
             const token = sessionstorage.getItem("token");
             
             let formdata = new FormData();
@@ -69,7 +88,7 @@ export default function Index() {
                 .then(function (response) {
                     //handle success
                 
-                    console.log("getprofile",response.data.data[0]);
+                    // console.log("getprofile",response.data.data[0]);
                     setCustomerInfo(response.data.data[0]);
                 
                     
@@ -79,7 +98,7 @@ export default function Index() {
                     console.log(response);
                 });
 
-            }
+    }
 
     async function getDatas()
     {
@@ -96,7 +115,7 @@ export default function Index() {
                
                 setPend_pack(response.data.pack);
 
-                console.log("pack",pend_pack)
+                // console.log("pack",pend_pack)
                 setPackages(true);
                
             })
@@ -131,7 +150,7 @@ export default function Index() {
       },[]);
 
 
-    
+    // console.log("current2",JSON.stringify(pend_pack).slice(indexOfFirstPost,indexOfLastPost))
 
     return (
       
@@ -160,58 +179,14 @@ export default function Index() {
               </div>
 
               <div >
-                <button onClick={() => raiseRequest("Package")}>Raise a Request</button>
+                <button onClick={() => raiseRequest("Package")} className="raise-req">Raise a Request</button>
 
               </div>
         </div>
            
                   
-                           
-                         {packages ?  (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col> :
-                                 (
 
-                                  <div className='view-msg'>
-                         
-
-                                    <div className='align-div pwd-div '>
-                                  
-                                    <Table striped bordered hover>
-                                      <thead>
-                                        <tr className='bold-text'>
-                                          <th>Date</th>
-                                          <th >PKG.Type</th>
-                                          <th>Cost</th>
-                                          <th>Sel.Months</th>
-                                          <th>Status</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                    
-                                        {Object.keys(pend_pack).map((data,id) =>(
-                                        
-                                          <tr>
-                                            
-                                            <td >{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
-                                            <td >{pend_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}>Package </span></td>
-                                            <td>{pend_pack[data].pack.packages_cost}</td> 
-                                            <td>{pend_pack[data].pack.months}</td>
-                                            <td className='error '>{pend_pack[data].pack.packages_status}</td>
-                                          
-                                          </tr>
-                                    
-                                    
-                                        ))}
-                                      </tbody>
-                                    </Table>
-                                    </div>
-                                    </div>                                     
-                                     ) ):(<></>)
-                                     
-                         }
-
-
-
-                           {packages ?(process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>:
+                          {packages ?(process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>:
                            (
                         <div className='view-msg'>
                          
@@ -220,23 +195,23 @@ export default function Index() {
                              
                               <Table striped bordered hover>
                               <thead>
-                                <tr className='bold-text'>
-                                  <th>Date</th>
-                                  <th >PKG.Type</th>
-                                  <th>Cost</th>
-                                  <th>Sel.Months</th>
-                                  <th>Status</th>
+                                <tr >
+                                  <th className='bold-text'>Date</th>
+                                  <th className='bold-text'>Package Type</th>
+                                  <th className='bold-text cost'>Cost</th>
+                                  <th className='bold-text'>Months</th>
+                                  <th className='bold-text'>Status</th>
                                 </tr>
                               </thead>
                               <tbody>
                             
                                 { Object.keys(process_pack).map((data,id) =>(
-                                
+                                 
                                   <tr>
                                     
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.created_at !== null? dateFormat(process_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>
-                                    <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_cost}</td> 
+                                    <td className='cost' onClick={()=>{view_pkg(process_pack[data])}}>${process_pack[data].pack.packages_cost}.00</td> 
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.months}</td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}} className='error '>{process_pack[data].pack.packages_status}</td>
                                   
@@ -246,6 +221,7 @@ export default function Index() {
                                 ))}
                               </tbody>
                             </Table>
+                            
 
                           </div>
                           </div>
@@ -255,6 +231,51 @@ export default function Index() {
                             }
 
 
+                           
+                         {packages ?  (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col> :
+                                 (
+
+                                  <div className='view-msg '>
+                         
+
+                                    <div className='align-div pwd-div mb-5'>
+                                  
+                                    <Table striped bordered hover >
+                                      <thead>
+                                        <tr >
+                                          <th className='bold-text'>Date</th>
+                                          <th className='bold-text' >Package Type</th>
+                                          {/* <th className='bold-text'>Cost</th> */}
+                                          <th className='bold-text'>Months</th>
+                                          <th className='bold-text'>Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                    
+                                        {Object.keys(pend_pack).map((data,id) =>(
+                                          // console.log("currentposts2",pend_pack[data].pack.created_at)
+                                        
+                                          <tr>
+                                            
+                                            <td >{pend_pack[data].pack.created_at !== null? dateFormat(pend_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
+                                            <td >{pend_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}>Package </span></td>
+                                            {/* <td>{pend_pack[data].pack.packages_cost}</td>  */}
+                                            <td>{pend_pack[data].pack.months}</td>
+                                            <td className='error '>{pend_pack[data].pack.packages_status}</td>
+                                          
+                                          </tr>
+                                    
+                                    
+                                        ))}
+                                      </tbody>
+                                    </Table>
+                                   
+
+                                    </div>
+                                    </div>                                     
+                                     ) ):(<></>)
+                                     
+                         }
 
                         {(process_pack === "No packages Available")  && (pend_pack === "No packages Available") ?(
 
@@ -263,7 +284,7 @@ export default function Index() {
                         <div className='view-msg'>
                          
 
-                         <div className='msg-align '>
+                         <div className='msg-align mb-5'>
                             <div class="main-packages dash-packages">
                                     <div class="package-wrap">
                                         <div class="package">

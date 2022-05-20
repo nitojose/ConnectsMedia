@@ -13,6 +13,10 @@ import {Buffer} from 'buffer';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -55,6 +59,8 @@ export default function Index() {
 
     React.useEffect(() => {
         logginornot();
+
+        
         console.log("type",type);
         const token = sessionstorage.getItem("token");
         const customer_id =  sessionstorage.getItem("customerId");
@@ -227,7 +233,7 @@ export default function Index() {
                                         <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p>
                                     </div>
 
-                                    <div className='second_section'>
+                                    <div className='second_section event-req-400'>
 
                                             <div className='mx-5 px-2'>
                                                 <h2>{campList.camp_type==='MPOST'?"MILLION":"STATIC"}<span className='warning'>POSTS</span></h2>
@@ -235,7 +241,7 @@ export default function Index() {
                                             </div>
 
                                     </div>
-                                    <div className='padding-8rem pt-3 space-between'>
+                                    <div className='padding-8rem event-reqs-400 pt-3 space-between'>
                                             <Row>
                                                 <Col>
                                                     < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
@@ -247,7 +253,7 @@ export default function Index() {
                                                         <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
 
                                                         <p>Cost : 
-                                                        <span >${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)} </span>
+                                                        <span className='bold-text'>${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)}.00 </span>
                                                         </p>
 
                                                         {type === "event" ? (<>
@@ -317,16 +323,16 @@ export default function Index() {
 
                                  {(paybtn || eventList.event_status === "Accepted") && 
                                  
-                                 <Container style={{marginLeft:'14rem'}}>
+                                 <Container style={{marginLeft:'14rem'}} className="event-bill-400">
                                   <div className='px-5 mx-5'>
                                         {subOrder && 
                                         <table className="table table-striped table-light mx-5 my-5 ">
                                             <thead class="thead-dark">
                                                 <tr>
-                                                    <th scope="col">Bill Id</th>
-                                                    <th scope="col">Bill Date</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col"></th>   
+                                                    <th className='bold-text' scope="col">Bill Id</th>
+                                                    <th className='bold-text' scope="col">Bill Date</th>
+                                                    <th className='bold-text' scope="col">Status</th>
+                                                    <th className='bold-text' scope="col"></th>   
                                                 </tr>
                                                 </thead>
                                                     <tbody>
@@ -336,7 +342,7 @@ export default function Index() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                     ))}
@@ -366,13 +372,13 @@ export default function Index() {
                                             <p>PACKAGE</p>
                                         </div>
 
-                                        <div className='sec-pkg-section'>
+                                        <div className='sec-pkg-section pkg-400'>
                                             <div className=' '>
                                                 <h2>{pkgData.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
                                             <p className='heading bold-text py-3'>Package Details</p>
-                                            <p>Package Cost : <span className='bold-text'>{pkgData.packages_cost}</span></p>
+                                            <p>Package Cost : <span className='bold-text'>${pkgData.packages_cost}.00</span></p>
                                             <p>Selected Months : <span className='bold-text'>{pkgData.months}</span></p>
                                             <p>Order Status : <span className='bold-text green'>{pkgData.packages_status}</span></p>
 
@@ -386,7 +392,7 @@ export default function Index() {
                                                 </div>
                                             )}
                                             
-                                            <p className='heading bold-text py-3'>Questionnaire</p>
+                                            {/* <p className='heading bold-text py-3'>Questionnaire</p>
                                             {pkgList.Question && pkgList.Question.map((d,id) =>
                                             
                                             
@@ -404,7 +410,7 @@ export default function Index() {
                                             </Row>
                                             </>
 
-                                            )}
+                                            )} */}
                                                
 
                                         </div>
@@ -412,17 +418,18 @@ export default function Index() {
                                         
 
 
-                                    <div className='align-div' >
+                                    <div className='align-div pkg-bill-400' style={{margin: '0 3% 0 11%'}}>
                                    
                                          {paybtn || pkgData.packages_status === "Accepted"  ? (<> 
 
                                             {subOrder && 
+                                            <div className='view-msg'>
                                                 <table className="table table-striped table-light mx-5 my-5 table-pkg-pending ">
                                                         <thead class="thead-dark">
-                                                            <tr>
-                                                                <th scope="col">Bill Id</th>
-                                                                <th scope="col">Bill Date</th>
-                                                                <th scope="col">Status</th>
+                                                            <tr className='bold-text'>
+                                                                <th className='bold-text' scope="col">Bill Id</th>
+                                                                <th className='bold-text' scope="col">Bill Date</th>
+                                                                <th className='bold-text' scope="col">Status</th>
                                                                 <th scope="col"></th>   
                                                             </tr>
                                                         </thead>
@@ -433,7 +440,7 @@ export default function Index() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.packages_cost,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.packages_cost,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                          ))}  
@@ -441,6 +448,7 @@ export default function Index() {
                                                                         
                                                     </tbody>
                                                 </table>
+                                                </div>
                                                      
                                                     } 
 
@@ -486,7 +494,32 @@ export default function Index() {
                             }
 
 
-                    <ToastContainer/>
+                            {frame === true &&
+
+                            confirmAlert({
+
+                                customUI: ({onClose}) => {
+                                    return (
+                                        <div className="payment ">
+
+                                        <Elements stripe={stripePromise} >
+                                            <CheckoutForm  />
+                                        </Elements>
+
+
+                                </div>
+                                    
+                                    );
+                                    
+                                }
+                            })
+
+                            }
+
+
+
+
+        <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
                
     </>
   )
@@ -690,13 +723,15 @@ export default function Index() {
     function paynow(subId,cost,orderid)
     {
         setSubId(subId);
-        console.log("clicked")
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);
         sessionstorage.setItem("orderId",orderid);
-        console.log("payment")
-        history.push('/payment-form');
-        history.go(0);
+        setFrame(true);
+        // console.log("clicked")
+        
+        // console.log("payment")
+        // history.push('/payment-form');
+        // history.go(0);
     }
 
 

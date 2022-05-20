@@ -567,11 +567,11 @@ export default function CustomizedList() {
       
                           setTimeout(() => 
                               confirmAlert({
-                                title: 'Thanks, Whats Next ?',
+                                title: "Thanks, What's Next ?",
                                 message: 'you can view the order request in Request -> Packages section',
                                 buttons: [
                                   {
-                                    label: 'Yes',
+                                    label: 'Ok',
                                     onClick: () => history.push('/dashboard')
                                   },
                                   

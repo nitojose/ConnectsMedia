@@ -181,7 +181,7 @@ export default function Index() {
 
 
                                           <div className='space-between text-color '>
-                                            <p className='bold-text'>{data.event_cost}</p>
+                                            <p className='bold-text'>${data.event_cost}.00</p>
                                               <p>Cost</p>
                                               
                                             </div>
@@ -237,7 +237,7 @@ export default function Index() {
 
 
                                           <div className='space-between text-color '>
-                                            <p className='bold-text'>{process_event[0].event_cost}</p>
+                                            <p className='bold-text'>${process_event[0].event_cost}.00</p>
                                               <p>Cost</p>
                                               
                                             </div>

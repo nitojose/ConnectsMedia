@@ -87,11 +87,11 @@ export default function CreateForm() {
                 setEventId(response.data.id);
                   setTimeout(() => 
                               confirmAlert({
-                                title: 'Thanks, Whats Next ?',
+                                title: "Thanks, What's Next ?",
                                 message: 'you can view the order request in Request -> Events section',
                                 buttons: [
                                   {
-                                    label: 'Yes',
+                                    label: 'Ok',
                                     onClick: () => history.push('/dashboard')
                                   },
                                   

@@ -56,6 +56,8 @@ import GetPackages from '../User/Packages/Index';
 
 import RaiseReq from '../User/RaiseRequest/Index';
 
+// import Pagination from './paginationTable';
+
 export default function Index() {
     let data = useParams();
   
@@ -94,7 +96,7 @@ export default function Index() {
 
 
                 <Route exact path='/login' >
-                <UserHeader/>
+                 <UserHeader/>
                     <Login />
 
                 </Route>
@@ -350,6 +352,9 @@ export default function Index() {
                     <Enquiry/>
                 </Route> */}
 
+{/* <Route exact path ="/pagination">
+                <Pagination/>
+</Route> */}
                 
                
             </Switch>

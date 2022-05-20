@@ -63,7 +63,7 @@ export default function EventPending() {
 
                                         <hr></hr>
 
-                                        <div className='space-between'>
+                                        <div className='space-between camp-400'>
                                             
 
                                             <img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5" id="event_req_img"/>
@@ -71,7 +71,7 @@ export default function EventPending() {
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{eventList.event_title}</span></p>
 
-                                                <p>Cost : <span >${eventList.event_cost}{''} </span></p>
+                                                <p>Cost : <span >${eventList.event_cost}.00 </span></p>
 
                                                 <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
                                                     <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
@@ -152,7 +152,7 @@ export default function EventPending() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                           
                                                        

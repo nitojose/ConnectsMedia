@@ -427,3 +427,10 @@ display:none;
 }
 }
 
+
+@media (max-width : 400px)
+{
+  #contact #contact-card {
+    padding-top: 45% !important;
+  }
+}

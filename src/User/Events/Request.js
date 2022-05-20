@@ -10,6 +10,7 @@ import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
 import {MdEmojiEvents} from 'react-icons/md';
 import {AiOutlineCamera} from 'react-icons/ai'
+import Pagination from '../../pages/Pagination';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -47,6 +48,20 @@ export default function Index() {
     const [process_event,setProcess_event] = React.useState([]);
     const [customerInfo,setCustomerInfo] = React.useState();
   
+    const [currentPage,setCurrentPage] = React.useState(1);
+    const [postsPerPage] = React.useState(10);
+    const indexOfLastPost = currentPage*postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts1 = process_event.slice(indexOfFirstPost,indexOfLastPost);
+
+    const currentPosts2 = pend_event.slice(indexOfFirstPost,indexOfLastPost);
+    
+
+    function paginate(pageNumber)
+    {
+      setCurrentPage(pageNumber);
+    }
+
     async function getDatas()
     {
             const token = sessionstorage.getItem("token");
@@ -159,36 +174,80 @@ export default function Index() {
 
 
           <div >
-            <button onClick={()=> raiseRequest("Event")}>Raise a Request</button>
+            <button onClick={()=> raiseRequest("Event")} className="raise-req">Raise a Request</button>
 
           </div>
       </div>
 
      
+                          { plans ? (process_event === "No events available" ? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
+
+                                                        
+                          (
+                            
+                            
+                              <div className='view-msg'>
+
+                              <div className='msg-align mx-0 mb-5'>
+                              <Table striped bordered hover>
+                            <thead>
+                              <tr >
+                                <th className='bold-text'>Date</th>
+                                <th className='bold-text'>title</th>
+                                <th className='bold-text cost'>Cost</th>
+                                <th className='bold-text'>Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+
+                              {currentPosts1.map((data, idx) => 
+                              
+                                <tr>
+                                  
+                                  <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
+                                  <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
+                                  <td className='cost' onClick={()=>{viewEvent(process_event[0])}}>${data.event_cost}.00</td> 
+                                  <td onClick={()=>{viewEvent(process_event[0])}} className='error '>{data.event_status}</td>
+                                
+                                </tr>
+                                
+                                
+                              )}
+                            </tbody>
+                          </Table>
+                          <Pagination postsPerPage={postsPerPage} totalPosts={process_event.length} paginate={paginate}/>
+                          </div>
+
+                              </div>                                     
+                              ))
+                            :(<></>)
+                          } 
+
+
                    
                           {plans ? (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
                            (
-                            <div className='view-msg'>
+                            <div className='view-msg '>
                      
-                            <div className='align-div pwd-div'>
+                            <div className='align-div pwd-div mb-5'>
                               <Table striped bordered hover>
                                 <thead>
-                                  <tr className='bold-text'>
-                                    <th>Date</th>
-                                    <th >title</th>
-                                    <th>Cost</th>
-                                    <th>Status</th>
+                                  <tr >
+                                    <th className='bold-text'>Date</th>
+                                    <th className='bold-text'>title</th>
+                                    {/* <th className='bold-text'>Cost</th> */}
+                                    <th className='bold-text'>Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                               
-                                  {pend_event.map((data, idx) => 
+                                  {currentPosts2.map((data, idx) => 
                                   
                                     <tr>
                                       
                                       <td >{ dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
                                       <td >{data.event_title}</td>
-                                      <td>{data.event_cost}</td> 
+                                      {/* <td>${data.event_cost}.00</td>  */}
                                       <td className='error '>{data.event_status}</td>
                                     
                                     </tr>
@@ -197,78 +256,34 @@ export default function Index() {
                                   )}
                                 </tbody>
                               </Table>
+                              <Pagination postsPerPage={postsPerPage} totalPosts={pend_event.length} paginate={paginate}/>
                               </div>
 
-</div>
+                            </div>
                            ))
                            :(<></>)}
 
 
 
-
-
-                          { plans ? (process_event === "No events available" ? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
-
-                              
-                              (
-                                
-                                 
-                                  <div className='view-msg'>
-                     
-                                  <div className='msg-align mx-0'>
-                                  <Table striped bordered hover>
-                                <thead>
-                                  <tr className='bold-text'>
-                                    <th>Date</th>
-                                    <th >title</th>
-                                    <th>Cost</th>
-                                    <th>Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                              
-                                  {process_event.map((data, idx) => 
-                                  
-                                    <tr>
-                                      
-                                      <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
-                                      <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
-                                      <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_cost}</td> 
-                                      <td onClick={()=>{viewEvent(process_event[0])}} className='error '>{data.event_status}</td>
-                                    
-                                    </tr>
-                                    
-                                    
-                                  )}
-                                </tbody>
-                              </Table>
-                              </div>
-
-                                  </div>                                     
-                                  ))
-                                :(<></>)
-                           } 
-                       
-
                        {(pend_event ==="No events available")  && (process_event === "No events available") ?(<>
-                        <div className='view-msg'>
+                        <div className='view-msg mb-5'>
                      
-                      <div className='msg-align mx-0'>
+                      <div className='align-div pwd-div'>
                         <div id='campaigns'>
                             <div>
-                                <ul>
-                                  <li>
+                                <ul style={{width:'50%',alignSelf:'center'}}>
+                                  <li id="event-dash-req" style={{height:'250px'}}>
                                         <h2>Upcoming Event</h2>
-                                        <img src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                        <span>Share your calendar here. We will pick all your future events from here</span>
+                                        <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                                        <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
                                   
                                                 {sessionstorage.getItem('token') ===null ?(
                                                     <>
-                                                    <button onClick={()=> redirectto("event")}>Register to start</button>
+                                                    <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
                                                     </>
                                                     ):(
                                                         <>
-                                                    <button onClick={()=>history.push('/events-creation')}>Start Here</button>
+                                                    <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
                                                     </>
                                                     )
                                                 }

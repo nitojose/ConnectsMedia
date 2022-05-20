@@ -146,13 +146,13 @@ export default function Index() {
                                 <div id="campaigns" style={{borderRadius:'8px'}}>
                                         <div>
 
-                                        <ul style={{width:'70%',alignSelf:'center'}}>
+                                        <ul style={{width:'100%',alignSelf:'center'}}>
 
-                                        <li >
+                                        <li style={{height:'50%'}}>
                                             <h2>Upcoming Event</h2>
                                             <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
                                             <span className='text-center mt-3'>Share your calendar here. We will pick all your future events from here</span>
-                                                        <button onClick={()=>history.push('/events-creation')} className='mt-3'>Start Here</button>
+                                                        <button onClick={()=>history.push('/events-creation')} style={{marginTop:'6rem',position:'static'}} >Start Here</button>
                                                     
                                         </li>
 

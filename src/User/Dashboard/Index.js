@@ -10,9 +10,14 @@ import axios from 'axios';
 import {Url,isLoggin,picture,imgUrl} from '../../GLOBAL/global';
 import { useHistory,Link} from "react-router-dom";
 import {MdAddPhotoAlternate} from 'react-icons/md';
-import {AiOutlineCamera} from 'react-icons/ai';
+import {AiOutlineCamera,AiOutlineClose,AiOutlineDelete} from 'react-icons/ai';
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -26,6 +31,7 @@ export default function Index() {
 
     const [profileUpload,setProfileupload] = React.useState({});
     const [coverUpload,setCoverupload] = React.useState({});
+    const [profilepic ,viewProfilepic] = React.useState(false);
 
     console.log("first")
    async function logginornot()
@@ -114,6 +120,22 @@ export default function Index() {
             console.log('error ' + error);
         });
     }
+
+    function viewProfile()
+    {
+        viewProfilepic(true);
+
+    }
+
+    function changePic()
+    {
+
+    }
+
+    function deletePic()
+    {
+
+    }
   return (
     <>
 
@@ -128,12 +150,12 @@ export default function Index() {
 
        
 
-            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash'/>):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
+            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)}  className='cover-img-dash pointer'/>):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
 
             <div className='cover-camera'>
-                {/* <label htmlFor='cover-image'><AiOutlineCamera  size={24} /></label>  */}
+                <label htmlFor="cover-image"><AiOutlineCamera  size={24} className="pointer" /></label> 
 
-                <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype" style={{visibility:'hidden'}} id="cover-image"/>
+                <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
             </div>
         </div>   
 
@@ -143,12 +165,12 @@ export default function Index() {
             <div className='profileDiv'>
               <div className='profileInner'>
                
-                {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)}  style={{objectFit:'contain'}} />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+                {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
                 <div className='img-camera'>
-                    <label htmlFor='group_image'><AiOutlineCamera  size={24} /></label> 
+                    <label htmlFor="group_image"><AiOutlineCamera className='pointer' size={24} /></label> 
         
-                    <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" style={{visibility:'hidden'}} id="group_image"/>
+                    <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
                 </div>  
 
 
@@ -156,52 +178,122 @@ export default function Index() {
               
             </div>
      
-     
-            <div className='dash-card'>
-              <p className='dash-text '>My Orders</p>
-                <div className=''>
-                  <p className=' number-text '>{orderCount}</p>
-                </div>
-            
-              <div className='dash-band'>
-                <FaShoppingBag size={22} className='mx-3 mt-3'/>
-              </div>
-
-            </div>
-     
-            <div className='dash-card'>
-              <p className='dash-text '>Pending Orders </p>
-
-              <div className=''>
-                  <p className=' number-text '>{pendCount}</p>
-                </div>
-
-                  <div className='dash-band'>
-                    <MdPendingActions size={22} className='mx-3 mt-3'/>
-                  </div>
-
-            </div>
-     
-     
-            <div className='dash-card'>
-            <p className='dash-text '>Processing Orders</p>
-                <div className=''>
-                  <p className=' number-text '>{processCount}</p>
-                </div>
-
+       
+                <div className='dash-card' id="dashcard1">
+                <p className='dash-text '>Active Orders</p>
+                    <div className=''>
+                    <p className=' number-text '>{orderCount}</p>
+                    </div>
+                
                 <div className='dash-band'>
-                  <CgUserAdd size={22} className='mx-3 mt-3' />
-                </div>    
+                    <FaShoppingBag size={18} className='mx-3 mt-3'/>
+                </div>
 
+                </div>
+        
+                <div className='dash-card' id="dashcard2">
+                <p className='dash-text '>Pending Orders </p>
+
+                <div className=''>
+                    <p className=' number-text '>{pendCount}</p>
+                    </div>
+
+                    <div className='dash-band'>
+                        <MdPendingActions size={18} className='mx-3 mt-3'/>
+                    </div>
+
+                </div>
+        
+        
+                <div className='dash-card' id="dashcard3">
+                <p className='dash-text '>Processing Orders</p>
+                    <div className=''>
+                    <p className=' number-text '>{processCount}</p>
+                    </div>
+
+                    <div className='dash-band'>
+                    <CgUserAdd size={18} className='mx-3 mt-3' />
+                    </div>    
+
+                </div>
             </div>
-     
 
-        </div>
+
+            <div className='view-msg mt-5 '>
+                <div className='align-div pwd-div'>
+                <h1 className=' font-20 py-3 text-center'>Video</h1>
+                     <div className='space-between'>
+                     <img src={require('../../assets/imgs/bg.jpg')} alt="video section" />
+                     </div>
+                    
+                </div>
+            </div>      
 
    
-       
+        <div className='view-msg mt-5 '>
+                <div className='align-div pwd-div'>
+                    <h1 className=' font-20 py-3 text-center'>Packages</h1>
+
+                    <div class="main-packages  dash-packages pb-3">
+                    <div class="package-wrap">
+                        <div class="package">
+                                                        <h4>Standard</h4>
+                                                        <div class="content">
+                                                            <ul>
+                                                                <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
+                                                                <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
+                                                                <li><i class="fa fa-check-circle"></i>Post Boosting – for more views</li>
+                                                                <li><i class="fa fa-check-circle"></i>1 Ad Promotion per month</li>                            
+                                                                <li><i class="fa fa-check-circle"></i>All Images, Graphics Copyrighting included</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div align="center">
+                                                        {sessionstorage.getItem('token') ===null ?(
+                                                            <>
+                                                        <button onClick={()=>redirecttoList("std")}>Register</button>
+                                                        </>
+                                                        ):(
+                                                            <>
+                                                        <button onClick={()=>history.push('/standard-list')}>Buy</button>
+                                                        </>
+                                                        )
+                                                        }
+                                                        </div>
+                                                    </div>                           
+                                                </div>                                 
+                                                <div class="package-wrap">
+                                                    <div class="package">
+                                                        <h4>Custom</h4>
+                                                        <div class="content">
+                                                            <ul>
+                                                                <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
+                                                                <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div align="center">
+                                                        {sessionstorage.getItem('token') ===null ?(
+                                                            <>
+                                                        <button onClick={()=> redirecttoList("custom")}>Register</button>
+                                                        </>
+                                                        ):(
+                                                            <>
+                                                        <button onClick={()=>history.push('/customized-list')}>Buy</button>
+                                                        </>
+                                                        )
+                                                        }
+                                                        </div>
+                                                    </div>
+                                                </div>
+                    </div>
+
+            
+            
+            
+            
+                </div>
+            </div>
            
-        <div className='view-msg mt-5'>
+        <div className='view-msg mt-5 mb-5'>
                 <div className='align-div pwd-div'>
                    
                     <div id="campaigns" style={{borderRadius:'8px'}}>
@@ -317,73 +409,36 @@ export default function Index() {
                     </div>
                 </div>
 
-              <div className='view-msg mt-5 '>
-                <div className='align-div pwd-div'>
-                    <h1 className=' font-20 py-3 text-center'>Packages</h1>
+                {profilepic === true &&
 
-                    <div class="main-packages  dash-packages">
-                    <div class="package-wrap">
-                        <div class="package">
-                                                        <h4>Standard</h4>
-                                                        <div class="content">
-                                                            <ul>
-                                                                <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
-                                                                <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
-                                                                <li><i class="fa fa-check-circle"></i>Post Boosting – for more views</li>
-                                                                <li><i class="fa fa-check-circle"></i>1 Ad Promotion per month</li>                            
-                                                                <li><i class="fa fa-check-circle"></i>All Images, Graphics Copyrighting included</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div align="center">
-                                                        {sessionstorage.getItem('token') ===null ?(
-                                                            <>
-                                                        <button onClick={()=>redirecttoList("std")}>Register</button>
-                                                        </>
-                                                        ):(
-                                                            <>
-                                                        <button onClick={()=>history.push('/standard-list')}>Buy</button>
-                                                        </>
-                                                        )
-                                                        }
-                                                        </div>
-                                                    </div>                           
-                                                </div>                                 
-                                                <div class="package-wrap">
-                                                    <div class="package">
-                                                        <h4>Custom</h4>
-                                                        <div class="content">
-                                                            <ul>
-                                                                <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
-                                                                <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>
-                                                            </ul>
-                                                        </div>
-                                                        <div align="center">
-                                                        {sessionstorage.getItem('token') ===null ?(
-                                                            <>
-                                                        <button onClick={()=> redirecttoList("custom")}>Register</button>
-                                                        </>
-                                                        ):(
-                                                            <>
-                                                        <button onClick={()=>history.push('/customized-list')}>Buy</button>
-                                                        </>
-                                                        )
-                                                        }
-                                                        </div>
-                                                    </div>
-                                                </div>
-                    </div>
+                    confirmAlert({
 
-            
-            
-            
-            
-                </div>
-            </div>
+                        customUI: ({onClose}) => {
+                            return (
+                                <div className='profile-pic-view '>
+                                    <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  />
 
-           
-            
-          
+                                    <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={35}/>
+                                    
 
+                                    <div >
+                                    
+                                        <AiOutlineDelete className='pointer mx-5' size={24} onClick={()=>deletePic()}/>
+                                        <label htmlFor="changepic"><AiOutlineCamera className='pointer mx-5' size={24} /></label> 
+
+                                        <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="changepic"/>
+                                    </div>
+                                    
+                                            
+                                </div>
+
+                            );
+                            
+                        }
+                    })
+
+                }      
+               
             <ToastContainer  position="top-center"  style={{marginTop:'50vh'}}/>
      
    </Container>
@@ -431,9 +486,9 @@ export default function Index() {
         }
     }
 
-    async function filechoose(e,pic)
+     function filechoose(e,pic)
     {
-        
+        viewProfilepic(false);
       
         const token = sessionstorage.getItem("token");
         
@@ -453,7 +508,7 @@ export default function Index() {
             {
                 setProfileupload(URL.createObjectURL(e.target.files[0]));
 
-                await axios({
+                 axios({
                 method: 'post',
                 url: Url+'profilephoto',
                 data: formdata,
@@ -464,6 +519,7 @@ export default function Index() {
                     if(response.data.photo !== "")
                     {
                         toast.success('Profie picture Updated!..',3000);
+                        setTimeout(()=>history.go(0),3000);
                     }
                     
                     
@@ -477,7 +533,7 @@ export default function Index() {
             {
 
                 setCoverupload(URL.createObjectURL(e.target.files[0]));
-                await axios({
+                 axios({
                     method: 'post',
                     url: Url+'coverphoto',
                     data: formdata,

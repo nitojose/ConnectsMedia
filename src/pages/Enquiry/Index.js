@@ -87,7 +87,7 @@ export default function Index() {
                                 
                                 
                                 
-                                   <Button variant="dark" onClick={()=>sentmessage()}>sent</Button>
+                                   <Button variant="dark" onClick={()=>sentmessage()}>Send</Button>
                                 
                                 
                             </Modal.Footer>
@@ -271,7 +271,7 @@ export default function Index() {
         .then(function (response) {
             //handle success
             console.log(response.data);
-            toast.success("message sent !!")
+            toast.success("message send !!")
             getDatas();
             
         })

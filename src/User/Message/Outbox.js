@@ -13,6 +13,7 @@ import {FiMoreVertical} from 'react-icons/fi'
 import {AiOutlineCamera} from 'react-icons/ai'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import 'react-toastify/dist/ReactToastify.css';
+import Pagination from '../../pages/Pagination';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -21,6 +22,17 @@ export default function Index() {
     
     const [allmessages,setAlmessages]= React.useState([{}]);
     const [customerInfo,setCustomerInfo] = React.useState();
+
+    const [currentPage,setCurrentPage] = React.useState(1);
+    const [postsPerPage] = React.useState(10);
+    const indexOfLastPost = currentPage*postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = allmessages.slice(indexOfFirstPost,indexOfLastPost);
+
+    function paginate(pageNumber)
+    {
+      setCurrentPage(pageNumber);
+    }
 
     async function logginornot()
     {
@@ -146,26 +158,26 @@ export default function Index() {
                             {length >0 ?(
                             
                           <>
-                          <div className='msg-align'>
+                          <div className='msg-align mb-5'>
 
                           <Table striped bordered hover>
                             <thead>
                               <tr>
-                                <th>Date</th>
-                                <th >Message</th>
-                                <th>From</th>
-                                <th>Status</th>
+                                <th className='bold-text'>Date</th>
+                                <th className='bold-text'>Message</th>
+                                {/* <th>From</th>
+                                <th>Status</th> */}
                               </tr>
                             </thead>
                             <tbody>
                            
-                              {allmessages.map((data, idx) => 
+                              {currentPosts.map((data, idx) => 
                                   data.msg_status === "NotRead" ? (
-                                    <tr className='bold-text pointer'>
+                                    <tr className=' pointer'>
                                     <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_user}</td>
-                                    <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
-                                    <td onClick={() => msgView(data)}>{data.msg_status}</td>
+                                    {/* <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
+                                    <td onClick={() => msgView(data)}>{data.msg_status}</td> */}
                                     <td>
                                     
                                 <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
@@ -176,8 +188,8 @@ export default function Index() {
                                         <tr className='pointer'>
                                     <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={() => msgView(data)}>{data.msg_user}</td>
-                                    <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
-                                    <td onClick={() => msgView(data)}>{data.msg_status}</td>
+                                    {/* <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td>
+                                    <td onClick={() => msgView(data)}>{data.msg_status}</td> */}
                                     <td>
                                     
                                 <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
@@ -190,6 +202,7 @@ export default function Index() {
                               )}
                             </tbody>
                           </Table>
+                          <Pagination postsPerPage={postsPerPage} totalPosts={allmessages.length} paginate={paginate}/>
                         </div>
                           </>
                             ):(<><div className='text-center align-div '> <p className='error-card '>No Messages</p></div></>)}
@@ -281,7 +294,7 @@ export default function Index() {
       .then(function (response) {
                   //handle success
           console.log(response.data);
-          toast.success("Message Sent !! ",{autoClose:2000});
+          toast.success("Message Send !! ",{autoClose:2000});
           setTimeout(() => history.push('/dashboard'),2000);
          
       })

@@ -87,7 +87,7 @@ export default function Index() {
                     
                     </div>
 
-                    <div className='header-banner' style={{marginLeft:'245px'}}>
+                    <div className='header-banner' style={{marginLeft:'245px',width:'70%'}}>
                     <MdCampaign color='black' className='mt-4 mx-4' size={22}/>
                     <p className='header-banner-text'>Campaign List</p>
                     </div>
@@ -96,7 +96,7 @@ export default function Index() {
 
 
                 <div className='view-msg mt-5'>
-                    <div className='align-div pwd-div'>
+                    <div className='align-div pwd-div mb-5'>
                     <div id="campaigns" style={{borderRadius:'8px'}}>
                                         <div>
 

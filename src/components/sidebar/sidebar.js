@@ -78,7 +78,7 @@ export default function Sidebar()
         'Access-Control-Allow-Methods': 'get' } ,params:{customer_id: customer_id} })
         .then(response => {
             // If request is good...
-            // console.log(response.data);
+            console.log(response.data);
 
             setprocessCount(response.data.Process_count);
             setpkgCount(response.data.notification.package);
@@ -161,13 +161,13 @@ function msgRecieve()
               <MenuItem>
               
               <div id="page-logo">
-                <img src={require('../../../src/assets/images/cm-01.jpg')}  alt='header-logo-img' onClick={()=>home()} style={{width: '100%',borderRadius:'8px'}}/>
+                <img src={require('../../../src/assets/images/cm-01.jpg')}  alt='header-logo-img' onClick={()=>home()} style={{width: '100%',borderRadius:'8px',height:'auto'}}/>
               </div>
               </MenuItem>
               <MenuItem icon={<FaHome/>} onClick={()=>history.push('/dashboard')}> Dashboard</MenuItem>
               {/* <MenuItem onClick={() => home()} icon={<FaHome/>}>Home</MenuItem> */}
 
-              {processCount === 0 ? '' :<span className='processNoti'></span>}
+              {(pkgCount!==0 || campCount !== 0 || eveCount !==0)  ?<span className='processNoti'></span> : ''}
                 <SubMenu title="Active Orders"    icon={<FaShoppingBag/>} style={{backgroundColor:'white'}} > 
                   <MenuItem icon={<FiPackage/>} onClick={() => orderpkg()}>Packages {pkgCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{pkgCount}</span>)}</MenuItem>
                   <MenuItem active={true} icon={<MdEmojiEvents/>} onClick={() => orderEvent()}>Events {eveCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{eveCount}</span>)}</MenuItem>

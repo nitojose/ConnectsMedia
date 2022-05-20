@@ -106,7 +106,7 @@ export default function Contact() {
     
 </div>
 <ToastContainer  style={{marginTop:'50vh'}} position="top-center" />
-<button className="chat-button" ><i class="fa fa-comments" aria-hidden="true"></i></button>
+<button className="chat-button" style={{display:'none'}}><i class="fa fa-comments" aria-hidden="true"></i></button>
         </>
     );
 
@@ -142,7 +142,7 @@ export default function Contact() {
                 console.log(response);
                 if(response.data === "ok")
                 {
-                    toast.success("message sent successfully !!",{autoClose:3000});
+                    toast.success("message send successfully !!",{autoClose:3000});
                     history.push('/home');
                 }
                

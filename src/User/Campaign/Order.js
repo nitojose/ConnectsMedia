@@ -10,7 +10,7 @@ import dateFormat from 'dateformat';
 import Parallax from 'react-rellax';
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
-
+import Pagination from '../../pages/Pagination';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -45,6 +45,17 @@ export default function Index() {
     const [campData] = React.useState([]);
     const[customerInfo,setCustomerInfo] = React.useState();
    
+    const [currentPage,setCurrentPage] = React.useState(1);
+    const [postsPerPage] = React.useState(10);
+    const indexOfLastPost = currentPage*postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = campData.slice(indexOfFirstPost,indexOfLastPost);
+
+    function paginate(pageNumber)
+    {
+      setCurrentPage(pageNumber);
+    }
+
 
     useEffect(() => {
 
@@ -173,27 +184,27 @@ export default function Index() {
                                     
                                 <>
                      
-                     <div className='align-div pwd-div'>
+                     <div className='align-div pwd-div mb-5'>
     
                         <Table striped bordered hover>
                           <thead>
-                            <tr className='bold-text'>
-                              <th>Date</th>
-                              <th >CAMP.Type</th>
-                              <th>Cost</th>
-                              <th>Drive Id</th>
-                              <th>Status</th>
+                            <tr >
+                              <th className='bold-text'>Date</th>
+                              <th className='bold-text'>Campaign Type</th>
+                              <th className='bold-text cost'>Cost</th>
+                              <th className='bold-text'>Drive Id</th>
+                              <th className='bold-text'>Status</th>
                             </tr>
                           </thead>
                           <tbody>
                         
-                            {campData.map((data, idx) => 
+                            {currentPosts.map((data, idx) => 
                             
                               <tr className='pointer'>
                                 
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
                                 <td onClick={()=>{view(data,"camp")}}>{ data.plan.camp_type === 'MPOST'?" Million Posts":" Static Posts"}</td>
-                                <td onClick={()=>{view(data,"camp")}}>{data.order.order_amt}</td>
+                                <td className='cost' onClick={()=>{view(data,"camp")}}>${data.order.order_amt}.00</td>
                                 <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
                                             {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
@@ -208,12 +219,13 @@ export default function Index() {
                             )}
                           </tbody>
                         </Table>
+                        <Pagination postsPerPage={postsPerPage} totalPosts={campData.length} paginate={paginate}/>
                       
                         </div>
                       </>
                       
                       ) :(<>
-                        <div className='align-div pwd-div'>
+                        <div className='align-div pwd-div mb-5'>
                           <div id="campaigns" style={{borderRadius:'8px'}}>
                             <div>
 

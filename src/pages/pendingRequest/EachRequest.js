@@ -57,7 +57,7 @@ export default function EachRequest() {
                                             <p>PACKAGE</p>
                                         </div>
 
-                                        <div className='sec-pkg-section '>
+                                        <div className='sec-pkg-section pkg-400'>
                                             <div className=' '>
                                                 <h2>{pkgData.pack.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
@@ -65,7 +65,7 @@ export default function EachRequest() {
 
                                             <hr></hr>
                                             <p className='heading bold-text py-3'>Package Details</p>
-                                            <p>Package Cost : <span className='bold-text'>{pkgData.pack.packages_cost}</span></p>
+                                            <p>Package Cost : <span className='bold-text'>${pkgData.pack.packages_cost}.00</span></p>
                                             <p>Selected Months : <span className='bold-text'>{pkgData.pack.months}</span></p>
                                            {pkgData.pack.drive_id ? (<p>Drive Id : <a href={pkgData.pack.drive_id} target="_blank" rel="noreferrer">click here</a></p>):(<></>)} 
 
@@ -166,7 +166,7 @@ export default function EachRequest() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.pack.packages_cost,Order.order_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.pack.packages_cost,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                           
                                                 ))

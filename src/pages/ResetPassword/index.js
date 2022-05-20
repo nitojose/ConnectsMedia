@@ -141,7 +141,7 @@ export default function Index() {
 
             
                 <div className='view-msg '>
-                    <Row className='align-div pwd-div '>
+                    <Row className='align-div pwd-div mb-5'>
                     <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
                         
 

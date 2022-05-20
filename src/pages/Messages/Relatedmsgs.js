@@ -156,7 +156,7 @@ export default function Relatedmsgs() {
                                 
                                 <Button variant="secondary" onClick={closebtn}>Close</Button>
                             
-                                <Button variant="dark" onClick={()=>ReplayToMsg()}>sent</Button>
+                                <Button variant="dark" onClick={()=>ReplayToMsg()}>Send</Button>
                               
                                 
                             </Modal.Footer>

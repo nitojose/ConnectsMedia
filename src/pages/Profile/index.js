@@ -221,12 +221,12 @@ export default function Index() {
 
         <div className='profileBefore' >
 
-            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo.cover_photo === (undefined || null)?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
+            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo.cover_photo === (undefined || null)?picture :(imgUrl+customerInfo.cover_photo)} className='cover-img-dash' />):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
             
             <div className='cover-camera'>
-                <label htmlFor='cover-image'><AiOutlineCamera  size={24} /></label> 
-        
-                <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype" style={{visibility:'hidden'}} id="cover-image"/>
+                <label htmlFor="cover-image"><AiOutlineCamera  size={24} className="pointer" /></label> 
+
+                <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
             </div>
         </div>   
 
@@ -263,7 +263,7 @@ export default function Index() {
             <div className='view-msg '>
                 
 
-                    <Row className='align-div pwd-div  '>
+                    <Row className='align-div pwd-div  mb-5'>
 
 {/*                     
                     <ImageUploader

@@ -11,6 +11,8 @@ import dateFormat from 'dateformat';
 import Parallax from 'react-rellax';
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
+import Pagination from '../../pages/Pagination';
+
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -19,6 +21,65 @@ export default function Index() {
   const[customerInfo,setCustomerInfo] = React.useState();
 
     let history = useHistory();
+    const[orders,setOrders] = React.useState([]);
+    
+    const [plans,setPlans] = React.useState(false);
+    
+
+    const [planData] = React.useState([]);
+   
+
+    
+    async function getDatas()
+    {
+            const token = sessionstorage.getItem("token");
+            const customer_id = sessionstorage.getItem("customerId");
+
+
+            await axios.get(Url+'getorder', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
+            .then(response => {
+                // If request is good...
+                
+                setOrders(response.data);
+                console.log("orders : ",response.data);
+                response.data.map((data, idx) => {
+                  
+                  if(data.order.order_item ===  "EVENT")
+                  {
+                    // setPlandata(data);
+                    planData.push(data);
+                    
+                  }
+                  
+                  
+
+                })
+                if(planData.length !== 0)
+                {
+                  setPlans(true);  
+                }
+                 
+                  
+               
+            })
+            .catch((error) => {
+                console.log('error ' + error);
+            });
+
+
+
+    }
+    
+    const [currentPage,setCurrentPage] = React.useState(1);
+    const [postsPerPage] = React.useState(10);
+    const indexOfLastPost = currentPage*postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = planData.slice(indexOfFirstPost,indexOfLastPost);
+
+    function paginate(pageNumber)
+    {
+      setCurrentPage(pageNumber);
+    }
 
     async function logginornot()
     {
@@ -77,52 +138,7 @@ export default function Index() {
   
     
 
-    const[orders,setOrders] = React.useState([]);
     
-    const [plans,setPlans] = React.useState(false);
-    
-
-    const [planData] = React.useState([]);
-   
-    async function getDatas()
-    {
-            const token = sessionstorage.getItem("token");
-            const customer_id = sessionstorage.getItem("customerId");
-
-
-            await axios.get(Url+'getorder', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
-            .then(response => {
-                // If request is good...
-                
-                setOrders(response.data);
-                console.log("orders : ",response.data);
-                response.data.map((data, idx) => {
-                  
-                  if(data.order.order_item ===  "EVENT")
-                  {
-                    // setPlandata(data);
-                    planData.push(data);
-                    
-                  }
-                  
-                  
-
-                })
-                if(planData.length !== 0)
-                {
-                  setPlans(true);  
-                }
-                 
-                  
-               
-            })
-            .catch((error) => {
-                console.log('error ' + error);
-            });
-
-
-
-    }
     
 
     useEffect(async () => {
@@ -173,27 +189,27 @@ export default function Index() {
                                     
                                 <>
                      
-                     <div className='align-div pwd-div'>
+                     <div className='align-div pwd-div mb-5'>
     
                         <Table striped bordered hover>
                           <thead>
-                            <tr className='bold-text'>
-                              <th>Date</th>
-                              <th >title</th>
-                              <th>Cost</th>
-                              <th>Drive Id</th>
-                              <th>Status</th>
+                            <tr >
+                              <th className='bold-text'>Date</th>
+                              <th className='bold-text'>title</th>
+                              <th className='bold-text cost'>Cost</th>
+                              <th className='bold-text'>Drive Id</th>
+                              <th className='bold-text'>Status</th>
                             </tr>
                           </thead>
                           <tbody>
                         
-                            {planData.map((data, idx) => 
+                            {currentPosts.map((data, idx) => 
                             
                               <tr className='pointer'>
                                 
                                 <td onClick={()=>{view(data,"event")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
                                 <td onClick={()=>{view(data,"event")}}>{data.plan[0].event_title}</td>
-                                <td onClick={()=>{view(data,"event")}}>{data.order.order_amt}</td>
+                                <td className="cost" onClick={()=>{view(data,"event")}}>${data.order.order_amt}.00</td>
                                 <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
                                 <td onClick={()=>{view(data,"event")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
                                             {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
@@ -208,36 +224,39 @@ export default function Index() {
                             )}
                           </tbody>
                         </Table>
-                      
+                        <Pagination postsPerPage={postsPerPage} totalPosts={planData.length} paginate={paginate}/>
                         </div>
                       </>
                       
                       ) :(<>
                         
-                          <div className='align-div pwd-div'>
-                            <div id='campaigns'>
-                              <div>
-                                  <ul style={{width:'70%',alignSelf:'center'}}>
-                                    <li>
-                                          <h2>Upcoming Event</h2>
-                                          <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                          <span className='mt-3'>Share your calendar here. We will pick all your future events from here</span>
-                                    
-                                                  {sessionstorage.getItem('token') ===null ?(
-                                                      <>
-                                                      <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
-                                                      </>
-                                                      ):(
-                                                          <>
-                                                      <button onClick={()=>history.push('/events-creation')} className='mt-3'>Start Here</button>
-                                                      </>
-                                                      )
-                                                  }
-                                    </li>
-                                  </ul>
-                                  </div>
-                            </div>
-                          </div>
+                      
+                     
+                     <div className='align-div pwd-div mb-5'>
+                       <div id='campaigns'>
+                           <div>
+                               <ul style={{width:'100%',alignSelf:'center'}}>
+                                 <li id="event-dash-req" style={{height:'150px'}}>
+                                       <h2>Upcoming Event</h2>
+                                       <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                                       <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
+                                 
+                                               {sessionstorage.getItem('token') ===null ?(
+                                                   <>
+                                                   <button onClick={()=> redirectto("event")} >Register to start</button>
+                                                   </>
+                                                   ):(
+                                                       <>
+                                                   <button onClick={()=>history.push('/events-creation')} >Start Here</button>
+                                                   </>
+                                                   )
+                                               }
+                                 </li>
+                               </ul>
+                               </div>
+                         </div>
+                         </div>
+                     
                         
                       </> )
                       

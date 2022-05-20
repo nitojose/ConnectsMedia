@@ -14,22 +14,22 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Index() {
 
     const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
-    const [spinner,setSpinner] = React.useState(false);
+    const [spinner,setspinner] = React.useState(false);
     
     let history = new useHistory();
-    const { emailid } = useParams();
-   console.log("email",emailid)
+    const emailid  = useParams();
+   console.log("email",emailid.email)
 
     function onSubmit(data)
     {
       
-        console.log("hello")
-        setSpinner(true);
+        console.log("hello");
+        setspinner(true);
         if(data.pass1 === data.pass2)
         {
             let formdata = new FormData();
      
-             formdata.append('email',emailid);
+            formdata.append('email',emailid.email);
             formdata.append('password',data.pass1);
      
 
@@ -45,16 +45,15 @@ export default function Index() {
             headers: headers
             })
             .then(function (response) {
+                setspinner(false);
                 //handle success
                 console.log(response.data.data.message);
-                setSpinner(false);
                 if(response.data.data.message === "Password updated successfully.")
                 {
-                    toast.success("password reset successfully !!",{autoClose:3000});
-                    setTimeout(() => history.push('/dashboard'),3000);
+                    toast.success("Password updated successfully. !!",{autoClose:3000});
+                    setTimeout(() => history.push('/dashboard'),3000)
                 }
-                // history.push('/home');
-                
+               
             })
             .catch(function (response) {
                 //handle error
@@ -63,12 +62,11 @@ export default function Index() {
         }
         else
         {
+            setspinner(false);
             toast.error('password doesnot match !!',{autoclose:2000});
-          
-            setSpinner(false);
+            // setTimeout(() => history.push('/change_password'),2000);
+            
         }
-
-    
     }
     
   return (
@@ -84,7 +82,7 @@ export default function Index() {
                         
 
                         <Row  className=''>
-                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("emailid")} className='textbox login-box'  style={{color:'#aaa'}} defaultValue={emailid} readOnly={true}/> </Col>
+                            <Col sm={12} md={12} xl={12} xxl={12}>  <input placeholder="Email" type="email" {...register("emailid")} className='textbox login-box'  style={{color:'#aaa'}} defaultValue={emailid.email} readOnly={true}/> </Col>
                             
                         </Row>
                        

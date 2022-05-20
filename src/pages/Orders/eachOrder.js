@@ -11,10 +11,19 @@ import { toast, ToastContainer } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from '../CheckoutForm';
+
 var sessionstorage = require('sessionstorage');
 
 export default  function EachOrder() {
     let history = useHistory();
+
+    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
+
+
+    
     async function logginornot()
     {
       const cust =  await isLoggin();
@@ -164,19 +173,19 @@ export default  function EachOrder() {
                                         </div>
 
 
-                                        <div className='space-between'>
+                                        <div className='space-between camp-400'>
                                             <img src={order.plan[0].photo === (undefined || null) ?notImage :imgUrl+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className='mt-5 mx-5'/>
 
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{order.plan[0].camp_title?order.plan[0].camp_title:order.plan[0].event_title }</span></p>
 
-                                                <p>Cost : <span >${order.order.order_amt}{''} </span></p>
+                                                <p >Cost : <span className='bold-text'>${order.order.order_amt}.00 </span></p>
 
                                                 <p>Date : <span >{dateFormat(order.plan[0].event_from, "mmmm dS, yyyy")+"  -  "+dateFormat(order.plan[0].event_to, "mmmm dS, yyyy")} </span></p>
 
                                                 <p className='underline'> Description </p>
                                             
-                                                <p style={{marginTop:'-1rem;',width:'60%'}}><span>{order.plan[0].camp_desc?order.plan[0].camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
+                                                <p style={{marginTop:'-1rem;'}}><span>{order.plan[0].camp_desc?order.plan[0].camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
                                                 
                                                 <Button variant="light" className='px-5 ' style={{width:'50%'}} onClick={()=>sent()}>Message</Button>
 
@@ -194,13 +203,14 @@ export default  function EachOrder() {
                                     <div>
 
                                     {subOrder.length !==0 ? <Container className='event-suborder'>
-                                        <table className="table table-striped table-light my-5 ">
+                                        <div className='view-msg'>
+                                        <table className="table table-striped table-light ">
                                                 <thead class="thead-dark">
-                                                    <tr>
-                                                        <th scope="col">Bill Id</th>
-                                                        <th scope="col">Bill Date</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col"></th>   
+                                                    <tr className='bold-text'>
+                                                        <th className='bold-text' scope="col">Bill Id</th>
+                                                        <th className='bold-text' scope="col">Bill Date</th>
+                                                        <th  className='bold-text' scope="col">Status</th>
+                                                        <th className='bold-text' scope="col"></th>   
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -212,7 +222,7 @@ export default  function EachOrder() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.order.order_amt,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.order.order_amt,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                         
@@ -222,6 +232,7 @@ export default  function EachOrder() {
                                     }
                                     </tbody>
                                         </table>
+                                        </div>
                                         </Container>:(<></>)}
                                     </div>
 
@@ -251,7 +262,7 @@ export default  function EachOrder() {
 
                                             <p className='heading bold-text py-3'>Package Details</p>
 
-                                            <p>Package Cost : <span className='bold-text'>{order.PACKAGE.packages_cost}</span></p>
+                                            <p>Package Cost : <span className='bold-text'>${order.PACKAGE.packages_cost}.00</span></p>
                                             <p>Selected Months : <span className='bold-text'>{order.PACKAGE.months}</span></p>
                                             <p>Drive Id : <a href={order.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
                                            
@@ -276,7 +287,7 @@ export default  function EachOrder() {
                                             )}
 
 
-                                            <p className='heading bold-text py-3'>{ order.Question.length === 0 ? "" :"Questionnaire"}</p>
+                                            {/* <p className='heading bold-text py-3'>{ order.Question.length === 0 ? "" :"Questionnaire"}</p>
 
                                            
                                             { order.Question && order.Question.map((d,id) =>
@@ -297,7 +308,7 @@ export default  function EachOrder() {
                                             </>
 
                                             
-                                            )}
+                                            )} */}
 
 
                                             <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button> 
@@ -308,15 +319,18 @@ export default  function EachOrder() {
 
                                       
                                                     
-                                    {subOrder.length !== 0 ? (<div className='suborder'>
+                                    {subOrder.length !== 0 ? 
+                                        (<div className='suborder' style={{margin: '0 13% 0 11%'}}>
                                        
-                                              <Container className='padding-8rem '>
+                                              <Container className=''>
+                                                  <div className='view-msg '>
+
                                             <table className="table table-striped table-light mt-5 ">
                                                 <thead class="thead-dark">
-                                                    <tr>
-                                                        <th scope="col">Bill Id</th>
-                                                        <th scope="col">Bill Date</th>
-                                                        <th scope="col">Status</th>
+                                                    <tr className='bold-text'>
+                                                        <th className='bold-text' scope="col">Bill Id</th>
+                                                        <th className='bold-text' scope="col">Bill Date</th>
+                                                        <th className='bold-text' scope="col">Status</th>
                                                         <th scope="col"></th>   
                                                     </tr>
                                                 </thead>
@@ -327,17 +341,19 @@ export default  function EachOrder() {
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{s.sorder_billdt}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                      ))
-                                                    }       
+                                                }       
                                                        
                                                                         
                                                 </tbody>
-                                        </table>
-                                        </Container>
+                                            </table>
+                                            </div>
+                                            </Container>
                                         
-                                    </div>):(<></>)}
+                                        </div>):
+                                    (<></>)}
 
 
                                         
@@ -350,7 +366,7 @@ export default  function EachOrder() {
 
 
                         
-                           {modelmsg === true &&
+                            {modelmsg === true &&
 
                                 confirmAlert({
 
@@ -362,7 +378,7 @@ export default  function EachOrder() {
                                             <textarea placeholder='Type your message..' id="message" className='msg-text' rows={4} required={true} ></textarea>
 
                                             <button onClick={()=>onClose()}>Close</button>
-                                            <button className='mx-2' onClick={() => sentmessage()}> Sent </button>
+                                            <button className='mx-2' onClick={() => sentmessage()}> Send </button>
                                             
                                         </div>
                                         
@@ -372,6 +388,31 @@ export default  function EachOrder() {
                                 })
 
                             }
+
+                            {frame === true &&
+
+                            confirmAlert({
+
+                                customUI: ({onClose}) => {
+                                    return (
+                                        <div className="payment ">
+       
+                                        <Elements stripe={stripePromise} >
+                                            <CheckoutForm  />
+                                        </Elements>
+                            
+                            
+                                </div>
+                                    
+                                    );
+                                    
+                                }
+                            })
+
+                            }
+
+
+                            
                 
          
      
@@ -398,15 +439,16 @@ export default  function EachOrder() {
 
     function paynow(subId,cost,orderid)
     {
-         setSubId(subId);
-        // console.log("clicked")
-        // setFrame(true);
+        setSubId(subId);
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);
         sessionstorage.setItem("orderId",orderid);
-        console.log("payment")
-        history.push('/payment-form');
-        history.go(0);
+        setFrame(true);
+
+        
+        // console.log("payment")
+        // history.push('/payment-form');
+        // history.go(0);
      
     }
 
@@ -447,7 +489,7 @@ export default  function EachOrder() {
             .then(function (response) {
                 //handle success
                 console.log(response.data);
-                toast.success("Message Sent !!",{autoClose:3000})
+                toast.success("Message Send !!",{autoClose:3000})
                 setmodelmsg(false);
                
                 setTimeout(() => history.go(0),3000) 

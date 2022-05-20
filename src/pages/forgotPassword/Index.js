@@ -47,7 +47,6 @@ export default function Index() {
             if(response.data.msg === "Reset password link sent on your email id.")
             {
                 toast.success("Reset password link sent on your email id. !!",{autoClose:3000});
-                // setTimeout(() => history.push('/login',3000))
                 setTimeout(() => history.push('/login'),3000)
             }
            

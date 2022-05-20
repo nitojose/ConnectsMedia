@@ -666,7 +666,7 @@ padding-bottom:5px;
 }
 #pillars #pillar4.active.subtitle .content{
 font-size:1.2vmax;
-line-height:100%;
+line-height:200%;
 }
 
 
@@ -692,8 +692,8 @@ flex:1 1 50%;
 font-size:95%;
 opacity:0;
 text-align:justify;
-font-family: "Nunito", sans-serif !important;
-font-size: larger;
+/* font-family: "Nunito", sans-serif !important; */
+/* font-size: 20px; */
 }
 #why.onfocus .explanation{
 animation:fly-from-left 500ms forwards;

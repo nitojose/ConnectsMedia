@@ -74,7 +74,7 @@ export default function Index() {
             
           </div>
 
-        <div className='header-banner' style={{marginLeft:'245px',width:'30%'}}>
+        <div className='header-banner' style={{marginLeft:'245px',width:'70%'}}>
         <FiPackage color='black' className='mt-4 mx-4' size={22}/>
         <p className='header-banner-text'>Package List</p>
         </div>
@@ -83,7 +83,7 @@ export default function Index() {
     </div>
 
         <div className='view-msg  ' style={{borderRadius:'8px'}}>
-                <div className='align-div pwd-div'>
+                <div className='align-div pwd-div mb-5'>
                     <div class="main-packages dash-packages">
                                                 <div class="package-wrap">
                                                     <div class="package">

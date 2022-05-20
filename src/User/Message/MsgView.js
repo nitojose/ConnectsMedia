@@ -87,7 +87,7 @@ export default function MsgView() {
 
        <div className='view-msg px-5 '>
 
-       <div className='msg-align '>
+       <div className='msg-align mb-5'>
 
            <Row>
                <Col className='flex-center'>

@@ -24,8 +24,7 @@ function App() {
     <>
     <Router>
     
-     
-  
+   
 	      <Index />
  
       </Router>  
