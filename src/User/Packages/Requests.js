@@ -207,7 +207,7 @@ export default function Index() {
                             
                                 { Object.keys(process_pack).map((data,id) =>(
                                  
-                                  <tr>
+                                  <tr className='pointer'>
                                     
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.created_at !== null? dateFormat(process_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { Container,Row,Col,Card } from 'react-bootstrap';
+import { Container,Row,Col,Card ,Spinner} from 'react-bootstrap';
 import axios from 'axios'
 import { Url ,notImage,isLoggin,imgUrl} from '../../../GLOBAL/global';
 import '../../../style/Mposts.scss'
@@ -8,6 +8,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import 'react-toastify/dist/ReactToastify.css';
+
+import {AiOutlineClose} from 'react-icons/ai';
+import dateFormat from 'dateformat';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from '../../CheckoutForm';
+
 var sessionstorage = require('sessionstorage');
 
 
@@ -15,6 +22,11 @@ var sessionstorage = require('sessionstorage');
 export default function Index() {
 
     const[Mpost,setMpost] = useState([]);
+    const [frame,setFrame] = React.useState(false);
+    const [spinner,setSpinner] = React.useState(false);
+
+    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
+
     let history = useHistory();
 
     useEffect(() => {
@@ -69,7 +81,7 @@ export default function Index() {
         <Container>
         <Row style={{marginLeft:'1.3rem'}}>
             {Mpost.map((mpost,id) => (
-                <Col xl={6} sm={12} md={12} xxl={6} >
+                <Col xl={6} sm={12} md={12} xxl={6} className='mt-3 mb-5'>
                     <div className='mpost-div'>
                         <img src={mpost.photo === (undefined || null) ? notImage :(imgUrl+mpost.photo)} alt='million' className='img-card-post'/>
 
@@ -83,7 +95,7 @@ export default function Index() {
                         </div>
 
                         <div className='months'>
-                                <div>Cost : $<span className='bold-text'>{mpost.camp_cost}</span></div>
+                            <div>Cost : $<span className='bold-text'>{mpost.camp_cost}.00 /month</span></div>
                                 <label >Number of Months : </label>
                                 <select className='btnstyle' id="months" required={true} >
                                     <option value="1">1 month</option>
@@ -99,9 +111,36 @@ export default function Index() {
                                     <option value="11">11 month</option>
                                     <option value="12">12 month</option>
                                 </select>
-                                <button className='align-center ' onClick={(e) => purchaseCamp(e,mpost)}>Purchase</button>
                                 
-                            </div>
+
+
+                                {(!spinner ===false )? (<> <button className='align-center ' >Purchase</button> {spinner && 
+                      <Spinner
+                    
+                      style={{marginLeft:'95%'}}
+                        animation="border"
+                        
+                        role="status"
+                        
+                      >
+                  
+                    </Spinner>} </>)
+                
+                      : (<><button className='align-center ' onClick={(e) => purchaseCamp(e,mpost)}>Purchase</button>{ spinner && 
+                      <Spinner
+                 
+                   
+                        animation="border"
+                        
+                        role="status"
+                        
+                      >
+                  
+                    </Spinner> }</>)
+                
+                }
+                                
+                        </div>
                         
                         
                     </div>
@@ -109,6 +148,30 @@ export default function Index() {
                 </Col>
                  ))}
             </Row>
+
+            {frame === true &&
+
+                confirmAlert({
+
+                    customUI: ({onClose}) => {
+                        return (
+                            <div className="payment ">
+
+                                <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
+
+                            <Elements stripe={stripePromise} >
+                                <CheckoutForm  />
+                            </Elements>
+
+
+                    </div>
+                        
+                        );
+                        
+                    }
+                })
+
+            }
 
         </Container>
   
@@ -121,7 +184,7 @@ export default function Index() {
 
     function purchaseCamp(e,mpost)
     {
-        
+        setSpinner(true);
         console.log("mpost",mpost)
         var months = document.getElementById("months").value;
         console.log("months",months);
@@ -157,9 +220,11 @@ export default function Index() {
             console.log("mpost-res",response.data);
             if(response.data.message === "Created")
             {
-                toast.success("Order Created !!",{autoClose:3000});
+                setSpinner(false);
+                toast.success("Order Created ,Now You can do  Payment!!",{autoClose:3000});
                 sessionstorage.setItem("campOrder",JSON.stringify(response.data));
-                setTimeout(() => history.push('/payment-form'),3000);
+                setFrame(true);
+                
 
             }
         })

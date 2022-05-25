@@ -317,7 +317,7 @@ export default function Index() {
 
 
                                                         <div className='space-between text-color '>
-                                                          <p className='bold-text'>{pend_pack[data].pack.packages_cost}</p>
+                                                          <p className='bold-text'>${pend_pack[data].pack.packages_cost}.00</p>
                                                             <p>Cost</p>
                                                             
                                                           </div>
@@ -390,7 +390,7 @@ export default function Index() {
 
 
                                                         <div className='space-between text-color '>
-                                                          <p className='bold-text'>{process_pack[data].pack.packages_cost}</p>
+                                                          <p className='bold-text'>${process_pack[data].pack.packages_cost}.00</p>
                                                             <p>Cost</p>
                                                             
                                                           </div>

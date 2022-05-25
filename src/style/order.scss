@@ -184,8 +184,8 @@
     color: #141C26;
     transform: rotate(-90deg);
     // transform-origin:top center;
-    font-size: 5vw;
-    margin-top: 28rem;
+    font-size: 3.5vw;
+    margin-top: 23rem;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     margin-left: 20rem;
@@ -194,12 +194,16 @@
     left: 0%;
 }
 
+.event-align
+{
+    margin-left: 15rem !important;
+}
 .camp-text
 {
     margin-left: 13rem;
     position: absolute;
     top:2.5rem;
-    // margin-top: 2rem;
+    
 }
 
 .vertical-text-pkg
@@ -208,11 +212,11 @@
     color: #141C26;
     transform: rotate(-90deg);
     // transform-origin:top center;
-    font-size: 5vw;
-    margin-top: 28rem;
+    font-size: 3.5vw;
+    margin-top: 23rem;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    margin-left: 14rem;
+    margin-left: 10rem;
     // top: 15vw;
     text-align: justify;
     left: 0%;

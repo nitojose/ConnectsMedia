@@ -205,6 +205,7 @@ export default function Index() {
                         
                             {currentPosts.map((data, idx) => 
                             
+                            
                               <tr className='pointer'>
                                 
                                 <td onClick={()=>{view(data,"event")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
@@ -274,12 +275,13 @@ export default function Index() {
   {
    
     //   setOrderId(orderId)
-    console.log(data.order.order_id)
+    let id = data.order.order_id;
     sessionstorage.setItem("orderID",JSON.stringify(data));
     sessionstorage.setItem("orderType",value);
 
     
-    history.push( '/order-view');
+    // history.push( '/order-view');
+    history.push('/order-payment/'+id)
     history.go(0);
   }
 

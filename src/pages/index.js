@@ -20,7 +20,7 @@ import Enquiry from '../pages/Enquiry/Index'
 import '../style/main.scss'
 import Mainscreen from '../../src/pages/MainScreen/index'
 import Requets from '../pages/pendingRequest/Index';
-import Faq from '../../src/pages/faq/index';
+import Faq from '../../src/pages/faq/Userfaq';
 import PendingReq from '../../src/pages/pendingRequest/pendingRequest'
 import Forgotpwd from '../../src/pages/forgotPassword/Index'
 import Forgotpwd1 from '../../src/pages/forgotPassword/forgot1'
@@ -30,6 +30,7 @@ import EventPending from './pendingRequest/EventPending';
 import Sidebar from '../components/sidebar/Sidebar';
 import GetCampaign from '../User/Campaign/Index';
 import DashHome from "../User/Dashboard/Index";
+import RequestPaynow from '../pages/Orders/RequestPaynow';
 
 import {
     BrowserRouter as Router,
@@ -109,11 +110,11 @@ export default function Index() {
 
                 </Route>
 
-                {/* <Route exact path='/faq'>
+                <Route exact path='/faq'>
                 <UserHeader/>
-               
+              
                     <Faq />
-                </Route> */}
+                </Route>
             
 
                 <Route exact path='/login/:standard-list'>
@@ -132,6 +133,12 @@ export default function Index() {
                 <Route exact path='/profile'>
                     <Sidebar/>
                    <Profile />
+
+                </Route>
+
+                <Route exact path='/order-payment/:id'>
+                    <Sidebar/>
+                   <RequestPaynow />
 
                 </Route>
 

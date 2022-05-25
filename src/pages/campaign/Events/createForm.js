@@ -119,8 +119,8 @@ export default function CreateForm() {
                 <Col xl={6} sm={12} md={12} xxl={5} className='py-5 my-5'>
 
                     <Parallax speed={5} > 
-                    <img src={require('../../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events" width='300px' height='300px'/> 
-                    <p className='para-content'>Share your calendar here. We will pick all your future events from here</p> 
+                    <img src={require('../../../../src/assets/imgs/connect.event.jpeg')} alt="Campaigns for Upcoming Events" width='300px' height='300px' className='event-form-img'/> 
+                    <p className='para-content'>Share your calendar here. We will pick all your future events from here.</p> 
                     </Parallax>
                 </Col>
 

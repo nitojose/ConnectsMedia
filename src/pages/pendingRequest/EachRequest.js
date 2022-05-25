@@ -10,11 +10,20 @@ import Parallax from 'react-rellax';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+import {AiOutlineClose} from 'react-icons/ai';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from '../CheckoutForm';
+
 var sessionstorage = require('sessionstorage');
 
 export default function EachRequest() {
 
-   
+    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
+    const [frame,setFrame] = React.useState(false);
     const pkgData =  JSON.parse(sessionstorage.getItem("pendPkg"))
     console.log("pkgdata",pkgData)
 
@@ -65,7 +74,7 @@ export default function EachRequest() {
 
                                             <hr></hr>
                                             <p className='heading bold-text py-3'>Package Details</p>
-                                            <p>Package Cost : <span className='bold-text'>${pkgData.pack.packages_cost}.00</span></p>
+                                            <p>Package Cost : <span className='bold-text'>${pkgData.pack.packages_cost}.00 /month</span></p>
                                             <p>Selected Months : <span className='bold-text'>{pkgData.pack.months}</span></p>
                                            {pkgData.pack.drive_id ? (<p>Drive Id : <a href={pkgData.pack.drive_id} target="_blank" rel="noreferrer">click here</a></p>):(<></>)} 
 
@@ -80,7 +89,7 @@ export default function EachRequest() {
                                                 </div>
                                             )}
                                             
-                                            <p className='heading bold-text py-3'>{pkgData.question.length ===0 ? "":'Questionnaire'}</p>
+                                            {/* <p className='heading bold-text py-3'>{pkgData.question.length ===0 ? "":'Questionnaire'}</p>
 
 
                                             
@@ -101,7 +110,7 @@ export default function EachRequest() {
                                             </Row>
                                             </>
 
-                                            )}
+                                            )} */}
                                                
 
                                         </div>
@@ -130,7 +139,7 @@ export default function EachRequest() {
                                             )} 
 
                                                 {pkgReject &&( 
-                                                    <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject()}>
+                                                    <div className='space-between reject-pkg'><select id="reason" className='select-months' onChange={()=>reject()}>
                                                             <option value="">Select Reason</option>
                                                             <option value="Not Intrested">Not Intrested</option>
                                                             <option value="Need to Add/Remove features">Need to Add/Remove features</option>
@@ -150,7 +159,7 @@ export default function EachRequest() {
                                         {payBtn && Order.order_status === "PP"? 
                                         (<>
                                                 {subOrder &&
-                                            <table className="table table-striped table-light mt-5 ">
+                                            <table className="table table-striped table-light pkg-400-subordder">
                                                         <thead class="thead-dark">
                                                             <tr>
                                                                 <th scope="col">Bill Id</th>
@@ -164,7 +173,7 @@ export default function EachRequest() {
                                             
                                                          <tr className='pointer'>
                                                                     <td >{s.sorder_id}</td>
-                                                                    <td >{s.sorder_billdt}</td>
+                                                                    <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.pack.packages_cost,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
@@ -180,6 +189,31 @@ export default function EachRequest() {
 
                                   
                                 </Container>
+
+
+                                {frame === true &&
+
+                                    confirmAlert({
+
+                                        customUI: ({onClose}) => {
+                                            return (
+                                                <div className="payment ">
+
+                                                    <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
+
+                                                <Elements stripe={stripePromise} >
+                                                    <CheckoutForm  />
+                                                </Elements>
+
+
+                                        </div>
+                                            
+                                            );
+                                            
+                                        }
+                                    })
+
+                                    }
                       
                 
                                 <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
@@ -348,9 +382,10 @@ export default function EachRequest() {
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);
         sessionstorage.setItem("orderId",orderid);
-        console.log("payment")
-        history.push('/payment-form');
-        history.go(0);
+        
+        // console.log("payment")
+        // history.push('/payment-form');
+        // history.go(0);
     }
 
     

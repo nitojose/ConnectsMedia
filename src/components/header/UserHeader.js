@@ -71,7 +71,7 @@ export default function UserHeader() {
     <section className='navbar'>
    
         {/* header logo */}
-            <div id="page-head">
+            <div id="page-head" className=' package-list-header'>
             <div id="page-logo"><a href="/">
             <img src={require('../../../src/assets/imgs/connect-media-logo.png')}  alt='header-logo-img' onClick={()=>home()}/></a></div>
             <div id="head-filler"></div>

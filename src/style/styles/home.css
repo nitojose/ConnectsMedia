@@ -1051,6 +1051,7 @@ display:inline-block;
 padding:2px 4px;
 background:#666;
 border-radius:2px;
+margin-top: 1rem !important;
 }
 .popup .active.subtitle{
 display:block;	
@@ -1163,7 +1164,8 @@ text-align:right;
 font-size:120%;
 font-weight:bold;
 padding:20px;
-text-shadow:2px 2px 3px #000;
+color: #000;
+/* text-shadow:2px 2px 3px #000; */
 }
 .package-wrap .package:before{
 content:' ';
@@ -1327,6 +1329,7 @@ background-position:right center;
 background-size:cover;
 background-blend-mode:multiply;
 background-repeat: no-repeat;
+color: #fff;
 }
 #faqs>div{
 padding-top:7vmax;

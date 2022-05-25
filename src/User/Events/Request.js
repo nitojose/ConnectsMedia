@@ -108,39 +108,39 @@ export default function Index() {
 
       },[]);
 
-      async function getInfos()
-{
-  console.log("get cust info")
-    const token = sessionstorage.getItem("token");
-    
-    let formdata = new FormData();
-    const customer_id = sessionstorage.getItem("customerId");
+    async function getInfos()
+    {
+      console.log("get cust info")
+        const token = sessionstorage.getItem("token");
+        
+        let formdata = new FormData();
+        const customer_id = sessionstorage.getItem("customerId");
 
-    formdata.append("customer_id",customer_id);
-    
-    const headers ={
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
-      }
+        formdata.append("customer_id",customer_id);
+        
+        const headers ={
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          }
 
-    await axios({
-        method: 'post',
-        url: Url+'getProfile',
-        data: formdata,
-        headers: headers
-        })
-        .then(function (response) {
-            //handle success
-           
-            console.log("getprofile",response.data.data[0]);
-            setCustomerInfo(response.data.data[0]);
-           
-            
-        })
-        .catch(function (response) {
-            //handle error
-            console.log(response);
-        });
+        await axios({
+            method: 'post',
+            url: Url+'getProfile',
+            data: formdata,
+            headers: headers
+            })
+            .then(function (response) {
+                //handle success
+              
+                console.log("getprofile",response.data.data[0]);
+                setCustomerInfo(response.data.data[0]);
+              
+                
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
 
       }
 
@@ -202,7 +202,7 @@ export default function Index() {
 
                               {currentPosts1.map((data, idx) => 
                               
-                                <tr>
+                                <tr className='pointer'>
                                   
                                   <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
                                   <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
@@ -271,8 +271,8 @@ export default function Index() {
                       <div className='align-div pwd-div'>
                         <div id='campaigns'>
                             <div>
-                                <ul style={{width:'50%',alignSelf:'center'}}>
-                                  <li id="event-dash-req" style={{height:'250px'}}>
+                                <ul style={{width:'100%',alignSelf:'center'}}>
+                                  <li id="event-dash-req" style={{height:'150px'}}>
                                         <h2>Upcoming Event</h2>
                                         <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
                                         <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>

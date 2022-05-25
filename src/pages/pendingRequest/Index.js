@@ -13,6 +13,7 @@ import {Buffer} from 'buffer';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
+import {AiOutlineClose} from 'react-icons/ai';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -229,22 +230,23 @@ export default function Index() {
                             <>
                                 
                                 
-                                    <div className='vertical-text '>
-                                        <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p>
+                                    <div className='vertical-text event-align'>
+                                        {/* <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p> */}
+                                        {campList.camp_type==='MPOST'?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}POSTS
                                     </div>
 
                                     <div className='second_section event-req-400'>
 
                                             <div className='mx-5 px-2'>
-                                                <h2>{campList.camp_type==='MPOST'?"MILLION":"STATIC"}<span className='warning'>POSTS</span></h2>
+                                                <h2>{campList.camp_type==='MPOST'?"MILLION ":"STATIC "}<span className='warning'>POSTS</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
 
                                     </div>
-                                    <div className='padding-8rem event-reqs-400 pt-3 space-between'>
+                                    <div className='padding-8rem event-reqs-400  space-between'>
                                             <Row>
                                                 <Col>
-                                                    < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} />
+                                                    < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'400px',width:'380px',borderRadius:'20px'}} />
 
                                                 </Col>
 
@@ -253,7 +255,7 @@ export default function Index() {
                                                         <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
 
                                                         <p>Cost : 
-                                                        <span className='bold-text'>${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)}.00 </span>
+                                                        <span className='bold-text'>${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)}.00 {type === "campaign" ? " /month":""} </span>
                                                         </p>
 
                                                         {type === "event" ? (<>
@@ -278,7 +280,7 @@ export default function Index() {
 
                                  
 
-                                    <div className=' padding-8rem space-between'>
+                                    <div className=' padding-8rem space-between mb-5'>
                                         
                                         {paybtn || eventList.event_status === "Accepted" ? (<> 
                                                     
@@ -287,6 +289,7 @@ export default function Index() {
                                                     ( eventList.event_status === 'Success' ? '' : (
                                                         <>
                                                         {!pkgReject && <Button variant="light" onClick={()=>accept(eventList.event_cost,type,0)}>Accept</Button>}
+                                                        {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
                                                         {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
 
 
@@ -340,7 +343,7 @@ export default function Index() {
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
-                                                                    <td >{s.sorder_billdt}</td>
+                                                                    <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
@@ -378,7 +381,7 @@ export default function Index() {
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
                                             <p className='heading bold-text py-3'>Package Details</p>
-                                            <p>Package Cost : <span className='bold-text'>${pkgData.packages_cost}.00</span></p>
+                                            <p>Package Cost : <span className='bold-text'>${pkgData.packages_cost}.00 /month</span></p>
                                             <p>Selected Months : <span className='bold-text'>{pkgData.months}</span></p>
                                             <p>Order Status : <span className='bold-text green'>{pkgData.packages_status}</span></p>
 
@@ -438,7 +441,7 @@ export default function Index() {
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
-                                                                    <td >{s.sorder_billdt}</td>
+                                                                    <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,pkgData.packages_cost,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
@@ -456,7 +459,7 @@ export default function Index() {
                                        (
                                            pkgData.packages_status === "Success" ? '' :(
                                                <>
-                                           <div className='space-between'>
+                                           <div className='space-between mb-5'>
                                           
                                         {!pkgReject && <Button variant="light" className='px-5' onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
 
@@ -501,6 +504,8 @@ export default function Index() {
                                 customUI: ({onClose}) => {
                                     return (
                                         <div className="payment ">
+
+                                            <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
 
                                         <Elements stripe={stripePromise} >
                                             <CheckoutForm  />

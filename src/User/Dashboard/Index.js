@@ -132,9 +132,41 @@ export default function Index() {
 
     }
 
-    function deletePic()
+    async function deletePic()
     {
 
+        const token = sessionstorage.getItem("token");
+        
+        let formdata = new FormData();
+        const customer_id = sessionstorage.getItem("customerId");
+        
+
+        formdata.append("customer_id",customer_id);
+
+        const headers ={
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
+          }
+
+        await axios({
+            method: 'post',
+            url: Url+'deleteprofilephoto',
+            data: formdata,
+            headers: headers
+            })
+            .then(function (response) {
+                //handle success
+               console.log(response.data);
+               if(response.data.photo === "NULL")
+               {
+                 toast.success('Profie picture Removed!..',3000);
+                 setTimeout(() => history.go(0),3000)
+               }
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
     }
   return (
     <>
@@ -165,7 +197,7 @@ export default function Index() {
             <div className='profileDiv'>
               <div className='profileInner'>
                
-                {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+                {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
 
                 <div className='img-camera'>
                     <label htmlFor="group_image"><AiOutlineCamera className='pointer' size={24} /></label> 
@@ -416,17 +448,20 @@ export default function Index() {
                         customUI: ({onClose}) => {
                             return (
                                 <div className='profile-pic-view '>
-                                    <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  />
+                                    {/* <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  /> */}
+{Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
+{console.log("profileup",profileUpload)}
                                     <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={35}/>
                                     
 
                                     <div >
                                     
                                         <AiOutlineDelete className='pointer mx-5' size={24} onClick={()=>deletePic()}/>
-                                        <label htmlFor="changepic"><AiOutlineCamera className='pointer mx-5' size={24} /></label> 
 
+                                        <label htmlFor="changepic"><AiOutlineCamera className='pointer mx-5' size={24} /></label> 
                                         <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="changepic"/>
+
                                     </div>
                                     
                                             
@@ -494,6 +529,7 @@ export default function Index() {
         
         let formdata = new FormData();
         const customer_id = sessionstorage.getItem("customerId");
+        
 
         formdata.append("customer_id",customer_id);
         formdata.append("photo",e.target.files[0]);

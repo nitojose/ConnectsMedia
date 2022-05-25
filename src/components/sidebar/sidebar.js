@@ -4,7 +4,7 @@ import React from 'react'
 import axios from 'axios';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { useHistory } from 'react-router-dom';
-import {FaHome,FaShoppingBag,FaArrowDown,FaArrowUp,FaSignOutAlt} from 'react-icons/fa'
+import {FaHome,FaShoppingBag,FaArrowDown,FaArrowUp,FaSignOutAlt,FaQuestion} from 'react-icons/fa'
 import {FiPackage,FiInfo} from 'react-icons/fi'
 import {MdEmojiEvents,MdCampaign,MdQuestionAnswer,MdPendingActions,} from 'react-icons/md'
 import {CgProfile,CgUserAdd} from 'react-icons/cg'
@@ -196,6 +196,7 @@ function msgRecieve()
 
                 <MenuItem icon={<FiPackage/>} onClick={()=>history.push('/getPackages')} style={{backgroundColor:'white'}}> Packages</MenuItem>
                 <MenuItem icon={<MdCampaign/>} onClick={()=>history.push('/getCampaigns')} style={{backgroundColor:'white'}}>Campaigns</MenuItem>
+                <MenuItem icon={<FaQuestion/>} onClick={()=>history.push('/faq')} style={{backgroundColor:'white'}}>FAQ</MenuItem>
 
                 <MenuItem icon={<FaSignOutAlt/>} onClick={() => logout()} style={{backgroundColor:'white'}}>Logout </MenuItem>
               

@@ -203,7 +203,7 @@ export default function Index() {
                               <tr className='pointer'>
                                 
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
-                                <td onClick={()=>{view(data,"camp")}}>{ data.plan.camp_type === 'MPOST'?" Million Posts":" Static Posts"}</td>
+                                <td onClick={()=>{view(data,"camp")}}>{ data.plan[0].camp_type === "MPOST"?" Million Posts":" Static Posts"}</td>
                                 <td className='cost' onClick={()=>{view(data,"camp")}}>${data.order.order_amt}.00</td>
                                 <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
                                 <td onClick={()=>{view(data,"camp")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}

@@ -5,10 +5,19 @@ import '../../style/order.scss'
 import { Url,imgUrl,notImage,isLoggin } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
-import dateFormat from 'dateformat';
 import Parallax from 'react-rellax';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
+import {AiOutlineClose} from 'react-icons/ai';
+import dateFormat from 'dateformat';
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from '../CheckoutForm';
+
 
 var sessionstorage = require('sessionstorage');
 
@@ -27,6 +36,11 @@ export default function EventPending() {
     const [subId,setSubId] = React.useState();
     const [rejectbtn,setrejectbtn] = React.useState(false);
     const [spinner,setSpinner] = React.useState(false);
+
+    const [frame,setFrame] = React.useState(false);
+
+    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
+
 
     async function logginornot()
     {
@@ -66,15 +80,15 @@ export default function EventPending() {
                                         <div className='space-between camp-400'>
                                             
 
-                                            <img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className="mx-5" id="event_req_img"/>
+                                            <img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'400px',width:'380px',borderRadius:'20px'}} className="mx-5" id="event_req_img"/>
 
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{eventList.event_title}</span></p>
 
-                                                <p>Cost : <span >${eventList.event_cost}.00 </span></p>
+                                                <p>Cost : <span className='bold-text' >${eventList.event_cost}.00  </span></p>
 
                                                 <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
-                                                    <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
+                                                <p> To Date &nbsp; &nbsp; &nbsp;: {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
 
                                                 <p className='underline'> Description </p>
                                             
@@ -96,7 +110,7 @@ export default function EventPending() {
                                 <div className='extraRowSpace'>
                                 </div>
 
-                                    <div className='padding-8rem space-between'>
+                                    <div className='padding-8rem space-between mb-5' style={{ marginTop: '-5rem'}}>
                                         {paybtn || eventList.event_status === "Accepted" ? (<> 
                                             </>):
                                             ( eventList.event_status === 'Success' ? '' : (
@@ -132,7 +146,7 @@ export default function EventPending() {
 
                                 {(paybtn || eventList.event_status === "Accepted") && 
 
-                                <Container className="event-accept-suborder" style={{marginLeft:'14rem'}}>
+                                <Container className="event-accept-suborder" style={{marginLeft:'14rem',marginTop: '-8rem'}}>
                                  
                                     <div className='px-5 mx-5'>
                                          {subOrder && 
@@ -150,7 +164,7 @@ export default function EventPending() {
                                                     {subOrder.map((s,id) =>(
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
-                                                                    <td >{s.sorder_billdt}</td>
+                                                                    <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
                                                                     <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,eventList.event_cost ,Order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
@@ -166,6 +180,30 @@ export default function EventPending() {
                                 </Container>  
                                 }
                                    
+
+                                   {frame === true &&
+
+                                        confirmAlert({
+
+                                            customUI: ({onClose}) => {
+                                                return (
+                                                    <div className="payment ">
+
+                                                        <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={35}/>
+
+                                                    <Elements stripe={stripePromise} >
+                                                        <CheckoutForm  />
+                                                    </Elements>
+
+
+                                            </div>
+                                                
+                                                );
+                                                
+                                            }
+                                        })
+
+                                    }
 
                                    
 
@@ -313,8 +351,10 @@ export default function EventPending() {
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);
         sessionstorage.setItem("orderId",orderid);
-        console.log("payment")
-        history.push('/payment-form');
-        history.go(0);
+        setFrame(true);
+
+        // console.log("payment")
+        // history.push('/payment-form');
+        // history.go(0)
     }
 }

@@ -5,12 +5,13 @@ import '../../style/order.scss'
 import { Url,notImage,isLoggin,imgUrl } from '../../GLOBAL/global';
 import axios from 'axios';
 import { useHistory,Link} from "react-router-dom";
-import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
 import { toast, ToastContainer } from 'react-toastify';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
+import {AiOutlineClose} from 'react-icons/ai';
+import dateFormat from 'dateformat';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
@@ -57,7 +58,7 @@ export default  function EachOrder() {
     const type =  sessionstorage.getItem("orderType");
     const order =  JSON.parse(sessionstorage.getItem("orderID"))
 
-    console.log("oId", JSON.parse(sessionstorage.getItem("orderID")) , "type",type)
+    console.log("oId", JSON.parse(sessionstorage.getItem("orderID")))
     
 
     React.useEffect( ()=>
@@ -157,13 +158,16 @@ export default  function EachOrder() {
                                 <>
                                 
                                 
-                                    <div className='vertical-text '>
-                                        <p>{type === "event" ?"EVENTS":""}</p>
+                                    <div className='vertical-text event-align '>
+                                        {/* <p>{type === "event" ?"EVENTS":""}</p> */}
+                                        <p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
                                     </div>
 
-                                    <div className='vertical-text camp-text'>
-                                        <p>{type === "camp" ?"CAMPAIGN":""}</p>
-                                    </div>
+                                    {/* <div className='vertical-text camp-text'> */}
+                                        {/* <p>{type === "camp" ?"CAMPAIGN":""}</p> */}
+                                        {/* <p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p> */}
+                                    
+                                    {/* </div> */}
 
                                     <div className='second_section'>
 
@@ -174,12 +178,12 @@ export default  function EachOrder() {
 
 
                                         <div className='space-between camp-400'>
-                                            <img src={order.plan[0].photo === (undefined || null) ?notImage :imgUrl+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'500px',width:'420px',borderRadius:'20px'}} className='mt-5 mx-5'/>
+                                            <img src={order.plan[0].photo === (undefined || null) ?notImage :imgUrl+order.plan[0].photo} alt={order.plan[0].order_id} width='250px' height='600px' style={{height:'400px',width:'380px',borderRadius:'20px'}} className='mt-5 mx-5'/>
 
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{order.plan[0].camp_title?order.plan[0].camp_title:order.plan[0].event_title }</span></p>
 
-                                                <p >Cost : <span className='bold-text'>${order.order.order_amt}.00 </span></p>
+                                               {type === "camp"? <p >Cost :<span className='bold-text'>${order.order.order_amt}.00 /month</span></p> : <p >Cost :<span className='bold-text'>${order.order.order_amt}.00 </span></p>} 
 
                                                 <p>Date : <span >{dateFormat(order.plan[0].event_from, "mmmm dS, yyyy")+"  -  "+dateFormat(order.plan[0].event_to, "mmmm dS, yyyy")} </span></p>
 
@@ -187,7 +191,7 @@ export default  function EachOrder() {
                                             
                                                 <p style={{marginTop:'-1rem;'}}><span>{order.plan[0].camp_desc?order.plan[0].camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
                                                 
-                                                <Button variant="light" className='px-5 ' style={{width:'50%'}} onClick={()=>sent()}>Message</Button>
+                                                <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button>
 
                                             </div>
 
@@ -220,9 +224,9 @@ export default  function EachOrder() {
                                                             <>
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
-                                                                    <td >{s.sorder_billdt}</td>
+                                                                    <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.order.order_amt,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light" className='mx-2' onClick={()=>paynow(s.sorder_id,order.order.order_amt,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                             </>
                                                         
@@ -248,7 +252,7 @@ export default  function EachOrder() {
                                    
                                       
                                         <div className='vertical-text-pkg '>
-                                            <p>PACKAGE</p>
+                                            <p>{order.PACKAGE.packages_type === "STD" ? <span style={{color:'#F1C40F',fontFamily:"cursive"}}>Standard </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Customized </span>}PACKAGE</p>
                                         </div>
 
 
@@ -256,13 +260,13 @@ export default  function EachOrder() {
 
 
                                             <div className=' '>
-                                                <h2>{order.PACKAGE.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
+                                                <h2>{order.PACKAGE.packages_type === "STD" ? "STANDRAD " :"CUSTOMIZED " }<span className='warning'> PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
 
                                             <p className='heading bold-text py-3'>Package Details</p>
 
-                                            <p>Package Cost : <span className='bold-text'>${order.PACKAGE.packages_cost}.00</span></p>
+                                            <p>Package Cost : <span className='bold-text'>${order.PACKAGE.packages_cost}.00 /month</span></p>
                                             <p>Selected Months : <span className='bold-text'>{order.PACKAGE.months}</span></p>
                                             <p>Drive Id : <a href={order.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
                                            
@@ -320,7 +324,7 @@ export default  function EachOrder() {
                                       
                                                     
                                     {subOrder.length !== 0 ? 
-                                        (<div className='suborder' style={{margin: '0 13% 0 11%'}}>
+                                        (<div className='suborder' style={{margin: '-5px 10% 0px 10%;'}}>
                                        
                                               <Container className=''>
                                                   <div className='view-msg '>
@@ -339,9 +343,9 @@ export default  function EachOrder() {
                                                            
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
-                                                                    <td >{s.sorder_billdt}</td>
+                                                                    <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light "  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light " id="paynow-btn"  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                      ))
                                                 }       
@@ -396,6 +400,8 @@ export default  function EachOrder() {
                                 customUI: ({onClose}) => {
                                     return (
                                         <div className="payment ">
+
+                                            <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
        
                                         <Elements stripe={stripePromise} >
                                             <CheckoutForm  />

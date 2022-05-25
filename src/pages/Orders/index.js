@@ -257,7 +257,7 @@ export default function Index() {
 
 
                                           <div className='space-between text-color '>
-                                            <p className='bold-text'>{data.order.order_amt}</p>
+                                            <p className='bold-text'>${data.order.order_amt}.00 /month</p>
                                               <p>Cost</p>
                                               
                                             </div>
@@ -335,7 +335,7 @@ export default function Index() {
 
 
                                     <div className='space-between text-color '>
-                                      <p className='bold-text'>{data.PACKAGE.packages_cost}</p>
+                                      <p className='bold-text'>${data.PACKAGE.packages_cost}.00 /month</p>
                                         <p>Cost</p>
                                         
                                       </div>
