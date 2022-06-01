@@ -16,6 +16,7 @@ import {  animateScroll as scroll } from 'react-scroll';
 import { Link } from 'react-router-dom';
 import Section from '../Section';
 import Navbar from '../../components/header/navbar';
+import FooterPage from '../../components/Footer/FooterPage';
 
 import '../../../node_modules/font-awesome/css/font-awesome.min.css';
 // import '../node_modules/seamless-scroll-polyfill/lib/bundle.min.cjs';
@@ -297,7 +298,7 @@ $("#page-logo").click(function(){
   return (
     <>
 
-<Navbar />
+	<Navbar />
 
     <div id="scroll-snap">
 		<Home/>
@@ -312,6 +313,7 @@ $("#page-logo").click(function(){
 		<Give/>
 		<Testimonial/>
 		<Contact />
+		{/* <FooterPage/> */}
     </div>
     </>
   );

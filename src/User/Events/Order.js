@@ -280,8 +280,8 @@ export default function Index() {
     sessionstorage.setItem("orderType",value);
 
     
-    // history.push( '/order-view');
-    history.push('/order-payment/'+id)
+    history.push( '/order-view');
+    // history.push('/order-payment/'+id)
     history.go(0);
   }
 

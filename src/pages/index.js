@@ -57,6 +57,10 @@ import GetPackages from '../User/Packages/Index';
 
 import RaiseReq from '../User/RaiseRequest/Index';
 
+import FooterPage from '../components/Footer/FooterPage';
+
+import Privacy from '../pages/Privacypolicy/Index';
+
 // import Pagination from './paginationTable';
 
 export default function Index() {
@@ -72,13 +76,13 @@ export default function Index() {
                 <Route exact path="/">
                     
                 <MainScreen />
-            
+                {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/home'>
 
                 <MainScreen />
-
+                {/* <FooterPage/> */}
                 </Route>
 
                 {/* <Sidebar/> */}
@@ -86,12 +90,12 @@ export default function Index() {
                 <Route exact path='/dashboard'>
                     <Sidebar/>
                    <DashHome/>
-                  
+                   {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/sidebar'>
                     <Sidebar/>
-                   
+                    {/* <FooterPage/> */}
                 </Route>
 
 
@@ -99,6 +103,7 @@ export default function Index() {
                 <Route exact path='/login' >
                  <UserHeader/>
                     <Login />
+                    {/* <FooterPage/> */}
 
                 </Route>
                
@@ -107,39 +112,40 @@ export default function Index() {
                <Route exact path='/registration' >
                 <UserHeader/>
                     <Registration />
-
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/faq'>
                 <UserHeader/>
               
                     <Faq />
+                    {/* <FooterPage/> */}
                 </Route>
             
 
                 <Route exact path='/login/:standard-list'>
                 <UserHeader/>
                 <Login  />
-
+                {/* <FooterPage/> */}
                 </Route>
 
 
                 <Route exact path='/login/:customized-list'>
                 <UserHeader/>
                 <Login  />
-
+                {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/profile'>
                     <Sidebar/>
                    <Profile />
-
+                   {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/order-payment/:id'>
                     <Sidebar/>
                    <RequestPaynow />
-
+                   {/* <FooterPage/> */}
                 </Route>
 
                 
@@ -147,20 +153,20 @@ export default function Index() {
                     <Route exact path='/forgot_password'>
                         <UserHeader/>
                         <Forgotpwd />
-
+                        {/* <FooterPage/> */}
                     </Route>
 
 
                     <Route exact path='/forgot_password1/:email'>
                     <UserHeader/>
                     <Forgotpwd1 />
-
+                    {/* <FooterPage/> */}
                     </Route>
 
                     <Route exact path='/raise-request'>
                         <Sidebar/>
                         <RaiseReq/>
-
+                        {/* <FooterPage/> */}
                     </Route>
 
                     
@@ -169,26 +175,26 @@ export default function Index() {
                 <Route exact path='/order-view'>
                     <Sidebar/>
                     <EachOrder />
-                
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/change_password'>
                          <Sidebar/>
                     <ChangePassword />
-
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/customized-list'>
                 <UserHeader/>
                     <CustomizedList />
-
+                    {/* <FooterPage/> */}
                 </Route>
 
 
                 <Route exact path='/standard-list'>
                      <UserHeader/>
                     <StandardList />
-
+                    {/* <FooterPage/> */}
                 </Route>
 
 
@@ -201,19 +207,19 @@ export default function Index() {
                 <Route exact path='/events-creation'>
                 <UserHeader/>
                     <EventsCreation />
-
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/million-posts'>
                 <UserHeader/>
                     <MillionPosts />
-
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/staticPosts'>
                     <UserHeader/>
                     <StaticPosts />
-
+                    {/* <FooterPage/> */}
                 </Route>
                 
                 {/* <Route exact path='/messages'>
@@ -235,13 +241,14 @@ export default function Index() {
                
                     <Sidebar/>
                     <RequestPkg  />
-                    
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/request/event'>
                
                     <Sidebar/>
                    < RequestEvent/>
+                   {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/order/event'>
@@ -249,6 +256,7 @@ export default function Index() {
                     <Sidebar/>
                    
                    < OrderEvent/>
+                   {/* <FooterPage/> */}
                 </Route>
 
 
@@ -257,6 +265,7 @@ export default function Index() {
                     <Sidebar/>
                    
                    < OrderPack/>
+                   {/* <FooterPage/> */}
                 </Route>
 
 
@@ -265,6 +274,7 @@ export default function Index() {
                     <Sidebar/>
                    
                    < OrderCamp/>
+                   {/* <FooterPage/> */}
                 </Route>
 
 
@@ -273,6 +283,7 @@ export default function Index() {
                     <Sidebar/>
                    
                    < SentMessage/>
+                   {/* <FooterPage/> */}
                 </Route>
 
 
@@ -281,6 +292,7 @@ export default function Index() {
                     <Sidebar/>
                    
                    < RecieveMsg/>
+                   {/* <FooterPage/> */}
                 </Route>
 
 
@@ -288,41 +300,51 @@ export default function Index() {
                 
                     <Sidebar/>
                    <MsgView/>
-                   
+                   {/* <FooterPage/> */}
                 </Route>
 
 
                 <Route exact path='/pending_req/:id'>
                 <Sidebar/>
                     <EachRequest/>
-
+                    {/* <FooterPage/> */}
                 </Route>
 
                 <Route exact path='/pending_req'>
                 <Sidebar/>
                     <EachRequest/>
-
+                    {/* <FooterPage/> */}
                 </Route>
 
 
                 <Route exact path='/request-pkg'>
                     <Sidebar/>
                     <EachRequest/>
-
+                    {/* <FooterPage/> */}
                 </Route>
 
 
                 <Route exact path='/request-event'>
                 <Sidebar/>
                     <EventPending/>
+                    {/* <FooterPage/> */}
+                </Route>
 
+                <Route exact path='/privacy'>
+                    <Privacy/>
+                    {/* <FooterPage/> */}
+                </Route>
+
+                <Route exact path='/terms'>
+                    {/* <Privacy/> */}
+                    {/* <FooterPage/> */}
                 </Route>
 
                
                 <Route exact path='/request/:type/:id'>
                 <Sidebar/>
                     <Requets/>
-                    
+                    {/* <FooterPage/> */}
                 </Route>
 
                 {/* <Route exact path='/my-requests'>
@@ -339,30 +361,22 @@ export default function Index() {
                     <Route exact path='/getCampaigns'>
                         <Sidebar/>
                         <GetCampaign/>
-                    
+                        {/* <FooterPage/> */}
                     </Route>
 
                     <Route exact path='/getPackages'>
                         <Sidebar/>
                         <GetPackages/>
-                    
+                        {/* <FooterPage/> */}
                     </Route>
 
                 <Route exact path='/payment-form'>
                     <Sidebar/>
                     <PaymentForm/>
-                    
+                    {/* <FooterPage/> */}
                 </Route>
 
-                {/* <Route exact path='/gene-enquiry'>
-                 <Sidebar/>
-                    <Enquiry/>
-                </Route> */}
-
-{/* <Route exact path ="/pagination">
-                <Pagination/>
-</Route> */}
-                
+            
                
             </Switch>
             {/* <Footer /> */}

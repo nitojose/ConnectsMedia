@@ -45,6 +45,7 @@
     "rellax": "^1.12.1",
     "sass": "^1.48.0",
     "sessionstorage": "^0.1.0",
+    "simple-react-footer": "^1.0.2",
     "stripe": "^8.216.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.3"

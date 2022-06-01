@@ -311,14 +311,15 @@ export default function Index() {
   function view(data,value)
   {
    
-    //   setOrderId(orderId)
-    console.log(data.order.order_id)
-    sessionstorage.setItem("orderID",JSON.stringify(data));
-    sessionstorage.setItem("orderType",value);
-
     
-    history.push( '/order-view');
-    history.go(0);
+     let id = data.order.order_id;
+     sessionstorage.setItem("orderID",JSON.stringify(data));
+     sessionstorage.setItem("orderType",value);
+ 
+     
+     history.push( '/order-view');
+    //  history.push('/order-payment/'+id)
+     history.go(0);
   }
 
 

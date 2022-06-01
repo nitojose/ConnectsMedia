@@ -31,6 +31,13 @@ a
     
 }
 
+.footer-container
+{
+    // bottom: 0;
+    position: absolute;
+    width: 100% !important;
+}
+
 .green
 {
     color: darkgreen !important;
@@ -39,7 +46,7 @@ a
 
  .pro-inner-list-item 
  {
-     background-color: #efefef !important;
+    background-color: #efefef !important;
  }
 
 .warning

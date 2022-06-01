@@ -41,6 +41,7 @@ export default function CustomizedList() {
      const { register, handleSubmit } = useForm({ shouldUseNativeValidation: true });
     const [Items_1,setItems_1] =  React.useState([]);
     const [QueAns] = React.useState([]);
+    const [pack,setPack] = React.useState(false);
     // const [pkg_id,setPkgId] = React.useState();
    
      const [Items,setItems] =  React.useState([]);
@@ -137,6 +138,10 @@ export default function CustomizedList() {
             {
               id:16,
               value:"SEO "
+            },
+            {
+              id:17,
+              value:"Website"
             }
      ]
 
@@ -179,7 +184,7 @@ export default function CustomizedList() {
                               <label style={{marginLeft:'1rem'}}>
                                 {item.value}
                               </label> 
-                              
+
                             </div>
                           
 
@@ -187,6 +192,38 @@ export default function CustomizedList() {
                           </>
                       ))
                     }
+
+{pack? <>
+<Col></Col> <Col><div>
+                                <input
+                                  type="checkbox"
+                                  style={{marginTop:'1rem'}}
+                                  key="1"
+                                  value="Build new Website"
+                                  className='checkbox'
+                                  onChange={(e)=> handleChange(e,"Build new Website")}
+                                /> 
+
+                              <label style={{marginLeft:'1rem'}}>
+                              Build new Website
+                              </label>
+
+                              <input
+                                style={{marginLeft:'1rem'}}
+                                  type="checkbox"
+                                  key="2"
+                                  value="Enhanced current Website"
+                                  className='checkbox'
+                                  onChange={(e)=> handleChange(e,"Enhanced current Website")}
+                                /> 
+
+                              <label style={{marginLeft:'1rem'}}>
+                              Enhanced current Website
+                              </label>
+
+                              
+                                
+                              </div></Col></>:<></>}
                   </Row>
           </div>
 
@@ -409,6 +446,11 @@ export default function CustomizedList() {
     {
       // var id = event.target.value;
       var value = item1;
+      console.log("temp",value)
+      if(value === "Website")
+      {
+        setPack(true);
+      }
       
       var temp = {
         "question" : value,
@@ -418,7 +460,8 @@ export default function CustomizedList() {
 
       // setItems(temp);
       QueAns.push(temp);
-      // console.log(temp)
+
+     
 
     }
 

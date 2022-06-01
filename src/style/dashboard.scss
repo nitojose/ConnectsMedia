@@ -49,6 +49,12 @@ body{
     
     }
 
+
+    .dash-video
+    {
+        width: -webkit-fill-available;
+    }
+
     .cover-img-dash
     {
         height: 100%;
@@ -57,6 +63,13 @@ body{
         object-fit: cover;
     }
 
+
+//     .footer-container
+// {
+//     bottom: 0;
+//     position: absolute;
+//     width: 100% !important;
+// }
 
 .processNoti
 {
@@ -72,6 +85,8 @@ body{
     border: 1px solid red;
     background-color: red;
 }
+
+
 
 
 .dash-card
@@ -549,6 +564,32 @@ body{
     {
         margin: 2rem 5rem 0 24rem;
     }
+
+    .event-accept-suborder 
+    {
+        margin-top: -2rem;;
+    }
+
+    #services>div
+    {
+        padding: 3vmax 5vmax 5vmax 5vmax !important; 
+    }
+
+    #service-list li
+    {
+        opacity: 1 !important;
+    }
+
+    .section{
+        scroll-snap-align: none !important;
+        scroll-snap-stop: none !important;
+    }
+    
+    .services-lists
+    {
+        padding-left: 0px !important;
+        padding-right: 5rem !important;
+    }
 @media (min-width:401px) and (max-width:850px){
 
     :root{
@@ -586,6 +627,7 @@ body{
     .suborder
     {
         margin-left: 0rem;
+        margin-right: 8rem;
     }
 
     .pkg-req-section .space-between 

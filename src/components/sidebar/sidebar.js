@@ -24,7 +24,7 @@ export default function Sidebar()
  async function logginornot()
     {
       const cust =  await isLoggin();
-      console.log("cust",cust);
+      // console.log("cust",cust);
       if(cust === null)
       {
         history.push('/login');
@@ -56,7 +56,7 @@ export default function Sidebar()
         .then(function (response) {
             //handle success
             // console.log("success");
-            console.log("inbox count",response.data);
+            // console.log("inbox count",response.data);
            setInboxCount(response.data.count);
             
         })
@@ -70,7 +70,7 @@ export default function Sidebar()
 
     async function getDatas()
     {
-      console.log("second")
+      // console.log("second")
 
       const token = sessionstorage.getItem("token");
       const customer_id = sessionstorage.getItem("customerId");
@@ -78,7 +78,7 @@ export default function Sidebar()
         'Access-Control-Allow-Methods': 'get' } ,params:{customer_id: customer_id} })
         .then(response => {
             // If request is good...
-            console.log(response.data);
+            // console.log(response.data);
 
             setprocessCount(response.data.Process_count);
             setpkgCount(response.data.notification.package);

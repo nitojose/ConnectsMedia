@@ -21,7 +21,7 @@ var sessionstorage = require('sessionstorage');
 export default  function EachOrder() {
     let history = useHistory();
 
-    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
+    const stripePromise = loadStripe("pk_live_51KlNyrDp5HAOMMnMOfq5yKAHtb3WHJZyNLO6YK1so2QeT7gkDdqmHh15HH9A9UDdzMLTjdIyWQxFWTKz4QhWZHV800AA2sYk40");
 
 
     
@@ -395,25 +395,25 @@ export default  function EachOrder() {
 
                             {frame === true &&
 
-                            confirmAlert({
+                                confirmAlert({
 
-                                customUI: ({onClose}) => {
-                                    return (
-                                        <div className="payment ">
+                                    customUI: ({onClose}) => {
+                                        return (
+                                            <div className="payment ">
 
-                                            <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
-       
-                                        <Elements stripe={stripePromise} >
-                                            <CheckoutForm  />
-                                        </Elements>
-                            
-                            
-                                </div>
-                                    
-                                    );
-                                    
-                                }
-                            })
+                                                <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
+        
+                                            <Elements stripe={stripePromise} >
+                                                <CheckoutForm  visibility={true} />
+                                            </Elements>
+                                
+                                
+                                    </div>
+                                        
+                                        );
+                                        
+                                    }
+                                })
 
                             }
 
@@ -433,6 +433,7 @@ export default  function EachOrder() {
   {
       console.log("hello")
       setmodelmsg(false);
+      setFrame(false);
   }
 
     function sent()

@@ -16,7 +16,7 @@ import axios from 'axios';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import FooterPage from '../../components/Footer/FooterPage';
 var sessionstorage = require('sessionstorage');
 
 
@@ -103,10 +103,11 @@ export default function Contact() {
             
         </div>
     </div>
-    
+   
 </div>
 <ToastContainer  style={{marginTop:'50vh'}} position="top-center" />
 <button className="chat-button" style={{display:'none'}}><i class="fa fa-comments" aria-hidden="true"></i></button>
+
         </>
     );
 

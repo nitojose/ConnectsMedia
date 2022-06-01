@@ -24,7 +24,7 @@ export default function Index() {
   const [frame,setFrame] = React.useState(false);
     const [spinner,setSpinner] = React.useState(false);
 
-    const stripePromise = loadStripe("pk_test_51KlVz1SIk7SQPAkIBOlnAMkhRjf3H2qyJnjp1O6aCk9QmSiTDijmsJOyoMcbXYTrY24mYvvV3B4BWPEoJaZiLG4500xgbriwyj");
+    const stripePromise = loadStripe("pk_live_51KlNyrDp5HAOMMnMOfq5yKAHtb3WHJZyNLO6YK1so2QeT7gkDdqmHh15HH9A9UDdzMLTjdIyWQxFWTKz4QhWZHV800AA2sYk40");
 
 
   let history = useHistory();
@@ -155,7 +155,7 @@ export default function Index() {
                                 <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
 
                             <Elements stripe={stripePromise} >
-                                <CheckoutForm  />
+                                <CheckoutForm visibility={true} />
                             </Elements>
 
 
