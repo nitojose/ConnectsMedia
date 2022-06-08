@@ -31,6 +31,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import GetCampaign from '../User/Campaign/Index';
 import DashHome from "../User/Dashboard/Index";
 import RequestPaynow from '../pages/Orders/RequestPaynow';
+import SuccessPage from '../pages/PaymentSuccess';
 
 import {
     BrowserRouter as Router,
@@ -311,6 +312,7 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/pending_req'>
+
                 <Sidebar/>
                     <EachRequest/>
                     {/* <FooterPage/> */}
@@ -365,8 +367,11 @@ export default function Index() {
                     </Route>
 
                     <Route exact path='/getPackages'>
-                        <Sidebar/>
-                        <GetPackages/>
+
+                        
+                            <Sidebar/>
+                            <GetPackages/>
+                        
                         {/* <FooterPage/> */}
                     </Route>
 
@@ -374,6 +379,10 @@ export default function Index() {
                     <Sidebar/>
                     <PaymentForm/>
                     {/* <FooterPage/> */}
+                </Route>
+
+                <Route exact path='/success'>
+                    <SuccessPage/>
                 </Route>
 
             

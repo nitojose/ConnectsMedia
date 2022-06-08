@@ -57,6 +57,7 @@ export default function Index() {
                
                 console.log("getprofile",response.data.data[0]);
                 setCustomerInfo(response.data.data[0]);
+            
                
                 
             })
@@ -70,11 +71,12 @@ export default function Index() {
 
 
     let history = new useHistory();
+
   return (
             <Container>
 
         <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
+            <img src={customerInfo === undefined ?picture : (imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
                 <div className='row-flex-align'>

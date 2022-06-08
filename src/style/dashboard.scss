@@ -483,6 +483,11 @@ body{
     margin: -1rem 3% 0px 17% !important;
 }
 
+
+.Shimmer-shimmer-0-1-1
+{
+    width: 100%;
+}
 #campaigns:not(.onfocus) li
     {
         background: #111d42 !important;
@@ -590,6 +595,19 @@ body{
         padding-left: 0px !important;
         padding-right: 5rem !important;
     }
+
+    .popup .active.subtitle
+    {
+        left: 25vw !important;
+        right:6vw !important;
+    }
+
+    #service-list li b
+    {
+        font-size: 60% !important;
+    }
+
+    
 @media (min-width:401px) and (max-width:850px){
 
     :root{
@@ -643,23 +661,16 @@ body{
     {
         margin: 2rem 3rem;
     }
+
+    .popup .active.subtitle
+    {
+        left: 25vw !important;
+        right:7vw !important;
+    }
 }
 
 
-// @media (max-width:650px){
 
-//     .row-flex-align
-//     {
-//         display: flex;
-//         flex-direction: row;
-//         justify-content: space-between;
-//         align-items: center;
-//         margin-top: 0% !important;
-//         margin: 7rem -2rem 0 4rem !important;
-//     }
-    
-
-// }
 
 @media (max-width:400px)
 {

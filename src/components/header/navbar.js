@@ -81,7 +81,8 @@ export default function Navbar(props,id) {
             <div id="head-filler"></div>
                 <div id="user-menu">
 
-                {sessionstorage.getItem('token')=== null ? (<>
+{console.log("token value in nav",sessionstorage.getItem('token'))}
+                {sessionstorage.getItem('token') === (undefined || null) ? (<>
                    
                             
                             

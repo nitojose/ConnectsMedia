@@ -52,9 +52,29 @@ export default function Index() {
        
       console.log("useeffect")
       logginornot();
-     
+      
+        $("#service-list li").click(function(){
+            var i=$(this).index()+1;
+            console.log(i);
+            $("#service-list .subtitle").removeClass("active");
+            $("#service"+i).addClass("active");
+        });
+        $(".popup .subtitle i").click(function(){
+            $(this).parent().removeClass("active");
+        });
+        $(document).on('keydown', function(event) {
+             if (event.key == "Escape") {
+                 $(".popup .subtitle i").parent().removeClass("active");
+             }
+         });
+        $("#socials li").click(function(){
+            var i=$(this).index()+1;
+            console.log(i);
+            $("#socials .subtitle").removeClass("active");
+            $("#social"+i).addClass("active");
+        });
 
-     
+
 
       getDatas();
 
@@ -265,7 +285,7 @@ export default function Index() {
             <div className='view-msg mt-5 '>
             <div className='align-div pwd-div'>
                 <div className="section popup" id="services">
-        <div class="service-main-div">
+        <div className="service-main-div">
             <h1>Services We Offer</h1>
             <div id="service-wrap">
                 <ul id="service-list" className="services-lists">
@@ -292,7 +312,7 @@ export default function Index() {
                 </ul>
             </div>
             <div id="service1" class="subtitle">
-                <div class="content">
+                <div class="view-msg content">
                 <h2>Promotions & Ads</h2>
                 <ul>
                 <li>Special campaign promotions with targeted reach and performance tracking</li>
@@ -400,7 +420,7 @@ export default function Index() {
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
             <div id="social1" class="subtitle">
-                <div class="content">
+                <div class=" content">
                 <h2>YouTube</h2>
                 <ul>
                 <li>We will handle your live-stream to increase followers and viewership</li>
@@ -509,11 +529,11 @@ export default function Index() {
                 <div className='align-div pwd-div'>
                     <h1 className=' font-20 py-3 text-center'>Packages</h1>
 
-                    <div class="main-packages  dash-packages pb-3">
-                    <div class="package-wrap">
-                        <div class="package">
+                    <div className="main-packages  dash-packages pb-3">
+                    <div className="package-wrap">
+                        <div className="package">
                                                         <h4>Standard</h4>
-                                                        <div class="content">
+                                                        <div className="content">
                                                             <ul>
                                                                 <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
                                                                 <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
@@ -536,10 +556,10 @@ export default function Index() {
                                                         </div>
                                                     </div>                           
                                                 </div>                                 
-                                                <div class="package-wrap">
-                                                    <div class="package">
+                                                <div className="package-wrap">
+                                                    <div className="package">
                                                         <h4>Custom</h4>
-                                                        <div class="content">
+                                                        <div className="content">
                                                             <ul>
                                                                 <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
                                                                 <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>

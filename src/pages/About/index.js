@@ -18,7 +18,7 @@ export default function index() {
                 <i id="incvolume" class="fa fa-volume-up" aria-hidden="true" style={{display:"block"}}></i>
                 <i id="stop-play" class="fa fa-stop-circle-o" aria-hidden="true" style={{display:"block"}}></i>
 
-                <video autoPlay={false} loop onLoadStart="this.volume=0.05">
+                <video autoPlay={false} loop >
                   <source src={require('../../../src/assets/imgs/video.mp4')} type="video/mp4"/>
                 </video>
                
@@ -36,9 +36,9 @@ In the present age of technology, you have great opportunity to spread the gospe
 
 {/* About section */}
 
-<div class="section" id="about">
+<div className="section" id="about">
 	<div>
-	<div class="video">
+	<div className="video">
         <video autoPlay={true} loop muted>
           <source src={require('../../../src/assets/imgs/mic.mp4')} type="video/mp4" />
           <span></span>
@@ -46,13 +46,13 @@ In the present age of technology, you have great opportunity to spread the gospe
     </div>
 	<div id="about-slides">
         <div>
-                <div class="content">
+                <div className="content">
                 <h2>Who We Are</h2>
                 We are a faith based, passionate and creative team of Christian believers and engagement specialists carrying the ever-relevant gospel of the Lord Jesus Christ to the present generation using social media. We are tech professionals equipped with modern-day IT and marketing skills, fully committed to utilizing social media to its fullest extent in spreading the gospel of the Lord Jesus Christ.
                 </div>
         </div>
         <div>
-                <div class="content">
+                <div className="content">
                 <h2>What We Do</h2>
                 Driven by Matthew 28:19-20, we have an opportunity that no other previous generations had in spreading the gospel to the masses through the internet; specifically social media. With our army of tech soldiers and our love for Jesus, we help churches and ministries have a strong presence in a variety of global media platforms.
                 </div>

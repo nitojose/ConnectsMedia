@@ -12,6 +12,7 @@ import Parallax from 'react-rellax';
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
+import Shimmer from "react-shimmer-effect";
 
 var sessionstorage = require('sessionstorage');
 
@@ -22,6 +23,7 @@ export default function Index() {
 
     let history = useHistory();
     const[orders,setOrders] = React.useState([]);
+    const [loading,setLoading] = React.useState(true);
     
     const [plans,setPlans] = React.useState(false);
     
@@ -56,7 +58,9 @@ export default function Index() {
                 })
                 if(planData.length !== 0)
                 {
-                  setPlans(true);  
+                  setLoading(false); 
+                  setPlans(true); 
+                  
                 }
                  
                   
@@ -183,9 +187,13 @@ export default function Index() {
           
 
              <div className='view-msg ' >
+
+                      {loading? 
+       <div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div>
+      :(
                         
 
-                        {plans  ? (
+                        plans  ? (
                                     
                                 <>
                      
@@ -256,12 +264,12 @@ export default function Index() {
                                </ul>
                                </div>
                          </div>
-                         </div>
+                      </div>
                      
                         
                       </> )
                       
-                    }
+                      )}
                                 
             </div>
   

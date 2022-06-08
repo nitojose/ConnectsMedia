@@ -11,6 +11,7 @@ import Parallax from 'react-rellax'
 import {MdEmojiEvents} from 'react-icons/md';
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -47,12 +48,16 @@ export default function Index() {
     
     const [process_event,setProcess_event] = React.useState([]);
     const [customerInfo,setCustomerInfo] = React.useState();
-  
+    
+    const [loading,setLoading] = React.useState(true);
+    
     const [currentPage,setCurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts1 = process_event.slice(indexOfFirstPost,indexOfLastPost);
+
+    console.log("currentpost1",currentPosts1)
 
     const currentPosts2 = pend_event.slice(indexOfFirstPost,indexOfLastPost);
     
@@ -75,11 +80,12 @@ export default function Index() {
                 
                 console.log("pending",response.data.event);    
                 setPend_event(response.data.event);
+                // setLoading(false);
                 setPlans(true);
                
             })
             .catch((error) => {
-                console.log('error ' + error);
+                console.log('error 1' + error);
             });
 
 
@@ -87,12 +93,13 @@ export default function Index() {
             .then(response => {
                 // If request is good...
                 
-                console.log("processing",response.data.event)
+                console.log("processing",response.data.event);
                 setProcess_event(response.data.event);
+                setLoading(false);
                 setPlans(true);
             })
             .catch((error) => {
-                console.log('error ' + error);
+                console.log('error 2' + error);
             });
 
 
@@ -101,7 +108,7 @@ export default function Index() {
 
    
 
-    useEffect( () => {
+    React.useEffect( () => {
 
      getDatas();
      getInfos();
@@ -179,16 +186,19 @@ export default function Index() {
           </div>
       </div>
 
-     
-                          { plans ? (process_event === "No events available" ? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
+{console.log("process-pend",process_event ,pend_event)}
 
-                                                        
+    {loading ?(<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></div> ):
+
+      (
+           (process_event === "No events available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col> :                       
                           (
-                            
-                            
+
+
                               <div className='view-msg'>
 
                               <div className='msg-align mx-0 mb-5'>
+                                {/* hello */}
                               <Table striped bordered hover>
                             <thead>
                               <tr >
@@ -200,9 +210,9 @@ export default function Index() {
                             </thead>
                             <tbody>
 
-                              {currentPosts1.map((data, idx) => 
+                              {currentPosts1.length!== 0 && currentPosts1.map((data, idx) => 
                               
-                                <tr className='pointer'>
+                                <tr className='pointer' key={idx}>
                                   
                                   <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
                                   <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
@@ -220,34 +230,35 @@ export default function Index() {
 
                               </div>                                     
                               ))
-                            :(<></>)
-                          } 
-
+                            
+                           
+                            &&
 
                    
-                          {plans ? (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
-                           (
+                         (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col>) :
+                           
+                            (
                             <div className='view-msg '>
                      
-                            <div className='align-div pwd-div mb-5'>
+                              <div className='align-div pwd-div mb-5'>
                               <Table striped bordered hover>
                                 <thead>
                                   <tr >
                                     <th className='bold-text'>Date</th>
                                     <th className='bold-text'>title</th>
-                                    {/* <th className='bold-text'>Cost</th> */}
+                                   
                                     <th className='bold-text'>Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                               
-                                  {currentPosts2.map((data, idx) => 
+                                  {currentPosts2.length !== 0 && currentPosts2.map((data, idx) => 
                                   
-                                    <tr>
+                                    <tr key={idx}>
                                       
                                       <td >{ dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
                                       <td >{data.event_title}</td>
-                                      {/* <td>${data.event_cost}.00</td>  */}
+                                      
                                       <td className='error '>{data.event_status}</td>
                                     
                                     </tr>
@@ -260,16 +271,17 @@ export default function Index() {
                               </div>
 
                             </div>
-                           ))
-                           :(<></>)}
+                            )
+                           )
+                           &&
 
-
-
-                       {(pend_event ==="No events available")  && (process_event === "No events available") ?(<>
+                           ((process_event === "No events available" && pend_event === "No events available") ? (
+                       
                         <div className='view-msg mb-5'>
+                       
                      
-                      <div className='align-div pwd-div'>
-                        <div id='campaigns'>
+                       <div className='align-div pwd-div'>
+                       <div id='campaigns'> 
                             <div>
                                 <ul style={{width:'100%',alignSelf:'center'}}>
                                   <li id="event-dash-req" style={{height:'150px'}}>
@@ -291,10 +303,16 @@ export default function Index() {
                                 </ul>
                                 </div>
                           </div>
+                          </div> 
                           </div>
-                          </div>
-                       </>):(<></>) }
+                        
+                       ):(<></>))
+                        
+                      
 
+      )
+                      
+   }
         
     </Container>
 

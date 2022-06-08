@@ -6,16 +6,16 @@ export default function index() {
 
     {/* testimonial */}
 
-<div class="section scrollbar" id="testimonials">
+<div className="section scrollbar" id="testimonials">
 	<div>
     <h2>Testimonials</h2>
 
 	<div id="txt-version">
-    	<div class="nav prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-        <ul class="content">
+    	<div className="nav prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+        <ul className="content">
             <li id="txt-testimony1">
             <blockquote>"We thank Connect Media Networks for creating this wonderful platform that we could trust, to provide our upcoming ministry events. We are very impressed with the process and management of our requests."
-            <cite class="author">Mr. Patrick M</cite>
+            <cite className="author">Mr. Patrick M</cite>
             </blockquote>
             <img src={require('../../../src/assets/imgs/pic.jpg')} alt="connect-arrow"/>
             </li>
@@ -23,21 +23,21 @@ export default function index() {
             <li id="txt-testimony2">
             <div>
             <blockquote>"We thank Connect Media Networks for creating this wonderful platform that we could trust, to provide our upcoming ministry events. We are very impressed with the process and management of our requests."
-            <cite class="author">Mr. Patrick M</cite>
+            <cite className="author">Mr. Patrick M</cite>
             </blockquote>
             <img src={require('../../../src/assets/imgs/pic.jpg')} alt="connect-arrow"/>
             </div>
             </li>
         </ul>
-        <div class="nav next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+        <div className="nav next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
     </div>
 
     <div id="vid-version">
-    	<div class="nav prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-        <ul class="content">
+    	<div className="nav prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+        <ul className="content">
             <li id="vid-testimony1">
             <blockquote>"We thank Connect Media Networks for creating this wonderful platform that we could trust, to provide our upcoming ministry events. We are very impressed with the process and management of our requests."
-            <cite class="author">Mr. Patrick M</cite>
+            <cite className="author">Mr. Patrick M</cite>
             </blockquote>
             <img src={require('../../../src/assets/imgs/pic.jpg')} alt="arrow"/>
             </li>
@@ -45,13 +45,13 @@ export default function index() {
             <li id="vid-testimony2">
             <div>
             <blockquote>"We thank Connect Media Networks for creating this wonderful platform that we could trust, to provide our upcoming ministry events. We are very impressed with the process and management of our requests."
-            <cite class="author">Mr. Patrick M.</cite>
+            <cite className="author">Mr. Patrick M.</cite>
             </blockquote>
             <img src={require('../../../src/assets/imgs/pic.jpg')} alt="arrow"/>
             </div>
             </li>
         </ul>
-        <div class="nav next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+        <div className="nav next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
     </div>
     </div>
     {/* <script>

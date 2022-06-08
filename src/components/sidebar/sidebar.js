@@ -118,37 +118,44 @@ function logout()
 
 function orderpkg()
 {
-  history.push('/order/package')
+  history.push('/order/package');
+  history.go(0);
 }
 
 function orderEvent()
 {
-  history.push('/order/event')
+  history.push('/order/event');
+  history.go(0);
 }
   
 function orderCamp()
 {
   history.push('/order/campaign');
+  history.go(0);
 }
 
 function reqPkg()
 {
   history.push('/request/package');
+  history.go(0);
 }
 
 function reqEvent()
 {
   history.push('/request/event');
+  history.go(0);
 }
 
 function msgSent()
 {
   history.push('/message/Outbox');
+  history.go(0);
 }
 
 function msgRecieve()
 {
-  history.push('/message/Inbox')
+  history.push('/message/Inbox');
+  history.go(0);
 }
 
   return(

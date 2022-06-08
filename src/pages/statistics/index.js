@@ -20,13 +20,13 @@ export default function Index() {
   return (
 <>
     <section id='statistics1'>
-        <div class="statistics-main-div">
-            <div class="top-div">
+        <div className="statistics-main-div">
+            <div className="top-div">
                 <h2>Statistics</h2>
                 <h4>2021</h4>
             </div>
 
-            <div class="second-div">
+            <div className="second-div">
                 <p>A CDF Capital study found that churches of all sizes experienced an average decline of 29% in tithing at the start of the pandemic</p>
                 <p>One of the more positive church statistics for 2021 is how happy church members have been with live streaming services</p>
                 <h4>In person meeting and non in meetings</h4>
@@ -35,15 +35,15 @@ export default function Index() {
             </div>
             
 
-            <div class="statistics-row">
+            <div className="statistics-row">
 
-                <div class="line-chrt-div">
-                    <div class="line-chart">
+                <div className="line-chrt-div">
+                    <div className="line-chart">
                         <h4>Line chart</h4>
-                        <div class="line-wrap">
-                            <div class="line-progess-bar">
-                                <div class="div-two">
-                                    <div class="div-three">
+                        <div className="line-wrap">
+                            <div className="line-progess-bar">
+                                <div className="div-two">
+                                    <div className="div-three">
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@ export default function Index() {
                         </div>
                     </div>
                 </div>
-                <div class="svg-diagram-div">
+                <div className="svg-diagram-div">
                     <svg id="diagram" xmlns="http://www.w3.org/2000/svg" width="110%" height="110%" viewBox="0 0 706 489">
                         <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="218.5" cy="211.5" rx="218.5" ry="211.5"
                             fill="#1389ff" />

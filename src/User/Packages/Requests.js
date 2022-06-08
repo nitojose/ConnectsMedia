@@ -11,6 +11,7 @@ import Parallax from 'react-rellax'
 import {FiPackage} from 'react-icons/fi';
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -41,7 +42,7 @@ export default function Index() {
 
    
     const [pend_pack,setPend_pack] = React.useState({});
-   
+    const [loading,setLoading] = React.useState(true);
   
     const [process_pack,setProcess_pack] = React.useState([]);
     const [customerInfo,setCustomerInfo] = React.useState();
@@ -50,11 +51,12 @@ export default function Index() {
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const currentPosts1 = process_pack.slice(indexOfFirstPost,indexOfLastPost);
+    const currentPosts1 = Object.keys(process_pack).slice(indexOfFirstPost,indexOfLastPost)
 
     // const currentPosts2 = pend_pack.slice(indexOfFirstPost,indexOfLastPost);
     
     const currentPosts2 = Object.keys(pend_pack).slice(indexOfFirstPost,indexOfLastPost);
+    console.log("currentpost2",currentPosts2);
 
     function paginate(pageNumber)
     {
@@ -105,11 +107,13 @@ export default function Index() {
             const token = sessionstorage.getItem("token");
             const customer_id = sessionstorage.getItem("customerId");
 
+         
 
             await axios.get(Url+'pendingrequest', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
             .then(response => {
                 // If request is good...
                 
+                console.log("request",response.data)
                 
                 console.log("pending",response.data.pack);    
                
@@ -126,12 +130,13 @@ export default function Index() {
 
            await axios.get(Url+'processingrequest', { headers: { Authorization: `Bearer ${token}` } ,params:{customer_id: customer_id} })
             .then(response => {
-                 console.log("processing",response.data.pack);   
+                 console.log("processing",response.data.package);   
                
                 setProcess_pack(response.data.pack);
+                setLoading(false);
                 setPackages(true);
                 
-               
+              //  console.log("len pack",process_pack.length)
                
             })
             .catch((error) => {
@@ -185,13 +190,14 @@ export default function Index() {
         </div>
            
                   
-
-                          {packages ?(process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>:
+{loading?<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div>
+</div>:(
+                          (process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col>:
                            (
-                        <div className='view-msg'>
+                      <div className='view-msg'>
                          
 
-                         <div className='align-div pwd-div '>
+                          <div className='align-div pwd-div '>
                              
                               <Table striped bordered hover>
                               <thead>
@@ -205,9 +211,9 @@ export default function Index() {
                               </thead>
                               <tbody>
                             
-                                { Object.keys(process_pack).map((data,id) =>(
+                                { currentPosts1 && currentPosts1.map((data,id) =>(
                                  
-                                  <tr className='pointer'>
+                                  <tr className='pointer' key={id}>
                                     
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.created_at !== null? dateFormat(process_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>
@@ -221,21 +227,21 @@ export default function Index() {
                                 ))}
                               </tbody>
                             </Table>
-                            
+                            <Pagination postsPerPage={postsPerPage} totalPosts={Object.keys(process_pack).length} paginate={paginate}/>
 
                           </div>
                           </div>
                                      
-                            ) ):(<></>)
+                            ) )
                           
-                            }
+                            &&
 
 
                            
-                         {packages ?  (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col> :
+                        (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col> :
                                  (
 
-                                  <div className='view-msg '>
+                                 <div className='view-msg '>
                          
 
                                     <div className='align-div pwd-div mb-5'>
@@ -252,10 +258,10 @@ export default function Index() {
                                       </thead>
                                       <tbody>
                                     
-                                        {Object.keys(pend_pack).map((data,id) =>(
-                                          // console.log("currentposts2",pend_pack[data].pack.created_at)
-                                        
-                                          <tr>
+                                        {currentPosts2 && currentPosts2.map((data,id) =>(
+                                          // console.log("data",data)
+                                          // console.log("id",id);
+                                          <tr key={id}>
                                             
                                             <td >{pend_pack[data].pack.created_at !== null? dateFormat(pend_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
                                             <td >{pend_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}>Package </span></td>
@@ -268,23 +274,22 @@ export default function Index() {
                                     
                                         ))}
                                       </tbody>
+                                      
                                     </Table>
                                    
-
+                                    <Pagination postsPerPage={postsPerPage} totalPosts={Object.keys(pend_pack).length} paginate={paginate}/>
                                     </div>
-                                    </div>                                     
-                                     ) ):(<></>)
-                                     
-                         }
+                                    </div>                                   
+                                     ) )
 
-                        {(process_pack === "No packages Available")  && (pend_pack === "No packages Available") ?(
 
-                          <>
-
-                        <div className='view-msg'>
+                                  &&  
                          
 
-                         <div className='msg-align mb-5'>
+                        ((process_pack === "No packages Available" && pend_pack === "No packages Available") ? (
+
+                        <div className='view-msg'>
+                          <div className='msg-align mb-5'>
                             <div class="main-packages dash-packages">
                                     <div class="package-wrap">
                                         <div class="package">
@@ -335,15 +340,13 @@ export default function Index() {
                                             </div>
                                         </div>
                                     </div>
-                                  </div>
-                                  </div>
                             </div>
-                            </>
-                            
-                  
-                        ):(<></>) }
+                            </div>
+                        </div>
+                          
+                        ):(<></>)))}
 
-
+                                        
 
                     
         

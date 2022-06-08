@@ -453,10 +453,6 @@ export default  function EachOrder() {
         setFrame(true);
 
         
-        // console.log("payment")
-        // history.push('/payment-form');
-        // history.go(0);
-     
     }
 
 
@@ -521,8 +517,6 @@ export default  function EachOrder() {
     function paySubmit()
     {
 
-
-     
         const token = sessionstorage.getItem("token");
 
         const headers ={

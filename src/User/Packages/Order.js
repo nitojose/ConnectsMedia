@@ -15,6 +15,7 @@ import Parallax from 'react-rellax'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
+import Shimmer from "react-shimmer-effect";
 
 var sessionstorage = require('sessionstorage');
 
@@ -29,6 +30,7 @@ export default function Index() {
     const [showpkg ,setpkg] = React.useState(false)
     const [packages,setPackages] = React.useState(true);
 
+    const [loading,setLoading] = React.useState(true);
    
     const [pkgData] = React.useState([]);
     
@@ -65,10 +67,6 @@ export default function Index() {
   },[]);
 
 
-  
-
-    
-    
 
     async function getDatas()
     {
@@ -105,6 +103,7 @@ export default function Index() {
                 })
                 if(pkgData.length !== 0 )
                 {
+                  setLoading(false);
                   setpkg(true);
                 }
                
@@ -197,9 +196,12 @@ export default function Index() {
         </div>
     
                     <div className='view-msg ' >
+
+{console.log("pkddata",pkgData)}
+                      {loading ? <><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></>:(
                         
 
-                    {showpkg  ? (
+                    showpkg  ? (
                                 
                             <>
                  
@@ -298,7 +300,9 @@ export default function Index() {
 
                       </> )
                   
-                }
+                      )
+
+}
                             
                         </div>
 

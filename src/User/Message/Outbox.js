@@ -14,6 +14,7 @@ import {AiOutlineCamera} from 'react-icons/ai'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import 'react-toastify/dist/ReactToastify.css';
 import Pagination from '../../pages/Pagination';
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -22,7 +23,7 @@ export default function Index() {
     
     const [allmessages,setAlmessages]= React.useState([{}]);
     const [customerInfo,setCustomerInfo] = React.useState();
-
+    const [loading,setLoading] = React.useState(true);
     const [currentPage,setCurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
@@ -74,7 +75,8 @@ export default function Index() {
                 // If request is good...
                 console.log("outbox",response.data.inbox.data);
                 setAlmessages(response.data.inbox.data);
-                setLength(response.data.inbox.data.length)
+                setLength(response.data.inbox.data.length);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log('error ' + error);
@@ -153,9 +155,11 @@ export default function Index() {
             </div>
             
                         <div className='view-msg ' >
-                           
 
-                            {length >0 ?(
+                        {loading?<div className='msg-align mb-5'><Shimmer><div className='msg-align mb-5'> <div >Loading...</div></div></Shimmer></div>:
+                        
+
+                            length >0 ?(
                             
                           <>
                           <div className='msg-align mb-5'>

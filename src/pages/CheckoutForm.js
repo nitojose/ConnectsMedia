@@ -124,10 +124,12 @@ const CARD_ELEMENT_OPTIONS = {
       setSpinner(true);
       // toast.warning("payment initiated .!",{autoClose:2500});
         try{
+          let amt = amount *100;
+          console.log("amt",amt);
             const {id} = paymentMethod 
             const res = await axios.post(Url+"donate",{
                 currency: 'usd',
-                amount:amount,
+                amount:amt,
                 id,
                cust_id:customerInfo.cust_id,
                stripeToken: paymentMethod.id,
@@ -188,13 +190,12 @@ const CARD_ELEMENT_OPTIONS = {
                                       url: Url+'payafter',
                                       data: data1,
                                       headers: headers
-                                      })
+                                      }) 
                                       .then(function (response) {
                                           //handle success
                                           console.log("pay After",response); 
                       
-                                          toast.success('Payment Success!!',{autoClose:3000});
-                                          setTimeout(() => history.push('/dashboard'),3000);
+                                          history.push('/success');
                                       })
                                       .catch(function (response) {
                                           //handle error

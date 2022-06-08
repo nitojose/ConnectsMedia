@@ -57,7 +57,7 @@ export default function Index() {
 
     <Container>
 
-<div className='profileBefore' >
+    <div className='profileBefore' >
             <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 

@@ -997,6 +997,7 @@ top:0;left:0;
 width:100%;height:100%;
 border-radius:10px;
 transition:all 500ms;
+color: #fff;
 }
 #service-list li>div:hover{
 background:var(--comp2);
@@ -1095,6 +1096,7 @@ color:var(--comp1);
 .popup .subtitle li{
 position:relative;
 padding-left:10px;
+color: #fff;
 }
 .popup .subtitle li:before{
 /*content:'\f111';

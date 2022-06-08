@@ -63,11 +63,12 @@ export default function Index() {
 
           setSpinner(false);
 
-          sessionstorage.setItem("token",response.data.token);
-          sessionstorage.setItem("customerId",response.data.id);
+          
 
           if((response.data.message === 'loggedin') && ( sessionstorage.getItem('camp') === ('events-creation' || 'staticPosts' || 'million-posts')) )
           {
+            sessionstorage.setItem("token",response.data.token);
+          sessionstorage.setItem("customerId",response.data.id);
             window.location.href= siteUrl+'/'+sessionstorage.getItem('camp');
             // console.log("url", window.location.href= siteUrl+'/'+sessionstorage.getItem('camp'))
             history.go(0)
@@ -100,12 +101,16 @@ export default function Index() {
           }
           else if((response.data.message === 'loggedin') && ( sessionstorage.getItem('list')=== ('standard-list' || 'customized-list')) )
           {
+            sessionstorage.setItem("token",response.data.token);
+          sessionstorage.setItem("customerId",response.data.id);
             setTimeout(() => history.push('/'+sessionstorage.getItem('list')),3000 ) ;
             // history.go(0)
             // console.log(" package list",sessionstorage.getItem('list'));
           }
           else if((response.data.message === 'loggedin') && (sessionstorage.getItem('request') !== null) )
           {
+            sessionstorage.setItem("token",response.data.token);
+          sessionstorage.setItem("customerId",response.data.id);
             window.location.href= siteUrl+sessionstorage.getItem('request');
             // history.go(0)
             // console.log(siteUrl+sessionstorage.getItem('request'));
@@ -113,6 +118,8 @@ export default function Index() {
 
           }
           else{
+            sessionstorage.setItem("token",response.data.token);
+          sessionstorage.setItem("customerId",response.data.id);
             history.push('/dashboard');
             // history.go(0);
             console.log(" home");
@@ -135,10 +142,8 @@ export default function Index() {
     <Container className='' >
       
       <Row >
-
-           
-                
-                <Col xl={6} sm={12} md={12} xxl={6} className='py-5 my-5'>
+ 
+                <Col xl={6} sm={12} md={12} xxl={6} className='py-5 my-5 m-20'>
 
                 <Parallax speed={-3} >  
                   <img src={require('../../assets/images/login.png')} height={500} width={500} alt="hands" />

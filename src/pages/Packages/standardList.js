@@ -123,31 +123,43 @@ export default function StandardList() {
 
                         </div>
                             
-              
+              {/* 9288006669 */}
                       <div className='first-div  '>
 
                         <p className=' font-20'>Duration of Package</p>
 
-                        <label>Number of Months : </label>
+                        <Row className='mt-5'>
+            <Col sm={12} md={12} xl={6} xxl={6}>
+              <label>Number of Months : </label>
 
-                
+                  <select id="months" required={true} className="select-months" >
+                    <option value="1" selected={true} >1 month</option>
+                    <option value="2" >2 month</option>
+                    <option value="3">3 month</option>
+                    <option value="4">4 month</option>
+                    <option value="5">5 month</option>
+                    <option value="6">6 month</option>
+                    <option value="7">7 month</option>
+                    <option value="8">8 month</option>
+                    <option value="9">9 month</option>
+                    <option value="10">10 month</option>
+                    <option value="11">11 month</option>
+                    <option value="12">12 month</option>
+                  </select>
+            </Col>
 
-                        <select name="months" id="months" className='select-months-number' >
-
-                            <option value="1" >1 month </option>
-                            <option value="2" >2 month</option>
-                            <option value="3">3 month</option>
-                            <option value="4">4 month </option>
-                            <option value="5">5 month  </option>
-                            <option value="6">6 month</option>
-                            <option value="7">7 month</option>
-                            <option value="8">8 month</option>
-                            <option value="9">9 month</option>
-                            <option value="10">10 month</option>
-                            <option value="11">11 month</option>
-                            <option value="12">12 month </option>
-
-                        </select>
+            <Col sm={12} md={12} xl={6} xxl={6}>  
+                                    
+              <p>Frequency Of Time</p>
+              <select id="frequency" required={true} className='select-months'>
+                <option value="Daily" selected={true}>Daily</option>
+                <option value="Weekly">Weekly</option>
+                                            
+                                        
+              </select>                       
+                                        
+            </Col>
+      </Row>
 
                       </div>
 
@@ -353,6 +365,7 @@ export default function StandardList() {
     //   console.log("Items,",JSON.stringify(Items));
       JSON.stringify(Items);
       var months = document.getElementById("months").value;
+      var fr = document.getElementById("frequency").value;
       // console.log("months",months);
       const member_id =  sessionstorage.getItem("customerId");
       const token = sessionstorage.getItem("token");
@@ -441,6 +454,7 @@ export default function StandardList() {
       data1.append("package_type",'STD');
       data1.append("package_cost",0);
       data1.append("months",months);
+      data1.append("frequency",fr);
     
       
          

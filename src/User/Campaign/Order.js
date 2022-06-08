@@ -11,6 +11,7 @@ import Parallax from 'react-rellax';
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -40,7 +41,8 @@ export default function Index() {
     const[orders,setOrders] = React.useState([]);
     
    
-    const [camps ,setCamps] = React.useState(false)
+    const [camps ,setCamps] = React.useState(false);
+    const [loading,setLoading] = React.useState(true);
    
     const [campData] = React.useState([]);
     const[customerInfo,setCustomerInfo] = React.useState();
@@ -129,6 +131,7 @@ export default function Index() {
                   
                 if(campData.length !== 0)
                 {
+                  setLoading(false);
                   setCamps(true);
                 }
                 
@@ -178,9 +181,11 @@ export default function Index() {
 
 
                     <div className='view-msg ' >
+
+                      {loading?<><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></>:
                         
 
-                        {camps  ? (
+                        camps  ? (
                                     
                                 <>
                      
@@ -321,6 +326,7 @@ export default function Index() {
                         </div>
                       </> )
                       
+                    
                     }
                                 
             </div>
