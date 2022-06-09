@@ -40,6 +40,9 @@ export default  function EachOrder() {
     React.useEffect(() => {
   
       logginornot();
+
+      sessionstorage.setItem('request',window.location.pathname);
+   console.log("req",sessionstorage.getItem("request"))
     },[]);
 
    
@@ -68,7 +71,8 @@ export default  function EachOrder() {
       
        
         getOrderDet();
-         setTimeout(() =>  getOrders(),5000) 
+        //  setTimeout(() =>  getOrders(),5000) 
+        // getOrders();
 
     },[]);
 
@@ -78,6 +82,8 @@ export default  function EachOrder() {
         {
             const token = sessionstorage.getItem("token");
             const customer_id =  sessionstorage.getItem("customerId");
+
+            console.log("orderid",id)
     
             var data = new FormData();
             data.append("customer_id",customer_id);
@@ -102,6 +108,32 @@ export default  function EachOrder() {
                     setorderDet(response.data);
                     setType(response.data.order.order_item)
                     setOrderItemId(response.data.order.order_itemid);
+
+
+
+                    var data1 = new FormData();
+                    data1.append("customer_id",customer_id);
+                    data1.append("item_id",response.data.order.order_itemid);
+                    data1.append("item",response.data.order.order_item)
+
+                     axios({
+                        method: 'post',
+                        url: Url+'getorderbyid',
+                        data: data1,
+                        headers: headers
+                        })
+                        .then( function (response) {
+                            //handle success
+                            console.log("pkg /event order",response.data); 
+                            setSubOrder(response.data.suborder);
+                            setOrder(response.data.order);
+                            // console.log("sss",response.data.suborder)
+                           
+                        })
+                        .catch(function (response) {
+                            //handle error
+                            console.log(response);
+                        });
                     
                    
                 })
@@ -323,13 +355,14 @@ export default  function EachOrder() {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    {console.log(order)}
                                                 {subOrder && subOrder.map((s,id) =>( 
                                                            
                                                                 <tr>
                                                                     <td >{s.sorder_id}</td>
                                                                     <td >{dateFormat(s.sorder_billdt, "mmmm dS, yyyy")}</td>
                                                                     <td >{s.sorder_status === "Invoiced" ? (<span className='bold-text green'>{s.sorder_status}</span>):(<span className='bold-text'>{s.sorder_status}</span>)}</td>
-                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light " id="paynow-btn"  className='mx-2' onClick={()=>paynow(s.sorder_id,order.PACKAGE.packages_cost,order.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
+                                                                    <td>{s.sorder_status === "Invoiced"? (<><Button variant="light " id="paynow-btn"  className='mx-2' onClick={()=>paynow(s.sorder_id,orderDet.order.order_amt,orderDet.order.order_id)}>Pay Now</Button></>):(<></>)}</td>
                                                                 </tr>
                                                      ))
                                                 }       
@@ -429,6 +462,8 @@ export default  function EachOrder() {
 
     function paynow(subId,cost,orderid)
     {
+
+        console.log("clicked")
         setSubId(subId);
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);

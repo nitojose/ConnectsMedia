@@ -149,8 +149,11 @@ const CARD_ELEMENT_OPTIONS = {
 
               console.log("payment Inten",paymentIntent)
 
-              if (error) return alert("Error in payment, please try again later");
-              
+              if (error) 
+              {
+                toast.warning("Error in payment, please try again .");
+                
+              }
               if (paymentIntent.status === "succeeded")
               {
                   const token = sessionstorage.getItem("token");
@@ -195,7 +198,7 @@ const CARD_ELEMENT_OPTIONS = {
                                           //handle success
                                           console.log("pay After",response); 
                       
-                                          history.push('/success');
+                                          // history.push('/success');
                                       })
                                       .catch(function (response) {
                                           //handle error
@@ -216,11 +219,14 @@ const CARD_ELEMENT_OPTIONS = {
               const res2 = await axios.post(Url+'checkAmount',{
                 id:res.data.id
               });
-              alert(`Payment successful, payment ID - ${res.data.id}`);
+
+              console.log("res2 checkout= ",res2);
+              history.push('/success');
+              // alert(`Payment successful, payment ID - ${res.data.id}`);
             } 
             else {
               // Simple HTTP Payment was successful
-              alert(`Payment successful, payment ID - ${res.data.id}`);
+              // alert(`Payment successful, payment ID - ${res.data.id}`);
             }
             
         }
