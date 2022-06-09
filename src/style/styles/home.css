@@ -37,6 +37,12 @@ display:block;
 color:#FFF;
 text-decoration:none;
 }
+
+.navbar
+{
+    padding-top: 0;
+    padding-bottom: 0;
+}
 #page-head{
 position:fixed;
 height:100px;

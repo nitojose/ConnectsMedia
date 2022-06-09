@@ -188,11 +188,73 @@ export default function Index() {
 
               </div>
         </div>
-           
+           {console.log("process pack1",process_pack)}
+           {console.log("pend pack1",pend_pack)}
                   
 {loading?<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div>
 </div>:(
-                          (process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col>:
+  // console.log("process pack in request",pend_pack) 
+  (((process_pack === "No packages Available") && (pend_pack === "No packages Available")) ? (
+
+    <div className='view-msg'>
+      <div className='msg-align mb-5'>
+        <div class="main-packages dash-packages">
+                <div class="package-wrap">
+                    <div class="package">
+                        <h4>Standard</h4>
+                        <div class="content">
+                            <ul>
+                                <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
+                                <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
+                                <li><i class="fa fa-check-circle"></i>Post Boosting – for more views</li>
+                                <li><i class="fa fa-check-circle"></i>1 Ad Promotion per month</li>                            
+                                <li><i class="fa fa-check-circle"></i>All Images, Graphics Copyrighting included</li>
+                            </ul>
+                        </div>
+                        <div align="center">
+                        {sessionstorage.getItem('token') ===null ?(
+                            <>
+                        <button onClick={()=>redirecttoList("std")}>Register</button>
+                        </>
+                        ):(
+                            <>
+                        <button onClick={()=>history.push('/standard-list')}>Buy</button>
+                        </>
+                        )
+                        }
+                        </div>
+                    </div>
+                </div>
+                <div class="package-wrap">
+                    <div class="package">
+                        <h4>Custom</h4>
+                        <div class="content">
+                            <ul>
+                                <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
+                                <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>
+                            </ul>
+                        </div>
+                        <div align="center">
+                        {sessionstorage.getItem('token') ===null ?(
+                            <>
+                        <button onClick={()=> redirecttoList("custom")}>Register</button>
+                        </>
+                        ):(
+                            <>
+                        <button onClick={()=>history.push('/customized-list')}>Buy</button>
+                        </>
+                        )
+                        }
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </div>
+      
+    ):(
+
+      (process_pack !== "No packages Available"? 
                            (
                       <div className='view-msg'>
                          
@@ -232,13 +294,10 @@ export default function Index() {
                           </div>
                           </div>
                                      
-                            ) )
-                          
-                            &&
+                            )
+                            :(
 
-
-                           
-                        (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col> :
+                              (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'></Col> :
                                  (
 
                                  <div className='view-msg '>
@@ -280,76 +339,14 @@ export default function Index() {
                                     <Pagination postsPerPage={postsPerPage} totalPosts={Object.keys(pend_pack).length} paginate={paginate}/>
                                     </div>
                                     </div>                                   
-                                     ) )
+                                     )) )
+                
+                           
+    )))
+    
+  
+  )}
 
-
-                                  &&  
-                         
-
-                        ((process_pack === "No packages Available" && pend_pack === "No packages Available") ? (
-
-                        <div className='view-msg'>
-                          <div className='msg-align mb-5'>
-                            <div class="main-packages dash-packages">
-                                    <div class="package-wrap">
-                                        <div class="package">
-                                            <h4>Standard</h4>
-                                            <div class="content">
-                                                <ul>
-                                                    <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
-                                                    <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
-                                                    <li><i class="fa fa-check-circle"></i>Post Boosting – for more views</li>
-                                                    <li><i class="fa fa-check-circle"></i>1 Ad Promotion per month</li>                            
-                                                    <li><i class="fa fa-check-circle"></i>All Images, Graphics Copyrighting included</li>
-                                                </ul>
-                                            </div>
-                                            <div align="center">
-                                            {sessionstorage.getItem('token') ===null ?(
-                                                <>
-                                            <button onClick={()=>redirecttoList("std")}>Register</button>
-                                            </>
-                                            ):(
-                                                <>
-                                            <button onClick={()=>history.push('/standard-list')}>Buy</button>
-                                            </>
-                                            )
-                                            }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="package-wrap">
-                                        <div class="package">
-                                            <h4>Custom</h4>
-                                            <div class="content">
-                                                <ul>
-                                                    <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
-                                                    <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>
-                                                </ul>
-                                            </div>
-                                            <div align="center">
-                                            {sessionstorage.getItem('token') ===null ?(
-                                                <>
-                                            <button onClick={()=> redirecttoList("custom")}>Register</button>
-                                            </>
-                                            ):(
-                                                <>
-                                            <button onClick={()=>history.push('/customized-list')}>Buy</button>
-                                            </>
-                                            )
-                                            }
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                          
-                        ):(<></>)))}
-
-                                        
-
-                    
-        
         </Container>
    
       );

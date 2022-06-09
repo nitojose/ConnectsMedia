@@ -57,7 +57,7 @@ export default function Index() {
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts1 = process_event.slice(indexOfFirstPost,indexOfLastPost);
 
-    console.log("currentpost1",currentPosts1)
+    
 
     const currentPosts2 = pend_event.slice(indexOfFirstPost,indexOfLastPost);
     
@@ -186,12 +186,47 @@ export default function Index() {
           </div>
       </div>
 
-{console.log("process-pend",process_event ,pend_event)}
+{console.log("process-pend request",process_event ,pend_event)}
 
     {loading ?(<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></div> ):
 
       (
-           (process_event === "No events available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col> :                       
+
+        (((process_event === "No events available") && (pend_event === "No events available")) ? (
+                       
+          <div className='view-msg mb-5'>
+         
+       
+         <div className='align-div pwd-div'>
+         <div id='campaigns'> 
+              <div>
+                  <ul style={{width:'100%',alignSelf:'center'}}>
+                    <li id="event-dash-req" style={{height:'150px'}}>
+                          <h2>Upcoming Event</h2>
+                          <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                          <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
+                    
+                                  {sessionstorage.getItem('token') ===null ?(
+                                      <>
+                                      <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
+                                      </>
+                                      ):(
+                                          <>
+                                      <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
+                                      </>
+                                      )
+                                  }
+                    </li>
+                  </ul>
+                  </div>
+            </div>
+            </div> 
+            </div>
+          
+         ):(
+
+
+           (process_event !== "No events available"?                       
                           (
 
 
@@ -229,10 +264,8 @@ export default function Index() {
                           </div>
 
                               </div>                                     
-                              ))
-                            
-                           
-                            &&
+                              ):
+                              (
 
                    
                          (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col>) :
@@ -273,43 +306,15 @@ export default function Index() {
                             </div>
                             )
                            )
-                           &&
 
-                           ((process_event === "No events available" && pend_event === "No events available") ? (
-                       
-                        <div className='view-msg mb-5'>
-                       
-                     
-                       <div className='align-div pwd-div'>
-                       <div id='campaigns'> 
-                            <div>
-                                <ul style={{width:'100%',alignSelf:'center'}}>
-                                  <li id="event-dash-req" style={{height:'150px'}}>
-                                        <h2>Upcoming Event</h2>
-                                        <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                        <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
-                                  
-                                                {sessionstorage.getItem('token') ===null ?(
-                                                    <>
-                                                    <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
-                                                    </>
-                                                    ):(
-                                                        <>
-                                                    <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
-                                                    </>
-                                                    )
-                                                }
-                                  </li>
-                                </ul>
-                                </div>
-                          </div>
-                          </div> 
-                          </div>
-                        
-                       ):(<></>))
+
+                           )))
+                          
+
+                           
                         
                       
-
+        )
       )
                       
    }
