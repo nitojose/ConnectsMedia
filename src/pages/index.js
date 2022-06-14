@@ -335,13 +335,13 @@ export default function Index() {
                     {/* <FooterPage/> */}
                 </Route>
 
-                <Route exact path='/privacy'>
+                <Route exact path='/privacy-policy'>
                     <Privacy/>
                     {/* <FooterPage/> */}
                 </Route>
 
-                <Route exact path='/terms'>
-                    {/* <Privacy/> */}
+                <Route exact path='/terms-and-conditions'>
+                    <Privacy/>
                     {/* <FooterPage/> */}
                 </Route>
 

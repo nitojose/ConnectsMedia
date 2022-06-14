@@ -48,19 +48,24 @@ export default function index() {
             
           </ul>
         </div>
-        <div className="col-lg-4 col-md-6 mb-lg-0">
+        <div className="col-lg-4 col-md-6 mb-lg-0 mt-3">
           <h6 className="text-uppercase font-weight-bold mb-4"></h6>
-          <a href='/privacy'> <p className="text-muted mb-4">
-             Privacy policy.</p></a>
+          
+
+            <ul className="list-unstyled mb-0">
+            <li className="mb-2"><a href='/privacy-policy' class="text-muted">Privacy policy</a></li>
+            <li className="mb-2"><a href="/terms-and-conditions" class="text-muted">Terms and Conditions</a></li>
+            
+          </ul>
          
-          <div className="p-1 rounded border">
+          {/* <div className="p-1 rounded border">
             <div className="input-group">
-              {/* <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0"> */}
+              {/* <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0"> 
               <div className="input-group-append">
                 <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

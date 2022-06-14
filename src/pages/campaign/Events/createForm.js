@@ -50,7 +50,7 @@ export default function CreateForm() {
     setSpinner(true);
     const customer_id =  sessionstorage.getItem("customerId");
     const token = sessionstorage.getItem("token");
-    
+    var fr = document.getElementById("frequency").value;
 
     var formdata = new FormData();
 
@@ -60,6 +60,7 @@ export default function CreateForm() {
     formdata.append("event_title",data.title);
     formdata.append("event_from",data.from);
     formdata.append("event_to",data.to);
+    formdata.append("frequency",fr);
     
    
     const headers ={
@@ -139,7 +140,7 @@ export default function CreateForm() {
                         <Col sm={12} md={12} xl={12} xxl={12}> 
                         <div style={{display: 'flex',flexDirection: 'row'}} className='' >
                          {/* {/ <label >event tile:</label> /} */}
-                         <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >Title:</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                         <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >Title:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                          <input placeholder="Event Title" type="text"  {...register("title" , { required: true })} className='textbox login-box' /> 
                          </div>
                          </Col>
@@ -149,7 +150,7 @@ export default function CreateForm() {
                     <Row>
                         <Col sm={12} md={12} xl={12} xxl={12}>
                             <div style={{display: 'flex',flexDirection: 'row'}} className='' >
-                            <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >From:</label>&nbsp;&nbsp;
+                            <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >From:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               <input type="date" placeholder="From Date"  {...register("from" , { required: true })} className='textbox login-box'/>
                               </div>
                          </Col>
@@ -161,9 +162,24 @@ export default function CreateForm() {
                     <Row>
                         <Col sm={12} md={12} xl={12} xxl={12}>
                         <div style={{display: 'flex',flexDirection: 'row'}} className='' >
-                            <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >To:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >To:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                               <input type="date" placeholder="To Date" {...register("to" , { required: true })} className='textbox login-box'/> 
                             </div>
+                        </Col>
+                        
+                    </Row>
+
+                    <Row>
+                        <Col sm={12} md={12} xl={12} xxl={12}>
+                        <div style={{display: 'flex',flexDirection: 'row'}} className='' >
+                        <label style={{display: 'flex',justifyContent: 'center',alignItems:'center',alignSelf: 'center'}} >Frequency of time</label>&nbsp;&nbsp;&nbsp;
+                        <select id="frequency" required={true} className='select-months'>
+                          <option value="Daily" selected={true}>Daily</option>
+                          <option value="Weekly">Weekly</option>
+                                                      
+                                                  
+                        </select>
+                        </div>
                         </Col>
                         
                     </Row>

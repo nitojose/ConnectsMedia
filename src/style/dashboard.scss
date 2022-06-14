@@ -57,6 +57,47 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     border-radius:50px ;
     
 }
+
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:focus-within {
+    color: #ddd; 
+    // box-shadow: 0px 5px 23px #aaa !important;
+    border-radius: 10px !important;
+    // background: #ecf0f3;
+    box-shadow: inset 6px 6px 6px rgb(202, 200, 200), inset -6px -6px 6px rgb(231, 226, 226) ;
+}
+.pro-sidebar .pro-menu.shaped .pro-menu-item > .pro-inner-item > .pro-icon-wrapper {
+    background-color: #002868 !important;
+   
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-icon-wrapper .pro-icon 
+{
+    padding: 5px;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item.pro-sub-menu > .pro-inner-item > .pro-arrow-wrapper .pro-arrow
+{
+    transform: rotate(45deg) !important;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item:hover
+{
+    color: red;
+}
+
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item > .pro-item-content:hover
+{
+    color: red !important;
+}
+
+
+
+.pro-item-content
+{
+    color: black!important;
+}
+
 @media screen and (min-height:900px){
     .profileBeforeOne img{
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -161,6 +202,24 @@ display: inline;
 
     
 
+}
+
+
+.inboxCount
+{
+
+
+    float: right;
+    color: #fff;
+    border-color: red;
+    border-radius: 50%;
+    /* padding: 0px 0px; */
+    height: 25px;
+    width: 25px;
+    padding: -1px;
+    background-color: #f13232;
+    font-weight: 600;
+    padding: 1px 4px;
 }
 
 .row-flex-align-one{
