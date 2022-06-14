@@ -89,14 +89,14 @@ export default function Index() {
 
     {/* packages */}
 
-<div class="section" id="packages">
+<div className="section" id="packages">
 	<div>
 	<h1>Packages</h1>
-        <div class="main-packages">
-            <div class="package-wrap">
-                <div class="package">
+        <div className="main-packages">
+            <div className="package-wrap">
+                <div className="package">
                     <h4>Standard</h4>
-                    <div class="content">
+                    <div className="content">
                         <ul>
                             <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
                             <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
@@ -119,10 +119,10 @@ export default function Index() {
                     </div>
                 </div>
             </div>
-            <div class="package-wrap">
-                <div class="package">
+            <div className="package-wrap">
+                <div className="package">
                     <h4>Custom</h4>
-                    <div class="content">
+                    <div className="content">
                         <ul>
                             <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
                             <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>

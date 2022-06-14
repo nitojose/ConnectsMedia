@@ -11,8 +11,6 @@ import {RiLockPasswordFill} from 'react-icons/ri';
 import {AiOutlineCamera} from 'react-icons/ai';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {FiPackage} from 'react-icons/fi';
-import {BsFillKanbanFill } from "react-icons/bs";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -110,35 +108,13 @@ export default function Index() {
     React.useEffect(() => {
         getUserInfo();
     },[])
-
-    var clicks = 1;
-   function onTapFun(){
-     clicks+=1;
-     console.log('taped succesfuly')
-    //  document.getElementsByClassName('pro-sidebar')
-    // alert('sdddsds');
-    const cursor = document.querySelector('.pro-sidebar');
-    const body = document.querySelector('.body-two')
-    if(clicks%2==0){
-      body.setAttribute("style",'max-width: 100vw;');
-
-      cursor.setAttribute("style", 'display:none;max-width:10px;');
-    }
-    else{
-      cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
-      body.setAttribute("style",'max-width:100vw-20.5vw;')
-
-    }
-    
-
-   }
     
   return (
       <>
 
 
 
-          {/* <Container >
+          <Container >
 
           <div className='profileBefore' >
             <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
@@ -160,48 +136,8 @@ export default function Index() {
                 <RiLockPasswordFill color='black' className='mt-4 mx-4' size={22}/>
                 <p className='header-banner-text'>Change Password</p>
             </div>
-        </div> */}
-        
+        </div>
 
-        <Container className='body-two'>
-
-
-
-
-<div className='image-sectioning-two'>
-      
-      <div className='profileBefore-two' >
-              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
-             
-          </div> 
-  
-  
-          <div className='row-flex-align-two'>
-  
-              <div className='profileInner'>
-                <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
-                //  style={{objectFit:'contain'}}
-                 />
-                
-              </div>
-             
-  
-  
-            <div className='header-banner-two'>
-            <div className='background-color-text'>
-          <BsFillKanbanFill color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
-  <div className='icon-tab-block'>
-          <RiLockPasswordFill color='black' className='icon-tab'/>
-
-          <p className='header-banner-text'>inbox</p>
-          </div>
-          </div>
-            </div>
-            </div>
-            <div className='button-background-req'></div>
-            
-  
-          </div>
 
             
                 <div className='view-msg '>

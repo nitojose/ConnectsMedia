@@ -34,7 +34,7 @@ export default function Contact() {
         <>
             {/* contact */}
 
-<div class="section" id="contact">
+<div className="section" id="contact">
 	<div>
         <div id="card-wrap">
             <div id="contact-card">

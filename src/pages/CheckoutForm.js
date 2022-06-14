@@ -124,10 +124,12 @@ const CARD_ELEMENT_OPTIONS = {
       setSpinner(true);
       // toast.warning("payment initiated .!",{autoClose:2500});
         try{
+          let amt = amount *100;
+          console.log("amt",amt);
             const {id} = paymentMethod 
             const res = await axios.post(Url+"donate",{
                 currency: 'usd',
-                amount:amount,
+                amount:amt,
                 id,
                cust_id:customerInfo.cust_id,
                stripeToken: paymentMethod.id,
@@ -147,8 +149,11 @@ const CARD_ELEMENT_OPTIONS = {
 
               console.log("payment Inten",paymentIntent)
 
-              if (error) return alert("Error in payment, please try again later");
-              
+              if (error) 
+              {
+                toast.warning("Error in payment, please try again .");
+                
+              }
               if (paymentIntent.status === "succeeded")
               {
                   const token = sessionstorage.getItem("token");
@@ -188,13 +193,12 @@ const CARD_ELEMENT_OPTIONS = {
                                       url: Url+'payafter',
                                       data: data1,
                                       headers: headers
-                                      })
+                                      }) 
                                       .then(function (response) {
                                           //handle success
                                           console.log("pay After",response); 
                       
-                                          toast.success('Payment Success!!',{autoClose:3000});
-                                          setTimeout(() => history.push('/dashboard'),3000);
+                                          // history.push('/success');
                                       })
                                       .catch(function (response) {
                                           //handle error
@@ -215,11 +219,14 @@ const CARD_ELEMENT_OPTIONS = {
               const res2 = await axios.post(Url+'checkAmount',{
                 id:res.data.id
               });
-              alert(`Payment successful, payment ID - ${res.data.id}`);
+
+              console.log("res2 checkout= ",res2);
+              history.push('/success');
+              // alert(`Payment successful, payment ID - ${res.data.id}`);
             } 
             else {
               // Simple HTTP Payment was successful
-              alert(`Payment successful, payment ID - ${res.data.id}`);
+              // alert(`Payment successful, payment ID - ${res.data.id}`);
             }
             
         }

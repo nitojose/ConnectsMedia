@@ -11,11 +11,7 @@ import Parallax from 'react-rellax';
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
-import {BsFillKanbanFill } from "react-icons/bs";
-import Footer from '../../components/Footer';
-
-import { AiOutlineBars } from "react-icons/ai";
-
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -45,7 +41,8 @@ export default function Index() {
     const[orders,setOrders] = React.useState([]);
     
    
-    const [camps ,setCamps] = React.useState(false)
+    const [camps ,setCamps] = React.useState(false);
+    const [loading,setLoading] = React.useState(true);
    
     const [campData] = React.useState([]);
     const[customerInfo,setCustomerInfo] = React.useState();
@@ -105,27 +102,7 @@ export default function Index() {
     
     }
 
-    var clicks = 1;
-   function onTapFun(){
-     clicks+=1;
-     console.log('taped succesfuly')
-    //  document.getElementsByClassName('pro-sidebar')
-    // alert('sdddsds');
-    const cursor = document.querySelector('.pro-sidebar');
-    const body = document.querySelector('.body-two')
-    if(clicks%2==0){
-      body.setAttribute("style",'max-width: 100vw;');
 
-      cursor.setAttribute("style", 'display:none;max-width:10px;');
-    }
-    else{
-      cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
-      body.setAttribute("style",'max-width:100vw-20.5vw;')
-
-    }
-    
-
-   }
       async function getDatas()
     {
             const token = sessionstorage.getItem("token");
@@ -154,6 +131,7 @@ export default function Index() {
                   
                 if(campData.length !== 0)
                 {
+                  setLoading(false);
                   setCamps(true);
                 }
                 
@@ -171,47 +149,43 @@ export default function Index() {
   return (
     <div >
     
-    <Container className='body-two'>
+    <Container >
 
-    <div className='image-sectioning-two'>
-      
-    <div className='profileBefore-two' >
-            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
+    <div className='profileBefore' >
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
         </div> 
 
+        <div className='row-flex-align'>
 
-        <div className='row-flex-align-two'>
-
+          <div className='profileDiv'>
             <div className='profileInner'>
-              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
-              //  style={{objectFit:'contain'}}
-               />
-              
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}} className='cover-img-dash'/>
+              {/* <div className='img-camera'>
+                  <AiOutlineCamera color='black' size={24} />
+              </div>   */}
+
+
             </div>
-           
-
-
-          <div className='header-banner-two'>
-          <div className='background-color-text'>
-        <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
-<div className='icon-tab-block'>
-        {/* <FiPackage color='black' className='icon-tab'/> */}
-        <p className='header-banner-text'>Package Orders</p>
-        </div>
-        </div>
+            
           </div>
+
+          <div className='header-banner' style={{marginLeft:'245px'}}>
+            <MdCampaign color='black' className='mt-4 mx-4' size={22}/>
+            <p className='header-banner-text'>Campaign Orders</p>
           </div>
-          
+
 
         </div>
         
 
 
                     <div className='view-msg ' >
+
+                      {loading?<><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></>:
                         
 
-                        {camps  ? (
+                        camps  ? (
                                     
                                 <>
                      
@@ -352,10 +326,11 @@ export default function Index() {
                         </div>
                       </> )
                       
+                    
                     }
                                 
             </div>
-            <Footer/>
+
     </Container>
 </div>
   );

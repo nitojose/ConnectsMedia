@@ -27,11 +27,12 @@ import Forgotpwd1 from '../../src/pages/forgotPassword/forgot1'
 import EachRequest from '../../src/pages/pendingRequest/EachRequest'
 import PaymentForm from '../../src/pages/Payment/index';
 import EventPending from './pendingRequest/EventPending';
-import Sidebar from '../components/sidebar/sidebar';
+import Sidebar from '../components/sidebar/Sidebar';
 import GetCampaign from '../User/Campaign/Index';
 import DashHome from "../User/Dashboard/Index";
 import RequestPaynow from '../pages/Orders/RequestPaynow';
-import "../style/sidebar-slider.scss";
+import SuccessPage from '../pages/PaymentSuccess';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -61,7 +62,6 @@ import FooterPage from '../components/Footer/FooterPage';
 
 import Privacy from '../pages/Privacypolicy/Index';
 
-
 // import Pagination from './paginationTable';
 
 export default function Index() {
@@ -86,14 +86,11 @@ export default function Index() {
                 {/* <FooterPage/> */}
                 </Route>
 
-                {/* <Sidebar/> */}    
+                {/* <Sidebar/> */}
 
                 <Route exact path='/dashboard'>
-
-                   <div className='dash-alignment-main'>
                     <Sidebar/>
                    <DashHome/>
-                   </div>
                    {/* <FooterPage/> */}
                 </Route>
 
@@ -265,11 +262,10 @@ export default function Index() {
 
 
                 <Route exact path='/order/package'>
-                <div className='dash-alignment-main-two'>
+                
                     <Sidebar/>
                    
                    < OrderPack/>
-                   </div>
                    {/* <FooterPage/> */}
                 </Route>
 
@@ -316,6 +312,7 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/pending_req'>
+
                 <Sidebar/>
                     <EachRequest/>
                     {/* <FooterPage/> */}
@@ -370,8 +367,11 @@ export default function Index() {
                     </Route>
 
                     <Route exact path='/getPackages'>
-                        <Sidebar/>
-                        <GetPackages/>
+
+                        
+                            <Sidebar/>
+                            <GetPackages/>
+                        
                         {/* <FooterPage/> */}
                     </Route>
 
@@ -379,6 +379,10 @@ export default function Index() {
                     <Sidebar/>
                     <PaymentForm/>
                     {/* <FooterPage/> */}
+                </Route>
+
+                <Route exact path='/success'>
+                    <SuccessPage/>
                 </Route>
 
             

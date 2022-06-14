@@ -4,36 +4,11 @@ import { useHistory} from "react-router-dom";
 import {Url,isLoggin,picture,imgUrl} from '../../GLOBAL/global';
 import {AiOutlineCamera} from 'react-icons/ai';
 import {FiPackage} from 'react-icons/fi';
-import {BsFillKanbanFill } from "react-icons/bs";
-import { AiOutlineBars } from "react-icons/ai";
-import Footer from '../../components/Footer';
-
 import axios from 'axios' 
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
 
-    var clicks = 1;
-   function onTapFun(){
-     clicks+=1;
-     console.log('taped succesfuly')
-    //  document.getElementsByClassName('pro-sidebar')
-    // alert('sdddsds');
-    const cursor = document.querySelector('.pro-sidebar');
-    const body = document.querySelector('.body-two')
-    if(clicks%2==0){
-      body.setAttribute("style",'max-width: 100vw;');
-
-      cursor.setAttribute("style", 'display:none;max-width:10px;');
-    }
-    else{
-      cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
-      body.setAttribute("style",'max-width:100vw-20.5vw;')
-
-    }
-    
-
-   }
     const[customerInfo,setCustomerInfo] = React.useState();
 
     async function getInfos()
@@ -80,72 +55,32 @@ export default function Index() {
 
   return (
 
-//     <Container>
+    <Container>
 
-// <div className='profileBefore' >
-//             <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
+    <div className='profileBefore' >
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
            
-//         </div> 
+        </div> 
 
-//         <div className='row-flex-align'>
+        <div className='row-flex-align'>
 
-//           <div className='profileDiv'>
-//             <div className='profileInner'>
-//               <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+          <div className='profileDiv'>
+            <div className='profileInner'>
+              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
               
 
 
-//             </div>
+            </div>
             
-//           </div>
+          </div>
 
-//         <div className='header-banner' style={{marginLeft:'245px',width:'70%'}}>
-//         <FiPackage color='black' className='mt-4 mx-4' size={22}/>
-//         <p className='header-banner-text'>Package List</p>
-//         </div>
+        <div className='header-banner' style={{marginLeft:'245px',width:'70%'}}>
+        <FiPackage color='black' className='mt-4 mx-4' size={22}/>
+        <p className='header-banner-text'>Package List</p>
+        </div>
 
     
-//     </div>
-
-<Container className='body-two'>
-
-
-
-
-<div className='image-sectioning-two'>
-      
-      <div className='profileBefore-two' >
-              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
-             
-          </div> 
-  
-  
-          <div className='row-flex-align-two'>
-  
-              <div className='profileInner'>
-                <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
-                //  style={{objectFit:'contain'}}
-                 />
-                
-              </div>
-             
-  
-  
-            <div className='header-banner-two'>
-            <div className='background-color-text'>
-          <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
-  <div className='icon-tab-block'>
-          <FiPackage color='black' className='icon-tab'/>
-
-          <p className='header-banner-text'>inbox</p>
-          </div>
-          </div>
-            </div>
-            </div>
-            <div className='button-background-req'></div>
-            
-  
-          </div>
+    </div>
 
         <div className='view-msg  ' style={{borderRadius:'8px'}}>
                 <div className='align-div pwd-div mb-5'>
@@ -202,7 +137,6 @@ export default function Index() {
                     </div>
                 </div>
         </div>
-        <Footer/>
     </Container>
     
   )

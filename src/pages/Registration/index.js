@@ -96,7 +96,7 @@ export default function Index(props) {
 
            
                 
-                <Col xl={4} sm={12} md={12} xxl={5} className='py-5 my-5'>
+                <Col xl={4} sm={12} md={12} xxl={5} className='py-5 my-5 m-20'>
 
                 <Parallax speed={-3} >  
                   <img src={require('../../assets/images/register.png')} height={500} width={500} alt="hands" />
@@ -105,7 +105,7 @@ export default function Index(props) {
 
                 <Col></Col>
 
-                <Col xl={4} sm={12} md={12} xxl={5} className='py-5 my-5'>
+                <Col xl={4} sm={12} md={12} xxl={5} className='py-5 my-5 m-20'>
                   
                   <Parallax speed={-3}>
                     <h6 className='heading'>Register</h6>

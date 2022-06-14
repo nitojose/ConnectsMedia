@@ -15,11 +15,6 @@ import {CgUserAdd} from 'react-icons/cg';
 import {AiOutlineCamera,AiOutlineClose,AiOutlineDelete} from 'react-icons/ai';
 import ImageUploader from 'react-images-upload';
 import { confirmAlert } from 'react-confirm-alert'; // Import
-import {FiPackage} from 'react-icons/fi';
-import {BsFillKanbanFill } from "react-icons/bs";
-import { AiOutlineBars } from "react-icons/ai";
-import Footer from '../../components/Footer';
-
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 var sessionstorage = require('sessionstorage');
 
@@ -58,27 +53,7 @@ export default function Index() {
     {
 
     }
-    var clicks = 1;
-   function onTapFun(){
-     clicks+=1;
-     console.log('taped succesfuly')
-    //  document.getElementsByClassName('pro-sidebar')
-    // alert('sdddsds');
-    const cursor = document.querySelector('.pro-sidebar');
-    const body = document.querySelector('.body-two')
-    if(clicks%2==0){
-      body.setAttribute("style",'max-width: 100vw;');
 
-      cursor.setAttribute("style", 'display:none;max-width:10px;');
-    }
-    else{
-      cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
-      body.setAttribute("style",'max-width:100vw-20.5vw;')
-
-    }
-    
-
-   }
     async function deletePic()
     {
 
@@ -273,23 +248,13 @@ export default function Index() {
         
     }
 
-    // function viewImageUpload(type)
-    // {
-    //     setPic(type);
-    //     setaupload(!upload);
-    // }
-
-    // function onImageChange(e)
-    // {
-    //     console.log("file",e)
-        
-    // }
+    
 
   return (
       <>
     
 
-        {/* <Container>
+        <Container>
 
         <div className='profileBefore' >
 
@@ -330,110 +295,60 @@ export default function Index() {
                     <p className='header-banner-text'>Profile</p>
                 </div>
 
-            </div> */}
-            <Container className='body-two'>
-
-
-
-
-<div className='image-sectioning-two'>
-      
-      <div className='profileBefore-two' >
-              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
-             
-          </div> 
-  
-  
-          <div className='row-flex-align-two'>
-  
-              <div className='profileInner'>
-                <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
-                //  style={{objectFit:'contain'}}
-                 />
-                
-              </div>
-             
-  
-  
-            <div className='header-banner-two'>
-            <div className='background-color-text'>
-          <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
-  <div className='icon-tab-block'>
-          <CgUserAdd color='black' className='icon-tab'/>
-
-          <p className='header-banner-text'>Profile</p>
-          </div>
-          </div>
             </div>
-            </div>
-            <div className='button-background-req'></div>
-            
-  
-          </div>
 
             <div className='view-msg '>
                 
 
                     <Row className='align-div pwd-div  mb-5'>
 
-{/*                     
-                    <ImageUploader
-                       className={upload?'imageup':'notimageup'}
-                       fileContainerStyle={{backgroundColor:'#f2d1b5'}}
-                       withIcon={true}
-                       buttonText='Choose images'
-                       onChange={(e) => filechoose(e)}
-                       imgExtension={['.jpg', '.gif', '.png', '.gif']}
-                       maxFileSize={5242880}
-                 />
-          */}
-                    <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
-                        <Row >
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" )} className='textbox login-box' defaultValue={customerInfo.cust_name} /> </Col>
+                        <Form onSubmit={handleSubmit(onSubmit)} className='mt-5'>
+                            <Row >
+                                <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Name" type="text"  {...register("name" )} className='textbox login-box' defaultValue={customerInfo.cust_name} /> </Col>
 
-                            <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Ministry" type="text" {...register('ministry')} className='textbox login-box' defaultValue={customerInfo.cust_ministry} /> </Col>
+                                <Col sm={12} md={12} xl={6} xxl={6}> <input placeholder="Ministry" type="text" {...register('ministry')} className='textbox login-box' defaultValue={customerInfo.cust_ministry} /> </Col>
 
-                        </Row>
+                            </Row>
 
-                        <Row  >
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Email" type="email"  className='textbox login-box' value={customerInfo.cust_email} disabled={true} style={{color:'#aaa',backgroundColor:'#f7f4f4'}}/> </Col>
+                            <Row  >
+                                <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Email" type="email"  className='textbox login-box' value={customerInfo.cust_email} disabled={true} style={{color:'#aaa',backgroundColor:'#f7f4f4'}}/> </Col>
 
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Phone" type="tel-in" {...register("phone")} className='textbox login-box' value={customerInfo.cust_phone}/> </Col>
+                                <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Phone" type="tel-in" {...register("phone")} className='textbox login-box' value={customerInfo.cust_phone}/> </Col>
 
-                        </Row>
+                            </Row>
 
-                        <Row  >
-                            
-                            <Col sm={12} md={12} xl={12} xxl={12}>
-                                <textarea placeholder="Full Address" {...register("add" , { required: true })} className='textbox '  rows={3} defaultValue={customerInfo.cust_address==='undefined'?'':customerInfo.cust_address} disabled={false} inputMode={'text'}></textarea></Col>
+                            <Row  >
+                                
+                                <Col sm={12} md={12} xl={12} xxl={12}>
+                                    <textarea placeholder="Full Address" {...register("add" , { required: true })} className='textbox '  rows={3} defaultValue={customerInfo.cust_address==='undefined'?'':customerInfo.cust_address} disabled={false} inputMode={'text'}></textarea></Col>
 
-                        </Row>
+                            </Row>
 
-                        {/* <Row>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox'/> </Col>
-                            <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox'/> </Col>
-                        </Row> */}
+                            {/* <Row>
+                                <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Password" type="password" {...register("pass1" , { required: true })} className='textbox'/> </Col>
+                                <Col sm={12} md={12} xl={6} xxl={6}>  <input placeholder="Re-Password" type="password"  {...register("pass2" , { required: true })} className='textbox'/> </Col>
+                            </Row> */}
 
-                        <Row className='extraRowSpace'>
-                        {(!spinner === false)? <Buttons text="Update " type="submit" disabled={true} /> : <Buttons text="Update " type="submit" />} 
+                            <Row className='extraRowSpace'>
+                            {(!spinner === false)? <Buttons text="Update " type="submit" disabled={true} /> : <Buttons text="Update " type="submit" />} 
 
-                            {spinner && 
-                            <Spinner
+                                {spinner && 
+                                <Spinner
 
-                            style={{marginLeft:'53%',marginTop:'-3.5rem'}}
-                            animation="border"
+                                style={{marginLeft:'53%',marginTop:'-3.5rem'}}
+                                animation="border"
 
-                            role="status"
+                                role="status"
 
-                            >
-                            </Spinner>
+                                >
+                                </Spinner>
 
-                            }
-                       
-                        </Row>
+                                }
                         
+                            </Row>
+                            
 
-                    </Form>    
+                        </Form>    
                     </Row>
 
             </div> 
@@ -445,8 +360,7 @@ export default function Index() {
                         customUI: ({onClose}) => {
                             return (
                                 <div className='profile-pic-view '>
-                                    {/* <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  /> */}
-                                        {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+                                    {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
                                         {console.log("profileup",profileUpload)}
                                     <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={35}/>
@@ -470,7 +384,7 @@ export default function Index() {
                     })
 
             }      
-               <Footer/>
+               
         </Container>
 
         <ToastContainer  position="top-center"  style={{marginTop:'50vh'}}/>

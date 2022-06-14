@@ -60,10 +60,10 @@ export default function EachRequest() {
     
                     <div className='pkg-req-section'>
       
-                                    <Container className='padding-bottom-5rem'>
+                                <Container className='padding-bottom-5rem'>
 
                                         <div className='vertical-text-pkg '>
-                                            <p>PACKAGE</p>
+                                        <p>{pkgData.pack.packages_type === "STD" ? <span style={{color:'#F1C40F',fontFamily:"cursive"}}>Standard </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Customized </span>}PACKAGE</p>
                                         </div>
 
                                         <div className='sec-pkg-section pkg-400'>
@@ -89,30 +89,7 @@ export default function EachRequest() {
                                                 </div>
                                             )}
                                             
-                                            {/* <p className='heading bold-text py-3'>{pkgData.question.length ===0 ? "":'Questionnaire'}</p>
-
-
-                                            
-                                            {pkgData.question && pkgData.question.map((d,id) =>
-                                            
-                                            
-                                            <>
-                                            
-                                            <Row >
-                                                <Col xxl={6} xl={6} md={6} sm={6} > 
-                                                    <p>{d.pspec_text}</p>
-                                                </Col>
-
-                                                <Col xxl={6} xl={6} md={6} sm={6}> 
-                                                    <p className='text-end'>{d.pspec_ans}</p> 
-                                                </Col>
-                                                <hr></hr>
-                                            </Row>
-                                            </>
-
-                                            )} */}
-                                               
-
+                                          
                                         </div>
 
 
@@ -195,18 +172,20 @@ export default function EachRequest() {
 
                                     confirmAlert({
 
-                                        customUI: ({onClose}) => {
+                                        customUI: ({onClose}) => 
+                                        {
                                             return (
-                                                <div className="payment ">
+                                                
+                                            <div className="payment ">
 
-                                                    <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
+                                                <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
 
                                                 <Elements stripe={stripePromise} >
                                                     <CheckoutForm  visibility={true}/>
                                                 </Elements>
 
 
-                                        </div>
+                                            </div>
                                             
                                             );
                                             
@@ -375,14 +354,14 @@ export default function EachRequest() {
     
   }
 
-  function paynow(subId,cost,orderid)
+    function paynow(subId,cost,orderid)
     {
         setSubId(subId);
         console.log("clicked")
         sessionstorage.setItem("subId",subId);
         sessionstorage.setItem("amount",cost);
         sessionstorage.setItem("orderId",orderid);
-        
+        setFrame(true)
         // console.log("payment")
         // history.push('/payment-form');
         // history.go(0);

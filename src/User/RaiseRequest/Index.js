@@ -5,9 +5,6 @@ import {MdPendingActions} from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Url,picture,isLoggin,imgUrl } from '../../GLOBAL/global';
-import { AiOutlineBars } from "react-icons/ai";
-import Footer from '../../components/Footer';
-
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -169,7 +166,7 @@ export default function Index() {
 
           </div>
       </div>
-      <Footer/>
+
     </Container>
 
   )
