@@ -16,6 +16,7 @@ import {FiPackage} from 'react-icons/fi';
 import {BsFillKanbanFill } from "react-icons/bs";
 import Pagination from '../../pages/Pagination';
 import { AiOutlineBars } from "react-icons/ai";
+import Shimmer from "react-shimmer-effect";
 import Footer from '../../components/Footer';
 
 var sessionstorage = require('sessionstorage');
@@ -26,7 +27,7 @@ export default function Index() {
     
     const [allmessages,setAlmessages]= React.useState([{}]);
     const[customerInfo,setCustomerInfo] = React.useState();
-
+    const [loading,setLoading] = React.useState(true);
     const [currentPage,setCurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
@@ -116,7 +117,8 @@ export default function Index() {
                 console.log("inbox",response.data.outbox.data);
               
                 setAlmessages(response.data.outbox.data);
-                setLength(response.data.outbox.data.length)
+                setLength(response.data.outbox.data.length);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log('error ' + error);
@@ -223,60 +225,62 @@ export default function Index() {
                 
             
             
-                        <div className='view-msg ' >
-                        
+          <div className='view-msg ' >
 
-                            {length >0 ?(
-                            
-                          <>
-                        <div className='msg-align mb-5'>
+{loading?<div className='msg-align mb-5'><Shimmer><div className='msg-align mb-5'> <div >Loading...</div></div></Shimmer></div>:
 
-                          <Table striped bordered hover>
-                            <thead>
-                              <tr>
-                                <th className='bold-text'>Date</th>
-                                <th className='bold-text' >Message</th>
-                                {/* <th>From</th> */}
-                                <th className='bold-text'>Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                           
-                              {currentPosts.map((data, idx) => 
 
-                                  data.msg_status === "NotRead" ? (
-                                <tr className='bold-text pointer'>
-                                <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
-                                <td onClick={() => msgView(data)}>{data.msg_user}</td>
-                                {/* <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td> */}
-                                <td onClick={() => msgView(data)}>{data.msg_status}</td>
-                                <td>
-                                
-                            <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
-                            </td>
-                                </tr>
-                                  ):(
+  length >0 ?(
+  
+<>
+<div className='msg-align mb-5'>
 
-                                    <tr className='pointer'>
-                                <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
-                                <td onClick={() => msgView(data)}>{data.msg_user}</td>
-                                {/* <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td> */}
-                                <td onClick={() => msgView(data)}>{data.msg_status}</td>
-                                <td><RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/></td>
-                                </tr>
+<Table striped bordered hover>
+  <thead>
+    <tr>
+      <th className='bold-text'>Date</th>
+      <th className='bold-text' >Message</th>
+      {/* <th>From</th> */}
+      <th className='bold-text'>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+    {currentPosts.map((data, idx) => 
 
-                                  )
-                                
-                              )}
-                            </tbody>
-                          </Table>
-                          <Pagination postsPerPage={postsPerPage} totalPosts={allmessages.length} paginate={paginate}/>
-                          </div>
-                          </>
-                           
-                            ) :(<><div className='text-center align-div'> <p className='error-card '>No Messages</p></div></>)}
-                            
-                        </div>
+        data.msg_status === "NotRead" ? (
+      <tr className='bold-text pointer'>
+      <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
+      <td onClick={() => msgView(data)}>{data.msg_user}</td>
+      {/* <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td> */}
+      <td onClick={() => msgView(data)}>{data.msg_status}</td>
+      <td>
+      
+  <RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/>
+  </td>
+      </tr>
+        ):(
+
+          <tr className='pointer'>
+      <td onClick={() => msgView(data)}>{data.created_at !== null? dateFormat(data.created_at, "mmmm dS, yyyy"):""}</td>
+      <td onClick={() => msgView(data)}>{data.msg_user}</td>
+      {/* <td onClick={() => msgView(data)}>{data.msg_type === "A"?"Admin":""}</td> */}
+      <td onClick={() => msgView(data)}>{data.msg_status}</td>
+      <td><RiDeleteBin6Line className='pointer' size={23} onClick={() => deleteMSg(data)}/></td>
+      </tr>
+
+        )
+      
+    )}
+  </tbody>
+</Table>
+<Pagination postsPerPage={postsPerPage} totalPosts={allmessages.length} paginate={paginate}/>
+</div>
+</>
+ 
+  ) :(<><div className='text-center align-div'> <p className='error-card '>No Messages</p></div></>)}
+  
+        </div>
                         <Footer/>
         </Container>
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>

@@ -16,7 +16,7 @@ import Footer from '../../components/Footer';
 import {FiPackage} from 'react-icons/fi';
 import {BsFillKanbanFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
-
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -59,7 +59,7 @@ export default function Index() {
     const indexOfLastPost = currentPage*postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts1 = process_event.slice(indexOfFirstPost,indexOfLastPost);
-
+    const [loading,setLoading] = React.useState(true);
     const currentPosts2 = pend_event.slice(indexOfFirstPost,indexOfLastPost);
     
 
@@ -95,6 +95,7 @@ export default function Index() {
                 
                 console.log("processing",response.data.event)
                 setProcess_event(response.data.event);
+                setLoading(false);
                 setPlans(true);
             })
             .catch((error) => {
@@ -208,6 +209,8 @@ export default function Index() {
           </div>
             </div>
             </div>
+
+
             <div className='button-background-req'></div>
             <button onClick={() => raiseRequest("Event")} className="button-raise-req">Raise a Request</button>
             
@@ -216,125 +219,136 @@ export default function Index() {
 
 
 
+          {loading ?(<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></div> ):
+
+(
+
+  (((process_event === "No events available") && (pend_event === "No events available")) ? (
+                 
+    <div className='view-msg mb-5'>
+   
+ 
+   <div className='align-div pwd-div'>
+   <div id='campaigns'> 
+        <div>
+            <ul style={{width:'100%',alignSelf:'center'}}>
+              <li id="event-dash-req" style={{height:'150px'}}>
+                    <h2>Upcoming Event</h2>
+                    <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                    <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
+              
+                            {sessionstorage.getItem('token') ===null ?(
+                                <>
+                                <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
+                                </>
+                                ):(
+                                    <>
+                                <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
+                                </>
+                                )
+                            }
+              </li>
+            </ul>
+            </div>
+      </div>
+      </div> 
+      </div>
+    
+   ):(
 
 
+     (process_event !== "No events available"?                       
+                    (
 
 
-     
-                          { plans ? (process_event === "No events available" ? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
+                        <div className='view-msg'>
 
-                                                        
-                          (
+                        <div className='msg-align mx-0 mb-5'>
+                          {/* hello */}
+                        <Table striped bordered hover>
+                      <thead>
+                        <tr >
+                          <th className='bold-text'>Date</th>
+                          <th className='bold-text'>title</th>
+                          <th className='bold-text cost'>Cost</th>
+                          <th className='bold-text'>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        {currentPosts1.length!== 0 && currentPosts1.map((data, idx) => 
+                        
+                          <tr className='pointer' key={idx}>
                             
-                            
-                              <div className='view-msg'>
+                            <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
+                            <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
+                            <td className='cost' onClick={()=>{viewEvent(process_event[0])}}>${data.event_cost}.00</td> 
+                            <td onClick={()=>{viewEvent(process_event[0])}} className='error '>{data.event_status}</td>
+                          
+                          </tr>
+                          
+                          
+                        )}
+                      </tbody>
+                    </Table>
+                    <Pagination postsPerPage={postsPerPage} totalPosts={process_event.length} paginate={paginate}/>
+                    </div>
 
-                              <div className='msg-align mx-0 mb-5'>
-                              <Table striped bordered hover>
-                            <thead>
-                              <tr >
-                                <th className='bold-text'>Date</th>
-                                <th className='bold-text'>title</th>
-                                <th className='bold-text cost'>Cost</th>
-                                <th className='bold-text'>Status</th>
+                        </div>                                     
+                        ):
+                        (
+
+             
+                   (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col>) :
+                     
+                      (
+                      <div className='view-msg '>
+               
+                        <div className='align-div pwd-div mb-5'>
+                        <Table striped bordered hover>
+                          <thead>
+                            <tr >
+                              <th className='bold-text'>Date</th>
+                              <th className='bold-text'>title</th>
+                             
+                              <th className='bold-text'>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                        
+                            {currentPosts2.length !== 0 && currentPosts2.map((data, idx) => 
+                            
+                              <tr key={idx}>
+                                
+                                <td >{ dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
+                                <td >{data.event_title}</td>
+                                
+                                <td className='error '>{data.event_status}</td>
+                              
                               </tr>
-                            </thead>
-                            <tbody>
-
-                              {currentPosts1.map((data, idx) => 
                               
-                                <tr className='pointer'>
-                                  
-                                  <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
-                                  <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
-                                  <td className='cost' onClick={()=>{viewEvent(process_event[0])}}>${data.event_cost}.00</td> 
-                                  <td onClick={()=>{viewEvent(process_event[0])}} className='error '>{data.event_status}</td>
-                                
-                                </tr>
-                                
-                                
-                              )}
-                            </tbody>
-                          </Table>
-                          <Pagination postsPerPage={postsPerPage} totalPosts={process_event.length} paginate={paginate}/>
-                          </div>
-
-                              </div>                                     
-                              ))
-                            :(<></>)
-                          } 
-
-
-                   
-                          {plans ? (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
-                           (
-                            <div className='view-msg '>
-                     
-                            <div className='align-div pwd-div mb-5'>
-                              <Table striped bordered hover>
-                                <thead>
-                                  <tr >
-                                    <th className='bold-text'>Date</th>
-                                    <th className='bold-text'>title</th>
-                                    {/* <th className='bold-text'>Cost</th> */}
-                                    <th className='bold-text'>Status</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
                               
-                                  {currentPosts2.map((data, idx) => 
-                                  
-                                    <tr>
-                                      
-                                      <td >{ dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
-                                      <td >{data.event_title}</td>
-                                      {/* <td>${data.event_cost}.00</td>  */}
-                                      <td className='error '>{data.event_status}</td>
-                                    
-                                    </tr>
-                                    
-                                    
-                                  )}
-                                </tbody>
-                              </Table>
-                              <Pagination postsPerPage={postsPerPage} totalPosts={pend_event.length} paginate={paginate}/>
-                              </div>
+                            )}
+                          </tbody>
+                        </Table>
+                        <Pagination postsPerPage={postsPerPage} totalPosts={pend_event.length} paginate={paginate}/>
+                        </div>
 
-                            </div>
-                           ))
-                           :(<></>)}
+                      </div>
+                      )
+                     )
 
 
+                     )))
+                    
 
-                       {(pend_event ==="No events available")  && (process_event === "No events available") ?(<>
-                        <div className='view-msg mb-5'>
                      
-                      <div className='align-div pwd-div'>
-                        <div id='campaigns'>
-                            <div>
-                                <ul style={{width:'100%',alignSelf:'center'}}>
-                                  <li id="event-dash-req" style={{height:'150px'}}>
-                                        <h2>Upcoming Event</h2>
-                                        <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                        <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
-                                  
-                                                {sessionstorage.getItem('token') ===null ?(
-                                                    <>
-                                                    <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
-                                                    </>
-                                                    ):(
-                                                        <>
-                                                    <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
-                                                    </>
-                                                    )
-                                                }
-                                  </li>
-                                </ul>
-                                </div>
-                          </div>
-                          </div>
-                          </div>
-                       </>):(<></>) }
+                  
+                
+  )
+)
+                
+}
                        <Footer/>
         
     </Container>

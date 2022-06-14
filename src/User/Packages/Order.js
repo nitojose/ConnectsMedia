@@ -19,6 +19,7 @@ import { AiOutlineBars } from "react-icons/ai";
 import Footer from '../../components/Footer';
 import Pagination from '../../pages/Pagination';
 import '../../style/sidebar-slider.scss';
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -28,7 +29,7 @@ export default function Index() {
     
     const[orders,setOrders] = React.useState([]);
     
-    
+    const [loading,setLoading] = React.useState(true);
     const [showpkg ,setpkg] = React.useState(false)
     const [packages,setPackages] = React.useState(true);
 
@@ -108,8 +109,10 @@ export default function Index() {
                 })
                 if(pkgData.length !== 0 )
                 {
+                  setLoading(false);
                   setpkg(true);
                 }
+               
                
                
             })
@@ -229,10 +232,13 @@ var clicks = 1;
 
         </div>
     
-                    <div className='view-msg-data' >
+        <div className='view-msg ' >
+
+{console.log("pkddata",pkgData)}
+                      {loading ? <><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></>:(
                         
 
-                    {showpkg  ? (
+                    showpkg  ? (
                                 
                             <>
                  
@@ -331,9 +337,11 @@ var clicks = 1;
 
                       </> )
                   
-                }
+                      )
+
+}
                             
-                        </div>
+        </div>
 
 <Footer/>
     </Container>

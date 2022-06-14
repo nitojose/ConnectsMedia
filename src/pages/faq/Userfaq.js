@@ -1,8 +1,26 @@
 import React from 'react'
 import '../../style/faq.scss'
 import Faq from "react-faq-component";
+import $ from 'jquery';
+
 
 export default function Userfaq() {
+
+    React.useEffect(()=>
+    {
+        $("#faqs li h2").click(function(){
+			if($(this).hasClass("active")){
+				$(this).removeClass("active");
+				$(this).next().hide();
+				return;
+			}
+			$("#faqs li h2").removeClass("active");
+			$("#faqs li div[itemprop=acceptedAnswer]").hide();
+			$(this).next().show();
+			$(this).addClass("active");
+		});
+    })
+    
   return (
     <div class="section scrollbar" id="faqs">
 	<div>

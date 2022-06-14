@@ -22,6 +22,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import '../../style/sidebar-slider.scss';
 import { AiOutlineBars } from "react-icons/ai";
 
+
 // import '../../style/order.scss';
 
 var sessionstorage = require('sessionstorage');
@@ -55,13 +56,31 @@ export default function Index() {
 
     React.useEffect( async() => {
 
+        $("#service-list li").click(function(){
+            var i=$(this).index()+1;
+            console.log(i);
+            $("#service-list .subtitle").removeClass("active");
+            $("#service"+i).addClass("active");
+        });
+        $(".popup .subtitle i").click(function(){
+            $(this).parent().removeClass("active");
+        });
+        $(document).on('keydown', function(event) {
+             if (event.key == "Escape") {
+                 $(".popup .subtitle i").parent().removeClass("active");
+             }
+         });
+        $("#socials li").click(function(){
+            var i=$(this).index()+1;
+            console.log(i);
+            $("#socials .subtitle").removeClass("active");
+            $("#social"+i).addClass("active");
+        });
+
        
       console.log("useeffect")
       logginornot();
      
-
-     
-
       getDatas();
 
       

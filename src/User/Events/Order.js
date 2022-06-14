@@ -15,7 +15,7 @@ import Pagination from '../../pages/Pagination';
 import {BsFillKanbanFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
 import Footer from '../../components/Footer';
-
+import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -25,7 +25,7 @@ export default function Index() {
 
     let history = useHistory();
     const[orders,setOrders] = React.useState([]);
-    
+    const [loading,setLoading] = React.useState(true);
     const [plans,setPlans] = React.useState(false);
     
 
@@ -59,7 +59,9 @@ export default function Index() {
                 })
                 if(planData.length !== 0)
                 {
-                  setPlans(true);  
+                  setLoading(false); 
+                  setPlans(true); 
+                  
                 }
                  
                   
@@ -216,88 +218,92 @@ export default function Index() {
         </div>
           
 
-             <div className='view-msg ' >
-                        
+        <div className='view-msg ' >
 
-                        {plans  ? (
-                                    
-                                <>
-                     
-                     <div className='align-div pwd-div mb-5'>
-    
-                        <Table striped bordered hover>
-                          <thead>
-                            <tr >
-                              <th className='bold-text'>Date</th>
-                              <th className='bold-text'>title</th>
-                              <th className='bold-text cost'>Cost</th>
-                              <th className='bold-text'>Drive Id</th>
-                              <th className='bold-text'>Status</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                        
-                            {currentPosts.map((data, idx) => 
-                            
-                            
-                              <tr className='pointer'>
-                                
-                                <td onClick={()=>{view(data,"event")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
-                                <td onClick={()=>{view(data,"event")}}>{data.plan[0].event_title}</td>
-                                <td className="cost" onClick={()=>{view(data,"event")}}>${data.order.order_amt}.00</td>
-                                <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
-                                <td onClick={()=>{view(data,"event")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
-                                            {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
-                                            {data.order.order_status === 'P'?(<><span className='warning '>Order Pending</span></>):(<></>)}
-                                            {data.order.order_status === 'R'?(<><span className='error '>Rejected</span></>):(<></>)}
-                                </td>
-                               
-                                {/* <td><RiDeleteBin6Line size={23} onClick={()=>console.log("delete")}/> </td> */}
-                              </tr>
-                              
-                              
-                            )}
-                          </tbody>
-                        </Table>
-                        <Pagination postsPerPage={postsPerPage} totalPosts={planData.length} paginate={paginate}/>
-                        </div>
-                      </>
-                      
-                      ) :(<>
-                        
-                      
-                     
-                     <div className='align-div pwd-div mb-5'>
-                       <div id='campaigns'>
-                           <div>
-                               <ul style={{width:'100%',alignSelf:'center'}}>
-                                 <li id="event-dash-req" style={{height:'150px'}}>
-                                       <h2>Upcoming Event</h2>
-                                       <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                                       <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
-                                 
-                                               {sessionstorage.getItem('token') ===null ?(
-                                                   <>
-                                                   <button onClick={()=> redirectto("event")} >Register to start</button>
-                                                   </>
-                                                   ):(
-                                                       <>
-                                                   <button onClick={()=>history.push('/events-creation')} >Start Here</button>
-                                                   </>
-                                                   )
-                                               }
-                                 </li>
-                               </ul>
-                               </div>
-                         </div>
-                         </div>
-                     
-                        
-                      </> )
-                      
-                    }
-                                
-            </div>
+{loading? 
+<div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div>
+:(
+  
+
+  plans  ? (
+              
+          <>
+
+<div className='align-div pwd-div mb-5'>
+
+  <Table striped bordered hover>
+    <thead>
+      <tr >
+        <th className='bold-text'>Date</th>
+        <th className='bold-text'>title</th>
+        <th className='bold-text cost'>Cost</th>
+        <th className='bold-text'>Drive Id</th>
+        <th className='bold-text'>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+  
+      {currentPosts.map((data, idx) => 
+      
+      
+        <tr className='pointer'>
+          
+          <td onClick={()=>{view(data,"event")}}>{data.order.created_at !== null? dateFormat(data.order.created_at, "mmmm dS, yyyy"):""}</td>
+          <td onClick={()=>{view(data,"event")}}>{data.plan[0].event_title}</td>
+          <td className="cost" onClick={()=>{view(data,"event")}}>${data.order.order_amt}.00</td>
+          <td >{data.order.order_status === 'R'?<span className='error'>No drive ID</span>:(<a href={data.order.drive_id} target="_blank" rel="noreferrer" style={{color:'black'}}>click here</a>)}</td>
+          <td onClick={()=>{view(data,"event")}}>{data.order.order_status === 'PP'?(<><span className='warning '>Payment Pending</span></>):(<></>)}
+                      {data.order.order_status === 'S'?(<><span className='green '>Success</span></>):(<></>)}
+                      {data.order.order_status === 'P'?(<><span className='warning '>Order Pending</span></>):(<></>)}
+                      {data.order.order_status === 'R'?(<><span className='error '>Rejected</span></>):(<></>)}
+          </td>
+         
+          {/* <td><RiDeleteBin6Line size={23} onClick={()=>console.log("delete")}/> </td> */}
+        </tr>
+        
+        
+      )}
+    </tbody>
+  </Table>
+  <Pagination postsPerPage={postsPerPage} totalPosts={planData.length} paginate={paginate}/>
+  </div>
+</>
+
+) :(<>
+  
+
+
+<div className='align-div pwd-div mb-5'>
+ <div id='campaigns'>
+     <div>
+         <ul style={{width:'100%',alignSelf:'center'}}>
+           <li id="event-dash-req" style={{height:'150px'}}>
+                 <h2>Upcoming Event</h2>
+                 <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                 <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
+           
+                         {sessionstorage.getItem('token') ===null ?(
+                             <>
+                             <button onClick={()=> redirectto("event")} >Register to start</button>
+                             </>
+                             ):(
+                                 <>
+                             <button onClick={()=>history.push('/events-creation')} >Start Here</button>
+                             </>
+                             )
+                         }
+           </li>
+         </ul>
+         </div>
+   </div>
+</div>
+
+  
+</> )
+
+)}
+          
+</div>
   
             <Footer/>
     </Container>

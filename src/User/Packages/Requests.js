@@ -13,7 +13,7 @@ import {FiPackage} from 'react-icons/fi';
 import {BsFillKanbanFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
 import Footer from '../../components/Footer';
-
+import Shimmer from "react-shimmer-effect";
 import Pagination from '../../pages/Pagination';
 var sessionstorage = require('sessionstorage');
 
@@ -50,18 +50,17 @@ export default function Index() {
   
     const [process_pack,setProcess_pack] = React.useState([]);
     const [customerInfo,setCustomerInfo] = React.useState();
-
+    const [loading,setLoading] = React.useState(true);
     const [currentPage,setCurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const currentPosts1 = process_pack.slice(indexOfFirstPost,indexOfLastPost);
+    const currentPosts1 = Object.keys(process_pack).slice(indexOfFirstPost,indexOfLastPost)
 
     // const currentPosts2 = pend_pack.slice(indexOfFirstPost,indexOfLastPost);
     
-    const currentPosts2 = Object.keys(pend_pack).slice(indexOfFirstPost,indexOfLastPost);
-
-    function paginate(pageNumber)
+    const currentPosts2 = Object.keys(pend_pack).slice(indexOfFirstPost,indexOfLastPost);  
+     function paginate(pageNumber)
     {
       setCurrentPage(pageNumber);
     }
@@ -119,7 +118,7 @@ export default function Index() {
                 console.log("pending",response.data.pack);    
                
                 setPend_pack(response.data.pack);
-
+                setLoading(false);
                 // console.log("pack",pend_pack)
                 setPackages(true);
                
@@ -250,13 +249,75 @@ export default function Index() {
         </div> */}
            
                   
+           {loading?<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div>
+</div>:(
+  // console.log("process pack in request",pend_pack) 
+  (((process_pack === "No packages Available") && (pend_pack === "No packages Available")) ? (
 
-                          {packages ?(process_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>:
+    <div className='view-msg'>
+      <div className='msg-align mb-5'>
+        <div class="main-packages dash-packages">
+                <div class="package-wrap">
+                    <div class="package">
+                        <h4>Standard</h4>
+                        <div class="content">
+                            <ul>
+                                <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
+                                <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
+                                <li><i class="fa fa-check-circle"></i>Post Boosting – for more views</li>
+                                <li><i class="fa fa-check-circle"></i>1 Ad Promotion per month</li>                            
+                                <li><i class="fa fa-check-circle"></i>All Images, Graphics Copyrighting included</li>
+                            </ul>
+                        </div>
+                        <div align="center">
+                        {sessionstorage.getItem('token') ===null ?(
+                            <>
+                        <button onClick={()=>redirecttoList("std")}>Register</button>
+                        </>
+                        ):(
+                            <>
+                        <button onClick={()=>history.push('/standard-list')}>Buy</button>
+                        </>
+                        )
+                        }
+                        </div>
+                    </div>
+                </div>
+                <div class="package-wrap">
+                    <div class="package">
+                        <h4>Custom</h4>
+                        <div class="content">
+                            <ul>
+                                <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
+                                <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>
+                            </ul>
+                        </div>
+                        <div align="center">
+                        {sessionstorage.getItem('token') ===null ?(
+                            <>
+                        <button onClick={()=> redirecttoList("custom")}>Register</button>
+                        </>
+                        ):(
+                            <>
+                        <button onClick={()=>history.push('/customized-list')}>Buy</button>
+                        </>
+                        )
+                        }
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </div>
+      
+    ):(
+
+      (process_pack !== "No packages Available"? 
                            (
-                        <div className='view-msg'>
+                      <div className='view-msg'>
                          
 
-                         <div className='align-div pwd-div '>
+                          <div className='align-div pwd-div '>
                              
                               <Table striped bordered hover>
                               <thead>
@@ -270,9 +331,9 @@ export default function Index() {
                               </thead>
                               <tbody>
                             
-                                { Object.keys(process_pack).map((data,id) =>(
+                                { currentPosts1 && currentPosts1.map((data,id) =>(
                                  
-                                  <tr className='pointer'>
+                                  <tr className='pointer' key={id}>
                                     
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.created_at !== null? dateFormat(process_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
                                     <td onClick={()=>{view_pkg(process_pack[data])}}>{process_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}> Package</span></td>
@@ -286,21 +347,18 @@ export default function Index() {
                                 ))}
                               </tbody>
                             </Table>
-                            
+                            <Pagination postsPerPage={postsPerPage} totalPosts={Object.keys(process_pack).length} paginate={paginate}/>
 
                           </div>
                           </div>
                                      
-                            ) ):(<></>)
-                          
-                            }
+                            )
+                            :(
 
-
-                           
-                         {packages ?  (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col> :
+                              (pend_pack === "No packages Available"? <Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'></Col> :
                                  (
 
-                                  <div className='view-msg '>
+                                 <div className='view-msg '>
                          
 
                                     <div className='align-div pwd-div mb-5'>
@@ -317,10 +375,10 @@ export default function Index() {
                                       </thead>
                                       <tbody>
                                     
-                                        {Object.keys(pend_pack).map((data,id) =>(
-                                          // console.log("currentposts2",pend_pack[data].pack.created_at)
-                                        
-                                          <tr>
+                                        {currentPosts2 && currentPosts2.map((data,id) =>(
+                                          // console.log("data",data)
+                                          // console.log("id",id);
+                                          <tr key={id}>
                                             
                                             <td >{pend_pack[data].pack.created_at !== null? dateFormat(pend_pack[data].pack.created_at, "mmmm dS, yyyy"):""}</td>
                                             <td >{pend_pack[data].pack.packages_type === "CUST"?"Customized ":"Standard "} <span style={{color:'black'}}>Package </span></td>
@@ -333,81 +391,19 @@ export default function Index() {
                                     
                                         ))}
                                       </tbody>
+                                      
                                     </Table>
                                    
-
+                                    <Pagination postsPerPage={postsPerPage} totalPosts={Object.keys(pend_pack).length} paginate={paginate}/>
                                     </div>
-                                    </div>                                     
-                                     ) ):(<></>)
-                                     
-                         }
-
-                        {(process_pack === "No packages Available")  && (pend_pack === "No packages Available") ?(
-
-                          <>
-
-                        <div className='view-msg'>
-                         
-
-                         <div className='msg-align mb-5'>
-                            <div class="main-packages dash-packages">
-                                    <div class="package-wrap">
-                                        <div class="package">
-                                            <h4>Standard</h4>
-                                            <div class="content">
-                                                <ul>
-                                                    <li><i class="fa fa-check-circle"></i>3 Done-for-you Posts Per Week<br></br>(1 video, 2 pictures / posters)</li>
-                                                    <li><i class="fa fa-check-circle"></i>Upto 2 Social Media Platforms</li>
-                                                    <li><i class="fa fa-check-circle"></i>Post Boosting – for more views</li>
-                                                    <li><i class="fa fa-check-circle"></i>1 Ad Promotion per month</li>                            
-                                                    <li><i class="fa fa-check-circle"></i>All Images, Graphics Copyrighting included</li>
-                                                </ul>
-                                            </div>
-                                            <div align="center">
-                                            {sessionstorage.getItem('token') ===null ?(
-                                                <>
-                                            <button onClick={()=>redirecttoList("std")}>Register</button>
-                                            </>
-                                            ):(
-                                                <>
-                                            <button onClick={()=>history.push('/standard-list')}>Buy</button>
-                                            </>
-                                            )
-                                            }
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="package-wrap">
-                                        <div class="package">
-                                            <h4>Custom</h4>
-                                            <div class="content">
-                                                <ul>
-                                                    <li><i class="fa fa-check-circle"></i>Register and check all our services </li>
-                                                    <li><i class="fa fa-check-circle"></i>Pick the services that suits your ministry needs</li>
-                                                </ul>
-                                            </div>
-                                            <div align="center">
-                                            {sessionstorage.getItem('token') ===null ?(
-                                                <>
-                                            <button onClick={()=> redirecttoList("custom")}>Register</button>
-                                            </>
-                                            ):(
-                                                <>
-                                            <button onClick={()=>history.push('/customized-list')}>Buy</button>
-                                            </>
-                                            )
-                                            }
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                                  </div>
-                            </div>
-                            </>
-                            
+                                    </div>                                   
+                                     )) )
+                
+    )))
+    
+  
+  )}
                   
-                        ):(<></>) }
-
 
 
                     

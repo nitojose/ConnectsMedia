@@ -222,6 +222,21 @@ display: inline;
     padding: 1px 4px;
 }
 
+.processNoti
+{
+    font-size: 20px;
+    color: red;
+    margin-top: 1.5rem;
+    position: absolute;
+    margin-left: 13rem;
+    font-weight: 900;
+    border-radius: 50%;
+    width: 7px;
+    height: 7px;
+    border: 1px solid red;
+    background-color: red;
+}
+
 .row-flex-align-one{
     position: absolute;
     top: 3vh;
