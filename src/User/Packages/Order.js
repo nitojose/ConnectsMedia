@@ -6,17 +6,19 @@ import React,{useEffect,useMemo} from 'react';
 import { Url,isLoggin,picture,imgUrl } from '../../GLOBAL/global';
 import { Container,Row,Col,Table,Button, Card } from 'react-bootstrap';
 import axios from 'axios';
-import '../../style/messages.scss';
+// import '../../style/messages.scss';
 import '../../style/order.scss';
 import {FiPackage} from 'react-icons/fi';
+import {BsFillKanbanFill } from "react-icons/bs";
 import { useHistory} from "react-router-dom";
 import dateFormat from 'dateformat';
 import Parallax from 'react-rellax'
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import {AiOutlineCamera} from 'react-icons/ai'
+import { AiOutlineBars } from "react-icons/ai";
+import Footer from '../../components/Footer';
 import Pagination from '../../pages/Pagination';
-import Shimmer from "react-shimmer-effect";
-
+import '../../style/sidebar-slider.scss';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -30,7 +32,6 @@ export default function Index() {
     const [showpkg ,setpkg] = React.useState(false)
     const [packages,setPackages] = React.useState(true);
 
-    const [loading,setLoading] = React.useState(true);
    
     const [pkgData] = React.useState([]);
     
@@ -67,6 +68,10 @@ export default function Index() {
   },[]);
 
 
+  
+
+    
+    
 
     async function getDatas()
     {
@@ -103,7 +108,6 @@ export default function Index() {
                 })
                 if(pkgData.length !== 0 )
                 {
-                  setLoading(false);
                   setpkg(true);
                 }
                
@@ -152,6 +156,29 @@ export default function Index() {
                 });
 
             }
+var clicks = 1;
+   function onTapFun(){
+     clicks+=1;
+    //  alert(clicks);
+
+    //  console.log('taped succesfuly')
+    //  document.getElementsByClassName('pro-sidebar')
+    // alert('sdddsds');
+    const cursor = document.querySelector('.pro-sidebar');
+    const body = document.querySelector('.body-two')
+    if(clicks%2==0){
+      body.setAttribute("style",'max-width: 100vw;');
+
+      cursor.setAttribute("style", 'display:none;');
+    }
+    else{
+      cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
+      body.setAttribute("style",'max-width:100vw-18vw;')
+
+    }
+    
+
+   }
 
     useEffect(async () => {
 
@@ -161,47 +188,51 @@ export default function Index() {
       },[]);
 
       console.log("pkgdaa",pkgData)
-    
 
   return (
-    <div >
+    <div className='' >
    
     
 
-    <Container>
+    <Container className='body-two'>
+
+      <div className='image-sectioning-two'>
       
-    <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
+    <div className='profileBefore-two' >
+            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
            
         </div> 
 
-        <div className='row-flex-align'>
 
-          <div className='profileDiv'>
+        <div className='row-flex-align-two'>
+
             <div className='profileInner'>
-              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
+              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
+              //  style={{objectFit:'contain'}}
+               />
               
-
-
             </div>
-            
-          </div>
+           
 
-          <div className='header-banner' style={{marginLeft:'245px'}}>
-        <FiPackage color='black' className='mt-4 mx-4' size={22}/>
+
+          <div className='header-banner-two'>
+          <div className='background-color-text'>
+        <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+<div className='icon-tab-block'>
+        <FiPackage color='black' className='icon-tab'/>
         <p className='header-banner-text'>Package Orders</p>
+        </div>
+        </div>
           </div>
-
+          </div>
+          
 
         </div>
     
-                    <div className='view-msg ' >
-
-{console.log("pkddata",pkgData)}
-                      {loading ? <><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></>:(
+                    <div className='view-msg-data' >
                         
 
-                    showpkg  ? (
+                    {showpkg  ? (
                                 
                             <>
                  
@@ -300,13 +331,11 @@ export default function Index() {
 
                       </> )
                   
-                      )
-
-}
+                }
                             
                         </div>
 
-
+<Footer/>
     </Container>
 </div>
   );
@@ -343,5 +372,6 @@ export default function Index() {
             history.go(0);
         }
     }
+
   
 }

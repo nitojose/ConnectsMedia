@@ -40,9 +40,9 @@ export default function Whyconnect() {
 
 {/* why connect */}
 
-<div className="section" id="why">
+<div class="section" id="why">
 	<link rel="stylesheet" href="net-particles.css" />
-    <span className="netparticles"></span>
+    <span class="netparticles"></span>
 	{/* <script src="net-particles.js"></script> */}
     {/* <? if(false){ ?>
 	<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
@@ -66,9 +66,9 @@ export default function Whyconnect() {
     </script>
     <? } ?> */}
   <div>
-	  <h1>Why <span className="connect-title">&nbsp;</span> ?</h1>
-    <div className="content">
-        <div className="explanation">
+	  <h1>Why <span class="connect-title">&nbsp;</span> ?</h1>
+    <div class="content">
+        <div class="explanation">
         We all have rapidly adapted ourselves to the era of smartphones. Social Media has emerged as one of the most effective and necessary ways to reach out to targeted audience and engage your church members. Many congregations and houses of worship brought their church services online with little knowledge. But full utilization of social media is still not the best for most of the churches, leaving aside mega churches. Yours could be one of them. Views, shares and likes could potentially increase to millions and people will start coming in-person by seeing your continuous online presence. Simply outsource the social media management and digital marketing work to professionals like us with 80% lesser cost and see great results in front of your eyes while we let you focus on what you do the best.
             <div id="stat-graph">
                 <div>
@@ -81,9 +81,9 @@ export default function Whyconnect() {
                       <svg id="graph" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" width="1795" height="742" viewBox="0 0 1795 742" preserveAspectRatio="xMinYMin meet">
                       <defs>
                         <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
-                          <stop offset="0" stopColor="#1f182d"/>
-                          <stop offset="0.582" stopColor="#0060a0"/>
-                          <stop offset="1" stopColor="#4da3ce"/>
+                          <stop offset="0" stop-color="#1f182d"/>
+                          <stop offset="0.582" stop-color="#0060a0"/>
+                          <stop offset="1" stop-color="#4da3ce"/>
                         </linearGradient>
                         <filter id="Path_1" x="55.636" y="195.721" width="1721.403" height="504.536" filterUnits="userSpaceOnUse">
                           <feOffset dx="18" dy="16" input="SourceAlpha"/>

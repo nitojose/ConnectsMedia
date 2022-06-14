@@ -1,35 +1,14 @@
 import React from 'react'
 import '../../style/faq.scss'
 import Faq from "react-faq-component";
-import $ from 'jquery';
-
 
 export default function Userfaq() {
-
-    React.useEffect(()=>
-    {
-    
-		$("#faqs li h2").click(function(){
-			if($(this).hasClass("active")){
-				$(this).removeClass("active");
-				$(this).next().hide();
-				return;
-			}
-			$("#faqs li h2").removeClass("active");
-			$("#faqs li div[itemprop=acceptedAnswer]").hide();
-			$(this).next().show();
-			$(this).addClass("active");
-		});
-	
-    },[]);
-
-    
   return (
-    <div className="section scrollbar" id="faqs">
+    <div class="section scrollbar" id="faqs">
 	<div>
         <h1>Frequently Asked Questions</h1>
         <img id="faq-icon" src={require('../../../src/assets/imgs/faq-icon.png')} alt="faq-icon"/>
-        <ul className="content">
+        <ul class="content">
         <li itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
 		<h2 itemprop="name">Why should I choose Connect Media Networks?</h2>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">

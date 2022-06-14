@@ -12,9 +12,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import {FiMoreVertical} from 'react-icons/fi'
 import {AiOutlineCamera} from 'react-icons/ai'
 import {RiDeleteBin6Line} from 'react-icons/ri'
+import {FiPackage} from 'react-icons/fi';
+import {BsFillKanbanFill } from "react-icons/bs";import { AiOutlineBars } from "react-icons/ai";
+import Footer from '../../components/Footer';
+
 import 'react-toastify/dist/ReactToastify.css';
 import Pagination from '../../pages/Pagination';
-import Shimmer from "react-shimmer-effect";
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -23,7 +26,7 @@ export default function Index() {
     
     const [allmessages,setAlmessages]= React.useState([{}]);
     const [customerInfo,setCustomerInfo] = React.useState();
-    const [loading,setLoading] = React.useState(true);
+
     const [currentPage,setCurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
@@ -75,8 +78,7 @@ export default function Index() {
                 // If request is good...
                 console.log("outbox",response.data.inbox.data);
                 setAlmessages(response.data.inbox.data);
-                setLength(response.data.inbox.data.length);
-                setLoading(false);
+                setLength(response.data.inbox.data.length)
             })
             .catch((error) => {
                 console.log('error ' + error);
@@ -119,6 +121,27 @@ export default function Index() {
                 });
 
             }
+            var clicks = 1;
+            function onTapFun(){
+              clicks+=1;
+              console.log('taped succesfuly')
+             //  document.getElementsByClassName('pro-sidebar')
+             // alert('sdddsds');
+             const cursor = document.querySelector('.pro-sidebar');
+             const body = document.querySelector('.body-two')
+             if(clicks%2==0){
+               body.setAttribute("style",'max-width: 100vw;');
+         
+               cursor.setAttribute("style", 'display:none;max-width:10px;');
+             }
+             else{
+               cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
+               body.setAttribute("style",'max-width:100vw-20.5vw;')
+         
+             }
+             
+         
+            }
 
     
   return (
@@ -127,7 +150,7 @@ export default function Index() {
     <div>
 
    
-        <Container>
+        {/* <Container>
 
         <div className='profileBefore' >
             <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
@@ -152,14 +175,51 @@ export default function Index() {
             </div>
 
 
+            </div> */}
+            <Container className='body-two'>
+
+
+
+
+<div className='image-sectioning-two'>
+      
+      <div className='profileBefore-two' >
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
+             
+          </div> 
+  
+  
+          <div className='row-flex-align-two'>
+  
+              <div className='profileInner'>
+                <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
+                //  style={{objectFit:'contain'}}
+                 />
+                
+              </div>
+             
+  
+  
+            <div className='header-banner-two'>
+            <div className='background-color-text'>
+          <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+  <div className='icon-tab-block'>
+          <FaArrowUp color='black' className='icon-tab'/>
+
+          <p className='header-banner-text'>inbox</p>
+          </div>
+          </div>
             </div>
+            </div>
+            <div className='button-background-req'></div>
+            
+  
+          </div>
             
                         <div className='view-msg ' >
+                           
 
-                        {loading?<div className='msg-align mb-5'><Shimmer><div className='msg-align mb-5'> <div >Loading...</div></div></Shimmer></div>:
-                        
-
-                            length >0 ?(
+                            {length >0 ?(
                             
                           <>
                           <div className='msg-align mb-5'>
@@ -212,7 +272,7 @@ export default function Index() {
                             ):(<><div className='text-center align-div '> <p className='error-card '>No Messages</p></div></>)}
                         </div>
                 
-
+                        <Footer/>
         </Container>
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
     </div>

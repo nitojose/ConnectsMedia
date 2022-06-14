@@ -8,7 +8,7 @@ import { useHistory} from "react-router-dom";
 import { fadeInUp } from 'react-animations'
 import { StyleSheet, css } from 'aphrodite';
 import { Dropdown } from 'react-bootstrap';
-import Sidebar from '../sidebar/Sidebar';
+import Sidebar from '../sidebar/sidebar';
 import Buttons from '../Packages/Buttons';
 // import '../../style/button.scss'
 import { animateScroll as scroll } from "react-scroll";
@@ -81,8 +81,7 @@ export default function Navbar(props,id) {
             <div id="head-filler"></div>
                 <div id="user-menu">
 
-{console.log("token value in nav",sessionstorage.getItem('token'))}
-                {sessionstorage.getItem('token') === (undefined || null) ? (<>
+                {sessionstorage.getItem('token')=== null ? (<>
                    
                             
                             
@@ -149,7 +148,7 @@ export default function Navbar(props,id) {
     // function signout()
     // {
     //     sessionstorage.clear();
-    //     history.push('/login');
+    //     history.push('/login');z
     //     history.go(0)
     // }
 

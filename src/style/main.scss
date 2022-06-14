@@ -14,7 +14,6 @@ body
     color: $primary_color;
     margin: 0px;
     padding: 0px;
-    // padding-top: 20rem;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -34,8 +33,9 @@ a
 .footer-container
 {
     // bottom: 0;
-    position: absolute;
+    position: relative;
     width: 100% !important;
+    
 }
 
 .green
@@ -167,13 +167,23 @@ a
     background-color: #f7f4f4;
 }
 
+
 .pwd-div
 {
     margin-top: 7rem;
     background-color: #fff;
     padding: 10px;
     border-radius: 10px;
+    overflow: auto;
 }
+.pwd-div1
+{
+    margin-top: 24rem;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 
 .margin-10px
 {
@@ -200,7 +210,7 @@ a
     flex-direction: column;
     align-items: center;
     margin-right: 0;
-    margin-top: 50px;
+    // margin-top: 50px;
 }
 
 
