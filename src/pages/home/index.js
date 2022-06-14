@@ -20,12 +20,12 @@ export default function index() {
     </section> */}
 
    
-    <div className="section" id="intro">
+    <div class="section" id="intro">
                             <div align="center">
-                                <div className="illustration">
+                                <div class="illustration">
                                 
                             </div>
-                            <div className="content">
+                            <div class="content">
                                 <h2>Connecting Your</h2>
                                 <h2 id="t1"><span id="church">Church</span> <span id="ministry">Ministry</span></h2>
                                 <h2>to the <i>World</i></h2>

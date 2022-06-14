@@ -11,7 +11,12 @@ import Parallax from 'react-rellax'
 import {MdEmojiEvents} from 'react-icons/md';
 import {AiOutlineCamera} from 'react-icons/ai'
 import Pagination from '../../pages/Pagination';
-import Shimmer from "react-shimmer-effect";
+import Footer from '../../components/Footer';
+
+import {FiPackage} from 'react-icons/fi';
+import {BsFillKanbanFill } from "react-icons/bs";
+import { AiOutlineBars } from "react-icons/ai";
+
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -48,16 +53,12 @@ export default function Index() {
     
     const [process_event,setProcess_event] = React.useState([]);
     const [customerInfo,setCustomerInfo] = React.useState();
-    
-    const [loading,setLoading] = React.useState(true);
-    
+  
     const [currentPage,setCurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexOfLastPost = currentPage*postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts1 = process_event.slice(indexOfFirstPost,indexOfLastPost);
-
-    
 
     const currentPosts2 = pend_event.slice(indexOfFirstPost,indexOfLastPost);
     
@@ -80,12 +81,11 @@ export default function Index() {
                 
                 console.log("pending",response.data.event);    
                 setPend_event(response.data.event);
-                // setLoading(false);
                 setPlans(true);
                
             })
             .catch((error) => {
-                console.log('error 1' + error);
+                console.log('error ' + error);
             });
 
 
@@ -93,13 +93,12 @@ export default function Index() {
             .then(response => {
                 // If request is good...
                 
-                console.log("processing",response.data.event);
+                console.log("processing",response.data.event)
                 setProcess_event(response.data.event);
-                setLoading(false);
                 setPlans(true);
             })
             .catch((error) => {
-                console.log('error 2' + error);
+                console.log('error ' + error);
             });
 
 
@@ -108,7 +107,7 @@ export default function Index() {
 
    
 
-    React.useEffect( () => {
+    useEffect( () => {
 
      getDatas();
      getInfos();
@@ -150,90 +149,87 @@ export default function Index() {
             });
 
       }
+      var clicks = 1;
+   function onTapFun(){
+     clicks+=1;
+     console.log('taped succesfuly')
+    //  document.getElementsByClassName('pro-sidebar')
+    // alert('sdddsds');
+    const cursor = document.querySelector('.pro-sidebar');
+    const body = document.querySelector('.body-two')
+    if(clicks%2==0){
+      body.setAttribute("style",'max-width: 100vw;');
 
+      cursor.setAttribute("style", 'display:none;max-width:10px;');
+    }
+    else{
+      cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
+      body.setAttribute("style",'max-width:100vw-20.5vw;')
+
+    }
+    
+
+   }
 
       
   return (
    
-    <Container>
-
-<div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
-           
-        </div> 
-
-        <div className='row-flex-align'>
-
-          <div className='profileDiv'>
-            <div className='profileInner'>
-              <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
-              
+    <Container className='body-two'>
 
 
+
+
+<div className='image-sectioning-two'>
+      
+      <div className='profileBefore-two' >
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
+             
+          </div> 
+  
+  
+          <div className='row-flex-align-two'>
+  
+              <div className='profileInner'>
+                <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
+                //  style={{objectFit:'contain'}}
+                 />
+                
+              </div>
+             
+  
+  
+            <div className='header-banner-two'>
+            <div className='background-color-text'>
+          <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+  <div className='icon-tab-block'>
+          <FiPackage color='black' className='icon-tab'/>
+          <p className='header-banner-text'>Package Orders</p>
+          </div>
+          </div>
             </div>
+            </div>
+            <div className='button-background-req'></div>
+            <button onClick={() => raiseRequest("Event")} className="button-raise-req">Raise a Request</button>
             
-          </div>
-
-          <div className='header-banner' style={{marginLeft:'8px',width:'40%'}}>
-            <MdEmojiEvents color='black' className='mt-4 mx-4' size={22}/>
-            <p className='header-banner-text'>Event Request</p>
+  
           </div>
 
 
-          <div >
-            <button onClick={()=> raiseRequest("Event")} className="raise-req">Raise a Request</button>
-
-          </div>
-      </div>
-
-{console.log("process-pend request",process_event ,pend_event)}
-
-    {loading ?(<div className='view-msg'><div className='align-div pwd-div mb-5'><Shimmer><div className='align-div pwd-div mb-5'> <div >Loading...</div></div></Shimmer></div></div> ):
-
-      (
-
-        (((process_event === "No events available") && (pend_event === "No events available")) ? (
-                       
-          <div className='view-msg mb-5'>
-         
-       
-         <div className='align-div pwd-div'>
-         <div id='campaigns'> 
-              <div>
-                  <ul style={{width:'100%',alignSelf:'center'}}>
-                    <li id="event-dash-req" style={{height:'150px'}}>
-                          <h2>Upcoming Event</h2>
-                          <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
-                          <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
-                    
-                                  {sessionstorage.getItem('token') ===null ?(
-                                      <>
-                                      <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
-                                      </>
-                                      ):(
-                                          <>
-                                      <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
-                                      </>
-                                      )
-                                  }
-                    </li>
-                  </ul>
-                  </div>
-            </div>
-            </div> 
-            </div>
-          
-         ):(
 
 
-           (process_event !== "No events available"?                       
+
+
+
+     
+                          { plans ? (process_event === "No events available" ? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
+
+                                                        
                           (
-
-
+                            
+                            
                               <div className='view-msg'>
 
                               <div className='msg-align mx-0 mb-5'>
-                                {/* hello */}
                               <Table striped bordered hover>
                             <thead>
                               <tr >
@@ -245,9 +241,9 @@ export default function Index() {
                             </thead>
                             <tbody>
 
-                              {currentPosts1.length!== 0 && currentPosts1.map((data, idx) => 
+                              {currentPosts1.map((data, idx) => 
                               
-                                <tr className='pointer' key={idx}>
+                                <tr className='pointer'>
                                   
                                   <td onClick={()=>{viewEvent(process_event[0])}}>{dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
                                   <td onClick={()=>{viewEvent(process_event[0])}}>{data.event_title}</td>
@@ -264,34 +260,35 @@ export default function Index() {
                           </div>
 
                               </div>                                     
-                              ):
-                              (
+                              ))
+                            :(<></>)
+                          } 
+
 
                    
-                         (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div'> </Col>) :
-                           
-                            (
+                          {plans ? (pend_event === "No events available"? (<Col xxl={6} xl={6} md={12} sm={12} className='text-center align-div  '> </Col>) :
+                           (
                             <div className='view-msg '>
                      
-                              <div className='align-div pwd-div mb-5'>
+                            <div className='align-div pwd-div mb-5'>
                               <Table striped bordered hover>
                                 <thead>
                                   <tr >
                                     <th className='bold-text'>Date</th>
                                     <th className='bold-text'>title</th>
-                                   
+                                    {/* <th className='bold-text'>Cost</th> */}
                                     <th className='bold-text'>Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                               
-                                  {currentPosts2.length !== 0 && currentPosts2.map((data, idx) => 
+                                  {currentPosts2.map((data, idx) => 
                                   
-                                    <tr key={idx}>
+                                    <tr>
                                       
                                       <td >{ dateFormat(data.created_at, "mmmm dS, yyyy")}</td>
                                       <td >{data.event_title}</td>
-                                      
+                                      {/* <td>${data.event_cost}.00</td>  */}
                                       <td className='error '>{data.event_status}</td>
                                     
                                     </tr>
@@ -304,20 +301,41 @@ export default function Index() {
                               </div>
 
                             </div>
-                            )
-                           )
+                           ))
+                           :(<></>)}
 
 
-                           )))
-                          
 
-                           
-                        
-                      
-        )
-      )
-                      
-   }
+                       {(pend_event ==="No events available")  && (process_event === "No events available") ?(<>
+                        <div className='view-msg mb-5'>
+                     
+                      <div className='align-div pwd-div'>
+                        <div id='campaigns'>
+                            <div>
+                                <ul style={{width:'100%',alignSelf:'center'}}>
+                                  <li id="event-dash-req" style={{height:'150px'}}>
+                                        <h2>Upcoming Event</h2>
+                                        <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
+                                        <span className='mt-3 text-center'>Share your calendar here. We will pick all your future events from here</span>
+                                  
+                                                {sessionstorage.getItem('token') ===null ?(
+                                                    <>
+                                                    <button onClick={()=> redirectto("event")} className='mt-3'>Register to start</button>
+                                                    </>
+                                                    ):(
+                                                        <>
+                                                    <button onClick={()=>history.push('/events-creation')} className='mt-3' >Start Here</button>
+                                                    </>
+                                                    )
+                                                }
+                                  </li>
+                                </ul>
+                                </div>
+                          </div>
+                          </div>
+                          </div>
+                       </>):(<></>) }
+                       <Footer/>
         
     </Container>
 

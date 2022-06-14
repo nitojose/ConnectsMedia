@@ -1,0 +1,110 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+#page-logo img{
+    width: 100%;
+    // background-color: aqua;
+    object-fit: fill;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1000;
+}
+.pro-sidebar{
+    position: fixed;
+    left: 0;
+    background-color: transparent;
+    min-width: 10vw;
+    max-width: 20vw;
+    
+}
+
+.nav-slide-icon{
+    display: none;
+}
+.icon-background-dash-cam-slid{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    z-index: 1001;
+    padding: 10px;
+    background-color: rgba(241, 241, 241, 0.63);
+    display: inline;
+    position: absolute;
+    right: 0;
+    top: -5px;
+    border-radius: 20px;
+}
+
+@media (max-width: 850px) {
+    .pro-sidebar{
+        font-size: 10px;
+        display: none;
+        // max-width: 20vw;
+    }
+    .nav-slide-icon{
+        display: block;
+    }
+    
+    .shaped{
+        width: 0vw;
+    }
+    .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout{
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        // position: relative;
+        display: flex;
+        background-color: rgba(0, 255, 255, 0);
+        flex-direction: column;
+        z-index: 101; 
+        width: 270px;}
+
+        .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout > nav{
+          
+            width: 270px;}
+        .pro-sidebar > .pro-sidebar-inner {
+            background: #1d1d1d00;
+            height: 100%;
+            width: 270px;
+            // position: relative;
+            z-index: 101; }
+            .side-bar-size{
+                width: 270px;
+              }
+  
+  }
+
+  .side-bar-size{
+    width: 22.5vw;
+  }
+.logo-align{display: flex;
+flex-direction: column;
+position: relative;
+width: auto;
+height: auto;}
+.bsFillKanbanFill1{
+    display: block;
+    position: absolute;
+    top: 21px;
+    right: 10px;
+}
+.shaped{
+    width: 19vw;
+}
+.pro-sidebar > .pro-sidebar-inner {
+    background: #1d1d1d00;
+    height: 100%;
+    // width: 19vw;
+    position: relative;
+    z-index: 101; }
+    .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout{
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: relative;
+        display: flex;
+        background-color: rgba(0, 255, 255, 0);
+        flex-direction: column;
+        z-index: 101; 
+      width: 100%;}

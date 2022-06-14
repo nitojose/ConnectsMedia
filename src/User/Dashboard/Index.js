@@ -14,9 +14,15 @@ import {AiOutlineCamera,AiOutlineClose,AiOutlineDelete} from 'react-icons/ai';
 import $ from 'jquery';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {BsFillKanbanFill } from "react-icons/bs";
+import Footer from '../../components/Footer';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import '../../style/sidebar-slider.scss';
+import { AiOutlineBars } from "react-icons/ai";
+
+// import '../../style/order.scss';
 
 var sessionstorage = require('sessionstorage');
 
@@ -52,29 +58,9 @@ export default function Index() {
        
       console.log("useeffect")
       logginornot();
-      
-        $("#service-list li").click(function(){
-            var i=$(this).index()+1;
-            console.log(i);
-            $("#service-list .subtitle").removeClass("active");
-            $("#service"+i).addClass("active");
-        });
-        $(".popup .subtitle i").click(function(){
-            $(this).parent().removeClass("active");
-        });
-        $(document).on('keydown', function(event) {
-             if (event.key == "Escape") {
-                 $(".popup .subtitle i").parent().removeClass("active");
-             }
-         });
-        $("#socials li").click(function(){
-            var i=$(this).index()+1;
-            console.log(i);
-            $("#socials .subtitle").removeClass("active");
-            $("#social"+i).addClass("active");
-        });
+     
 
-
+     
 
       getDatas();
 
@@ -84,7 +70,27 @@ export default function Index() {
       
 
     },[]);
-
+    var clicks = 1;
+    function onTapFun(){
+      clicks+=1;
+      console.log('taped succesfuly')
+     //  document.getElementsByClassName('pro-sidebar')
+     // alert('sdddsds');
+     const cursor = document.querySelector('.pro-sidebar');
+     const body = document.querySelector('.body-two')
+     if(clicks%2==0){
+       body.setAttribute("style",'max-width: 100vw;');
+ 
+       cursor.setAttribute("style", 'display:none;max-width:10px;');
+     }
+     else{
+       cursor.setAttribute("style", 'display:block;max-width: 270px;');
+       body.setAttribute("style",'max-width:100vw-20.5vw;')
+ 
+     }
+     
+ 
+    }
     async function getUserInfo()
     {
       console.log("get cust info")
@@ -121,6 +127,8 @@ export default function Index() {
     
     }
 
+    
+
     async function getDatas()
     {
       console.log("second")
@@ -153,6 +161,7 @@ export default function Index() {
     {
 
     }
+    
 
     async function deletePic()
     {
@@ -188,41 +197,111 @@ export default function Index() {
             .catch(function (response) {
                 //handle error
                 console.log(response);
+     
+     
             });
     }
+
+    
   return (
     <>
 
     
-   <Container >
-      <div className='header-banner dash-header' style={{marginLeft:'245px',width:'80%',marginTop:'2rem'}}>
-        <MdDashboard color='black' className='mt-4 mx-4' size={22}/>
-        <p className='header-banner-text'>Welcome <span className='ministry'>{customerInfo === undefined ? "" : customerInfo.cust_ministry}</span></p>
-      </div>
-
-      <div className='profileBefore'  >
+   <Container className='body-two'>
+   <div className='profileBeforeOne'  >
 
        
 
-            {Object.keys(coverUpload).length === 0 ? (<img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)}  className='cover-img-dash pointer'/>):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
+{Object.keys(coverUpload).length === 0 ? (<img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)}  className='cover-img-dash1 pointer'/>):(<><img src={coverUpload?coverUpload : picture} className='cover-img-dash' /></>)}
 
-            <div className='cover-camera'>
-                <label htmlFor="cover-image"><AiOutlineCamera  size={24} className="pointer" /></label> 
+<div className='cover-camera'>
+    <label htmlFor="cover-image">
+        <div className='icon-background-dash-cam'>
+        <AiOutlineCamera  size={20} className="pointer" />
+        </div></label> 
 
-                <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
-            </div>
-        </div>   
+    <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
+</div>
+<div className='icon-background-dash'>
+<AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera2' onClick={()=>onTapFun()}/>
 
-    
-        <div className='row-flex-align' style={{marginTop:'5rem'}}>
+</div>
 
-            <div className='profileDiv'>
-              <div className='profileInner'>
+<div className='content-overlay'>
+      <div className='dash-content'
+    //    style={{marginLeft:'245px',width:'80%',marginTop:'2rem'}}
+       >
+        <MdDashboard color='black' className='icon-dash12' size={22}/>
+        <p className='header-banner-text'>Welcome <span className='ministry'>{customerInfo === undefined ? "" : customerInfo.cust_ministry}</span></p>
+      </div>
+      <div className='order-section-align'>
+      <div className='position-two-dash'>
+       <div className='dash-card' id="dashcard1">
+        <div className='dash-text-align1'>
+        <div className='dash-band'>
+           <FaShoppingBag size={18}/>
+       </div>
+       <p className='dash-text '>Active Orders</p>
+       
+       </div>
+           <div className='dash-text'>
+           <p className=' number-text '>{orderCount}</p>
+           </div>
+       
+     
+
+       </div>
+       <div className='dash-card' id="dashcard2">
+       <div className='dash-text-align1'>
+
+       <div className='dash-band'>
+               <MdPendingActions size={18}/>
+           </div>
+       <p className='dash-text '>Pending Orders </p>
+
+       </div>
+       <div className=''>
+           <p className=' number-text '>{pendCount}</p>
+           </div>
+
+           
+
+       </div>
+       </div> 
+
+       
+
+       <div className='dash-card' id="dashcard3">
+       <div className='dash-text-align1'>
+       <div className='dash-band'>
+           <CgUserAdd size={18}  />
+           </div> 
+       <p className='dash-text '>Processing Orders</p>
+      
+       </div>
+           <div className=''>
+           <p className=' number-text '>{processCount}</p>
+           </div>
+
+              
+
+       </div>
+       </div>
+        
+      </div>
+
+
+      <div className='row-flex-align-one'
+        //  style={{marginTop:'5rem'}}
+         >
+
+            
+              <div className='profileInner-one'>
                
                 {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
 
                 <div className='img-camera'>
-                    <label htmlFor="group_image"><AiOutlineCamera className='pointer' size={24} /></label> 
+                    <label htmlFor="group_image"><AiOutlineCamera color='white' className='pointer'  /></label> 
         
                     <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
                 </div>  
@@ -230,51 +309,17 @@ export default function Index() {
 
               </div>
               
+           
+    
             </div>
-     
-       
-                <div className='dash-card' id="dashcard1">
-                <p className='dash-text '>Active Orders</p>
-                    <div className=''>
-                    <p className=' number-text '>{orderCount}</p>
-                    </div>
-                
-                <div className='dash-band'>
-                    <FaShoppingBag size={18} className='mx-3 mt-3'/>
-                </div>
+</div> 
 
-                </div>
+    
         
-                <div className='dash-card' id="dashcard2">
-                <p className='dash-text '>Pending Orders </p>
-
-                <div className=''>
-                    <p className=' number-text '>{pendCount}</p>
-                    </div>
-
-                    <div className='dash-band'>
-                        <MdPendingActions size={18} className='mx-3 mt-3'/>
-                    </div>
-
-                </div>
-        
-        
-                <div className='dash-card' id="dashcard3">
-                <p className='dash-text '>Processing Orders</p>
-                    <div className=''>
-                    <p className=' number-text '>{processCount}</p>
-                    </div>
-
-                    <div className='dash-band'>
-                    <CgUserAdd size={18} className='mx-3 mt-3' />
-                    </div>    
-
-                </div>
-            </div>
 
 
-            <div className='view-msg mt-5 '>
-                <div className='align-div pwd-div'>
+<div className='view-msg mt-5 '>
+                <div className='align-div pwd-div1'>
                 <video autoPlay={false} className='dash-video' controls={true}>
                   <source src={require('../../assets/video/connect event flow.mp4')} type="video/mp4"/>
                 </video>
@@ -282,10 +327,29 @@ export default function Index() {
                 </div>
             </div>  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div className='view-msg mt-5 '>
             <div className='align-div pwd-div'>
                 <div className="section popup" id="services">
-        <div className="service-main-div">
+        <div class="service-main-div">
             <h1>Services We Offer</h1>
             <div id="service-wrap">
                 <ul id="service-list" className="services-lists">
@@ -311,8 +375,8 @@ export default function Index() {
                 <li><img src={require('../../../src/assets/imgs/truth.png')} alt="truth"/></li>
                 </ul>
             </div>
-            <div id="service1" class="subtitle sub">
-                <div class="view-msg content">
+            <div id="service1" class="subtitle">
+                <div class="content">
                 <h2>Promotions & Ads</h2>
                 <ul>
                 <li>Special campaign promotions with targeted reach and performance tracking</li>
@@ -322,7 +386,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service2" class="subtitle sub ">
+            <div id="service2" class="subtitle">
                 <div class="content">
                 <h2>Live Stream Handling</h2>
                     <ul>
@@ -333,7 +397,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service3" class="subtitle sub">
+            <div id="service3" class="subtitle">
                 <div class="content">
                 <h2>Done-For-You Personalized Pictures</h2>
                     <ul>
@@ -344,7 +408,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service4" class="subtitle sub">
+            <div id="service4" class="subtitle">
                 <div class="content">
                 <h2>Done-For-You Personalized Videos</h2>
                     <ul>
@@ -355,7 +419,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service5" class="subtitle sub">
+            <div id="service5" class="subtitle">
                 <div class="content">
                 <h2>Short Videos & Reels</h2>
                     <ul>
@@ -365,7 +429,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service6" class="subtitle sub">
+            <div id="service6" class="subtitle">
                 <div class="content">
                 <h2>Application Development</h2>
                     <ul>
@@ -376,7 +440,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service7" class="subtitle sub">
+            <div id="service7" class="subtitle">
                 <div class="content">
                 <h2>Technology</h2>
                     <ul>
@@ -385,7 +449,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service8" class="subtitle sub">
+            <div id="service8" class="subtitle">
                 <div class="content">
                 <h2>Content Writing</h2>
                     <ul>
@@ -397,7 +461,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service9" class="subtitle sub">
+            <div id="service9" class="subtitle">
                 <div class="content">
                 <h2>Ready–to–use Campaigns</h2>
                     <ul>
@@ -410,7 +474,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service10" class="subtitle sub">
+            <div id="service10" class="subtitle">
                 <div class="content">
                 <h2>Share</h2>
                     <ul>
@@ -419,8 +483,8 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social1" class="subtitle sub">
-                <div class=" content">
+            <div id="social1" class="subtitle">
+                <div class="content">
                 <h2>YouTube</h2>
                 <ul>
                 <li>We will handle your live-stream to increase followers and viewership</li>
@@ -430,7 +494,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social2" class="subtitle sub">
+            <div id="social2" class="subtitle">
                 <div class="content">
                 <h2>Facebook</h2>
                 <ul>
@@ -442,7 +506,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social3" class="subtitle sub">
+            <div id="social3" class="subtitle">
                 <div class="content">
                 <h2>Instagram</h2>
                 <ul>
@@ -453,7 +517,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social4" class="subtitle sub">
+            <div id="social4" class="subtitle">
                 <div class="content">
                 <h2>Twitter</h2>
                 <ul>
@@ -464,7 +528,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
         </div>
-            <div id="social5" class="subtitle sub">
+            <div id="social5" class="subtitle">
                 <div class="content">
                 <h2>Digital Marketing</h2>
                 <ul>
@@ -477,7 +541,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social6" class="subtitle sub">
+            <div id="social6" class="subtitle">
                 <div class="content">
                 <h2>Website</h2>
                 <ul>
@@ -488,7 +552,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social7" class="subtitle sub">
+            <div id="social7" class="subtitle">
                 <div class="content">
                 <h2>Truth Social</h2>
                 <ul>
@@ -497,35 +561,50 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            {/* <script>
-            $("#service-list li").click(function(){
-                var i=$(this).index()+1;
-                console.log(i);
-                $("#service-list .subtitle").removeClass("active");
-                $("#service"+i).addClass("active");
-            });
-            $(".popup .subtitle i").click(function(){
-                $(this).parent().removeClass("active");
-            });
-            $(document).on('keydown', function(event) {
-                if (event.key == "Escape") {
-                    $(".popup .subtitle i").parent().removeClass("active");
-                }
-            });
-            $("#socials li").click(function(){
-                var i=$(this).index()+1;
-                console.log(i);
-                $("#socials .subtitle").removeClass("active");
-                $("#social"+i).addClass("active");
-            });
-            </script> */}
+          
         </div>
         </div>
                 </div>
             </div>
 
-   
-        <div className='view-msg mt-5 '>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+            
+               
+
+
+
+
+
+
+
+                <div className='view-msg mt-5 '>
                 <div className='align-div pwd-div'>
                     <h1 className=' font-20 py-3 text-center'>Packages</h1>
 
@@ -588,7 +667,14 @@ export default function Index() {
                 </div>
             </div>
            
-        <div className='view-msg mt-5 mb-5'>
+            
+            
+            
+            
+            
+           
+          
+            <div className='view-msg mt-5 mb-5'>
                 <div className='align-div pwd-div'>
                    
                     <div id="campaigns" style={{borderRadius:'8px'}}>
@@ -704,6 +790,10 @@ export default function Index() {
                     </div>
                 </div>
 
+
+
+
+
                 {profilepic === true &&
 
                     confirmAlert({
@@ -712,7 +802,9 @@ export default function Index() {
                             return (
                                 <div className='profile-pic-view '>
                                     {/* <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  /> */}
-{Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+{Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()}
+//  style={{objectFit:'contain'}}
+  className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
 {console.log("profileup",profileUpload)}
                                     <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={35}/>
@@ -737,8 +829,10 @@ export default function Index() {
 
                 }      
                
-            <ToastContainer  position="top-center"  style={{marginTop:'50vh'}}/>
-     
+            <ToastContainer  position="top-center"
+            //   style={{marginTop:'50vh'}}
+              />
+     <Footer/>
    </Container>
     
    </>

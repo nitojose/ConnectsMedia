@@ -76,9 +76,9 @@ export default function pillars() {
 
         {/* Pillar Section */}
 
-<div className="section popup" id="pillars">
+<div class="section popup" id="pillars">
   <div>
-	<h1><i className="fa fa-arrow-left" aria-hidden="true"></i>Four<br></br>Pillars</h1>
+	<h1><i class="fa fa-arrow-left" aria-hidden="true"></i>Four<br></br>Pillars</h1>
     <ul>
     <li>
     	<h2>Our Vision</h2>
@@ -98,21 +98,21 @@ export default function pillars() {
     </li>
     </ul>
     <div id="pillar1" class="subtitle">
-    <div className="content">
+    <div class="content">
     <h2>Our Vision</h2>
     To be a pillar of support for Churches and servants of God in spreading the word by leveraging social media to its utmost utility. We strongly believe that the teachings of the Lord Jesus should not be limited to the Sunday service and connect groups, but also be brought to the forefront of everyone's lives via social media engagement. We are fully committed to creating a strong, engaging presence in social media that trumps all other content that keeps people distracted from the gospel.
     </div>
-    <i className="fa fa-times-circle" aria-hidden="true"></i>
+    <i class="fa fa-times-circle" aria-hidden="true"></i>
     </div>
-    <div id="pillar2" className="subtitle">
-    <div className="content">
+    <div id="pillar2" class="subtitle">
+    <div class="content">
     <h2>Our Mission</h2>
     To be a tool for Churches and Ministires to accomplish the great commission given to us. Mathew 28:19-20
     </div>
-    <i className="fa fa-times-circle" aria-hidden="true"></i>
+    <i class="fa fa-times-circle" aria-hidden="true"></i>
     </div>
-    <div id="pillar3" className="subtitle">
-    <div className="content">
+    <div id="pillar3" class="subtitle">
+    <div class="content">
     <h2>Faith Statement</h2>
     We believe in the Trinity - Father, Son and the Holy Spirit.<br></br>
 We believe that Jesus came to this world, bore our sin, died for us and on the thrid day rose back to life by the power of the Holy Spirit to rescue us from sin, curse and death that whoever believes in Himwill not perish buy have everlasting life.<br></br>
@@ -121,8 +121,8 @@ It is our joy and greatest commision to spread this good news of Jesus to the wo
 	</div>
     <i class="fa fa-times-circle" aria-hidden="true"></i>
     </div>
-    <div id="pillar4" className="subtitle scrollbar">
-    	<div className="content">
+    <div id="pillar4" class="subtitle scrollbar">
+    	<div class="content">
         <h2>Core Values</h2>
         <b>Faith in Jesus</b><br></br>
 "Jesus sai tho him, 'If you can believe? All things are possible for one who believes." Mark 9:23<br></br>

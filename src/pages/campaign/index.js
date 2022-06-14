@@ -115,7 +115,7 @@ export default function Campaigns() {
 
     {/* Campaigns */}
 
-<div className="section scrollbar" id="campaigns">
+<div class="section scrollbar" id="campaigns">
 	<div>
 	<h1>Campaigns</h1>
     <ul>

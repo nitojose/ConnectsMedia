@@ -10,8 +10,11 @@ import {MdEmojiEvents,MdCampaign,MdQuestionAnswer,MdPendingActions,} from 'react
 import {CgProfile,CgUserAdd} from 'react-icons/cg'
 import {RiLockPasswordFill} from "react-icons/ri"
 import {Url,isLoggin} from '../../GLOBAL/global';
-var sessionstorage = require('sessionstorage');
+import '../../style/sidebar-slider.scss';
+import { AiOutlineClose } from "react-icons/ai";
+import {BsFillKanbanFill } from "react-icons/bs";
 
+var sessionstorage = require('sessionstorage');
 export default function Sidebar()
 {
   let history = useHistory();
@@ -118,97 +121,147 @@ function logout()
 
 function orderpkg()
 {
-  history.push('/order/package');
-  history.go(0);
+  history.push('/order/package')
+  // const cursor = document.querySelector('.pro-sidebar');
+
+  // cursor.setAttribute("style", 'display:none;');
 }
 
 function orderEvent()
 {
-  history.push('/order/event');
-  history.go(0);
+  history.push('/order/event')
+  // const cursor = document.querySelector('.pro-sidebar');
+
+  // cursor.setAttribute("style", 'display:none;');
 }
   
 function orderCamp()
 {
   history.push('/order/campaign');
-  history.go(0);
+  // const cursor = document.querySelector('.pro-sidebar');
+
+  // cursor.setAttribute("style", 'display:none;');
 }
 
 function reqPkg()
 {
   history.push('/request/package');
-  history.go(0);
+//  /cursor.setAttribute("style", 'display:none;');
 }
 
 function reqEvent()
 {
   history.push('/request/event');
-  history.go(0);
+  // const cursor = document.querySelector('.pro-sidebar');
+
+  // cursor.setAttribute("style", 'display:none;');
 }
 
 function msgSent()
 {
   history.push('/message/Outbox');
-  history.go(0);
+  // const cursor = document.querySelector('.pro-sidebar');
+
+  // cursor.setAttribute("style", 'display:none;');
 }
 
 function msgRecieve()
 {
-  history.push('/message/Inbox');
-  history.go(0);
+  history.push('/message/Inbox')
+
+  // var clientWidth = document.getElementsByClassName('body-two').style.width;
+  alert(clientWidth);
+  // const cursor = document.querySelector('.pro-sidebar');
+
+  // cursor.setAttribute("style", 'display:none;');
 }
+
+var clicks = 1;
+   function onTapFun(){
+     clicks+=1;
+     console.log('taped succesfuly')
+    //  document.getElementsByClassName('pro-sidebar')
+    // alert('sdddsds');
+    const cursor = document.querySelector('.pro-sidebar');
+    const body = document.querySelector('.body-two');
+    // const body2 = document.querySelector('.dash-screen-sizess');
+    if(clicks%2==0){
+      // alert(clicks);
+      // body.setAttribute("style",'max-width: 100vw;');
+      // body2.setAttribute("style",'max-width: 100vw;');
+
+      // cursor.setAttribute("style", 'display:none;max-width:10px;');
+
+    }
+    else{
+      // cursor.setAttribute("style", 'display:block;max-width: 270px;');
+      // body.setAttribute("style",'max-width:100vw-20.5vw;');
+      // body2.setAttribute("style",'max-width: 100%-20%;');
+      cursor.setAttribute("style", 'display:none;');
+
+
+    }
+      
+
+   }
 
   return(
     <>
   
-       <ProSidebar style={{position:'fixed',top:0,left:0,}} >
+       
+  <ProSidebar className='side-bar-size' style={{position:'fixed',top:0,left:0,}} >
      
 
-            <Menu iconShape="round" style={{backgroundColor:'white',height:'100%'}} >
-              <MenuItem>
-              
-              <div id="page-logo">
-                <img src={require('../../../src/assets/images/cm-01.jpg')}  alt='header-logo-img' onClick={()=>home()} style={{width: '100%',borderRadius:'8px',height:'auto'}}/>
-              </div>
-              </MenuItem>
-              <MenuItem icon={<FaHome/>} onClick={()=>history.push('/dashboard')}> Dashboard</MenuItem>
-              {/* <MenuItem onClick={() => home()} icon={<FaHome/>}>Home</MenuItem> */}
+     <Menu iconShape="round" style={{backgroundColor:'white',height:'100%'}} >
+     <MenuItem className='nav-slide-icon'>
+     <div className='icon-background-dash-cam-slid'>
+<AiOutlineClose size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera2' onClick={()=>onTapFun()}/>
+</div>
+      </MenuItem>
+       <MenuItem>
+       
+       <div id="page-logo">
+         <img src={require('../../../src/assets/images/cm-01.jpg')}  alt='header-logo-img' onClick={()=>home()} style={{width: '100%',borderRadius:'8px',height:'auto'}}/>
+       </div>
+       </MenuItem>
+       <MenuItem icon={<FaHome/>} onClick={()=>history.push('/dashboard')}> Dashboard</MenuItem>
+       {/* <MenuItem onClick={() => home()} icon={<FaHome/>}>Home</MenuItem> */}
 
-              {(pkgCount!==0 || campCount !== 0 || eveCount !==0)  ?<span className='processNoti'></span> : ''}
-                <SubMenu title="Active Orders"    icon={<FaShoppingBag/>} style={{backgroundColor:'white'}} > 
-                  <MenuItem icon={<FiPackage/>} onClick={() => orderpkg()}>Packages {pkgCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{pkgCount}</span>)}</MenuItem>
-                  <MenuItem active={true} icon={<MdEmojiEvents/>} onClick={() => orderEvent()}>Events {eveCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{eveCount}</span>)}</MenuItem>
-                  <MenuItem icon={<MdCampaign/>} onClick={() => orderCamp() }>Campaigns {campCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{campCount}</span>)}</MenuItem>
-                </SubMenu>
+       {(pkgCount!==0 || campCount !== 0 || eveCount !==0)  ?<span className='processNoti'></span> : ''}
+         <SubMenu title="Active Orders"    icon={<FaShoppingBag/>} style={{backgroundColor:'white'}} > 
+           <MenuItem icon={<FiPackage/>} onClick={() => orderpkg()}>Packages {pkgCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{pkgCount}</span>)}</MenuItem>
+           <MenuItem active={true} icon={<MdEmojiEvents/>} onClick={() => orderEvent()}>Events {eveCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{eveCount}</span>)}</MenuItem>
+           <MenuItem icon={<MdCampaign/>} onClick={() => orderCamp() }>Campaigns {campCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{campCount}</span>)}</MenuItem>
+         </SubMenu>
 
-                <SubMenu title="Order Requests" icon={<MdPendingActions/>} style={{backgroundColor:'white'}}>
-                  <MenuItem icon={<FiPackage/>} onClick={() => reqPkg()}>Packages</MenuItem>
-                  <MenuItem icon={<MdEmojiEvents/>} onClick={() => reqEvent()}>Events </MenuItem>
-                 
-                </SubMenu>
+         <SubMenu title="Order Requests" icon={<MdPendingActions/>} style={{backgroundColor:'white'}}>
+           <MenuItem icon={<FiPackage/>} onClick={() => reqPkg()}>Packages</MenuItem>
+           <MenuItem icon={<MdEmojiEvents/>} onClick={() => reqEvent()}>Events </MenuItem>
+          
+         </SubMenu>
 
-                <SubMenu icon={<MdQuestionAnswer/>} title="Messages"  >
-                  <MenuItem icon={<FaArrowDown/>} onClick={() => msgRecieve()}>Inbox {inboxCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{inboxCount}</span>)} </MenuItem>
-                  <MenuItem icon={<FaArrowUp/>} onClick={() => msgSent()} >Outbox </MenuItem>
-                
-                </SubMenu>
+         <SubMenu icon={<MdQuestionAnswer/>} title="Messages"  >
+           <MenuItem icon={<FaArrowDown/>} onClick={() => msgRecieve()}>Inbox {inboxCount === 0 ? (<></>) : (<span className='inboxCount text-center' >{inboxCount}</span>)} </MenuItem>
+           <MenuItem icon={<FaArrowUp/>} onClick={() => msgSent()} >Outbox </MenuItem>
+         
+         </SubMenu>
 
-                {/* <MenuItem icon={<FiInfo/>} onClick={() => history.push('/gene-enquiry')}>General Enquiry </MenuItem> */}
+         {/* <MenuItem icon={<FiInfo/>} onClick={() => history.push('/gene-enquiry')}>General Enquiry </MenuItem> */}
 
-               
-                <MenuItem icon={<CgUserAdd/>} onClick={()=>history.push('/profile')} style={{backgroundColor:'white'}}>Change Profile</MenuItem>
-                  
-                
-                <MenuItem icon={<RiLockPasswordFill/>} onClick={()=>history.push('/change_password')} style={{backgroundColor:'white'}}>Change Password </MenuItem>
+        
+         <MenuItem icon={<CgUserAdd/>} onClick={()=>history.push('/profile')} style={{backgroundColor:'white'}}>Change Profile</MenuItem>
+           
+         
+         <MenuItem icon={<RiLockPasswordFill/>} onClick={()=>history.push('/change_password')} style={{backgroundColor:'white'}}>Change Password </MenuItem>
 
-                <MenuItem icon={<FiPackage/>} onClick={()=>history.push('/getPackages')} style={{backgroundColor:'white'}}> Packages</MenuItem>
-                <MenuItem icon={<MdCampaign/>} onClick={()=>history.push('/getCampaigns')} style={{backgroundColor:'white'}}>Campaigns</MenuItem>
-                <MenuItem icon={<FaQuestion/>} onClick={()=>history.push('/faq')} style={{backgroundColor:'white'}}>FAQ</MenuItem>
+         <MenuItem icon={<FiPackage/>} onClick={()=>history.push('/getPackages')} style={{backgroundColor:'white'}}> Packages</MenuItem>
+         <MenuItem icon={<MdCampaign/>} onClick={()=>history.push('/getCampaigns')} style={{backgroundColor:'white'}}>Campaigns</MenuItem>
+         <MenuItem icon={<FaQuestion/>} onClick={()=>history.push('/faq')} style={{backgroundColor:'white'}}>FAQ</MenuItem>
 
-                <MenuItem icon={<FaSignOutAlt/>} onClick={() => logout()} style={{backgroundColor:'white'}}>Logout </MenuItem>
-              
-            </Menu>
-          </ProSidebar> 
+         <MenuItem icon={<FaSignOutAlt/>} onClick={() => logout()} style={{backgroundColor:'white'}}>Logout </MenuItem>
+       
+     </Menu>
+   </ProSidebar>
          
        
     </>

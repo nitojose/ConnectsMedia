@@ -1,13 +1,11 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
-import {AiOutlineCamera,AiOutlineClose} from 'react-icons/ai';
+import {AiOutlineCamera} from 'react-icons/ai';
 import {MdPayment} from 'react-icons/md';
 import { Url,isLoggin,picture,imgUrl } from '../../GLOBAL/global';
 import axios from 'axios';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
-import { useHistory } from "react-router-dom";
+
 
 import React from 'react'
 import { Container } from "react-bootstrap";
@@ -16,25 +14,6 @@ var sessionstorage = require('sessionstorage');
 export default function Index() {
 
   const [customerInfo,setCustomerInfo] = React.useState();
-  const [frame,setFrame] = React.useState(false);
-
-  const history = useHistory();
-
-  async function logginornot()
-    {
-      const cust =  await isLoggin();
-      console.log("cust",cust);
-      if(cust === null)
-      {
-        history.push('/login');
-      }
-      else{
-        setFrame(true);
-      }
-      
-  
-    }
-
   async function getInfos()
         {
         console.log("get cust info")
@@ -72,10 +51,7 @@ export default function Index() {
     }
 
   React.useEffect(() => {
-    logginornot();
     getInfos();
-
-    
   })
 
     const stripePromise = loadStripe("pk_live_51KlNyrDp5HAOMMnMOfq5yKAHtb3WHJZyNLO6YK1so2QeT7gkDdqmHh15HH9A9UDdzMLTjdIyWQxFWTKz4QhWZHV800AA2sYk40");
@@ -101,37 +77,21 @@ export default function Index() {
               </div>
               
             </div>
-            {/* <div className='header-banner' style={{marginLeft:'245px'}}>
+            <div className='header-banner' style={{marginLeft:'245px'}}>
                 <MdPayment color='black' className='mt-4 mx-4' size={22}/>
                 <p className='header-banner-text'>Change Password</p>
-            </div> */}
+            </div>
 
         </div>
         
-        {frame === true &&
-
-          confirmAlert({
-
-              customUI: ({onClose}) => {
-                  return (
-                      <div className="payment mt-5">
-
-                          <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
-
-                      <Elements stripe={stripePromise} >
-                          <CheckoutForm  visibility={true} />
-                      </Elements>
+    <div className="payment ">
+       
+            <Elements stripe={stripePromise} >
+                <CheckoutForm  visibility={true} />
+            </Elements>
 
 
-              </div>
-                  
-                  );
-                  
-              }
-          })
-
-        }
-
+    </div>
     </Container>
   )
 }
