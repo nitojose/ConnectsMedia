@@ -311,7 +311,7 @@ export default function Index() {
                 <li><img src={require('../../../src/assets/imgs/truth.png')} alt="truth"/></li>
                 </ul>
             </div>
-            <div id="service1" class="subtitle">
+            <div id="service1" class="subtitle sub">
                 <div class="view-msg content">
                 <h2>Promotions & Ads</h2>
                 <ul>
@@ -322,7 +322,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service2" class="subtitle">
+            <div id="service2" class="subtitle sub ">
                 <div class="content">
                 <h2>Live Stream Handling</h2>
                     <ul>
@@ -333,7 +333,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service3" class="subtitle">
+            <div id="service3" class="subtitle sub">
                 <div class="content">
                 <h2>Done-For-You Personalized Pictures</h2>
                     <ul>
@@ -344,7 +344,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service4" class="subtitle">
+            <div id="service4" class="subtitle sub">
                 <div class="content">
                 <h2>Done-For-You Personalized Videos</h2>
                     <ul>
@@ -355,7 +355,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service5" class="subtitle">
+            <div id="service5" class="subtitle sub">
                 <div class="content">
                 <h2>Short Videos & Reels</h2>
                     <ul>
@@ -365,7 +365,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service6" class="subtitle">
+            <div id="service6" class="subtitle sub">
                 <div class="content">
                 <h2>Application Development</h2>
                     <ul>
@@ -376,7 +376,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service7" class="subtitle">
+            <div id="service7" class="subtitle sub">
                 <div class="content">
                 <h2>Technology</h2>
                     <ul>
@@ -385,7 +385,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service8" class="subtitle">
+            <div id="service8" class="subtitle sub">
                 <div class="content">
                 <h2>Content Writing</h2>
                     <ul>
@@ -397,7 +397,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service9" class="subtitle">
+            <div id="service9" class="subtitle sub">
                 <div class="content">
                 <h2>Ready–to–use Campaigns</h2>
                     <ul>
@@ -410,7 +410,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="service10" class="subtitle">
+            <div id="service10" class="subtitle sub">
                 <div class="content">
                 <h2>Share</h2>
                     <ul>
@@ -419,7 +419,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social1" class="subtitle">
+            <div id="social1" class="subtitle sub">
                 <div class=" content">
                 <h2>YouTube</h2>
                 <ul>
@@ -430,7 +430,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social2" class="subtitle">
+            <div id="social2" class="subtitle sub">
                 <div class="content">
                 <h2>Facebook</h2>
                 <ul>
@@ -442,7 +442,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social3" class="subtitle">
+            <div id="social3" class="subtitle sub">
                 <div class="content">
                 <h2>Instagram</h2>
                 <ul>
@@ -453,7 +453,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social4" class="subtitle">
+            <div id="social4" class="subtitle sub">
                 <div class="content">
                 <h2>Twitter</h2>
                 <ul>
@@ -464,7 +464,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
         </div>
-            <div id="social5" class="subtitle">
+            <div id="social5" class="subtitle sub">
                 <div class="content">
                 <h2>Digital Marketing</h2>
                 <ul>
@@ -477,7 +477,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social6" class="subtitle">
+            <div id="social6" class="subtitle sub">
                 <div class="content">
                 <h2>Website</h2>
                 <ul>
@@ -488,7 +488,7 @@ export default function Index() {
                 </div>
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
-            <div id="social7" class="subtitle">
+            <div id="social7" class="subtitle sub">
                 <div class="content">
                 <h2>Truth Social</h2>
                 <ul>

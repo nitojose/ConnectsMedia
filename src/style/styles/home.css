@@ -1064,7 +1064,7 @@ margin-top: 1rem !important;
 display:block;	
 opacity:1;
 position:fixed;
-left:10vw;top:10vh;
+left:15vw !important;top:10vh;
 bottom:11vh;right:11vw;
 background:rgb(0,0,0,0.9);
 padding:3vmax;
