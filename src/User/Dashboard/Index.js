@@ -103,7 +103,7 @@ export default function Index() {
        cursor.setAttribute("style", 'display:none;max-width:10px;');
      }
      else{
-       cursor.setAttribute("style", 'display:block;max-width: 270px;');
+       cursor.setAttribute("style", 'display:block;max-width: 100%;');
        body.setAttribute("style",'max-width:100vw-20.5vw;')
  
      }
@@ -819,28 +819,29 @@ export default function Index() {
 
                         customUI: ({onClose}) => {
                             return (
+                                <Container className='body-two2'>
                                 <div className='profile-pic-view '>
                                     {/* <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  /> */}
 {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()}
 //  style={{objectFit:'contain'}}
-  className="pointer" />):(<><img alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+  className="pointer svgimg1" style={{width:'50vw',height:'30%'}} />):(<><img className="pointer svgimg1"  alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
 {console.log("profileup",profileUpload)}
-                                    <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={35}/>
+                                    <AiOutlineClose className='Ai-close pointer svgimg1' onClick={()=>onClose()} size={35}/>
                                     
 
                                     <div >
                                     
-                                        <AiOutlineDelete className='pointer mx-5' size={24} onClick={()=>deletePic()}/>
+                                        <AiOutlineDelete className='pointer mx-5 svgimg1' size={24} onClick={()=>deletePic()}/>
 
-                                        <label htmlFor="changepic"><AiOutlineCamera className='pointer mx-5' size={24} /></label> 
+                                        <label htmlFor="changepic"><AiOutlineCamera className='pointer mx-5 svgimg1' size={24} /></label> 
                                         <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="changepic"/>
 
                                     </div>
                                     
                                             
                                 </div>
-
+</Container>
                             );
                             
                         }

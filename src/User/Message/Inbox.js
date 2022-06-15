@@ -281,6 +281,9 @@ export default function Index() {
   ) :(<><div className='text-center align-div'> <p className='error-card '>No Messages</p></div></>)}
   
         </div>
+
+
+        
                         <Footer/>
         </Container>
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>

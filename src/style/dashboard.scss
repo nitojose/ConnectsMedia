@@ -4,6 +4,11 @@
     padding: 0;
     // box-sizing: border-box;
 }
+.body-two-payment{
+    width: 50%;
+    height: 25%;
+    background-color: #f13232;
+}
 .icon-dash12{
     margin-left: 10px;
     margin-right: 10px;
@@ -577,7 +582,6 @@ height: 10vw;
 .icon-background-dash{
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-    z-index: 1000;
     padding: 10px;
     background-color: rgba(187, 187, 187, 0.479);
     display: inline;
@@ -590,7 +594,6 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .icon-background-dash-cam{
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-    z-index: 1000;
     padding: 10px;
     background-color: rgba(187, 187, 187, 0.479);
     display: inline;
@@ -768,13 +771,31 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
        width: auto !important;
       
     }
-
-    .profile-pic-view img
-    {
-        width: -webkit-fill-available !important;
-        height: auto;
+    .profile-pic-view{
+        width: 50%;
+        height: 50%;
     }
-.pwd-div-one{margin-top: 20vh;}
+    img .svgimg1{
+        width: 50%;
+        height: 50%;
+    }
+
+    .profile-pic-view img .svgimg1
+    {
+        width: 50% !important;
+        height: 50vh;
+    }
+// .pwd-div-one{margin-top: 20vh;}
+
+.body-two2{
+    width: 50%;
+    height: 50%;
+
+}
+.body-two2 img{
+    width: -webkit-fill-available !important;
+    height: auto;
+}
 
 
     .profile-pic-view div {

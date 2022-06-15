@@ -15,8 +15,32 @@ import dateFormat from 'dateformat';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
+import '../../style/orderView.scss'
+import { AiOutlineBars } from "react-icons/ai";
 
 var sessionstorage = require('sessionstorage');
+
+var clicks = 1;
+function onTapFun(){
+  clicks+=1;
+  console.log('taped succesfuly')
+ //  document.getElementsByClassName('pro-sidebar')
+ // alert('sdddsds');
+ const cursor = document.querySelector('.pro-sidebar');
+ const body = document.querySelector('.body-two')
+ if(clicks%2==0){
+   body.setAttribute("style",'max-width: 100vw;');
+
+   cursor.setAttribute("style", 'display:none;max-width:10px;');
+ }
+ else{
+   cursor.setAttribute("style", 'display:block;max-width: 100%;');
+   body.setAttribute("style",'max-width:100vw-20.5vw;')
+
+ }
+ 
+
+}
 
 export default  function EachOrder() {
     let history = useHistory();
@@ -149,9 +173,9 @@ export default  function EachOrder() {
     
 
   return (
-  
     <div>
 
+<Container className='body-two'>
 
                             { type === "camp" || type ==="event"  ? (
 
@@ -251,7 +275,11 @@ export default  function EachOrder() {
                                      <>
                                    
                                       
-                                        <div className='vertical-text-pkg '>
+                                        <div className='vertical-text-pkg-two '>
+                                        {/* <div className='icon-background-dash'> */}
+<AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
+
+{/* </div> */}
                                             <p>{order.PACKAGE.packages_type === "STD" ? <span style={{color:'#F1C40F',fontFamily:"cursive"}}>Standard </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Customized </span>}PACKAGE</p>
                                         </div>
 
@@ -264,61 +292,39 @@ export default  function EachOrder() {
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
 
-                                            <p className='heading bold-text py-3'>Package Details</p>
+                                            <div className='package-details-content-section'>
+                                                <p className='heading bold-text py-3'>Package Details</p>
 
-                                            <p>Package Cost : <span className='bold-text'>${order.PACKAGE.packages_cost}.00 /month</span></p>
-                                            <p>Selected Months : <span className='bold-text'>{order.PACKAGE.months}</span></p>
-                                            <p>Drive Id : <a href={order.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
-                                           
+                                                <p>Package Cost : <span className='bold-text'>${order.PACKAGE.packages_cost}.00 /month</span></p>
+                                                <p>Selected Months : <span className='bold-text'>{order.PACKAGE.months}</span></p>
+                                                <p>Drive Id : <a href={order.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
+                                            
 
-
+                                            </div>
+                                            <div className='package-details-content-section'>
 
                                             
-                                            <p className='heading bold-text py-3'>{order.PACKAGE_details.length ===0 ? "":"Specifications"}</p>
+                                                <p className='heading bold-text py-3'>{order.PACKAGE_details.length ===0 ? "":"Specifications"}</p>
 
-                                            {order.PACKAGE_details && order.PACKAGE_details.map((d,id) =>
+                                                {order.PACKAGE_details && order.PACKAGE_details.map((d,id) =>
 
-                                                    <>
+                                                        <>
+                                                    
+
+                                                    <div className=''>
+                                                        <p>{d.pspec_text}</p>
+                                                        <p>{d.pspec_ans}</p>
+
+                                                    </div>
+                                                    </>
                                                 
+                                                )}
 
-                                                <div className=''>
-                                                    <p>{d.pspec_text}</p>
-                                                    <p>{d.pspec_ans}</p>
-
-                                                </div>
-                                                </>
-                                            
-                                            )}
-
-
-                                            {/* <p className='heading bold-text py-3'>{ order.Question.length === 0 ? "" :"Questionnaire"}</p>
-
-                                           
-                                            { order.Question && order.Question.map((d,id) =>
-                                          
-                                           
-                                            <>
-                                            
-                                            <Row >
-                                                <Col xxl={6} xl={6} md={6} sm={6} > 
-                                                    <p>{d.pspec_text}</p>
-                                                </Col>
-
-                                                <Col xxl={6} xl={6} md={6} sm={6}> 
-                                                    <p className='text-end'>{d.pspec_ans}</p> 
-                                                </Col>
-                                                <hr></hr>
-                                            </Row>
-                                            </>
-
-                                            
-                                            )} */}
-
-
-                                            <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button> 
+                                                <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button> 
                                            
                                             
 
+                                            </div>
                                         </div>
 
                                       
@@ -361,7 +367,9 @@ export default  function EachOrder() {
 
 
                                         
-                                        </> </div> ):(<></>)
+                                        </> </div> 
+                                        
+                                        ):(<></>)
                                        
                                     )
                               
@@ -425,7 +433,7 @@ export default  function EachOrder() {
 
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
 
-    
+        </Container>
 </div>
   );
 

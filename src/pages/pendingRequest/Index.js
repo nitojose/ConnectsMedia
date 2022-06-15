@@ -13,7 +13,7 @@ import {Buffer} from 'buffer';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
-import {AiOutlineClose} from 'react-icons/ai';
+import {AiOutlineClose,AiOutlineBars} from 'react-icons/ai';
 
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
@@ -55,6 +55,28 @@ export default function Index() {
   
     }
   
+
+    var clicks = 1;
+    function onTapFun(){
+      clicks+=1;
+      console.log('taped succesfuly')
+     //  document.getElementsByClassName('pro-sidebar')
+     // alert('sdddsds');
+     const cursor = document.querySelector('.pro-sidebar');
+     const body = document.querySelector('.body-two')
+     if(clicks%2==0){
+       body.setAttribute("style",'max-width: 100vw;');
+    
+       cursor.setAttribute("style", 'display:none;max-width:10px;');
+     }
+     else{
+       cursor.setAttribute("style", 'display:block;max-width: 100%;');
+       body.setAttribute("style",'max-width:100vw-20.5vw;')
+    
+     }
+     
+    
+    }
   
   
 
@@ -228,52 +250,55 @@ export default function Index() {
 
 
                             <>
+                                <Container className='body-two'>
+                                <div className='event-pending'>
                                 
-                                
-                                    <div className='vertical-text event-align'>
-                                        {/* <p>{type === "event" ?"EVENTS":"CAMPAIGNS"}</p> */}
+                                  
+                                    <div className='content-align-for-event'>
+                                        <div className='vertical-text'>
+                                            <p>EVENTS</p>
+                                        </div>
+
+                                        <div className='mx-5 px-2'>
                                         {campList.camp_type==='MPOST'?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}POSTS
-                                    </div>
-
-                                    <div className='second_section event-req-400'>
-
-                                            <div className='mx-5 px-2'>
-                                                <h2>{campList.camp_type==='MPOST'?"MILLION ":"STATIC "}<span className='warning'>POSTS</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
-                                            </div>
+                                        </div>
+                                    </div> 
 
-                                    </div>
-                                    <div className='padding-8rem event-reqs-400  space-between'>
-                                            <Row>
-                                                <Col>
-                                                    < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'400px',width:'380px',borderRadius:'20px'}} />
+                                    <div className='second_section '>
+                                        <hr></hr>
 
-                                                </Col>
+                                        <div className='space-between-two camp-400'>
+                                               
+                                                        < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id}  width='50%' style={{borderRadius:'20px',marginRight:'20px'}}  id="event_req_img"/>
 
-                                                <Col className='content-end'>
-                                                    <div className='font-12 content-end ' >
-                                                        <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
+                                                    
 
-                                                        <p>Cost : 
-                                                        <span className='bold-text'>${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)}.00 {type === "campaign" ? " /month":""} </span>
-                                                        </p>
+                                                    
+                                                        <div className='font-12 content-end-two ' >
+                                                            <p> Tittle : <span >{eventList.event_title?eventList.event_title:campList.camp_title}</span></p>
 
-                                                        {type === "event" ? (<>
-                                                        <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
-                                                            <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
-                                                            </>):(<>
-                                                        <p className='underline'> Description </p>
-                                                        
-                                                        <p style={{marginTop:'-1rem;'}}><span>{campList.camp_desc?campList.camp_desc.camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
-                                                        </>)}
+                                                            <p>Cost : 
+                                                            <span className='bold-text'>${eventList.event_cost?(eventList.event_cost ):(campList.camp_cost)}.00 {type === "campaign" ? " /month":""} </span>
+                                                            </p>
 
-                                                        <p>Status : <span className='bold-text green'>{eventList.event_status?eventList.event_status:campList.camp_status} </span></p>
+                                                            {type === "event" ? (<>
+                                                            <p>From Date : {dateFormat(eventList.event_from, "mmmm dS, yyyy") }</p>
+                                                                <p> To Date : {dateFormat(eventList.event_to, "mmmm dS, yyyy")}</p>
+                                                                </>):(<>
+                                                            <p className='underline'> Description </p>
+                                                            
+                                                            <p style={{marginTop:'-1rem;'}}><span>{campList.camp_desc?campList.camp_desc.camp_desc:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "} </span></p>
+                                                            </>)}
 
-                                                    </div>
+                                                            <p>Status : <span className='bold-text green'>{eventList.event_status?eventList.event_status:campList.camp_status} </span></p>
+
+                                                        </div>
+                                                    
+                                                    
                                                 
-                                                </Col>
-                                            </Row>
-                                             
+                                        </div>
+
                                     </div>
 
                                     <div className='extraRowSpace'></div>
@@ -357,8 +382,8 @@ export default function Index() {
                                              
                                     </div>
                                 </Container>}
-
-                                   
+</div>
+                                   </Container>
 
                             </>
 
@@ -369,51 +394,55 @@ export default function Index() {
                                         
                                        
                                         <>
-                                       <Container className='padding-bottom-5rem'>
-
-                                        <div className='vertical-text-pkg  '>
-                                            <p>PACKAGE</p>
+                                       
+                                       <Container className='body-two'>
+                                        <div className='vertical-text-pkg-two  '>
+                                        <AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
+                                            <p>{pkgData.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></p>
                                         </div>
 
-                                        <div className='sec-pkg-section pkg-400'>
+
+                                        <div className='sec-pkg-section '>
+
                                             <div className=' '>
                                                 <h2>{pkgData.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
-                                            <p className='heading bold-text py-3'>Package Details</p>
-                                            <p>Package Cost : <span className='bold-text'>${pkgData.packages_cost}.00 /month</span></p>
-                                            <p>Selected Months : <span className='bold-text'>{pkgData.months}</span></p>
-                                            <p>Order Status : <span className='bold-text green'>{pkgData.packages_status}</span></p>
 
-                                            <p className='heading bold-text py-3'> Specifications</p>
-                                            {
-                                                pkgList.PACKAGE_details && pkgList.PACKAGE_details.map((p,id)  =>
-                                                <div className=''>
-                                                    <p>{p.pspec_text}</p>
-                                                    <p>{p.pspec_ans}</p>
 
-                                                </div>
-                                            )}
-                                            
-                                            {/* <p className='heading bold-text py-3'>Questionnaire</p>
-                                            {pkgList.Question && pkgList.Question.map((d,id) =>
-                                            
-                                            
-                                            <>
-                                            
-                                            <Row >
-                                                <Col xxl={6} xl={6} md={6} sm={6} > 
-                                                    <p>{d.pspec_text}</p>
-                                                </Col>
+                                           
+                                            <div className='package-details-content-section'>
+                                                <p className='heading bold-text py-3'>Package Details</p>
 
-                                                <Col xxl={6} xl={6} md={6} sm={6}> 
-                                                    <p className='text-end'>{d.pspec_ans}</p> 
-                                                </Col>
-                                                <hr></hr>
-                                            </Row>
-                                            </>
+                                                <p>Package Cost : <span className='bold-text'>${pkgData.packages_cost}.00 /month</span></p>
+                                                <p>Selected Months : <span className='bold-text'>{pkgData.months}</span></p>
+                                                <p>Order Status : <span className='bold-text green'>{pkgData.packages_status}</span></p>
+                                            
 
-                                            )} */}
+                                            </div>
+
+
+
+                                           
+
+                                            <div className='package-details-content-section'>
+
+                                                                                        
+                                                <p className='heading bold-text py-3'>Specifications</p>
+
+                                                {
+                                                    pkgList.PACKAGE_details && pkgList.PACKAGE_details.map((p,id)  =>
+                                                    <div className=''>
+                                                        <p>{p.pspec_text}</p>
+                                                        <p>{p.pspec_ans}</p>
+
+                                                    </div>
+                                                )}
+
+
+
+                                            </div>
+                                            
                                                
 
                                         </div>
@@ -421,13 +450,13 @@ export default function Index() {
                                         
 
 
-                                    <div className='align-div pkg-bill-400' style={{margin: '0 3% 0 11%'}}>
+                                    <div className='align-div pkg-bill-400'>
                                    
                                          {paybtn || pkgData.packages_status === "Accepted"  ? (<> 
 
                                             {subOrder && 
                                             <div className='view-msg'>
-                                                <table className="table table-striped table-light mx-5 my-5 table-pkg-pending ">
+                                                <table className="table table-striped table-light  my-5 table-pkg-pending ">
                                                         <thead class="thead-dark">
                                                             <tr className='bold-text'>
                                                                 <th className='bold-text' scope="col">Bill Id</th>
@@ -459,7 +488,7 @@ export default function Index() {
                                        (
                                            pkgData.packages_status === "Success" ? '' :(
                                                <>
-                                           <div className='space-between mb-5'>
+                                           <div className='space-between '>
                                           
                                         {!pkgReject && <Button variant="light" className='px-5' onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
 
@@ -503,6 +532,7 @@ export default function Index() {
 
                                 customUI: ({onClose}) => {
                                     return (
+                                        <Container className='body-two-payment'>
                                         <div className="payment ">
 
                                             <AiOutlineClose className='Ai-close pointer' onClick={()=>onClose()} size={28}/>
@@ -513,7 +543,7 @@ export default function Index() {
 
 
                                 </div>
-                                    
+                                </Container>
                                     );
                                     
                                 }

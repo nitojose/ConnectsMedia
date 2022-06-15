@@ -12,13 +12,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-import {AiOutlineClose} from 'react-icons/ai';
+import {AiOutlineClose} from 'react-icons/ai'; 
 import dateFormat from 'dateformat';
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from '../CheckoutForm';
-
-
+import '../../style/eventsblock.scss'
 var sessionstorage = require('sessionstorage');
 
 
@@ -61,28 +60,33 @@ export default function EventPending() {
 
 
   return (
+    <Container className='body-two'>
     <div className='event-pending'>
                                 
-                                
+                                <div className='content-align-for-event'>
                                     <div className='vertical-text'>
                                         <p>EVENTS</p>
                                     </div>
 
-                                <div className='second_section '>
-
-                                        <div className='mx-5 px-2'>
+                                    <div className='mx-5 px-2'>
                                             <h2>STATIC<span className='warning'>POSTS</span></h2>
                                             <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
-                                        </div>
+                                    </div>
+                                </div> 
+
+
+                                <div className='second_section '>
+
+                                        
 
                                         <hr></hr>
 
-                                        <div className='space-between camp-400'>
+                                        <div className='space-between-two camp-400'>
                                             
 
-                                            <img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='250px' height='600px' style={{height:'400px',width:'380px',borderRadius:'20px'}} className="mx-5" id="event_req_img"/>
+                                            <img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id} width='50%'  style={{borderRadius:'20px',marginRight:'20px'}}  id="event_req_img"/>
 
-                                            <div className='font-12 content-end'>
+                                            <div className='font-12 content-end-two'>
                                                 <p> Tittle : <span >{eventList.event_title}</span></p>
 
                                                 <p>Cost : <span className='bold-text' >${eventList.event_cost}.00  </span></p>
@@ -94,6 +98,42 @@ export default function EventPending() {
                                             
                                                 <p>Status : <span className='bold-text green'>{eventList.event_status} </span></p>
 
+
+
+
+                                                <div className=' space-between-two-btn mb-5' >
+                                                    {paybtn || eventList.event_status === "Accepted" ? (<> 
+                                                        </>):
+                                                        ( eventList.event_status === 'Success' ? '' : (
+                                                        <>
+                                                            {!pkgReject && <Button variant="light" className='px-5 btn5' onClick={()=>accept()}>Accept</Button>}
+
+                                                            {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
+
+                                                            {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
+
+
+                                                        </>
+                                                        ))
+                                                    }
+                                                        
+
+                                                        {pkgReject &&( <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject()}>
+                                                        <option value="">Select Reason</option>
+                                                        <option value="Not Intrested">Not Intrested</option>
+                                                        <option value="Need to Add/Remove features">Need to Add/Remove features</option>
+                                                        <option value="Change of mind">Change of mind</option>
+                                                        <option value="Decided for alternative product">Decided for alternative product</option>
+                                                        </select>&nbsp;&nbsp;
+
+                                                        <label> OR </label>
+                                                        <textarea type="text" id="reason-text" rows={5} className='msg-text mx-3 px-2' placeholder=' type your reject reason' ></textarea> 
+                                                        <button onClick={() => reject()}>Submit</button>
+                                                        </div>)
+                                                        
+                                                    }
+                                                
+                                                </div>
                                             </div>
 
 
@@ -110,43 +150,11 @@ export default function EventPending() {
                                 <div className='extraRowSpace'>
                                 </div>
 
-                                    <div className='padding-8rem space-between mb-5' style={{ marginTop: '-5rem'}}>
-                                        {paybtn || eventList.event_status === "Accepted" ? (<> 
-                                            </>):
-                                            ( eventList.event_status === 'Success' ? '' : (
-                                            <>
-                                                 {!pkgReject && <Button variant="light" className='px-5' onClick={()=>accept()}>Accept</Button>}
-
-                                                 {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
-
-                                                 {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
-
-
-                                            </>
-                                            ))
-                                        }
-                                                        
-
-                                                        {pkgReject &&( <div className='space-between'><select id="reason" className='select-months' onChange={()=>reject()}>
-                                                        <option value="">Select Reason</option>
-                                                        <option value="Not Intrested">Not Intrested</option>
-                                                        <option value="Need to Add/Remove features">Need to Add/Remove features</option>
-                                                        <option value="Change of mind">Change of mind</option>
-                                                        <option value="Decided for alternative product">Decided for alternative product</option>
-                                                        </select>&nbsp;&nbsp;
-
-                                                        <label> OR </label>
-                                                        <textarea type="text" id="reason-text" rows={5} className='msg-text mx-3 px-2' placeholder=' type your reject reason' ></textarea> 
-                                                        <button onClick={() => reject()}>Submit</button>
-                                                        </div>)
-                                                        
-                                                }
-                                                
-                                    </div>
+                                    
 
                                 {(paybtn || eventList.event_status === "Accepted") && 
 
-                                <Container className="event-accept-suborder" style={{marginLeft:'14rem',marginTop: '-8rem'}}>
+                                <Container className="event-accept-suborder" >
                                  
                                     <div className='px-5 mx-5'>
                                          {subOrder && 
@@ -208,6 +216,7 @@ export default function EventPending() {
                                    
 
                             </div>
+                            </Container>
 
   )
 

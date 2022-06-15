@@ -15,8 +15,26 @@ height: 100%;
 
 
 }
+ .body-two-one{
+        
+        border-radius: 20px;
+        margin: 0;
+        padding: 20px;
+        background-color: #6c81a3;
+    position: absolute;
+    max-width: 50vw;
+    left: 25% ;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 25vh;
+    
+    
+    }
 @media (max-width:850px){
     .body-two{
+        color: black;
+
         margin: 0;
         padding: 0;
         background-color: white;
@@ -26,6 +44,22 @@ height: 100%;
     padding-left: 10px;
     padding-right: 10px;
     height: 100%;
+    
+    
+    }
+    .body-two-one{
+        color: black;
+        border-radius: 20px;
+        margin: 0;
+        padding: 20px;
+        background-color: #6c81a3;
+    position: absolute;
+    max-width: 50vw;
+    left: 25% ;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 25vh;
     
     
     }

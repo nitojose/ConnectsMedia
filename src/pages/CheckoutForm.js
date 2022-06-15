@@ -241,7 +241,7 @@ const CARD_ELEMENT_OPTIONS = {
        <>
        
 
-            <Container className="py-5">
+       <Container className='body-two-one'>
                 <form onSubmit={handleSubmit}>
                   
                   <CardElement options={CARD_ELEMENT_OPTIONS} visibility={true} disabled={false}/>
