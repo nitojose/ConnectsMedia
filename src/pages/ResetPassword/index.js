@@ -8,7 +8,7 @@ import { Form } from 'react-bootstrap';
 import { Link,useHistory } from 'react-router-dom';
 import { Url,picture,imgUrl } from '../../GLOBAL/global';
 import {RiLockPasswordFill} from 'react-icons/ri';
-import {AiOutlineCamera} from 'react-icons/ai';
+import {AiOutlineCamera,AiOutlineBars} from 'react-icons/ai';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {FiPackage} from 'react-icons/fi';
@@ -201,11 +201,11 @@ export default function Index() {
   
             <div className='header-banner-two'>
             <div className='background-color-text'>
-          <BsFillKanbanFill color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+          <AiOutlineBars color='black' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
   <div className='icon-tab-block'>
           <RiLockPasswordFill color='black' className='icon-tab'/>
 
-          <p className='header-banner-text'>inbox</p>
+          <p className='header-banner-text'>Change Password</p>
           </div>
           </div>
             </div>

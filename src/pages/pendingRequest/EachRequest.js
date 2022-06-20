@@ -104,7 +104,7 @@ export default function EachRequest() {
 
 
 
-                                        <div className='sec-pkg-section '>
+                                        <div className=' '>
                                             <div className=' '>
                                                 <h2>{pkgData.pack.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
@@ -155,7 +155,7 @@ export default function EachRequest() {
                                                 
                                             {Order.order_status === "PP" ? (<></>) :(
                                                 <>
-                                                <div className='space-between '>
+                                                <div className='space-between pb-5'>
 
                                                     {<Button variant="light" className="px-5" style={{fontSize:'20px',fontWeight:'bold'}} onClick={()=>accept()}  >Accept</Button>}
                                                         
@@ -259,7 +259,7 @@ export default function EachRequest() {
   {
 
     setSpinner(true)
-    // setPkgReject(true);
+    setPkgReject(false);
     const token = sessionstorage.getItem("token");
     const customer_id =  sessionstorage.getItem("customerId");
 

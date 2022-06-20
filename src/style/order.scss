@@ -176,8 +176,8 @@ width: 100%;
  }
  .row-flex-align-two img{
      position: absolute;
-     top:15vh;
-    //  left: 0;
+     top:13vh;
+     left: 20vh;
  }
  .profileDiv{
      position: absolute;
@@ -200,7 +200,8 @@ border-radius: 10px;
 padding-top: 20px;
     padding-bottom: 20px;
 
-background-color: rgba(255, 255, 255, 0.521);
+// background-color: rgba(255, 255, 255, 0.521);
+background-color: aliceblue;
 
  }
  .background-color-text{
@@ -230,10 +231,11 @@ background-color: rgba(255, 255, 255, 0.521);
     z-index: 1000;
     position: absolute;
     right: 10%;
-bottom: 15px;
-    width: 30%;
-    height: 20%;
+    bottom: 15px;
+    width: 27%;
+    height: 30%;
     display: block;
+    top: 8rem;
 }
 // *{
 //     margin: 0;

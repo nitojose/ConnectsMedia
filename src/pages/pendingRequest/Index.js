@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { useParams } from "react-router-dom";
 import { Container,Row,Col,Card,Button,Table,Spinner } from 'react-bootstrap';
@@ -271,16 +272,16 @@ export default function Index() {
                                             <p>EVENTS</p>
                                         </div>
 
-                                        <div className='mx-5 px-2'>
+                                        <div className=''>
                                         {campList.camp_type==='MPOST'?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}POSTS
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                         </div>
                                     </div> 
 
-                                    <div className='second_section '>
+                                    <div className='second_section_2'>
                                         <hr></hr>
 
-                                        <div className='space-between-two camp-400'>
+                                        <div className='space-between camp-400'>
                                                
                                                         < img src={eventList.photo === (undefined || null) ?notImage :imgUrl+eventList.photo} alt={eventList.order_id}  width='50%' style={{borderRadius:'20px',marginRight:'20px'}}  id="event_req_img"/>
 
@@ -327,7 +328,7 @@ export default function Index() {
                                                         <>
                                                         {!pkgReject && <Button variant="light" onClick={()=>accept(eventList.event_cost,type,0)}>Accept</Button>}
                                                         {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
-                                                        {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
+                                                        {!rejectbtn && <Button variant="light" className="" onClick={()=>reason()}>Reject</Button>}
 
 
                                                             </>
@@ -363,10 +364,10 @@ export default function Index() {
 
                                  {(paybtn || eventList.event_status === "Accepted") && 
                                  
-                                 <Container style={{marginLeft:'14rem'}} className="event-bill-400">
-                                  <div className='px-5 mx-5'>
+                                 <Container  className="event-bill-400">
+                                  <div className=''>
                                         {subOrder && 
-                                        <table className="table table-striped table-light mx-5 my-5 ">
+                                        <table className="table table-striped table-light ">
                                             <thead class="thead-dark">
                                                 <tr>
                                                     <th className='bold-text' scope="col">Bill Id</th>
@@ -414,7 +415,7 @@ export default function Index() {
                                         </div>
 
 
-                                        <div className='sec-pkg-section '>
+                                        <div className=' '>
 
                                             <div className=' '>
                                                 <h2>{pkgData.packages_type === "STD" ? "STANDRAD ":"CUSTOMIZED "}<span className='warning'>PACKAGE</span></h2>
@@ -502,11 +503,11 @@ export default function Index() {
                                                <>
                                            <div className='space-between '>
                                           
-                                        {!pkgReject && <Button variant="light" className='px-5' onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
+                                        {!pkgReject && <Button variant="light" className='' onClick={()=>accept(pkgData.packages_cost,type,pkgData.months)}>Accept</Button>}
 
                                         {(!spinner === false) && <Spinner animation="border" style={{marginLeft:'-21rem',color:'black'}}></Spinner>}
 
-                                        {!rejectbtn && <Button variant="light" className="px-5" onClick={()=>reason()}>Reject</Button>}
+                                        {!rejectbtn && <Button variant="light" className="" onClick={()=>reason()}>Reject</Button>}
 
                                         </div>
                                         </>)

@@ -193,21 +193,34 @@ export default  function EachOrder() {
                                 <>
                                 
                                 
-                                    <div className='vertical-text event-align '>
-                                        {/* <p>{type === "event" ?"EVENTS":""}</p> */}
-                                        <p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
+
+                                    <div className='vertical-text-pkg-two '>
+                                        {/* <div className='icon-background-dash'> */}
+<AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
+
+{/* </div> */}
+<p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
                                     </div>
 
-                                    {/* <div className='vertical-text camp-text'> */}
-                                        {/* <p>{type === "camp" ?"CAMPAIGN":""}</p> */}
-                                        {/* <p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p> */}
                                     
-                                    {/* </div> */}
+                                    {/* <div className='vertical-text event-align '>
+                                        <p>{type === "event" ?"EVENTS":""}</p> 
+                                        <p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
+                                    </div> */}
+
+
+                        {/* <div className='vertical-text camp-text'>
+                                        <p>{type === "camp" ?"CAMPAIGN":""}</p>
+                                        <p>{order.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
+                                    
+                                    </div>  */}
+
+                                    
 
                                     <div className='second_section_2'>
 
                                         <div className=''>
-                                            <h2>{order.plan[0].camp_type === "MPOST"?"MILLION ":"STATIC "}<span className='warning'>POSTS</span></h2>
+                                            <h2 style={{color:'#F1C40F',fontFamily:"cursive"}}>{type === "event" ?"EVENTS":"CAMPAIGNS"}</h2>
                                             <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                         </div>
 

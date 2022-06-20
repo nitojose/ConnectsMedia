@@ -332,7 +332,7 @@ export default function Index() {
                 {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer profileInner-one-img" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
 
                 <div className='img-camera'>
-                    <label htmlFor="group_image"><AiOutlineCamera color='white' className='pointer'  /></label> 
+                    <label htmlFor="group_image"><AiOutlineCamera color='white' className='pointer' style={{color:'black'}} /></label> 
         
                     <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
                 </div>  

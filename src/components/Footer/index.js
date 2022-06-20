@@ -7,8 +7,16 @@ import { FaYoutube } from "react-icons/fa";
 import '../../style/main.scss'
 import Parallax from 'react-rellax'
 import '../../style/footer.scss'
+import { useHistory } from 'react-router-dom';
 
-export default function index() {
+export default function Index() {
+
+  let history = useHistory();
+
+  function home()
+  {
+    history.push('/home')
+  }
     return (
         <>      
         <body class="d-flex flex-column">
@@ -21,6 +29,7 @@ export default function index() {
         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
             {/* <img src="img/logo.png" alt="" width="180" class="mb-3"> */}
           <p className="font-italic text-muted">We know how to get you there. Your 100% satisfaction is guaranteed.</p>
+          <img src={require('../../assets/images/cm-01.jpg')}  onClick={()=>home()} style={{width: '65%',borderRadius:'8px',height:'auto'}} className="pointer" alt="logo"/>
           <ul className="list-inline mt-4">
             <li className="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
             <li className="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -53,6 +62,7 @@ export default function index() {
           
 
             <ul className="list-unstyled mb-0">
+            <li className="mb-2"><a href='/donate' class="text-muted">Give Now</a></li>
             <li className="mb-2"><a href='/privacy-policy' class="text-muted">Privacy policy</a></li>
             <li className="mb-2"><a href="/terms-and-conditions" class="text-muted">Terms and Conditions</a></li>
             
@@ -73,7 +83,7 @@ export default function index() {
     <div className="bg-light py-4">
       <div className="container text-center">
         
-        <p className="text-muted mb-0 py-2">© 2022 Connect media All rights reserved.</p>
+        <p className="text-muted mb-0 py-2">© 2022 Connect Media Networks All rights reserved.</p>
       </div>
     </div>
   </footer>

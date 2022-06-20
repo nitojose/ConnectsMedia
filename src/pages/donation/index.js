@@ -59,7 +59,7 @@ export default function Index() {
                         </Elements>
                         </div>
 
-                        <img src={require('../../assets/imgs/give-bg.jpg')}/>
+                        <img src={require('../../assets/imgs/donation1.jpg')} alt="Give Now"/>
   </div>
 
   </div>

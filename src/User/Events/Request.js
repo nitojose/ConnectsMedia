@@ -213,10 +213,10 @@ export default function Index() {
   
             <div className='header-banner-two'>
             <div className='background-color-text'>
-          <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+          <AiOutlineBars color='black' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
   <div className='icon-tab-block'>
-          <FiPackage color='black' className='icon-tab'/>
-          <p className='header-banner-text'>Package Orders</p>
+          <MdEmojiEvents color='black' className='icon-tab'/>
+          <p className='header-banner-text'>Events Requests</p>
           </div>
           </div>
             </div>

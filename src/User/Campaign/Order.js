@@ -9,7 +9,8 @@ import { useHistory} from "react-router-dom";
 import dateFormat from 'dateformat';
 import Parallax from 'react-rellax';
 import {RiDeleteBin6Line} from 'react-icons/ri'
-import {AiOutlineCamera} from 'react-icons/ai'
+import {AiOutlineCamera} from 'react-icons/ai';
+
 import Pagination from '../../pages/Pagination';
 import {BsFillKanbanFill } from "react-icons/bs";
 import Footer from '../../components/Footer';
@@ -211,10 +212,10 @@ export default function Index() {
 
           <div className='header-banner-two'>
           <div className='background-color-text'>
-        <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+        <AiOutlineBars color='black' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
 <div className='icon-tab-block'>
-        {/* <FiPackage color='black' className='icon-tab'/> */}
-        <p className='header-banner-text'>Package Orders</p>
+        <MdCampaign color='black' className='icon-tab'/>
+        <p className='header-banner-text'>Campaign Orders</p>
         </div>
         </div>
           </div>

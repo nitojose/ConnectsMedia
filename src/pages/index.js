@@ -31,6 +31,7 @@ import Sidebar from '../components/sidebar/sidebar';
 import GetCampaign from '../User/Campaign/Index';
 import DashHome from "../User/Dashboard/Index";
 import RequestPaynow from '../pages/Orders/RequestPaynow';
+import PaymentSuccess from './PaymentSuccess'
 import "../style/sidebar-slider.scss";
 import {
     BrowserRouter as Router,
@@ -121,7 +122,7 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/faq'>
-                <UserHeader/>
+                <Sidebar/>
               
                     <Faq />
                     {/* <FooterPage/> */}
@@ -387,6 +388,9 @@ export default function Index() {
                     {/* <FooterPage/> */}
                 </Route>
 
+                <Route exact path='/success'>
+                  <PaymentSuccess/>
+                </Route>
             
                
             </Switch>

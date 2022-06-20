@@ -7,7 +7,8 @@ import axios from 'axios';
 import { Url,picture,isLoggin,imgUrl } from '../../GLOBAL/global';
 import { AiOutlineBars } from "react-icons/ai";
 import Footer from '../../components/Footer';
-
+import {MdEmojiEvents} from 'react-icons/md';
+import {FiPackage} from 'react-icons/fi';
 var sessionstorage = require('sessionstorage');
 
 export default function Index() {
@@ -69,36 +70,86 @@ export default function Index() {
 
   const type = sessionstorage.getItem("reqType");
     const history = new useHistory();
+
+    var clicks = 1;
+    function onTapFun(){
+      clicks+=1;
+      console.log('taped succesfuly')
+     //  document.getElementsByClassName('pro-sidebar')
+    //  alert();
+     const cursor = document.querySelector('.pro-sidebar');
+     const body = document.querySelector('.body-two')
+
+     if(window.innerWidth<=850){
+
+        if(clicks==clicks+1){
+       body.setAttribute("style",'max-width: 100vw;');
+ 
+       cursor.setAttribute("style", 'display:none;max-width:10px;');}
+       else{
+        cursor.setAttribute("style", 'display:block;max-width: 100%;');
+        body.setAttribute("style",'max-width:100vw-20.5vw;')
+  
+      }}
+      else{
+        if(clicks%2==0){
+            body.setAttribute("style",'max-width: 100vw;');
+      
+            cursor.setAttribute("style", 'display:none;max-width:10px;');}
+            else{
+             cursor.setAttribute("style", 'display:block;max-width: 100%;');
+             body.setAttribute("style",'max-width:100vw-20.5vw;')
+       
+           }
+      }
+ 
+    }
   return (
-    <Container>
-     <div className='profileBefore' >
-            <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
-           
-        </div> 
-
-        <div className='row-flex-align'>
-
-          <div className='profileDiv'>
-            <div className='profileInner'>
-              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
-              
 
 
+
+
+<Container className='body-two'>
+
+
+
+
+<div className='image-sectioning-two'>
+      
+      <div className='profileBefore-two' >
+              <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="Avatar" className='cover-img-dash-image' />
+             
+          </div> 
+  
+  
+          <div className='row-flex-align-two'>
+  
+              <div className='profileInner'>
+                <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile"
+                //  style={{objectFit:'contain'}}
+                 />
+                
+              </div>
+             
+  
+  
+            <div className='header-banner-two'>
+            <div className='background-color-text'>
+          <AiOutlineBars color='black' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+  <div className='icon-tab-block'>
+          {type === "Package" ? <FiPackage color='black' className='icon-tab'/> :<MdEmojiEvents color='black' className='icon-tab'/> }
+
+          <p className='header-banner-text'>{type==="Packages"?"Package":"Events"}</p>
+          </div>
+          </div>
             </div>
+            </div>
+            <div className='button-background-req'></div>
             
+  
           </div>
 
-          <div className='header-banner' style={{marginLeft:'8px',width:'40%'}}>
-            <MdPendingActions color='black' className='mt-4 mx-4' size={22}/>
-            <p className='header-banner-text'>{type} Request</p>
-          </div>
-
-
-         
-      </div>
-
-
-      <div className='view-msg'>
+          <div className='view-msg'>
           <div className='msg-align'>
 
               {type === "Package"? 
@@ -169,8 +220,10 @@ export default function Index() {
 
           </div>
       </div>
-      <Footer/>
+        <Footer/>
     </Container>
+
+    
 
   )
 

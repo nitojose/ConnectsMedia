@@ -77,7 +77,8 @@ export default function Give() {
                       id,
                   cust_id:Math.random(),
                   stripeToken: paymentMethod.id,
-                  subscription:"onetime"
+                  subscription:"onetime",
+                  email:formdata.email
                   })
   
                   console.log("res",res);
@@ -85,71 +86,74 @@ export default function Give() {
   
                   if(res.data.actionRequired)
                   {
-                  const { paymentIntent, error } = await stripe.confirmCardPayment(
-                      res.data.clientSecret
-                  );
+                    const { paymentIntent, error } = await stripe.confirmCardPayment(
+                        res.data.clientSecret
+                    );
   
   
   
-                  console.log("payment Inten",paymentIntent)
-  
-                  if (error) 
-                  {
-                      toast.warning("Error in payment, please try again .");
-                      
-                  }
-                  if (paymentIntent.status === "succeeded")
-                  {
-                      
-  
-                      // alert(`Payment successful, payment ID - ${res.data.id}`);
-                      const headers ={
-                        'Content-Type': 'multipart/form-data',
-                        
+                    console.log("payment Inten",paymentIntent)
+    
+                    if (error) 
+                    {
+                        toast.warning("Error in payment, please try again .");
                         
                     }
-            
-                    var data = new FormData();
-                    
-                    data.append("transaction_id",res.data.id);
-                    data.append("name",formdata.name);
-                    data.append("email",formdata.email);
-                    data.append("amount",formdata.amount);
-                        
+                    if (paymentIntent.status === "succeeded")
+                    {
                       
-            
-                        axios({
-                            method: 'post',
-                            url: Url+'donation',
-                            data: data,
-                            headers: headers
-                            })
-                            .then(function (response) {
-                                //handle success
-                                console.log("after donation",response.data); 
+  
+                        //   alert(`Payment successful, payment ID - ${paymentIntent.id}`);
+                        const headers ={
+                            'Content-Type': 'multipart/form-data',
+                            
+                            
+                        }
                 
-                            })
-                            .catch(function (response) {
-                                //handle error
-                                console.log(response);
-                              
-                            });
+                        var data = new FormData();
+                        
+                        data.append("transaction_id",paymentIntent.id);
+                        data.append("name",formdata.name);
+                        data.append("email",formdata.email);
+                        data.append("amount",formdata.amount);
+                            
+                        
                 
+                            axios({
+                                method: 'post',
+                                url: Url+'donation',
+                                data: data,
+                                headers: headers
+                                })
+                                .then(function (response) {
+                                    //handle success
+                                    console.log("after donation",response.data); 
+
+                                    // const res2 =  axios.post(Url+'checkAmount',{
+                                    //     id:paymentIntent.id
+                                    // });
+                                    history.push('/success');
+                                    // console.log("res2 checkout= ",res2);
+                    
+                                })
+                                .catch(function (response) {
+                                    //handle error
+                                    console.log(response);
+                                
+                                });
+                    
                          
               
-                  }
+                    }
                       // return alert(`Payment successful, payment ID - ${res.data.id}`);
-                  const res2 = await axios.post(Url+'checkAmount',{
-                      id:res.data.id
-                  });
-  
-                  console.log("res2 checkout= ",res2);
-                  history.push('/success');
+                 
+                //   history.push('/success');
                   // alert(`Payment successful, payment ID - ${res.data.id}`);
                   } 
                   else {
                   // Simple HTTP Payment was successful
-                  alert(`Payment successful, payment ID - ${res.data.id}`);
+                //   alert(`Payment successful, payment ID - ${res.data.id}`);
+                    
                   }
                   
               }

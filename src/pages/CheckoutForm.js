@@ -182,7 +182,7 @@ const CARD_ELEMENT_OPTIONS = {
                                   data1.append("order_id",response.data.txn_order);
                                   data1.append("status","Success");
                                   data1.append("suborder_id",response.data.txn_suborder);
-          
+                                  data1.append("stripe_id",paymentIntent.id);
                                   axios({
                                       method: 'post',
                                       url: Url+'payafter',
@@ -194,7 +194,7 @@ const CARD_ELEMENT_OPTIONS = {
                                           console.log("pay After",response); 
                       
                                           toast.success('Payment Success!!',{autoClose:3000});
-                                          setTimeout(() => history.push('/dashboard'),3000);
+                                          setTimeout(() => history.push('/success'),3000);
                                       })
                                       .catch(function (response) {
                                           //handle error

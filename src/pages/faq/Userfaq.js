@@ -2,6 +2,7 @@ import React from 'react'
 import '../../style/faq.scss'
 import Faq from "react-faq-component";
 import $ from 'jquery';
+import { Container } from 'react-bootstrap';
 
 
 export default function Userfaq() {
@@ -22,6 +23,8 @@ export default function Userfaq() {
     })
     
   return (
+    <Container className='body-two'>
+        <div className='view-msg mt-5 '>
     <div class="section scrollbar" id="faqs">
 	<div>
         <h1>Frequently Asked Questions</h1>
@@ -389,5 +392,7 @@ export default function Userfaq() {
         </ul>
     </div>
 </div>
+</div>
+</Container>
   )
 }

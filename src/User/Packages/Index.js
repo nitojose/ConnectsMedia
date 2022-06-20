@@ -92,32 +92,6 @@ export default function Index() {
 
   return (
 
-//     <Container>
-
-// <div className='profileBefore' >
-//             <img src={customerInfo === undefined ?picture :(imgUrl+customerInfo.cover_photo)} alt="cover" className='cover-img-dash' />
-           
-//         </div> 
-
-//         <div className='row-flex-align'>
-
-//           <div className='profileDiv'>
-//             <div className='profileInner'>
-//               <img className='cover-img-dash' src={customerInfo === undefined ?picture :(imgUrl+customerInfo.photo)} alt="profile" style={{objectFit:'contain'}}/>
-              
-
-
-//             </div>
-            
-//           </div>
-
-//         <div className='header-banner' style={{marginLeft:'245px',width:'70%'}}>
-//         <FiPackage color='black' className='mt-4 mx-4' size={22}/>
-//         <p className='header-banner-text'>Package List</p>
-//         </div>
-
-    
-//     </div>
 
 <Container className='body-two'>
 
@@ -145,11 +119,11 @@ export default function Index() {
   
             <div className='header-banner-two'>
             <div className='background-color-text'>
-          <AiOutlineBars color='green' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
+          <AiOutlineBars color='black' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
   <div className='icon-tab-block'>
           <FiPackage color='black' className='icon-tab'/>
 
-          <p className='header-banner-text'>inbox</p>
+          <p className='header-banner-text'>Packages List</p>
           </div>
           </div>
             </div>

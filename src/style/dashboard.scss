@@ -123,7 +123,7 @@ html,body{
 .body-two-payment{
     width: 50%;
     height: 25%;
-    background-color: #f13232;
+    // background-color: #f13232;
 }
 .icon-dash12{
     margin-left: 10px;
@@ -167,8 +167,8 @@ width: 80%;
 border-radius: 10px;
 padding-top: 20px;
     padding-bottom: 20px;
-
-background-color: rgba(255, 255, 255, 0.521);
+    background-color: aliceblue;
+// background-color: rgba(255, 255, 255, 0.521);
 }
 .profileBeforeOne img{
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -329,7 +329,8 @@ padding: 10px;
     margin: 10px;
     // position: relative;
     border-radius: 10px 10px 10px 10px;
-    background-color: rgba(255, 255, 255, 0.521);
+    // background-color: rgba(255, 255, 255, 0.521);
+    background-color: aliceblue;
 }
 .dash-band{
 // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -447,13 +448,13 @@ height: 10vw;
     display: none;
 }
 .img-camera{
-    padding: 10%;
+    padding: 7%;
     border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.445);
+    background-color: aliceblue;
+    color: #000;
     position: relative;
     top: -2vw;
-    left: 3vw;
-    // color: rgb(255, 255, 255);
+    left: 4vw;
 }
 
 .align-div-one{
@@ -532,7 +533,8 @@ height: 10vw;
             margin: 10px;
             position: relative;
             border-radius: 10px 10px 10px 10px;
-            background-color: rgba(255, 255, 255, 0.521);
+            // background-color: rgba(255, 255, 255, 1);
+            background-color: aliceblue;
         }
     .content-overlay{
         margin-top: 40px;
@@ -745,7 +747,8 @@ height: 10vw;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     padding: 10px;
-    background-color: rgba(187, 187, 187, 0.479);
+    // background-color: rgba(187, 187, 187, 0.479);
+    background-color: aliceblue;
     display: inline;
     position: absolute;
     top: 4vh;
@@ -757,7 +760,8 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     padding: 10px;
-    background-color: rgba(187, 187, 187, 0.479);
+    // background-color: rgba(187, 187, 187, 0.479);
+    background-color: aliceblue;
     display: inline;
     position: absolute;
     top: 5vh;
@@ -774,7 +778,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 .cover-camera{
     position: absolute;
     top: 40px;
-//    background-color: aqua; 
+    // background-color: aliceblue;
     display: block !important;
    padding-left: 40px;
 }
@@ -787,7 +791,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     .dash-content{
         color: black;
         display: flex;
-        
+        background-color: aliceblue;
         justify-content: center;
         align-items: center;}
     .package-wrap {
@@ -813,16 +817,17 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     #dashcard1{
         width: 45%;
         margin-top: 10px;
+        background-color: aliceblue;
     }
     #dashcard2{
         width: 45%;
         margin-top: 10px;
-
+        background-color: aliceblue;
     }
     #dashcard3{
         width: 100%;
         margin-top: 10px;
-
+        background-color: aliceblue;
     }
     .dash-band{
         display: none;
@@ -1084,7 +1089,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     {
         height: 350px !important;
         width: 100% !important;
-        margin-left: 3rem !important;
+        margin-left: 1.5rem !important;
         border-radius: 20px;
     }
 
