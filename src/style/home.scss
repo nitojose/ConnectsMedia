@@ -1,6 +1,9 @@
 @import './main.scss';
 
-
+body{
+    margin: 0;
+    padding: 0;
+}
 .button-text
 {
     border-radius: 20px;
@@ -24,7 +27,11 @@
     font-size: 3rem;
     
 }
-
+.nav-main{
+    margin: 0 !important;
+    padding: 0!important;
+    background-color: aqua;
+}
 .menu-btn
 {
     color: $primary_color;

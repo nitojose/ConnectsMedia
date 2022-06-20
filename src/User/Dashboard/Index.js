@@ -94,20 +94,32 @@ export default function Index() {
       clicks+=1;
       console.log('taped succesfuly')
      //  document.getElementsByClassName('pro-sidebar')
-     // alert('sdddsds');
+    //  alert();
      const cursor = document.querySelector('.pro-sidebar');
      const body = document.querySelector('.body-two')
-     if(clicks%2==0){
+
+     if(window.innerWidth<=850){
+
+        if(clicks==clicks+1){
        body.setAttribute("style",'max-width: 100vw;');
  
-       cursor.setAttribute("style", 'display:none;max-width:10px;');
-     }
-     else{
-       cursor.setAttribute("style", 'display:block;max-width: 100%;');
-       body.setAttribute("style",'max-width:100vw-20.5vw;')
- 
-     }
-     
+       cursor.setAttribute("style", 'display:none;max-width:10px;');}
+       else{
+        cursor.setAttribute("style", 'display:block;max-width: 100%;');
+        body.setAttribute("style",'max-width:100vw-20.5vw;')
+  
+      }}
+      else{
+        if(clicks%2==0){
+            body.setAttribute("style",'max-width: 100vw;');
+      
+            cursor.setAttribute("style", 'display:none;max-width:10px;');}
+            else{
+             cursor.setAttribute("style", 'display:block;max-width: 100%;');
+             body.setAttribute("style",'max-width:100vw-20.5vw;')
+       
+           }
+      }
  
     }
     async function getUserInfo()
@@ -317,7 +329,7 @@ export default function Index() {
             
               <div className='profileInner-one'>
                
-                {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
+                {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer profileInner-one-img" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
 
                 <div className='img-camera'>
                     <label htmlFor="group_image"><AiOutlineCamera color='white' className='pointer'  /></label> 
@@ -339,6 +351,7 @@ export default function Index() {
 
 <div className='view-msg mt-5 '>
                 <div className='align-div pwd-div1'>
+                    <h2>Guiding Video</h2>
                 <video autoPlay={false} className='dash-video' controls={true}>
                   <source src={require('../../assets/video/connect event flow.mp4')} type="video/mp4"/>
                 </video>
@@ -827,16 +840,21 @@ export default function Index() {
   className="pointer svgimg1" style={{width:'50vw',height:'30%'}} />):(<><img className="pointer svgimg1"  alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
 {console.log("profileup",profileUpload)}
-                                    <AiOutlineClose className='Ai-close pointer svgimg1' onClick={()=>onClose()} size={35}/>
                                     
 
-                                    <div >
-                                    
+                                    <div className='profile-pic-editing'>
+                                        <div className='profile-pic-editing-inner'>
+                                    <AiOutlineClose  className='Ai-close pointer svgimg1' size={24} onClick={()=>onClose()}/>
+
+                                    </div>
+                                    <div className='profile-pic-editing-inner'>
                                         <AiOutlineDelete className='pointer mx-5 svgimg1' size={24} onClick={()=>deletePic()}/>
-
-                                        <label htmlFor="changepic"><AiOutlineCamera className='pointer mx-5 svgimg1' size={24} /></label> 
-                                        <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="changepic"/>
-
+                                        </div>
+                                        <div className='profile-pic-editing-inner'>
+                                        <label htmlFor="changepic"><AiOutlineCamera style={{color:'white'}} className='pointer mx-5 svgimg1' size={24} /></label> 
+                                        
+                                        <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="changepic" style={{display:'none'}}/>
+                                        </div>
                                     </div>
                                     
                                             

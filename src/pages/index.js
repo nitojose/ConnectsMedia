@@ -61,13 +61,14 @@ import FooterPage from '../components/Footer/FooterPage';
 
 import Privacy from '../pages/Privacypolicy/Index';
 
+import Donate from '../pages/donation/index';
+
 
 // import Pagination from './paginationTable';
 
 export default function Index() {
     let data = useParams();
   
-
     return (
             <>
             <div>
@@ -158,6 +159,11 @@ export default function Index() {
                         <UserHeader/>
                         <Forgotpwd />
                         {/* <FooterPage/> */}
+                    </Route>
+
+
+                    <Route exact path='/donate'>
+                        <Donate/>
                     </Route>
 
 

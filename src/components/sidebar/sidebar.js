@@ -104,10 +104,18 @@ export default function Sidebar()
 
     },[]);
 
-
+    const cursor = document.querySelector('.pro-sidebar');
+    const body = document.querySelector('.body-two')
     function home()
     {
       history.push('/');
+      if(window.innerWidth<500){
+
+       
+      
+        cursor.setAttribute("style", 'display:none;max-width: 100%;');
+  
+      }
     }
 
 function logout()
@@ -115,6 +123,13 @@ function logout()
     sessionstorage.clear();
       history.push('/login');
       history.go(0);
+      if(window.innerWidth<500){
+
+       
+      
+        cursor.setAttribute("style", 'display:none;max-width: 100%;');
+  
+      }
 }
 
 
@@ -122,85 +137,188 @@ function logout()
 function orderpkg()
 {
   history.push('/order/package')
-  // const cursor = document.querySelector('.pro-sidebar');
+  
+  if(window.innerWidth<500){
 
-  // cursor.setAttribute("style", 'display:none;');
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
 
 function orderEvent()
 {
   history.push('/order/event')
-  // const cursor = document.querySelector('.pro-sidebar');
+  if(window.innerWidth<500){
 
-  // cursor.setAttribute("style", 'display:none;');
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
   
 function orderCamp()
 {
   history.push('/order/campaign');
-  // const cursor = document.querySelector('.pro-sidebar');
+  if(window.innerWidth<500){
 
-  // cursor.setAttribute("style", 'display:none;');
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
 
 function reqPkg()
 {
   history.push('/request/package');
-//  /cursor.setAttribute("style", 'display:none;');
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
 
 function reqEvent()
 {
   history.push('/request/event');
-  // const cursor = document.querySelector('.pro-sidebar');
+  if(window.innerWidth<500){
 
-  // cursor.setAttribute("style", 'display:none;');
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
 
 function msgSent()
 {
   history.push('/message/Outbox');
-  // const cursor = document.querySelector('.pro-sidebar');
+  if(window.innerWidth<500){
 
-  // cursor.setAttribute("style", 'display:none;');
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
 
 function msgRecieve()
 {
   history.push('/message/Inbox')
 
-  // var clientWidth = document.getElementsByClassName('body-two').style.width;
-  alert(clientWidth);
-  // const cursor = document.querySelector('.pro-sidebar');
+  if(window.innerWidth<500){
 
-  // cursor.setAttribute("style", 'display:none;');
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
+}
+function dashScreen()
+{
+  history.push('/dashboard')
+
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
+}
+function profile()
+{
+  history.push('/profile')
+
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
+}
+function changePassword()
+{
+  history.push('/change_password')
+
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
+}
+function getPackages()
+{
+  history.push('/getPackages')
+
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
+}
+function getCampaigns()
+{
+  history.push('/getCampaigns')
+
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
+}
+function faq()
+{
+  history.push('/faq')
+
+  if(window.innerWidth<500){
+
+       
+      
+    cursor.setAttribute("style", 'display:none;max-width: 1%;');
+    
+
+  }
 }
 
 var clicks = 1;
    function onTapFun(){
-     clicks+=1;
+    
      console.log('taped succesfuly')
     //  document.getElementsByClassName('pro-sidebar')
     // alert('sdddsds');
     const cursor = document.querySelector('.pro-sidebar');
     const body = document.querySelector('.body-two');
     // const body2 = document.querySelector('.dash-screen-sizess');
-    if(clicks%2==0){
-      // alert(clicks);
-      // body.setAttribute("style",'max-width: 100vw;');
-      // body2.setAttribute("style",'max-width: 100vw;');
-
-      // cursor.setAttribute("style", 'display:none;max-width:10px;');
-
-    }
-    else{
-      // cursor.setAttribute("style", 'display:block;max-width: 270px;');
-      // body.setAttribute("style",'max-width:100vw-20.5vw;');
-      // body2.setAttribute("style",'max-width: 100%-20%;');
+    
       cursor.setAttribute("style", 'display:none;');
 
 
-    }
+    
       
 
    }
@@ -213,18 +331,21 @@ var clicks = 1;
      
 
      <Menu iconShape="round" style={{backgroundColor:'white',height:'100%'}} >
-     <MenuItem className='nav-slide-icon'>
+     <div className='nav-slide-icon'>
      <div className='icon-background-dash-cam-slid'>
-<AiOutlineClose size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera2' onClick={()=>onTapFun()}/>
+<AiOutlineClose size={10} color='black' className='bsFillKanbanFill2 pointer cover-camera2' onClick={()=>onTapFun()}/>
 </div>
-      </MenuItem>
+      </div>
        <MenuItem>
        
        <div id="page-logo">
          <img src={require('../../../src/assets/images/cm-01.jpg')}  alt='header-logo-img' onClick={()=>home()} style={{width: '100%',borderRadius:'8px',height:'auto'}}/>
        </div>
        </MenuItem>
-       <MenuItem icon={<FaHome/>} onClick={()=>history.push('/dashboard')}> Dashboard</MenuItem>
+       <MenuItem icon={<FaHome/>} onClick={()=>dashScreen()
+      
+      
+      }> Dashboard</MenuItem>
        {/* <MenuItem onClick={() => home()} icon={<FaHome/>}>Home</MenuItem> */}
 
        {(pkgCount!==0 || campCount !== 0 || eveCount !==0)  ?<span className='processNoti'></span> : ''}
@@ -249,14 +370,14 @@ var clicks = 1;
          {/* <MenuItem icon={<FiInfo/>} onClick={() => history.push('/gene-enquiry')}>General Enquiry </MenuItem> */}
 
         
-         <MenuItem icon={<CgUserAdd/>} onClick={()=>history.push('/profile')} style={{backgroundColor:'white'}}>Change Profile</MenuItem>
+         <MenuItem icon={<CgUserAdd/>} onClick={()=>profile()} style={{backgroundColor:'white'}}>Change Profile</MenuItem>
            
          
-         <MenuItem icon={<RiLockPasswordFill/>} onClick={()=>history.push('/change_password')} style={{backgroundColor:'white'}}>Change Password </MenuItem>
+         <MenuItem icon={<RiLockPasswordFill/>} onClick={()=>changePassword()} style={{backgroundColor:'white'}}>Change Password </MenuItem>
 
-         <MenuItem icon={<FiPackage/>} onClick={()=>history.push('/getPackages')} style={{backgroundColor:'white'}}> Packages</MenuItem>
-         <MenuItem icon={<MdCampaign/>} onClick={()=>history.push('/getCampaigns')} style={{backgroundColor:'white'}}>Campaigns</MenuItem>
-         <MenuItem icon={<FaQuestion/>} onClick={()=>history.push('/faq')} style={{backgroundColor:'white'}}>FAQ</MenuItem>
+         <MenuItem icon={<FiPackage/>} onClick={()=>getPackages()} style={{backgroundColor:'white'}}> Packages</MenuItem>
+         <MenuItem icon={<MdCampaign/>} onClick={()=>getCampaigns()} style={{backgroundColor:'white'}}>Campaigns</MenuItem>
+         <MenuItem icon={<FaQuestion/>} onClick={()=>faq()} style={{backgroundColor:'white'}}>FAQ</MenuItem>
 
          <MenuItem icon={<FaSignOutAlt/>} onClick={() => logout()} style={{backgroundColor:'white'}}>Logout </MenuItem>
        

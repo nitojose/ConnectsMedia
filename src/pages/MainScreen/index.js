@@ -298,7 +298,7 @@ $("#page-logo").click(function(){
   return (
     <>
 
-	<Navbar />
+	<Navbar className='nav-main' style={{paddingTop:'0 !important',paddingBottom:'0 !important',backgroundColor:'transparent'}}/>
 
     <div id="scroll-snap">
 		<Home/>

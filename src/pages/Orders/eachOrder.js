@@ -21,27 +21,38 @@ import { AiOutlineBars } from "react-icons/ai";
 var sessionstorage = require('sessionstorage');
 
 var clicks = 1;
-function onTapFun(){
-  clicks+=1;
-  console.log('taped succesfuly')
- //  document.getElementsByClassName('pro-sidebar')
- // alert('sdddsds');
- const cursor = document.querySelector('.pro-sidebar');
- const body = document.querySelector('.body-two')
- if(clicks%2==0){
-   body.setAttribute("style",'max-width: 100vw;');
+    function onTapFun(){
+      clicks+=1;
+      console.log('taped succesfuly')
+     //  document.getElementsByClassName('pro-sidebar')
+    //  alert();
+     const cursor = document.querySelector('.pro-sidebar');
+     const body = document.querySelector('.body-two')
 
-   cursor.setAttribute("style", 'display:none;max-width:10px;');
- }
- else{
-   cursor.setAttribute("style", 'display:block;max-width: 100%;');
-   body.setAttribute("style",'max-width:100vw-20.5vw;')
+     if(window.innerWidth<=850){
 
- }
+        if(clicks==clicks+1){
+       body.setAttribute("style",'max-width: 100vw;');
  
-
-}
-
+       cursor.setAttribute("style", 'display:none;max-width:10px;');}
+       else{
+        cursor.setAttribute("style", 'display:block;max-width: 100%;');
+        body.setAttribute("style",'max-width:100vw-20.5vw;')
+  
+      }}
+      else{
+        if(clicks%2==0){
+            body.setAttribute("style",'max-width: 100vw;');
+      
+            cursor.setAttribute("style", 'display:none;max-width:10px;');}
+            else{
+             cursor.setAttribute("style", 'display:block;max-width: 100%;');
+             body.setAttribute("style",'max-width:100vw-20.5vw;')
+       
+           }
+      }
+ 
+    }
 export default  function EachOrder() {
     let history = useHistory();
 
@@ -193,7 +204,7 @@ export default  function EachOrder() {
                                     
                                     {/* </div> */}
 
-                                    <div className='second_section'>
+                                    <div className='second_section_2'>
 
                                         <div className=''>
                                             <h2>{order.plan[0].camp_type === "MPOST"?"MILLION ":"STATIC "}<span className='warning'>POSTS</span></h2>
@@ -284,10 +295,10 @@ export default  function EachOrder() {
                                         </div>
 
 
-                                        <div className='sec-pkg-section '>
+                                        <div className=' '>
 
 
-                                            <div className=' '>
+                                            <div className='pad-order'>
                                                 <h2>{order.PACKAGE.packages_type === "STD" ? "STANDRAD " :"CUSTOMIZED " }<span className='warning'> PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
@@ -330,7 +341,7 @@ export default  function EachOrder() {
                                       
                                                     
                                     {subOrder.length !== 0 ? 
-                                        (<div className='suborder' style={{margin: '-5px 10% 0px 10%;'}}>
+                                        (<div className='' style={{margin: '-5px 10% 0px 10%;'}}>
                                        
                                               <Container className=''>
                                                   <div className='view-msg '>

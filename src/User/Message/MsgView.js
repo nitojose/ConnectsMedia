@@ -63,20 +63,32 @@ export default function MsgView() {
       clicks+=1;
       console.log('taped succesfuly')
      //  document.getElementsByClassName('pro-sidebar')
-     // alert('sdddsds');
+    //  alert();
      const cursor = document.querySelector('.pro-sidebar');
      const body = document.querySelector('.body-two')
-     if(clicks%2==0){
+
+     if(window.innerWidth<=850){
+
+        if(clicks==clicks+1){
        body.setAttribute("style",'max-width: 100vw;');
  
-       cursor.setAttribute("style", 'display:none;max-width:10px;');
-     }
-     else{
-       cursor.setAttribute("style", 'display:block;max-width: 20.5vw;');
-       body.setAttribute("style",'max-width:100vw-20.5vw;')
- 
-     }
-     
+       cursor.setAttribute("style", 'display:none;max-width:10px;');}
+       else{
+        cursor.setAttribute("style", 'display:block;max-width: 100%;');
+        body.setAttribute("style",'max-width:100vw-20.5vw;')
+  
+      }}
+      else{
+        if(clicks%2==0){
+            body.setAttribute("style",'max-width: 100vw;');
+      
+            cursor.setAttribute("style", 'display:none;max-width:10px;');}
+            else{
+             cursor.setAttribute("style", 'display:block;max-width: 100%;');
+             body.setAttribute("style",'max-width:100vw-20.5vw;')
+       
+           }
+      }
  
     }
 
