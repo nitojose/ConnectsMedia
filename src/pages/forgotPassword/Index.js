@@ -66,7 +66,7 @@ export default function Index() {
 
 
           <Container className='pwd-div'>
-          <Parallax speed={-3}>
+          {/* <Parallax speed={-3}> */}
                     <h6 className='heading text-center my-5 '>Forgot Password</h6>
                     
                     
@@ -113,7 +113,7 @@ export default function Index() {
                     </Form>
 
 
-                    </Parallax>
+                    {/* </Parallax> */}
                     
 
 

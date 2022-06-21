@@ -21,7 +21,8 @@ export default function Give() {
     const stripe = useStripe();
     const elements = useElements();
     const stripePromise = loadStripe("pk_live_51KlNyrDp5HAOMMnMOfq5yKAHtb3WHJZyNLO6YK1so2QeT7gkDdqmHh15HH9A9UDdzMLTjdIyWQxFWTKz4QhWZHV800AA2sYk40");
-
+    //pk_test_51KlNyrDp5HAOMMnM7fJdwCrmBsB2cl3VvmnDSEAznm49NFAw6H5EJBMmOYbL5JekAKl1yRqqHVcKWMKl7TNlHMqy005EkIk2Fh 
+    
     let history = useHistory();
     const CARD_ELEMENT_OPTIONS = {
         style: {

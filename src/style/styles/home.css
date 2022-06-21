@@ -41,7 +41,8 @@ color:#FFF;
 text-decoration:none;
 }
 #page-head{
-    background-color: #111d4257;
+    /* background-color: #111d4257; */
+    background-color: transparent;
 position:fixed; 
 height:100px;
 z-index:500;

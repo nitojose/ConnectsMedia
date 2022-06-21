@@ -301,7 +301,7 @@ export default  function EachOrder() {
                                       
                                         <div className='vertical-text-pkg-two '>
                                         {/* <div className='icon-background-dash'> */}
-<AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
+                                                <AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
 
 {/* </div> */}
                                             <p>{order.PACKAGE.packages_type === "STD" ? <span style={{color:'#F1C40F',fontFamily:"cursive"}}>Standard </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Customized </span>}PACKAGE</p>
@@ -311,7 +311,7 @@ export default  function EachOrder() {
                                         <div className=' '>
 
 
-                                            <div className='pad-order'>
+                                            <div className=''>
                                                 <h2>{order.PACKAGE.packages_type === "STD" ? "STANDRAD " :"CUSTOMIZED " }<span className='warning'> PACKAGE</span></h2>
                                                 <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
@@ -319,7 +319,7 @@ export default  function EachOrder() {
                                             <div className='package-details-content-section'>
                                                 <p className='heading bold-text py-3'>Package Details</p>
 
-                                                <p>Package Cost : <span className='bold-text'>${order.PACKAGE.packages_cost}.00 /month</span></p>
+                                                <p>Package Cost : <span className='bold-text'> ${order.PACKAGE.packages_cost}.00 /month</span></p>
                                                 <p>Selected Months : <span className='bold-text'>{order.PACKAGE.months}</span></p>
                                                 <p>Drive Id : <a href={order.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
                                             

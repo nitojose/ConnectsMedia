@@ -78,7 +78,7 @@ export default function pillars() {
 
 <div class="section popup" id="pillars">
   <div>
-	<h1><i class="fa fa-arrow-left" aria-hidden="true"></i>Four<br></br>Pillars</h1>
+	<h1 style={{color:'#f5c812'}}><i class="fa fa-arrow-left" aria-hidden="true"></i>Four<br></br>Pillars</h1>
     <ul>
     <li>
     	<h2>Our Vision</h2>

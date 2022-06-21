@@ -62,7 +62,7 @@ export default  function EachOrder() {
     // const type =  sessionstorage.getItem("orderType");
     const order =  JSON.parse(sessionstorage.getItem("orderID"))
 
-    console.log("oId",id)
+    // console.log("oId",id)
     
 
     React.useEffect( ()=>
@@ -70,7 +70,7 @@ export default  function EachOrder() {
       
        
         getOrderDet();
-         setTimeout(() =>  getOrders(),5000) 
+         
 
     },[]);
 
@@ -81,9 +81,9 @@ export default  function EachOrder() {
             const token = sessionstorage.getItem("token");
             const customer_id =  sessionstorage.getItem("customerId");
     
-            var data = new FormData();
-            data.append("customer_id",customer_id);
-            data.append("order_id",id);
+            var data1 = new FormData();
+            data1.append("customer_id",customer_id);
+            data1.append("order_id",id);
             
     
             const headers ={
@@ -95,15 +95,49 @@ export default  function EachOrder() {
             await axios({
                 method: 'post',
                 url: Url+'getorderid',
-                data: data,
+                data: data1,
                 headers: headers
                 })
                 .then(function (response) {
                     //handle success
                     console.log("res",response.data); 
-                    setorderDet(response.data);
-                    setType(response.data.order.order_item)
                     setOrderItemId(response.data.order.order_itemid);
+                    setorderDet(response.data);
+                    setType(response.data.order.order_item);
+
+
+                    var data = new FormData();
+                    data.append("customer_id",customer_id);
+                    data.append("item_id",response.data.order.order_itemid);
+                    data.append("item",response.data.order.order_item)
+
+                    const headers ={
+                        'Content-Type': 'multipart/form-data',
+                        'Authorization': `Bearer ${token}`,
+                        'Access-Control-Allow-Origin' : '*',
+                        'Access-Control-Allow-Methods': 'POST'
+                    }
+
+                    axios({
+                        method: 'post',
+                        url: Url+'getorderbyid',
+                        data: data,
+                        headers: headers
+                        })
+                        .then( function (response) {
+                            //handle success
+                            console.log("pkg /event order",response.data); 
+                            setSubOrder(response.data.suborder);
+                            setOrder(response.data.order);
+                            // console.log("sss",response.data.suborder)
+                        
+                        })
+                        .catch(function (response) {
+                            //handle error
+                            console.log(response);
+                        });
+                                
+
                     
                    
                 })
@@ -116,68 +150,68 @@ export default  function EachOrder() {
         
        
     
-  async function getOrders()
-      {
-        const token = sessionstorage.getItem("token");
-        const customer_id =  sessionstorage.getItem("customerId");
+   
 
-        var data = new FormData();
-        data.append("customer_id",customer_id);
-        data.append("item_id",orderItemId);
-        data.append("item",type)
+      var clicks = 1;
+    function onTapFun(){
+      clicks+=1;
+      console.log('taped succesfuly')
+     //  document.getElementsByClassName('pro-sidebar')
+    //  alert();
+     const cursor = document.querySelector('.pro-sidebar');
+     const body = document.querySelector('.body-two')
 
-        const headers ={
-            'Content-Type': 'multipart/form-data',
-            'Authorization': `Bearer ${token}`,
-            'Access-Control-Allow-Origin' : '*',
-            'Access-Control-Allow-Methods': 'POST'
-          }
+     if(window.innerWidth<=850){
 
-         await axios({
-            method: 'post',
-            url: Url+'getorderbyid',
-            data: data,
-            headers: headers
-            })
-            .then( function (response) {
-                //handle success
-                console.log("pkg /event order",response.data); 
-                setSubOrder(response.data.suborder);
-                setOrder(response.data.order);
-                // console.log("sss",response.data.suborder)
-               
-            })
-            .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
-
+        if(clicks==clicks+1){
+       body.setAttribute("style",'max-width: 100vw;');
+ 
+       cursor.setAttribute("style", 'display:none;max-width:10px;');}
+       else{
+        cursor.setAttribute("style", 'display:block;max-width: 100%;');
+        body.setAttribute("style",'max-width:100vw-20.5vw;')
+  
+      }}
+      else{
+        if(clicks%2==0){
+            body.setAttribute("style",'max-width: 100vw;');
+      
+            cursor.setAttribute("style", 'display:none;max-width:10px;');}
+            else{
+             cursor.setAttribute("style", 'display:block;max-width: 100%;');
+             body.setAttribute("style",'max-width:100vw-20.5vw;')
+       
+           }
       }
+ 
+    }
     
 
   return (
   
     <div>
+        <Container className='body-two'>
 
-{/*  */}
+
 
                             { type === "CAMPAIGN" || type ==="EVENT"  ? (
 
                                 <>
                                 {/* {console.log("order",orderDet.order_details.plan[0].event_id)} */}
                                 
-                                    <div className='vertical-text event-align '>
-                                        {/* <p>{type === "event" ?"EVENTS":""}</p> */}
+                                    <div className='vertical-text-pkg-two '>
+                                    <AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
+
                                         <p>{orderDet.order_details.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
                                     </div>
 
                                     {/* <div className='vertical-text camp-text'>
-                                        {/* <p>{type === "camp" ?"CAMPAIGN":""}</p> 
+                                      <p>{type === "camp" ?"CAMPAIGN":""}</p> 
                                         <p>{orderDet.order_details.plan[0].camp_type === "MPOST"?<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Million </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Static </span>}<span >POSTS</span></p>
                                     
                                     </div> */}
 
-                                    <div className='second_section'>
+                                    <div className='second_section_2'>
 
                                         <div className=''>
                                             <h2>{orderDet.order_details.plan[0].camp_type === "MPOST"?"MILLION ":"STATIC "}<span className='warning'>POSTS</span></h2>
@@ -191,7 +225,7 @@ export default  function EachOrder() {
                                             <div className='font-12 content-end'>
                                                 <p> Tittle : <span >{orderDet.order_details.plan[0].camp_title?orderDet.order_details.plan[0].camp_title:orderDet.order_details.plan[0].event_title }</span></p>
 
-                                               {type === "camp"? <p >Cost : <span className='bold-text'>$ { orderDet.order.order_amt}.00 /month</span></p> : <p >Cost :<span className='bold-text'>${orderDet.order.order_amt}.00 </span></p>} 
+                                               {type === "camp"? <p >Cost : <span className='bold-text'> $ { orderDet.order.order_amt}.00 /month</span></p> : <p >Cost :<span className='bold-text'>${orderDet.order.order_amt}.00 </span></p>} 
 
                                                 <p>Date : <span >{dateFormat(orderDet.order_details.plan[0].event_from, "mmmm dS, yyyy")+"  -  "+dateFormat(orderDet.order_details.plan[0].event_to, "mmmm dS, yyyy")} </span></p>
 
@@ -255,65 +289,72 @@ export default  function EachOrder() {
                                     : 
                                     (
                                         type==="PACKAGE" ? (
-                                      <div className='padding-7rem'>  
+                                        
                                      <>
                                    
                                       
-                                        <div className='vertical-text-pkg '>
+                                        <div className='vertical-text-pkg-two  '>
+                                        <AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera3' onClick={()=>onTapFun()}/>
+
                                             <p>{orderDet.order_details.PACKAGE.packages_type === "STD" ? <span style={{color:'#F1C40F',fontFamily:"cursive"}}>Standard </span>:<span style={{color:'#F1C40F',fontFamily:"cursive"}}>Customized </span>}PACKAGE</p>
                                         </div>
 
 
-                                        <div className='sec-pkg-section '>
+                                        <div className=' '>
 
 
-                                            <div className=' '>
+                                            <div className=''>
                                                 <h2>{orderDet.order_details.PACKAGE.packages_type === "STD" ? "STANDRAD " :"CUSTOMIZED " }<span className='warning'> PACKAGE</span></h2>
-                                                <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
+                                                <p className='font-12'><span >Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. </span></p>
                                             </div>
 
-                                            <p className='heading bold-text py-3'>Package Details</p>
+                                            <div className='package-details-content-section'>
+                                                <p className='heading bold-text py-3'>Package Details</p>
 
-                                            <p>Package Cost : <span className='bold-text'>${orderDet.order_details.PACKAGE.packages_cost}.00 /month</span></p>
-                                            <p>Selected Months : <span className='bold-text'>{orderDet.order_details.PACKAGE.months}</span></p>
-                                            <p>Drive Id : <a href={orderDet.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
+                                                <p>Package Cost : <span className='bold-text'> ${orderDet.order_details.PACKAGE.packages_cost}.00 /month</span></p>
+                                                <p>Selected Months : <span className='bold-text'>{orderDet.order_details.PACKAGE.months}</span></p>
+                                                <p>Drive Id : <a href={orderDet.order.drive_id} target="_blank" rel="noreferrer">click here</a></p>
                                            
 
+                                            </div>
 
+                                            <div className='package-details-content-section'>
 
-                                            
+                                                                                        
                                             <p className='heading bold-text py-3'>{orderDet.order_details.PACKAGE_details.length ===0 ? "":"Specifications"}</p>
 
                                             {orderDet.order_details.PACKAGE_details && orderDet.order_details.PACKAGE_details.map((d,id) =>
 
-                                                    <>
-                                                
+                                            <>
 
-                                                <div className=''>
-                                                    <p>{d.pspec_text}</p>
-                                                    <p>{d.pspec_ans}</p>
 
-                                                </div>
-                                                </>
-                                            
+                                            <div className=''>
+                                            <p>{d.pspec_text}</p>
+                                            <p>{d.pspec_ans}</p>
+
+                                            </div>
+                                            </>
+
                                             )}
 
-
-                                          
-
                                             <Button variant="light" className='px-5 ' onClick={()=>sent()}>Message</Button> 
-                                           
-                                            
+
+
+
+                                            </div>
+
+
 
                                         </div>
 
                                       
                                                     
                                     {subOrder.length !== 0 ? 
-                                        (<div className='suborder' style={{margin: '-5px 10% 0px 10%;'}}>
+                                        (<div className='' style={{margin: '-5px 10% 0px 10%;'}}>
                                        
                                               <Container className=''>
-                                                  <div className='view-msg '>
+                                                  <div className='view-msg'>
 
                                             <table className="table table-striped table-light mt-5 ">
                                                 <thead class="thead-dark">
@@ -347,7 +388,7 @@ export default  function EachOrder() {
 
 
                                         
-                                        </> </div> ):(<></>)
+                                        </>  ):(<></>)
                                        
                                     )
                               
@@ -410,7 +451,7 @@ export default  function EachOrder() {
      
 
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
-
+        </Container>
     
 </div>
   );
