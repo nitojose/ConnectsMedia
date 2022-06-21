@@ -179,6 +179,13 @@ width: 100%;
      top:13vh;
      left: 20vh;
  }
+ @media (max-width:500px) {
+    .row-flex-align-two img{
+        position: absolute;
+        top:13vh;
+        left: 8vh;
+    }
+ }
  .profileDiv{
      position: absolute;
      top: 0;
@@ -191,6 +198,27 @@ width: 100%;
     color: black;
     display: flex;
     
+// position: absolute;
+
+// top: 1px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+width: 80%;
+border-radius: 10px;
+padding-top: 20px;
+    padding-bottom: 20px;
+
+// background-color: rgba(255, 255, 255, 0.521);
+background-color: aliceblue;
+
+ }
+ .header-banner-two-section3{
+     position: absolute;
+     top: 3vh;
+    color: black;
+    display: flex;
+    display: flex;
+    justify-content: space-between;
+
 // position: absolute;
 
 // top: 1px;

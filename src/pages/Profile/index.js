@@ -19,6 +19,7 @@ import {FiPackage} from 'react-icons/fi';
 import {BsFillKanbanFill } from "react-icons/bs";
 import { AiOutlineBars } from "react-icons/ai";
 import Footer from '../../components/Footer';
+import {MdTerrain } from "react-icons/md";
 
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 var sessionstorage = require('sessionstorage');
@@ -367,7 +368,7 @@ export default function Index() {
              
   
   
-            <div className='header-banner-two'>
+            <div className='header-banner-two-section3'>
             <div className='background-color-text'>
           <AiOutlineBars color='black' className='bsFillKanbanFill' onClick={()=>onTapFun()}/>
   <div className='icon-tab-block'>
@@ -376,6 +377,28 @@ export default function Index() {
           <p className='header-banner-text'>Profile</p>
           </div>
           </div>
+
+          {/*copy from ############### */}
+          <div>
+    <label htmlFor="cover-image" style={{marginRight:'20px'}}>
+        
+        <MdTerrain  size={20} className="pointer" />
+        </label> 
+
+    <input style={{display:'none'}} type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
+
+
+          {/* copy from ############### */}
+
+         
+                    <label  style={{marginRight:'20px'}} htmlFor="group_image"><AiOutlineCamera color='white' className='pointer' style={{color:'black'}} /></label> 
+        
+                    <input type="file" style={{display:'none'}} onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
+                
+                    </div>
+
+          {/* copy from ############### */}
+
             </div>
             </div>
             <div className='button-background-req'></div>

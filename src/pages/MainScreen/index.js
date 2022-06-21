@@ -301,6 +301,7 @@ $("#page-logo").click(function(){
 	<Navbar className='nav-main' style={{paddingTop:'0 !important',paddingBottom:'0 !important',backgroundColor:'transparent'}}/>
 
     <div id="scroll-snap">
+		{/* <div className='main-screen-hide-section'> */}
 		<Home/>
 		<About />
 		<Pillars />
@@ -312,6 +313,7 @@ $("#page-logo").click(function(){
 		<Faq/>
 		<Give/>
 		<Testimonial/>
+		{/* </div> */}
 		<Contact />
 		{/* <FooterPage/> */}
     </div>

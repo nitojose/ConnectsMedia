@@ -22,7 +22,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import '../../style/sidebar-slider.scss';
 import { AiOutlineBars } from "react-icons/ai";
 
-
+import {MdTerrain } from "react-icons/md";
 // import '../../style/order.scss';
 
 var sessionstorage = require('sessionstorage');
@@ -248,7 +248,7 @@ export default function Index() {
 <div className='cover-camera'>
     <label htmlFor="cover-image">
         <div className='icon-background-dash-cam'>
-        <AiOutlineCamera  size={20} className="pointer" />
+        <MdTerrain  size={20} className="pointer" />
         </div></label> 
 
     <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
@@ -837,18 +837,22 @@ export default function Index() {
                                     {/* <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  /> */}
 {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()}
 //  style={{objectFit:'contain'}}
-  className="pointer svgimg1" style={{width:'50vw',height:'30%'}} />):(<><img className="pointer svgimg1"  alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+  className="pointer svgimg1" style={{height:'100%'}} />):(<><img className="pointer svgimg1"  alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
 {console.log("profileup",profileUpload)}
                                     
 
-                                    <div className='profile-pic-editing'>
+                                    
+                                    
+                                            
+                                </div>
+                                <div className='profile-pic-editing'>
                                         <div className='profile-pic-editing-inner'>
                                     <AiOutlineClose  className='Ai-close pointer svgimg1' size={24} onClick={()=>onClose()}/>
 
                                     </div>
                                     <div className='profile-pic-editing-inner'>
-                                        <AiOutlineDelete className='pointer mx-5 svgimg1' size={24} onClick={()=>deletePic()}/>
+                                        <AiOutlineDelete className='pointer svgimg1' size={24} onClick={()=>deletePic()}/>
                                         </div>
                                         <div className='profile-pic-editing-inner'>
                                         <label htmlFor="changepic"><AiOutlineCamera style={{color:'white'}} className='pointer mx-5 svgimg1' size={24} /></label> 
@@ -856,9 +860,6 @@ export default function Index() {
                                         <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="changepic" style={{display:'none'}}/>
                                         </div>
                                     </div>
-                                    
-                                            
-                                </div>
 </Container>
                             );
                             

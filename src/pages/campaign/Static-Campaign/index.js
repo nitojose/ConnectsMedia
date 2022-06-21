@@ -79,7 +79,7 @@ export default function Index() {
 <>
 <div style={{marginTop:100}}>
         <Container>
-        <Row style={{marginLeft:'1.3rem'}}>
+        <Row>
             {post.map((mpost,id) => (
                 <Col xl={6} sm={12} md={12} xxl={6} className="mt-3 mb-5">
                     <div className='mpost-div'>

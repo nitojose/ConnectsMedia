@@ -975,7 +975,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       
     }
     .profile-pic-view{
-        width: 50%;
+        width: 100%;
         height: 50%;
         margin: auto;
     }
@@ -992,8 +992,12 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 // .pwd-div-one{margin-top: 20vh;}
 
 .body-two2{
-    width: 50%;
-    height: 50%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
 }
 .body-two2 img{

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory,Link} from "react-router-dom";
+import '../../src/style/paymentsuccess.css'
 export default function PaymentSuccess() {
 
   const history = useHistory();
@@ -11,7 +12,17 @@ export default function PaymentSuccess() {
 
 
   return (
-    <div className='center-align'>PaymentSuccess</div>
+<div class="box"> 
+  <div class="success alert">
+    <div class="alert-body">
+      Success !
+    </div>
+  </div>
+   
+
+
+
+    </div>
   )
   
 }
