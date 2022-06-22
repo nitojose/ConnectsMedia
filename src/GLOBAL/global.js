@@ -17,14 +17,15 @@ async function isLoggin()
 {
    
     const customer_id = await sessionstorage.getItem("customerId");
+    console.log("customerid in global",sessionstorage.getItem("customerId"))
    
-    if(customer_id === null)
+        if(customer_id === null)
         {
-            // history.push('/login');
+           
             return customer_id;
         }
             
-    
+   
 }
 
 

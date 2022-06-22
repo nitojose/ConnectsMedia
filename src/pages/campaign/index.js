@@ -5,6 +5,8 @@ import Parallax from 'react-rellax'
 import { useHistory} from "react-router-dom";
 import axios from 'axios';
 import { Url } from '../../GLOBAL/global';
+import "../HomePage/index.js";
+
 var sessionstorage = require('sessionstorage');
 
 

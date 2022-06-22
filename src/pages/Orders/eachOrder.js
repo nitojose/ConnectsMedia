@@ -450,11 +450,6 @@ export default  function EachOrder() {
                             }
 
 
-                            
-                
-         
-     
-
         <ToastContainer position='top-center' style={{marginTop:'50vh'}}/>
 
         </Container>
@@ -472,6 +467,7 @@ export default  function EachOrder() {
     {
         console.log("message box clicked")
         setmodelmsg(true);
+        setFrame(false);
     }
 
     

@@ -21,7 +21,6 @@ var sessionstorage = require('sessionstorage');
 
 export default function Index() {
 
-
     let history = useHistory();
 
     async function logginornot()
@@ -32,17 +31,12 @@ export default function Index() {
       {
         history.push('/login');
       }
-      
-  
     }
   
     React.useEffect(() => {
-  
       logginornot();
     },[]);
   
-    
-
     const[orders,setOrders] = React.useState([]);
     
     const [loading,setLoading] = React.useState(true);
@@ -61,7 +55,6 @@ export default function Index() {
     {
       setCurrentPage(pageNumber);
     }
-
 
     useEffect(() => {
 

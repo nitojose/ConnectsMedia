@@ -19,6 +19,9 @@ scroll-snap-type: y mandatory;
 -webkit-overflow-scrolling:touch;
 /* color: #fff; */
 }
+html.freeze,body.freeze{
+    overflow:hidden !important;
+}
 #scroll-snap{
     background:var(--bg);
     color:#fff;
@@ -45,7 +48,7 @@ text-decoration:none;
     background-color: transparent;
 position:fixed; 
 height:100px;
-z-index:500;
+z-index:1500;
 top:0;left:0;
 width:100%;
 display:flex;
@@ -1478,7 +1481,7 @@ width:57%;
 text-shadow:2px 2px 3px #555;
 }
 #give button{
-width:10vmax;
+width:15vmax;
 font-size: 35%;
 padding: 0px 20px;
 }

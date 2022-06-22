@@ -133,6 +133,7 @@ $(document).ready(function(){
 	});
 	$('#nav-icon').click(function(){
 		$(this).toggleClass('open');
+		$("body,html").toggleClass("freeze");
 		$("#section-nav").toggleClass('open');
 	});
 });

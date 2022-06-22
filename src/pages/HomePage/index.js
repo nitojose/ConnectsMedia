@@ -26,7 +26,9 @@ export default function Index() {
 
   React.useEffect(()=>
 {
+	
   $(document).ready(function(){
+	
 		$("#video #play-btn").click(function(){
 			$("#video").addClass("playing");
 			$("#player video").trigger("play");
@@ -131,6 +133,7 @@ $(document).ready(function(){
 		$('#nav-icon').removeClass("open");
 		$("#section-nav").removeClass("open");
 	});
+	
 	$('#nav-icon').click(function(){
 		$(this).toggleClass('open');
 		$("#section-nav").toggleClass('open');

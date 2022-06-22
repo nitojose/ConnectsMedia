@@ -14,13 +14,12 @@ import { FaUserTie }  from "react-icons/fa";
 import axios from 'axios';
 import { Url } from '../../GLOBAL/global';
 import {MdDashboard} from 'react-icons/md';
+import $ from 'jquery';
+
 var sessionstorage = require('sessionstorage');
 
 // console.log('token is',sessionstorage.getItem('token'));
 // console.log("userheader",window.location.pathname)
-
-
-
 
 export default function UserHeader() {
 
@@ -37,7 +36,6 @@ export default function UserHeader() {
         {
             setHomePath(true)
         }
-
        
 
         const token = sessionstorage.getItem("token");
@@ -59,6 +57,11 @@ export default function UserHeader() {
             });
         }
 
+        $('#nav-icon').click(function(){
+            $(this).toggleClass('open');
+            $("#section-nav").toggleClass('open');
+        });
+
         getDatas();
 
         
@@ -76,8 +79,8 @@ export default function UserHeader() {
             <img src={require('../../../src/assets/imgs/connect-media-logo.png')}  alt='header-logo-img' onClick={()=>home()}/></a></div>
             <div id="head-filler"></div>
             <div id="user-menu">
-
-            {sessionstorage.getItem('token')=== null  ? (<>
+{console.log("token in navbar",sessionstorage.getItem('token'))}
+            {(sessionstorage.getItem('token')=== null || sessionstorage.getItem('token')===undefined)  ? (<>
                 
                
                         
@@ -98,15 +101,14 @@ export default function UserHeader() {
 
                     
             </div>
-            <div id="page-menu">
+            {/* <div id="page-menu">
             <div id="nav-icon">
-            <span></span>
             <span> </span>
-            <span></span>
+            <span> </span>
             <span> </span>
             <span> </span>
             </div>
-            </div>
+            </div> */}
             </div>
     {/* header logo end */}
     </section>

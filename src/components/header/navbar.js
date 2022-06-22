@@ -81,7 +81,7 @@ export default function Navbar(props,id) {
             <div id="head-filler"></div>
                 <div id="user-menu">
 
-                {sessionstorage.getItem('token')=== null ? (<>
+                {(sessionstorage.getItem('token')=== null || sessionstorage.getItem('token')===undefined)  ? (<>
                    
                             
                             
@@ -91,9 +91,8 @@ export default function Navbar(props,id) {
                 </div>
             <div id="page-menu">
               <div id="nav-icon">
-                  <span></span>
                   <span> </span>
-                  <span></span>
+                  <span> </span>
                   <span> </span>
                   <span> </span>
                 </div>
@@ -116,7 +115,8 @@ export default function Navbar(props,id) {
           <li data-section="give"><span>Give</span></li>
           <li data-section="testimonials"><span>Testimonials</span></li>
           <li data-section="contact"><span>Contact</span></li>
-          {sessionstorage.getItem('token')!== null ? (<></>):(<><li data-section="login" onClick={() => Login()}><span>Login</span></li></>)}
+          {(sessionstorage.getItem('token')!== null && sessionstorage.getItem('token')!==undefined)  ?
+           (<></>):(<><li data-section="login" onClick={() => Login()}><span>Login</span></li></>)}
           
         </ul>
 

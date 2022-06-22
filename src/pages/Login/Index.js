@@ -13,9 +13,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Popup from '../../components/popUp/Index';
 import { flip } from 'react-animations';
+import "../MainScreen/index.js";
 
 var sessionstorage = require('sessionstorage');
-
 
 export default function Index() {
 
@@ -30,8 +30,6 @@ export default function Index() {
     // setValue(d);
 
     // console.log("token in login ",sessionstorage.getItem('token'))
-
-    
 
     function onSubmit(data)
     {
@@ -141,7 +139,7 @@ export default function Index() {
                 <Col xl={6} sm={12} md={12} xxl={6} className='py-5 my-5'>
 
                 <Parallax speed={-3} >  
-                  <img src={require('../../assets/images/login.png')} height={500} width={500} alt="hands" />
+                  <img src={require('../../assets/images/login.png')} height={"auto"} width={"100%"} alt="hands" />
                 </Parallax>
                 </Col>
 

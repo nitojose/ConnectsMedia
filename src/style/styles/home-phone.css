@@ -112,7 +112,7 @@
   left:0px;right:0px;
   top:0px;bottom:0px;
   background:rgb(0,0,50,0.9);
-  z-index:400;
+  z-index:1400;
   justify-content:flex-start;
   flex-wrap:wrap;
   padding:60px 15px 15px 15px;
@@ -426,9 +426,57 @@
   display:none;
   }
   }
+
+  @media (max-height : 600px) and (orientation: landscape)
+  {
+    #video #video-text{
+      font-size: 75%;
+    }
+    #about .content {
+      font-size: 75%;
+    }
+    #pillars h1 {
+      margin-right: 15vmax;
+      transform-origin:right top;
+    }
+    .section#why{
+      padding-top: 80px;
+    }
+    #why .explanation {
+      font-size: 70%;
+    }
+    #services #service-wrap{
+      height:80%;
+    }
+    #packages h1{
+      font-size:120%;
+    }
+    #packages .package{
+      width:auto;
+      font-size:60%;
+    }
+    #campaigns ul {
+      overflow-x:auto;
+      overflow-y:hidden;
+      flex-wrap: nowrap;
+    }
+    #testimonials>div {
+      padding-top: 5vw;
+    }
+    #testimonials h2 {
+      font-size:120%;
+    }
+    #testimonials ul.content {
+      font-size:65%
+    }
+    #contact .textbox {
+      height:10vh;
+    }
+
+  }
   
   
-  @media (max-width : 400px)
+  @media (max-width:400px)
   {
     #contact #contact-card {
       padding-top: 45% !important;

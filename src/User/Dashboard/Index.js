@@ -44,9 +44,9 @@ export default function Index() {
    async function logginornot()
     {
       console.log("login")
-      const cust =  await isLoggin();
-      console.log("cust",cust);
-      if(cust === null)
+      let cust_id =  await isLoggin();
+      console.log("cust",cust_id);
+      if(cust_id === null)
       {
         history.push('/login');
       }
@@ -55,6 +55,14 @@ export default function Index() {
     }
 
     React.useEffect( async() => {
+
+        logginornot();
+     
+      getDatas();
+
+      
+
+      await getUserInfo();
 
         $("#service-list li").click(function(){
             var i=$(this).index()+1;
@@ -79,13 +87,7 @@ export default function Index() {
 
        
       console.log("useeffect")
-      logginornot();
-     
-      getDatas();
-
       
-
-      await getUserInfo();
       
 
     },[]);
