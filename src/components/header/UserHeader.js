@@ -79,8 +79,8 @@ export default function UserHeader() {
             <img src={require('../../../src/assets/imgs/connect-media-logo.png')}  alt='header-logo-img' onClick={()=>home()}/></a></div>
             <div id="head-filler"></div>
             <div id="user-menu">
-{console.log("token in navbar",sessionstorage.getItem('token'))}
-            {(sessionstorage.getItem('token')=== null || sessionstorage.getItem('token')===undefined)  ? (<>
+{console.log("token in navbar",typeof(sessionstorage.getItem('token')))}
+            {((sessionstorage.getItem('token')=== null) || (sessionstorage.getItem('token')==="undefined"))  ? (<>
                 
                
                         

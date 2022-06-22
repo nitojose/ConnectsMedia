@@ -46,7 +46,7 @@ export default function Index() {
       console.log("login")
       let cust_id =  await isLoggin();
       console.log("cust",cust_id);
-      if(cust_id === null)
+      if(cust_id === (null || "undefined"))
       {
         history.push('/login');
       }
