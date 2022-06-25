@@ -153,13 +153,20 @@ height:100%;
 }
 #section-nav li:before{
 position:absolute;
-content:'';
+content:' ';
 right:0;top:4px;
 width:10px;height:10px;
 border:2px solid #FFF;
 border-radius:50%;
 background-color:none;
 transition:all 300ms;
+}
+#section-nav li[data-section="login"]:before{
+    border:none;
+    background: url('../../assets/imgs/user-login.png') no-repeat;
+    background-size: contain;
+    transform: scale(2,2);
+    
 }
 #section-nav li:hover:before{
 background-color:var(--comp2);

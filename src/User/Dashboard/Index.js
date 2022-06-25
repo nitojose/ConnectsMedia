@@ -703,13 +703,13 @@ export default function Index() {
             <div className='view-msg mt-5 mb-5'>
                 <div className='align-div pwd-div'>
                    
-                    <div id="campaigns" style={{borderRadius:'8px'}}>
+                    <div id="campaigns" style={{borderRadius:'8px',color:'#FFFFFF'}} className="onfocus">
                     
                                         <div>
                                         <h1 className=' font-20 text-center'>Campaigns</h1>
                                         <ul>
 
-                                        <li>
+                                        <li className="onfocus">
                                             <h2>Upcoming Event</h2>
                                             <img className='mt-3' src={require('../../../src/assets/imgs/mike.png')} alt="Campaigns for Upcoming Events"/>
                                             <span className='mt-3'>Share your calendar here. We will pick all your future events from here</span>
