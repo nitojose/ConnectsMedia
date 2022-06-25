@@ -136,14 +136,13 @@ function logout()
 
 function orderpkg()
 {
-  history.push('/order/package')
+  history.push('/order/package');
+  //this.props.history.push("/order/package");
+  //history.go();
   
   if(window.innerWidth<500){
 
-       
-      
     cursor.setAttribute("style", 'display:none;max-width: 1%;');
-    
 
   }
 }

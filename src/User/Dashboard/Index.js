@@ -251,23 +251,42 @@ export default function Index() {
     <label htmlFor="cover-image">
         <div className='icon-background-dash-cam'>
         <MdTerrain  size={20} className="pointer" />
-        </div></label> 
-
-    <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
+        </div>
+        <input type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
+    </label> 
 </div>
 <div className='icon-background-dash'>
 <AiOutlineBars size={20} color='black' className='bsFillKanbanFill2 pointer cover-camera2' onClick={()=>onTapFun()}/>
 
 </div>
 
-<div className='content-overlay'>
-      <div className='dash-content'
-    //    style={{marginLeft:'245px',width:'80%',marginTop:'2rem'}}
-       >
-        <MdDashboard color='black' className='icon-dash12' size={22}/>
-        <p className='header-banner-text'>Welcome <span className='ministry'>{customerInfo === undefined ? "" : customerInfo.cust_ministry}</span></p>
-      </div>
-      <div className='order-section-align'>
+<div className="profile-idents">
+    <div className='content-overlay'>
+        <div className='dash-content'
+        //    style={{marginLeft:'245px',width:'80%',marginTop:'2rem'}}
+        >
+            <MdDashboard color='black' className='icon-dash12' size={22}/>
+            <p className='header-banner-text'>Welcome <span className='ministry'>{customerInfo === undefined ? "" : customerInfo.cust_ministry}</span></p>
+        </div>     
+            
+    </div>
+    <div className='row-flex-align-one'
+            //  style={{marginTop:'5rem'}}
+            >
+                <div className='profileInner-one'>
+                    {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} className="pointer profileInner-one-img" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
+                    <div className='img-camera'>
+                        <label htmlFor="group_image"><AiOutlineCamera color='white' className='pointer' style={{color:'black'}} /></label> 
+            
+                        <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
+                    </div>  
+                </div>
+                </div>
+    </div> 
+</div>
+
+<div className="stats">
+<div className='order-section-align'>
       <div className='position-two-dash'>
        <div className='dash-card' id="dashcard1">
         <div className='dash-text-align1'>
@@ -320,35 +339,8 @@ export default function Index() {
 
        </div>
        </div>
-        
-      </div>
+</div>
 
-
-      <div className='row-flex-align-one'
-        //  style={{marginTop:'5rem'}}
-         >
-
-            
-              <div className='profileInner-one'>
-               
-                {Object.keys(profileUpload).length === 0 ? (<img  src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}} className="pointer profileInner-one-img" />):(<><img  src={profileUpload?profileUpload : picture} /></>)}
-
-                <div className='img-camera'>
-                    <label htmlFor="group_image"><AiOutlineCamera color='white' className='pointer' style={{color:'black'}} /></label> 
-        
-                    <input type="file" onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
-                </div>  
-
-
-              </div>
-              
-           
-    
-            </div>
-</div> 
-
-    
-        
 
 
 <div className='view-msg mt-5 '>
@@ -839,7 +831,7 @@ export default function Index() {
                                     {/* <img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()} style={{objectFit:'contain'}}  /> */}
 {Object.keys(profileUpload).length === 0 ? (<img alt="profile" src={customerInfo === undefined ? picture :(imgUrl+customerInfo.photo)} onClick={()=>viewProfile()}
 //  style={{objectFit:'contain'}}
-  className="pointer svgimg1" style={{height:'100%'}} />):(<><img className="pointer svgimg1"  alt="profile" src={profileUpload?profileUpload : picture} /></>)}
+  className="pointer svgimg1" style={{maxHeight:"75vh"}} />):(<><img className="pointer svgimg1"  alt="profile" src={profileUpload?profileUpload : picture} /></>)}
 
 {console.log("profileup",profileUpload)}
                                     

@@ -123,6 +123,7 @@ $(document).ready(function(){
 		{
 			return;
 		}
+		$("body,html").removeClass("freeze");
 		$('body,html').animate({
 			scrollTop: $("#"+section).offset().top
 		});

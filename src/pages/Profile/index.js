@@ -379,10 +379,10 @@ export default function Index() {
           </div>
 
           {/*copy from ############### */}
-          <div>
+          <div className='change-photos'>
     <label htmlFor="cover-image" style={{marginRight:'20px'}}>
         
-        <MdTerrain  size={20} className="pointer" />
+        <MdTerrain  size={20} className="pointer" />&nbsp;   <div className="txt">Cover Photo</div>
         </label> 
 
     <input style={{display:'none'}} type="file" onChange={(e) => filechoose(e,"cover")} className="filetype"  id="cover-image"/>
@@ -391,7 +391,8 @@ export default function Index() {
           {/* copy from ############### */}
 
          
-                    <label  style={{marginRight:'20px'}} htmlFor="group_image"><AiOutlineCamera color='white' className='pointer' style={{color:'black'}} /></label> 
+                    <label  style={{marginRight:'20px'}} htmlFor="group_image"><AiOutlineCamera color='white' className='pointer' style={{color:'black'}} />
+                     &nbsp; <div className="txt">Profile Photo</div></label> 
         
                     <input type="file" style={{display:'none'}} onChange={(e) => filechoose(e,"profile")} className="filetype" id="group_image"/>
                 

@@ -26,10 +26,12 @@ export default function Index() {
   <footer className="bg-white">
     <div className="container py-5">
       <div className="row py-4">
-        <div className="col-lg-4 col-md-6 mb-4 mb-lg-0">
+        <div className="col-lg-1">
+        </div>
+        <div className="col-lg-4 col-md-6 mb-4 mb-lg-0 ml-5">
             {/* <img src="img/logo.png" alt="" width="180" class="mb-3"> */}
-          <p className="font-italic text-muted">We know how to get you there. Your 100% satisfaction is guaranteed.</p>
           <img src={require('../../assets/images/cm-01.jpg')}  onClick={()=>home()} style={{width: '65%',borderRadius:'8px',height:'auto'}} className="pointer" alt="logo"/>
+          <p className="font-italic text-muted mt-5">We know how to get you there.<br></br>Your 100% satisfaction is guaranteed.</p>
           <ul className="list-inline mt-4">
             <li className="list-inline-item"><a href="#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></li>
             <li className="list-inline-item"><a href="#" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></li>
@@ -57,15 +59,12 @@ export default function Index() {
             
           </ul>
         </div>
-        <div className="col-lg-4 col-md-6 mb-lg-0 mt-3">
-          <h6 className="text-uppercase font-weight-bold mb-4"></h6>
-          
-
+        <div className="col-lg-3 col-md-6 mb-lg-0">
+          <h6 className="text-uppercase font-weight-bold mb-4">Connect</h6>
             <ul className="list-unstyled mb-0">
             <li className="mb-2"><a href='/donate' class="text-muted">Give Now</a></li>
             <li className="mb-2"><a href='/privacy-policy' class="text-muted">Privacy policy</a></li>
             <li className="mb-2"><a href="/terms-and-conditions" class="text-muted">Terms and Conditions</a></li>
-            
           </ul>
          
           {/* <div className="p-1 rounded border">
