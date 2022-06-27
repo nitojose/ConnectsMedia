@@ -234,7 +234,7 @@ export default function Index() {
 
         await axios({
             method: 'post',
-            url: Url+'getorderbyid',
+            url: Url+'getorderbyidapi',
             data: data,
             headers: headers
             })

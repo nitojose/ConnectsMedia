@@ -108,8 +108,8 @@ export default  function EachOrder() {
 
                     var data = new FormData();
                     data.append("customer_id",customer_id);
-                    data.append("item_id",response.data.order.order_itemid);
-                    data.append("item",response.data.order.order_item)
+                    data.append("order_id",response.data.order.order_id);
+                    // data.append("item",response.data.order.order_item)
 
                     const headers ={
                         'Content-Type': 'multipart/form-data',

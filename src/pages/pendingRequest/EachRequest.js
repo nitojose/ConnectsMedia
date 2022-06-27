@@ -287,7 +287,7 @@ export default function EachRequest() {
                 })
                 .then(function (response) {
                     //handle success
-                    console.log("response",response); 
+                    console.log("response",response.data); 
                     
 
                     if(response.data.message === "Mail Send Successfully." )
@@ -301,7 +301,7 @@ export default function EachRequest() {
 
                         axios({
                         method: 'post',
-                        url: Url+'getorderbyid',
+                        url: Url+'getorderbyidapi',
                         data: data1,
                         headers: headers
                         })

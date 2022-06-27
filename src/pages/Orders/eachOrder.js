@@ -151,8 +151,8 @@ export default  function EachOrder() {
 
         var data = new FormData();
         data.append("customer_id",customer_id);
-        data.append("item_id",order.order.order_itemid);
-        data.append("item",order.order.order_item)
+        data.append("order_id",order.order.order_id);
+        // data.append("item",order.order.order_item)
 
         const headers ={
             'Content-Type': 'multipart/form-data',
@@ -169,7 +169,7 @@ export default  function EachOrder() {
             })
             .then(function (response) {
                 //handle success
-                console.log("pkg /event order",response.data); 
+                console.log("pkg /event order in orderview",response.data); 
                 setSubOrder(response.data.suborder);
                 setOrder(response.data.order);
                 // console.log("sss",response.data.suborder)

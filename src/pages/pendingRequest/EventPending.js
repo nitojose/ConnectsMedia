@@ -234,8 +234,8 @@ export default function EventPending() {
 
     
     
-    var data = new FormData();
-    data.append("event_id",eventList.event_id);
+            var data = new FormData();
+            data.append("event_id",eventList.event_id);
             data.append("customer_id",customer_id);
             data.append("cost",eventList.event_cost );
             data.append("status","S");
@@ -261,7 +261,7 @@ export default function EventPending() {
 
                     axios({
                         method: 'post',
-                        url: Url+'getorderbyid',
+                        url: Url+'getorderbyidapi',
                         data: data1,
                         headers: headers
                         })
