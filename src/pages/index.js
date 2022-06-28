@@ -343,6 +343,7 @@ export default function Index() {
                 </Route>
 
                 <Route exact path='/privacy-policy'>
+                <UserHeader/>
                     <Privacy/>
                     {/* <FooterPage/> */}
                 </Route>

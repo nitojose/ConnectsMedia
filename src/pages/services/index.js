@@ -33,7 +33,7 @@ export default function index() {
             
 
 
-<div class="section popup" id="services">
+<div class="section scrollbar popup" id="services">
     <div class="service-main-div">
         <h1>Services We Offer</h1>
         <div id="service-wrap">

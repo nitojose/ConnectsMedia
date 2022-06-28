@@ -410,7 +410,7 @@ export default function Index() {
             <div className='view-msg '>
                 
 
-                    <Row className='align-div pwd-div  mb-5'>
+                    <Row className='align-div pwd-div mb-5'>
 
 {/*                     
                     <ImageUploader

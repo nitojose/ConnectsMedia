@@ -23,13 +23,13 @@ export default function Index() {
   
 
 
-  <footer className="bg-white">
+  <footer>
     <div className="container py-5">
       <div className="row py-4">
         <div className="col-lg-1">
         </div>
         <div className="col-lg-4 col-md-6 mb-4 mb-lg-0 ml-5">
-            {/* <img src="img/logo.png" alt="" width="180" class="mb-3"> */}
+           
           <img src={require('../../assets/images/cm-01.jpg')}  onClick={()=>home()} style={{width: '65%',borderRadius:'8px',height:'auto'}} className="pointer" alt="logo"/>
           <p className="font-italic text-muted mt-5">We know how to get you there.<br></br>Your 100% satisfaction is guaranteed.</p>
           <ul className="list-inline mt-4">
@@ -67,14 +67,7 @@ export default function Index() {
             <li className="mb-2"><a href="/terms-and-conditions" class="text-muted">Terms and Conditions</a></li>
           </ul>
          
-          {/* <div className="p-1 rounded border">
-            <div className="input-group">
-              {/* <input type="email" placeholder="Enter your email address" aria-describedby="button-addon1" class="form-control border-0 shadow-0"> 
-              <div className="input-group-append">
-                <button id="button-addon1" type="submit" class="btn btn-link"><i class="fa fa-paper-plane"></i></button>
-              </div>
-            </div>
-          </div> */}
+        
         </div>
       </div>
     </div>
