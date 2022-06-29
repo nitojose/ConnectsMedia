@@ -324,13 +324,14 @@
   }
   .package-wrap .package:before{
   background-position:top center;
-  height:60px;
+  height:50px;
   }
   .main-packages{
   height:100%;
   }
   .package h4{
   text-align:center;
+  padding: 10px;
   }
   
   #campaigns>div{
