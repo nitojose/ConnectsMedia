@@ -33,7 +33,6 @@ export default function Index() {
 		});
 		$("#video #stop-play").click(function(){
 			$('#player video').get(0).pause();
-    		//$('#player video').get(0).currentTime = 0;
 			$("#video").removeClass("playing");
 		});
 		$("#video #decvolume").click(function(){
@@ -69,12 +68,10 @@ export default function Index() {
 
 
     // scroll-start
-
     var activeSec="intro";
 var sectionId="";
 function onEntryEffects(){
 	//pagemenu sticky
-  // console.log("onentery")
 	if($(window).scrollTop()>200)
 		$("#page-head").addClass("sticky");
 	else
@@ -82,14 +79,10 @@ function onEntryEffects(){
 
 	//find section
 	var sections=$("#scroll-snap .section");
-  // console.log("sections",sections)
 	$(sections).each(function(index, e) {
         var section=$(e);
 		sectionId=$(e).attr("id");
-		// console.log(sectionId,section.offset().top,$(window).scrollTop(), section.height(),section.css("display"));
 		if (section.offset().top - $(window).scrollTop() < $(window).height() - 150 && section.offset().top+section.height() > $(window).scrollTop() + 150 && section.css("display")!=='none') {
-			//activeSec=sectionId;
-      // console.log("condition statisfied")
 			return false;
 		}
 	});
@@ -103,7 +96,6 @@ function onEntryEffects(){
 	//close mobile menu
 	$('#nav-icon').removeClass("open");
 	$("#section-nav").removeClass("open");
-	// console.log(activeSec);
 	
 	//sanitize popups
 	if(activeSec!=='pillars') $("#pillars .subtitle").removeClass("active");
@@ -117,16 +109,16 @@ $(window).on("scroll", function () {
 $(document).ready(function(){
 	onEntryEffects();
 	$("#section-nav li:not([data-section=login])").click(function(){
+		$("body,html").removeClass("freeze");		
 		var section=$(this).attr("data-section");
-		//location.href="#"+section;
 		if (section === 'login')
 		{
 			return;
 		}
-		$("body,html").removeClass("freeze");
-		$('body,html').animate({
+		location.href="#"+section;
+		/*$('body,html').animate({
 			scrollTop: $("#"+section).offset().top
-		});
+		});*/
 		
 		//close mobile menu
 		$('#nav-icon').removeClass("open");
@@ -183,7 +175,6 @@ $(window).resize(graphRepaint);
 
 $("#service-list li").click(function(){
   var i=$(this).index()+1;
-  console.log(i);
   $("#service-list .subtitle").removeClass("active");
   $("#service"+i).addClass("active");
 });
@@ -197,7 +188,6 @@ $(document).on('keydown', function(event) {
  });
 $("#socials li").click(function(){
   var i=$(this).index()+1;
-  // console.log(i);
   $("#socials .subtitle").removeClass("active");
   $("#social"+i).addClass("active");
 });
