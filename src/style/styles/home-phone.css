@@ -250,8 +250,9 @@
   }
   
   #give button {
-    width: 15vmax;
-    font-size: 43%;
+    width: 20vmax;
+    font-size: 50%;
+    padding:10px 20px;
   }
   
   #services h1{
